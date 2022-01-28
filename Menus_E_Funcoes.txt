@@ -1,0 +1,13 @@
+1) % de alocação diária, com visão mensal
+Fica no dashboard e terá um gráfico
+2) # de reservas por range de datas
+Fica no dashboard e terá um gráfico
+3) # de utilizadores registados
+Fica nos utilizadores e terá uma lista de utilizadores registados e um numero de utilizadores registados total
+4) % de salas mais utilizadas face à capacidade
+Fica na sala e terá um gráfico
+5) "realtime Data" com a marcação das salas 
+permitindo a gestão + eficiente dos mesmos
+Fica na sala terá uma lista de salas e permite gerir marcações (Criar, Eliminar e Editar)
+6) Necessidade atual de limpeza de sala
+Fica na sala
