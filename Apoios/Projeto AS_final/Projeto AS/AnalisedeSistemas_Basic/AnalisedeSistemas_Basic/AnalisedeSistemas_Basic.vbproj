@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8A6128D6-00B9-4118-9326-F0B20AC6F2EA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>AnalisedeSistemas_Basic.My.MyApplication</StartupObject>
+    <RootNamespace>AnalisedeSistemas_Basic</RootNamespace>
+    <AssemblyName>AnalisedeSistemas_Basic</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>AnalisedeSistemas_Basic.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>AnalisedeSistemas_Basic.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BDbEdi2021DataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDbEdi2021DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="BDbEdi2021DataSet1.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDbEdi2021DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="BDbEdi2021DataSet101.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDbEdi2021DataSet101.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="BDbEdi2021DataSet11.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDbEdi2021DataSet11.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="BDbEdi2021DataSet12.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDbEdi2021DataSet12.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="BDbEdi2021DataSet2.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDbEdi2021DataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="BDbEdi2021DataSet3.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDbEdi2021DataSet3.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="BDbEdi2021DataSet4.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDbEdi2021DataSet4.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="BDbEdi2021DataSet5.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDbEdi2021DataSet5.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="BDbEdi2021DataSet6.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDbEdi2021DataSet6.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="BDbEdi2021DataSet7.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDbEdi2021DataSet7.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="BDbEdi2021DataSet8.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDbEdi2021DataSet8.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="BDbEdi2021DataSet9.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDbEdi2021DataSet9.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet1.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Departamento.Designer.vb">
+      <DependentUpon>Departamento.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Departamento.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gerencia.Designer.vb">
+      <DependentUpon>Gerencia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Gerencia.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gestor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gestor.Designer.vb">
+      <DependentUpon>Gestor.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inscricao.Designer.vb">
+      <DependentUpon>Inscricao.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Inscricao.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Participacao.Designer.vb">
+      <DependentUpon>Participacao.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Participacao.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Requisitante.Designer.vb">
+      <DependentUpon>Requisitante.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Requisitante.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reuniao.Designer.vb">
+      <DependentUpon>Reuniao.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reuniao.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sala.Designer.vb">
+      <DependentUpon>Sala.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Sala.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Servico.Designer.vb">
+      <DependentUpon>Servico.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Servico.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Servico_Sala.Designer.vb">
+      <DependentUpon>Servico_Sala.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Servico_Sala.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utilizador.Designer.vb">
+      <DependentUpon>Utilizador.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Utilizador.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Departamento.resx">
+      <DependentUpon>Departamento.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gerencia.resx">
+      <DependentUpon>Gerencia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gestor.resx">
+      <DependentUpon>Gestor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inscricao.resx">
+      <DependentUpon>Inscricao.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Participacao.resx">
+      <DependentUpon>Participacao.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Requisitante.resx">
+      <DependentUpon>Requisitante.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reuniao.resx">
+      <DependentUpon>Reuniao.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sala.resx">
+      <DependentUpon>Sala.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servico.resx">
+      <DependentUpon>Servico.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servico_Sala.resx">
+      <DependentUpon>Servico_Sala.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilizador.resx">
+      <DependentUpon>Utilizador.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BDbEdi2021DataSet.xsc">
+      <DependentUpon>BDbEdi2021DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BDbEdi2021DataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BDbEdi2021DataSet.xss">
+      <DependentUpon>BDbEdi2021DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet1.xsc">
+      <DependentUpon>BDbEdi2021DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BDbEdi2021DataSet1.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BDbEdi2021DataSet1.xss">
+      <DependentUpon>BDbEdi2021DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet101.xsc">
+      <DependentUpon>BDbEdi2021DataSet101.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet101.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BDbEdi2021DataSet101.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BDbEdi2021DataSet101.xss">
+      <DependentUpon>BDbEdi2021DataSet101.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet11.xsc">
+      <DependentUpon>BDbEdi2021DataSet11.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet11.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BDbEdi2021DataSet11.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BDbEdi2021DataSet11.xss">
+      <DependentUpon>BDbEdi2021DataSet11.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet12.xsc">
+      <DependentUpon>BDbEdi2021DataSet12.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet12.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BDbEdi2021DataSet12.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BDbEdi2021DataSet12.xss">
+      <DependentUpon>BDbEdi2021DataSet12.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet2.xsc">
+      <DependentUpon>BDbEdi2021DataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BDbEdi2021DataSet2.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BDbEdi2021DataSet2.xss">
+      <DependentUpon>BDbEdi2021DataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet3.xsc">
+      <DependentUpon>BDbEdi2021DataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BDbEdi2021DataSet3.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BDbEdi2021DataSet3.xss">
+      <DependentUpon>BDbEdi2021DataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet4.xsc">
+      <DependentUpon>BDbEdi2021DataSet4.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet4.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BDbEdi2021DataSet4.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BDbEdi2021DataSet4.xss">
+      <DependentUpon>BDbEdi2021DataSet4.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet5.xsc">
+      <DependentUpon>BDbEdi2021DataSet5.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet5.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BDbEdi2021DataSet5.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BDbEdi2021DataSet5.xss">
+      <DependentUpon>BDbEdi2021DataSet5.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet6.xsc">
+      <DependentUpon>BDbEdi2021DataSet6.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet6.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BDbEdi2021DataSet6.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BDbEdi2021DataSet6.xss">
+      <DependentUpon>BDbEdi2021DataSet6.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet7.xsc">
+      <DependentUpon>BDbEdi2021DataSet7.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet7.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BDbEdi2021DataSet7.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BDbEdi2021DataSet7.xss">
+      <DependentUpon>BDbEdi2021DataSet7.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet8.xsc">
+      <DependentUpon>BDbEdi2021DataSet8.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet8.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BDbEdi2021DataSet8.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BDbEdi2021DataSet8.xss">
+      <DependentUpon>BDbEdi2021DataSet8.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet9.xsc">
+      <DependentUpon>BDbEdi2021DataSet9.xsd</DependentUpon>
+    </None>
+    <None Include="BDbEdi2021DataSet9.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BDbEdi2021DataSet9.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BDbEdi2021DataSet9.xss">
+      <DependentUpon>BDbEdi2021DataSet9.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+</Project>

@@ -1,0 +1,46 @@
+C:\Users\nachi\Desktop\Ambiente de Trabalho\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\bin\Debug\AnalisedeSistemas_Basic.exe.config
+C:\Users\nachi\Desktop\Ambiente de Trabalho\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\bin\Debug\AnalisedeSistemas_Basic.exe
+C:\Users\nachi\Desktop\Ambiente de Trabalho\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\bin\Debug\AnalisedeSistemas_Basic.pdb
+C:\Users\nachi\Desktop\Ambiente de Trabalho\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\bin\Debug\AnalisedeSistemas_Basic.xml
+C:\Users\nachi\Desktop\Ambiente de Trabalho\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.vbprojAssemblyReference.cache
+C:\Users\nachi\Desktop\Ambiente de Trabalho\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.Form1.resources
+C:\Users\nachi\Desktop\Ambiente de Trabalho\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.Resources.resources
+C:\Users\nachi\Desktop\Ambiente de Trabalho\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.vbproj.GenerateResource.cache
+C:\Users\nachi\Desktop\Ambiente de Trabalho\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.vbproj.CoreCompileInputs.cache
+C:\Users\nachi\Desktop\Ambiente de Trabalho\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.exe
+C:\Users\nachi\Desktop\Ambiente de Trabalho\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.xml
+C:\Users\nachi\Desktop\Ambiente de Trabalho\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.pdb
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\bin\Debug\AnalisedeSistemas_Basic.exe.config
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\bin\Debug\AnalisedeSistemas_Basic.exe
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\bin\Debug\AnalisedeSistemas_Basic.pdb
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\bin\Debug\AnalisedeSistemas_Basic.xml
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.vbprojAssemblyReference.cache
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.Resources.resources
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.vbproj.GenerateResource.cache
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.vbproj.CoreCompileInputs.cache
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.exe
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.xml
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.pdb
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic - Cópia\AnalisedeSistemas_Basic\bin\Debug\AnalisedeSistemas_Basic.exe.config
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic - Cópia\AnalisedeSistemas_Basic\bin\Debug\AnalisedeSistemas_Basic.exe
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic - Cópia\AnalisedeSistemas_Basic\bin\Debug\AnalisedeSistemas_Basic.pdb
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic - Cópia\AnalisedeSistemas_Basic\bin\Debug\AnalisedeSistemas_Basic.xml
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic - Cópia\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.vbprojAssemblyReference.cache
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic - Cópia\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.Gestor.resources
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic - Cópia\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.Resources.resources
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic - Cópia\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.vbproj.GenerateResource.cache
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic - Cópia\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.vbproj.CoreCompileInputs.cache
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic - Cópia\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.exe
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic - Cópia\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.xml
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic - Cópia\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.pdb
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.Gestor.resources
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.Departamento.resources
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.Gerencia.resources
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.Requisitante.resources
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.Reuniao.resources
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.Sala.resources
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.Utilizador.resources
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.Inscricao.resources
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.Participacao.resources
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.Servico.resources
+C:\Users\nachi\Desktop\Ambiente de Trabalho\SQL_2022_AS\AnalisedeSistemas_Basic\AnalisedeSistemas_Basic\obj\Debug\AnalisedeSistemas_Basic.Servico_Sala.resources

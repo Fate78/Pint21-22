@@ -1,0 +1,936 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+AnalisedeSistemas_Basic
+</name>
+</assembly>
+<members>
+<member name="T:AnalisedeSistemas_Basic.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:AnalisedeSistemas_Basic.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:AnalisedeSistemas_Basic.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet.GESTORDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet.GESTORRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet.GESTORRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSetTableAdapters.GESTORTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSetTableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSetTableAdapters.TableAdapterManager.UpdateUpdatedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSetTableAdapters.TableAdapterManager.UpdateInsertedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSetTableAdapters.TableAdapterManager.UpdateDeletedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSetTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSetTableAdapters.TableAdapterManager.UpdateAll(AnalisedeSistemas_Basic.BDbEdi2021DataSet)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSetTableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSetTableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet1">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet1.DEPARTAMENTODataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet1.DEPARTAMENTORow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet1.DEPARTAMENTORowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet1TableAdapters.DEPARTAMENTOTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet1TableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet1TableAdapters.TableAdapterManager.UpdateUpdatedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet1,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet1TableAdapters.TableAdapterManager.UpdateInsertedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet1,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet1TableAdapters.TableAdapterManager.UpdateDeletedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet1,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet1TableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet1TableAdapters.TableAdapterManager.UpdateAll(AnalisedeSistemas_Basic.BDbEdi2021DataSet1)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet1TableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet1TableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet10">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet10.SERVICODataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet10.SERVICORow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet10.SERVICORowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet10TableAdapters.SERVICOTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet10TableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet10TableAdapters.TableAdapterManager.UpdateUpdatedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet10,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet10TableAdapters.TableAdapterManager.UpdateInsertedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet10,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet10TableAdapters.TableAdapterManager.UpdateDeletedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet10,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet10TableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet10TableAdapters.TableAdapterManager.UpdateAll(AnalisedeSistemas_Basic.BDbEdi2021DataSet10)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet10TableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet10TableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet11">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet11.SERVICO_SALADataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet11.SERVICO_SALARow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet11.SERVICO_SALARowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet11TableAdapters.SERVICO_SALATableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet11TableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet11TableAdapters.TableAdapterManager.UpdateUpdatedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet11,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet11TableAdapters.TableAdapterManager.UpdateInsertedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet11,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet11TableAdapters.TableAdapterManager.UpdateDeletedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet11,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet11TableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet11TableAdapters.TableAdapterManager.UpdateAll(AnalisedeSistemas_Basic.BDbEdi2021DataSet11)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet11TableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet11TableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet12">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet12.UTILIZADORDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet12.UTILIZADORRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet12.UTILIZADORRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet12TableAdapters.UTILIZADORTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet12TableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet12TableAdapters.TableAdapterManager.UpdateUpdatedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet12,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet12TableAdapters.TableAdapterManager.UpdateInsertedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet12,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet12TableAdapters.TableAdapterManager.UpdateDeletedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet12,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet12TableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet12TableAdapters.TableAdapterManager.UpdateAll(AnalisedeSistemas_Basic.BDbEdi2021DataSet12)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet12TableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet12TableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet2">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet2.GERENCIADataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet2.GERENCIARow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet2.GERENCIARowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet2TableAdapters.GERENCIATableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet2TableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet2TableAdapters.TableAdapterManager.UpdateUpdatedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet2,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet2TableAdapters.TableAdapterManager.UpdateInsertedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet2,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet2TableAdapters.TableAdapterManager.UpdateDeletedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet2,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet2TableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet2TableAdapters.TableAdapterManager.UpdateAll(AnalisedeSistemas_Basic.BDbEdi2021DataSet2)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet2TableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet2TableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet3">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet3.REQUISITANTEDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet3.REQUISITANTERow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet3.REQUISITANTERowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet3TableAdapters.REQUISITANTETableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet3TableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet3TableAdapters.TableAdapterManager.UpdateUpdatedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet3,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet3TableAdapters.TableAdapterManager.UpdateInsertedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet3,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet3TableAdapters.TableAdapterManager.UpdateDeletedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet3,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet3TableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet3TableAdapters.TableAdapterManager.UpdateAll(AnalisedeSistemas_Basic.BDbEdi2021DataSet3)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet3TableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet3TableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet4">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet4.REQUISITANTEDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet4.REQUISITANTERow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet4.REQUISITANTERowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet4TableAdapters.REQUISITANTETableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet4TableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet4TableAdapters.TableAdapterManager.UpdateUpdatedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet4,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet4TableAdapters.TableAdapterManager.UpdateInsertedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet4,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet4TableAdapters.TableAdapterManager.UpdateDeletedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet4,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet4TableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet4TableAdapters.TableAdapterManager.UpdateAll(AnalisedeSistemas_Basic.BDbEdi2021DataSet4)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet4TableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet4TableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet5">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet5.SALADataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet5.SALARow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet5.SALARowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet5TableAdapters.SALATableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet5TableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet5TableAdapters.TableAdapterManager.UpdateUpdatedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet5,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet5TableAdapters.TableAdapterManager.UpdateInsertedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet5,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet5TableAdapters.TableAdapterManager.UpdateDeletedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet5,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet5TableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet5TableAdapters.TableAdapterManager.UpdateAll(AnalisedeSistemas_Basic.BDbEdi2021DataSet5)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet5TableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet5TableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet6">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet6.REUNIAODataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet6.REUNIAORow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet6.REUNIAORowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet6TableAdapters.REUNIAOTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet6TableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet6TableAdapters.TableAdapterManager.UpdateUpdatedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet6,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet6TableAdapters.TableAdapterManager.UpdateInsertedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet6,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet6TableAdapters.TableAdapterManager.UpdateDeletedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet6,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet6TableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet6TableAdapters.TableAdapterManager.UpdateAll(AnalisedeSistemas_Basic.BDbEdi2021DataSet6)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet6TableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet6TableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet7">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet7.UTILIZADORDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet7.UTILIZADORRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet7.UTILIZADORRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet7TableAdapters.UTILIZADORTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet7TableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet7TableAdapters.TableAdapterManager.UpdateUpdatedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet7,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet7TableAdapters.TableAdapterManager.UpdateInsertedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet7,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet7TableAdapters.TableAdapterManager.UpdateDeletedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet7,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet7TableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet7TableAdapters.TableAdapterManager.UpdateAll(AnalisedeSistemas_Basic.BDbEdi2021DataSet7)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet7TableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet7TableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet8">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet8.INSCRICAODataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet8.INSCRICAORow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet8.INSCRICAORowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet8TableAdapters.INSCRICAOTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet8TableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet8TableAdapters.TableAdapterManager.UpdateUpdatedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet8,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet8TableAdapters.TableAdapterManager.UpdateInsertedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet8,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet8TableAdapters.TableAdapterManager.UpdateDeletedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet8,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet8TableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet8TableAdapters.TableAdapterManager.UpdateAll(AnalisedeSistemas_Basic.BDbEdi2021DataSet8)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet8TableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet8TableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet9">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet9.PARTICIPACAODataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet9.PARTICIPACAORow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet9.PARTICIPACAORowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet9TableAdapters.PARTICIPACAOTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet9TableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet9TableAdapters.TableAdapterManager.UpdateUpdatedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet9,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet9TableAdapters.TableAdapterManager.UpdateInsertedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet9,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet9TableAdapters.TableAdapterManager.UpdateDeletedRows(AnalisedeSistemas_Basic.BDbEdi2021DataSet9,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet9TableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.BDbEdi2021DataSet9TableAdapters.TableAdapterManager.UpdateAll(AnalisedeSistemas_Basic.BDbEdi2021DataSet9)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet9TableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.BDbEdi2021DataSet9TableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.DataSet1">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.DataSet1.REQUISITANTEDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.DataSet1.REQUISITANTERow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.DataSet1.REQUISITANTERowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.DataSet1TableAdapters.REQUISITANTETableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.DataSet1TableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.DataSet1TableAdapters.TableAdapterManager.UpdateUpdatedRows(AnalisedeSistemas_Basic.DataSet1,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.DataSet1TableAdapters.TableAdapterManager.UpdateInsertedRows(AnalisedeSistemas_Basic.DataSet1,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.DataSet1TableAdapters.TableAdapterManager.UpdateDeletedRows(AnalisedeSistemas_Basic.DataSet1,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.DataSet1TableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:AnalisedeSistemas_Basic.DataSet1TableAdapters.TableAdapterManager.UpdateAll(AnalisedeSistemas_Basic.DataSet1)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.DataSet1TableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:AnalisedeSistemas_Basic.DataSet1TableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+</members>
+</doc>
