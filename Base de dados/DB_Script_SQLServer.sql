@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2017                    */
-/* Created on:     08/04/2022 22:36:50                          */
+/* Created on:     08/04/2022 23:35:15                          */
 /*==============================================================*/
 
 
@@ -61,24 +61,6 @@ if exists (select 1
 go
 
 if exists (select 1
-            from  sysindexes
-           where  id    = object_id('RESERVA')
-            and   name  = 'RELATIONSHIP_3_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index RESERVA.RELATIONSHIP_3_FK
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('RESERVA')
-            and   name  = 'RELATIONSHIP_2_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index RESERVA.RELATIONSHIP_2_FK
-go
-
-if exists (select 1
             from  sysobjects
            where  id = object_id('RESERVA')
             and   type = 'U')
@@ -86,28 +68,10 @@ if exists (select 1
 go
 
 if exists (select 1
-            from  sysindexes
-           where  id    = object_id('SALA')
-            and   name  = 'RELATIONSHIP_1_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index SALA.RELATIONSHIP_1_FK
-go
-
-if exists (select 1
             from  sysobjects
            where  id = object_id('SALA')
             and   type = 'U')
    drop table SALA
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('TICKET')
-            and   name  = 'RELATIONSHIP_4_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index TICKET.RELATIONSHIP_4_FK
 go
 
 if exists (select 1
@@ -125,37 +89,10 @@ if exists (select 1
 go
 
 if exists (select 1
-            from  sysindexes
-           where  id    = object_id('UTILIZADOR')
-            and   name  = 'RELATIONSHIP_5_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index UTILIZADOR.RELATIONSHIP_5_FK
-go
-
-if exists (select 1
             from  sysobjects
            where  id = object_id('UTILIZADOR')
             and   type = 'U')
    drop table UTILIZADOR
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('UTILIZADOR_CENTRO')
-            and   name  = 'GERE_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index UTILIZADOR_CENTRO.GERE_FK
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('UTILIZADOR_CENTRO')
-            and   name  = 'E_GERIDA_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index UTILIZADOR_CENTRO.E_GERIDA_FK
 go
 
 if exists (select 1
@@ -192,26 +129,6 @@ create table RESERVA (
 go
 
 /*==============================================================*/
-/* Index: RELATIONSHIP_2_FK                                     */
-/*==============================================================*/
-
-
-
-
-create nonclustered index RELATIONSHIP_2_FK on RESERVA (ID_SALA ASC)
-go
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_3_FK                                     */
-/*==============================================================*/
-
-
-
-
-create nonclustered index RELATIONSHIP_3_FK on RESERVA (ID_UTILIZADOR ASC)
-go
-
-/*==============================================================*/
 /* Table: SALA                                                  */
 /*==============================================================*/
 create table SALA (
@@ -226,16 +143,6 @@ create table SALA (
 go
 
 /*==============================================================*/
-/* Index: RELATIONSHIP_1_FK                                     */
-/*==============================================================*/
-
-
-
-
-create nonclustered index RELATIONSHIP_1_FK on SALA (ID_CENTRO ASC)
-go
-
-/*==============================================================*/
 /* Table: TICKET                                                */
 /*==============================================================*/
 create table TICKET (
@@ -247,16 +154,6 @@ create table TICKET (
    RESOLVIDO            bit                  not null,
    constraint PK_TICKET primary key (ID_TICKET)
 )
-go
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_4_FK                                     */
-/*==============================================================*/
-
-
-
-
-create nonclustered index RELATIONSHIP_4_FK on TICKET (ID_UTILIZADOR ASC)
 go
 
 /*==============================================================*/
@@ -280,20 +177,10 @@ create table UTILIZADOR (
    NOME_COMPLETO        varchar(1024)        not null,
    PALAVRA_PASSE        varchar(1024)        not null,
    EMAIL                varchar(1024)        not null,
-   DATA_NASCIMENTO      datetime             null,
+   DATA_NASCIMENTO      date                 null,
    ATIVO                bit                  not null,
    constraint PK_UTILIZADOR primary key (ID_UTILIZADOR)
 )
-go
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_5_FK                                     */
-/*==============================================================*/
-
-
-
-
-create nonclustered index RELATIONSHIP_5_FK on UTILIZADOR (ID_TIPO ASC)
 go
 
 /*==============================================================*/
@@ -304,26 +191,6 @@ create table UTILIZADOR_CENTRO (
    ID_CENTRO            int                  not null,
    constraint PK_UTILIZADOR_CENTRO primary key (ID_UTILIZADOR, ID_CENTRO)
 )
-go
-
-/*==============================================================*/
-/* Index: E_GERIDA_FK                                           */
-/*==============================================================*/
-
-
-
-
-create nonclustered index E_GERIDA_FK on UTILIZADOR_CENTRO (ID_UTILIZADOR ASC)
-go
-
-/*==============================================================*/
-/* Index: GERE_FK                                               */
-/*==============================================================*/
-
-
-
-
-create nonclustered index GERE_FK on UTILIZADOR_CENTRO (ID_CENTRO ASC)
 go
 
 alter table RESERVA
