@@ -169,7 +169,7 @@ go
 /* Table: CENTRO_GEOGRAFICO                                     */
 /*==============================================================*/
 create table CENTRO_GEOGRAFICO (
-   ID_CENTRO            int                  not null,
+   ID_CENTRO            int                  IDENTITY(1,1) not null,
    NOME_CENTRO          varchar(1024)        not null,
    ATIVO                bit                  not null,
    constraint PK_CENTRO_GEOGRAFICO primary key (ID_CENTRO)
@@ -180,7 +180,7 @@ go
 /* Table: RESERVA                                               */
 /*==============================================================*/
 create table RESERVA (
-   ID_RESERVA           int                  not null,
+   ID_RESERVA           int                  IDENTITY(1,1) not null,
    ID_SALA              int                  null,
    ID_UTILIZADOR        int                  not null,
    HORA_INICIO          datetime             not null,
@@ -215,7 +215,7 @@ go
 /* Table: SALA                                                  */
 /*==============================================================*/
 create table SALA (
-   ID_SALA              int                  not null,
+   ID_SALA              int                  IDENTITY(1,1) not null,
    ID_CENTRO            int                  null,
    N_SALA               int                  not null,
    LOTACAO_MAX          int                  not null,
@@ -239,7 +239,7 @@ go
 /* Table: TICKET                                                */
 /*==============================================================*/
 create table TICKET (
-   ID_TICKET            int                  not null,
+   ID_TICKET            int                  IDENTITY(1,1) not null,
    ID_UTILIZADOR        int                  not null,
    ASSUNTO              varchar(1024)        not null,
    CATEGORIA            varchar(1024)        not null,
@@ -263,7 +263,7 @@ go
 /* Table: TIPO_UTILIZADOR                                       */
 /*==============================================================*/
 create table TIPO_UTILIZADOR (
-   ID_TIPO              int                  not null,
+   ID_TIPO              int                  IDENTITY(1,1) not null,
    NOME_TIPO            varchar(1024)        not null,
    DESCRICAO            varchar(1024)        null,
    constraint PK_TIPO_UTILIZADOR primary key (ID_TIPO)
@@ -274,7 +274,7 @@ go
 /* Table: UTILIZADOR                                            */
 /*==============================================================*/
 create table UTILIZADOR (
-   ID_UTILIZADOR        int                  not null,
+   ID_UTILIZADOR        int                  IDENTITY(1,1) not null,
    ID_TIPO              int                  not null,
    NOME_UTILIZADOR      varchar(1024)        not null,
    NOME_COMPLETO        varchar(1024)        not null,
