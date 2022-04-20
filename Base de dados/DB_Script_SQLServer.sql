@@ -120,8 +120,9 @@ create table RESERVA (
    ID_RESERVA           int                  IDENTITY(1,1) not null,
    ID_SALA              int                  null,
    ID_UTILIZADOR        int                  not null,
-   HORA_INICIO          datetime             not null,
-   HORA_FIM             datetime             not null,
+   HORA_INICIO          time             not null,
+   HORA_FIM             time             not null,
+   DATA_RESERVA         date                 not null,
    NUM_PESSOAS          int                  not null,
    ATIVO                bit                  not null,
    constraint PK_RESERVA primary key (ID_RESERVA)
@@ -136,7 +137,7 @@ create table SALA (
    ID_CENTRO            int                  null,
    N_SALA               int                  not null,
    LOTACAO_MAX          int                  not null,
-   TEMPO_MIN_LIMP       datetime             not null,
+   TEMPO_MIN_LIMP       time             not null,
    ATIVO                bit                  not null,
    constraint PK_SALA primary key (ID_SALA)
 )
