@@ -161,8 +161,7 @@ go
 /* Table: TIPO_UTILIZADOR                                       */
 /*==============================================================*/
 create table TIPO_UTILIZADOR (
-   ID_TIPO              int                  IDENTITY(1,1) not null,
-   N_TIPO               int                  UNIQUE not null,
+   ID_TIPO              int                  UNIQUE not null,
    NOME_TIPO            varchar(1024)        not null,
    DESCRICAO            varchar(1024)        null,
    constraint PK_TIPO_UTILIZADOR primary key (ID_TIPO)
