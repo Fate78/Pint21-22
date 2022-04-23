@@ -107,7 +107,7 @@ go
 /*==============================================================*/
 create table CENTRO_GEOGRAFICO (
    ID_CENTRO            int                  IDENTITY(1,1) not null,
-   NOME_CENTRO          varchar(1024)        not null,
+   NOME_CENTRO          varchar(1024)        UNIQUE not null,
    ATIVO                bit                  not null,
    constraint PK_CENTRO_GEOGRAFICO primary key (ID_CENTRO)
 )
@@ -162,6 +162,7 @@ go
 /*==============================================================*/
 create table TIPO_UTILIZADOR (
    ID_TIPO              int                  IDENTITY(1,1) not null,
+   N_TIPO               int                  UNIQUE not null,
    NOME_TIPO            varchar(1024)        not null,
    DESCRICAO            varchar(1024)        null,
    constraint PK_TIPO_UTILIZADOR primary key (ID_TIPO)
@@ -174,11 +175,12 @@ go
 create table UTILIZADOR (
    ID_UTILIZADOR        int                  IDENTITY(1,1) not null,
    ID_TIPO              int                  not null,
-   NOME_UTILIZADOR      varchar(1024)        not null,
+   NOME_UTILIZADOR      varchar(1024)        UNIQUE not null,
    NOME_COMPLETO        varchar(1024)        not null,
    PALAVRA_PASSE        varchar(1024)        not null,
-   EMAIL                varchar(1024)        not null,
+   EMAIL                varchar(1024)        UNIQUE not null,
    DATA_NASCIMENTO      date                 null,
+   VERIFICADO           bit                  not null,
    ATIVO                bit                  not null,
    constraint PK_UTILIZADOR primary key (ID_UTILIZADOR)
 )
@@ -190,6 +192,7 @@ go
 create table UTILIZADOR_CENTRO (
    ID_UTILIZADOR        int                  not null,
    ID_CENTRO            int                  not null,
+   ATIVO                bit                  not null,
    constraint PK_UTILIZADOR_CENTRO primary key (ID_UTILIZADOR, ID_CENTRO)
 )
 go

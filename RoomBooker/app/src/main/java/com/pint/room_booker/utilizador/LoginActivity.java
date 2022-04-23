@@ -30,9 +30,6 @@ public class LoginActivity extends AppCompatActivity {
 
     boolean isEmailValid, isPasswordValid;
 
-    private JSONArray arrayLogin = null;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if(password.getText().toString().isEmpty())
         {
-            passError.setError("Introduza o sua palavra-passe");
+            passError.setError("Introduza a sua palavra-passe");
             isPasswordValid= false;
         } else {
 

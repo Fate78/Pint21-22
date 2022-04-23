@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ContentLogin extends DB_Default {
-    private int id;
+    private int id, id_tipo;
     private String email, password, nome_utilizador;
     private String email_input, password_input;
 
@@ -20,6 +20,7 @@ public class ContentLogin extends DB_Default {
             ResultSet resultSet = db.select("SELECT * from utilizador where email = '" + this.getEmail_input() + "'");
             if (resultSet.next()) {
                 setId(resultSet.getInt("id_utilizador"));
+                setId_tipo(resultSet.getInt("id_tipo"));
                 Log.i("INFO", "VALUES " + resultSet);
                 return true;
             }
@@ -38,7 +39,7 @@ public class ContentLogin extends DB_Default {
             if (resultSet.next()) {
                 setId(resultSet.getInt("id_utilizador"));
                 setNome_utilizador(resultSet.getString("nome_utilizador"));
-
+                setId_tipo(resultSet.getInt("id_tipo"));
                 Log.i("INFO", "VALUES " + resultSet);
                 return true;
             }
@@ -115,5 +116,13 @@ public class ContentLogin extends DB_Default {
 
     public void setNome_utilizador(String nome_utilizador) {
         this.nome_utilizador = nome_utilizador;
+    }
+
+    public int getId_tipo() {
+        return id_tipo;
+    }
+
+    public void setId_tipo(int id_tipo) {
+        this.id_tipo = id_tipo;
     }
 }
