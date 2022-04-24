@@ -25,7 +25,7 @@ import org.json.JSONArray;
 public class LoginActivity extends AppCompatActivity {
     private ContentLogin contentLogin;
     EditText email, password;
-    Button login;
+    Button btn_login;
     TextInputLayout emailError, passError;
 
     boolean isEmailValid, isPasswordValid;
@@ -43,11 +43,11 @@ public class LoginActivity extends AppCompatActivity {
         contentLogin = new ContentLogin();
         email = (EditText) findViewById(R.id.ed_email);
         password = (EditText) findViewById(R.id.ed_password);
-        login = (Button) findViewById(R.id.btn_login);
+        btn_login = (Button) findViewById(R.id.btn_login);
         emailError = (TextInputLayout) findViewById(R.id.error_email);
         passError = (TextInputLayout) findViewById(R.id.error_password);
-        
-        login.setOnClickListener(new View.OnClickListener() {
+
+        btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 validate_login();
@@ -88,17 +88,27 @@ public class LoginActivity extends AppCompatActivity {
             if(contentLogin.loginEmail()) {
                 this.contentLogin.loginPassword();
                 if (contentLogin.loginPassword()) {
-                    this.contentLogin.verificarAtivo();
-                    if(contentLogin.verificarAtivo()){
+                    this.contentLogin.checkAtivo();
+                    if(contentLogin.checkAtivo()){
                         //vai colocar o id na classe Shared Preferences
                         // vai bloquear a opção de voltar para a página de login
                         SharedPreferencesHelper.SessionStateSharedPreferences(LoginActivity.this, true);
                         finish();
 
-                        Toast.makeText(getApplicationContext(), "Bem Vindo " + this.contentLogin.getNome_utilizador() + "!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        intent.putExtra("id_utilizador", this.contentLogin.getId());
-                        startActivity(intent);
+                        //Se não verificado pedir para mudar password
+                        if(!contentLogin.checkVerificado(contentLogin.getId())) {
+                            Toast.makeText(getApplicationContext(), "É necessário alterar a sua palavra passe!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), VerifyAccountActivity.class);
+                            intent.putExtra("id_utilizador", this.contentLogin.getId());
+                            startActivity(intent);
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "Bem Vindo " + this.contentLogin.getNome_utilizador() + "!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent.putExtra("id_utilizador", this.contentLogin.getId());
+                            startActivity(intent);
+                        }
+
                     }else{
                         Toast.makeText(getApplicationContext(), "A sua conta ainda não foi aprovada!", Toast.LENGTH_SHORT).show();
                     }

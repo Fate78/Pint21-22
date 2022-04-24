@@ -10,8 +10,8 @@ import java.sql.SQLException;
 
 public class ContentLogin extends DB_Default {
     private int id, id_tipo;
-    private String email, password, nome_utilizador;
-    private String email_input, password_input;
+    private String email, password, confirmarPassword, nome_utilizador;
+    private String email_input, password_input, confirmarPassword_input;
 
     public Boolean loginEmail() {
         DB db = new DB();
@@ -50,7 +50,7 @@ public class ContentLogin extends DB_Default {
         return false;
     }
 
-    public Boolean verificarAtivo() {
+    public Boolean checkAtivo() {
         DB db = new DB();
 
         try {
@@ -59,7 +59,7 @@ public class ContentLogin extends DB_Default {
                 setId(resultSet.getInt("id_utilizador"));
                 setNome_utilizador(resultSet.getString("nome_utilizador"));
 
-                Log.i("INFO", "VALUES" + resultSet);
+                Log.i("INFO", "VALUES " + resultSet);
                 return true;
             }
 
@@ -68,6 +68,31 @@ public class ContentLogin extends DB_Default {
             return false;
         }
         return false;
+    }
+
+    public Boolean checkVerificado(int id)
+    {
+        DB db = new DB();
+
+        try {
+            ResultSet resultSet = db.select("SELECT * from utilizador where id_utilizador = '" + this.getId() + "' and verificado = 'True'" );
+            if (resultSet.next()) {
+                Log.i("INFO", "VALUES " + resultSet);
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return false;
+    }
+
+    public void changePasword(){
+        DB db = new DB();
+        String sql="";
+        sql = String.format("UPDATE utilizador SET palavra_passe = '%s', verificado = 'True' where id_utilizador = '%s';",
+                this.getConfirmarPassword(), this.getId());
+        db.execute(sql);
     }
 
     public String getEmail_input() {
@@ -124,5 +149,21 @@ public class ContentLogin extends DB_Default {
 
     public void setId_tipo(int id_tipo) {
         this.id_tipo = id_tipo;
+    }
+
+    public String getConfirmarPassword() {
+        return confirmarPassword;
+    }
+
+    public void setConfirmarPassword(String confirmarPassword) {
+        this.confirmarPassword = confirmarPassword;
+    }
+
+    public String getConfirmarPassword_input() {
+        return confirmarPassword_input;
+    }
+
+    public void setConfirmarPassword_input(String confirmarPassword_input) {
+        this.confirmarPassword_input = confirmarPassword_input;
     }
 }
