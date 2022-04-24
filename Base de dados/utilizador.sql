@@ -19,3 +19,4 @@ insert into utilizador (id_tipo, nome_utilizador, nome_completo, palavra_passe, 
 insert into utilizador (id_tipo, nome_utilizador, nome_completo, palavra_passe, email, data_nascimento, verificado, ativo) values (2, 'ntooheyi', 'Nanny Toohey', 'kfDvl6RaCj', 'ntooheyi@about.com', '06/30/1986', 0, 1);
 insert into utilizador (id_tipo, nome_utilizador, nome_completo, palavra_passe, email, data_nascimento, verificado, ativo) values (3, 'hchisholmej', 'Henri Chisholme', 'iqE2o94T', 'hchisholmej@statcounter.com', '05/22/1979', 0, 0);
 insert into utilizador (id_tipo, nome_utilizador, nome_completo, palavra_passe, email, data_nascimento, verificado, ativo) values (1, 'admin', 'Admin Adminton', 'Passw0rd', 'admin@gmail.com', '05/20/1998', 1, 1);
+insert into utilizador (id_tipo, nome_utilizador, nome_completo, palavra_passe, email, data_nascimento, verificado, ativo) values (3, 'teste', 'Sir Teste', 'Passw0rd', 'teste@gmail.com', '05/20/1998', 0, 1);
