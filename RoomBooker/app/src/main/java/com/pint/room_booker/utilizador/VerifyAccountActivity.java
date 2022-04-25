@@ -4,22 +4,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.pint.room_booker.R;
+import com.pint.room_booker.salas.SalasActivity;
 
 public class VerifyAccountActivity extends AppCompatActivity {
     private ContentLogin contentLogin;
     EditText password, confirmar_password;
     Button btn_alterar;
-
     TextInputLayout passwordError;
+
     boolean isPasswordValid;
     String pass, conf_pass;
 
@@ -27,11 +30,6 @@ public class VerifyAccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_account);
-
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
 
         contentLogin = new ContentLogin();
         password = (EditText) findViewById(R.id.ed_novapasse);
@@ -55,6 +53,10 @@ public class VerifyAccountActivity extends AppCompatActivity {
 
         if(checkPasswords()){
             this.contentLogin.changePasword();
+            Toast.makeText(getApplicationContext(), "Password alterada!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), SalasActivity.class);
+            intent.putExtra("id_utilizador", this.contentLogin.getId());
+            startActivity(intent);
         }
 
     }
@@ -64,8 +66,8 @@ public class VerifyAccountActivity extends AppCompatActivity {
         conf_pass = confirmar_password.getText().toString();
 
         if (pass.isEmpty()) {
-            passwordError.setError("Introduza uma password!");
             passwordError.setVisibility(View.VISIBLE);
+            passwordError.setError("Introduza uma password!");
             return false;
         }
         else{
@@ -74,8 +76,8 @@ public class VerifyAccountActivity extends AppCompatActivity {
                 passwordError.setErrorEnabled(false);
                 return true;
             } else {
-                passwordError.setError("As passwords são diferentes!");
                 passwordError.setVisibility(View.VISIBLE);
+                passwordError.setError("As passwords são diferentes!");
                 isPasswordValid = false;
                 return false;
             }

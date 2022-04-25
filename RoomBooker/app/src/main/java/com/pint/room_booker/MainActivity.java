@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         btn_sql = (Button) findViewById(R.id.btn_sql);
         textView = (TextView) findViewById(R.id.txtView);
+
         btn_sql.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

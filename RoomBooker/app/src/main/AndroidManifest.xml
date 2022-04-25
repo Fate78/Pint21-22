@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RoomBooker"
         tools:ignore="AllowBackup">
-        <activity android:name=".utilizador.VerifyAccountActivity"></activity>
+        <activity android:name=".utilizador.PerfilActivity"></activity>
+        <activity android:name=".salas.SalasActivity" />
+        <activity android:name=".utilizador.VerifyAccountActivity" />
         <activity android:name=".utilizador.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

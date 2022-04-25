@@ -8,9 +8,11 @@ import com.pint.room_booker.database.DB_Default;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.time.LocalDate;
+
 public class ContentLogin extends DB_Default {
     private int id, id_tipo;
-    private String email, password, confirmarPassword, nome_utilizador;
+    private String email, password, confirmarPassword, nome_utilizador, nome_completo, data_nascimento;
     private String email_input, password_input, confirmarPassword_input;
 
     public Boolean loginEmail() {
@@ -58,7 +60,9 @@ public class ContentLogin extends DB_Default {
             if (resultSet.next()) {
                 setId(resultSet.getInt("id_utilizador"));
                 setNome_utilizador(resultSet.getString("nome_utilizador"));
-
+                setNome_completo(resultSet.getString("nome_completo"));
+                setEmail(resultSet.getString("email"));
+                setData_nascimento(resultSet.getString("data_nascimento"));
                 Log.i("INFO", "VALUES " + resultSet);
                 return true;
             }
@@ -165,5 +169,21 @@ public class ContentLogin extends DB_Default {
 
     public void setConfirmarPassword_input(String confirmarPassword_input) {
         this.confirmarPassword_input = confirmarPassword_input;
+    }
+
+    public String getNome_completo() {
+        return nome_completo;
+    }
+
+    public void setNome_completo(String nome_completo) {
+        this.nome_completo = nome_completo;
+    }
+
+    public String getData_nascimento() {
+        return data_nascimento;
+    }
+
+    public void setData_nascimento(String data_nascimento) {
+        this.data_nascimento = data_nascimento;
     }
 }
