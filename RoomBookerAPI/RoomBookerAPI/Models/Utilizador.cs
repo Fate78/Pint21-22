@@ -22,7 +22,7 @@ namespace RoomBookerAPI.Models
         public bool Verificado { get; set; }
         public bool Ativo { get; set; }
 
-        public virtual TipoUtilizador IdTipoNavigation { get; set; } = null!;
+        //public virtual TipoUtilizador IdTipoNavigation { get; set; } = null!;
         public virtual ICollection<Reserva> Reservas { get; set; }
         public virtual ICollection<Ticket> Tickets { get; set; }
         public virtual ICollection<UtilizadorCentro> UtilizadorCentros { get; set; }

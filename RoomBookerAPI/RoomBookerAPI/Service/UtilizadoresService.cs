@@ -68,19 +68,6 @@ namespace RoomBookerAPI.Service
 
             return new CreatedAtActionResult("GetUtilizador", "GetUtilizadores", new { id = utilizador.IdUtilizador }, utilizador);
         }
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    var utilizador = await pintContext.Utilizadores.FindAsync(id);
-        //    if (utilizador == null)
-        //    {
-        //        return new NotFoundResult();
-        //    }
-
-        //    pintContext.Utilizadores.Remove(utilizador);
-        //    await pintContext.SaveChangesAsync();
-
-        //    return new NoContentResult();
-        //}
         private bool UtilizadorExists(int id)
         {
             return pintContext.Utilizadores.Any(e => e.IdUtilizador == id);

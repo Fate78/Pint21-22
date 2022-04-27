@@ -16,13 +16,13 @@ namespace RoomBookerAPI.Models
         {
         }
 
-        public virtual DbSet<CentroGeografico> CentroGeograficos { get; set; } = null!;
+        public virtual DbSet<CentroGeografico> CentrosGeograficos { get; set; } = null!;
         public virtual DbSet<Reserva> Reservas { get; set; } = null!;
         public virtual DbSet<Sala> Salas { get; set; } = null!;
         public virtual DbSet<Ticket> Tickets { get; set; } = null!;
-        public virtual DbSet<TipoUtilizador> TipoUtilizadores { get; set; } = null!;
+        public virtual DbSet<TipoUtilizador> TiposUtilizador { get; set; } = null!;
         public virtual DbSet<Utilizador> Utilizadores { get; set; } = null!;
-        public virtual DbSet<UtilizadorCentro> UtilizadorCentros { get; set; } = null!;
+        public virtual DbSet<UtilizadorCentro> UtilizadoresCentros { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -215,11 +215,11 @@ namespace RoomBookerAPI.Models
 
                 entity.Property(e => e.Verificado).HasColumnName("VERIFICADO");
 
-                entity.HasOne(d => d.IdTipoNavigation)
-                    .WithMany(p => p.Utilizadors)
-                    .HasForeignKey(d => d.IdTipo)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UTILIZAD_RELATIONS_TIPO_UTI");
+                //entity.HasOne(d => d.IdTipoNavigation)
+                //    .WithMany(p => p.Utilizadores)
+                //    .HasForeignKey(d => d.IdTipo)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_UTILIZAD_RELATIONS_TIPO_UTI");
             });
 
             modelBuilder.Entity<UtilizadorCentro>(entity =>

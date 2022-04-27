@@ -264,3 +264,5 @@ C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\RoomBookerAPI\RoomBookerAPI
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\RoomBookerAPI\RoomBookerAPI\bin\Debug\net6.0\System.Net.Http.Formatting.dll
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\RoomBookerAPI\RoomBookerAPI\bin\Debug\net6.0\System.Web.Http.dll
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\RoomBookerAPI\RoomBookerAPI\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\RoomBookerAPI\RoomBookerAPI\obj\Debug\net6.0\RoomBookerAPI.RazorAssemblyInfo.cache
+C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\RoomBookerAPI\RoomBookerAPI\obj\Debug\net6.0\RoomBookerAPI.RazorAssemblyInfo.cs

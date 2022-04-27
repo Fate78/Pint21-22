@@ -7,6 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<PintContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseConnection")));
 builder.Services.AddScoped<IUtilizadoresService, UtilizadoresService>();
+builder.Services.AddScoped<ITiposUtilizadorService, TiposUtilizadorService>();
+builder.Services.AddScoped<ISalasService, SalasService>();
+builder.Services.AddScoped<ICentrosGeograficosService, CentrosGeograficosService>();
+builder.Services.AddScoped<IUtilizadoresCentrosService, UtilizadoresCentrosService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
