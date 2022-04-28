@@ -11,6 +11,8 @@ builder.Services.AddScoped<ITiposUtilizadorService, TiposUtilizadorService>();
 builder.Services.AddScoped<ISalasService, SalasService>();
 builder.Services.AddScoped<ICentrosGeograficosService, CentrosGeograficosService>();
 builder.Services.AddScoped<IUtilizadoresCentrosService, UtilizadoresCentrosService>();
+builder.Services.AddScoped<ITicketsService, TicketsService>();
+builder.Services.AddScoped<IReservasService, ReservasService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
