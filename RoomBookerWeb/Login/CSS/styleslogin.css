@@ -6,6 +6,38 @@ body{
     height: 100vh;
     overflow: hidden;
 }   
+.Section_top{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    background-image: url(viseu.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    justify-content: center;
+    animation: change 20s infinite ease-in-out;
+}
+@keyframes change{
+    0%
+    {
+        background-image: url(viseu.jpg);
+    }
+    33%
+    {
+        background-image: url(tomar.jpg);
+    }
+    66% 
+    {
+        background-image: url(fundao.jpg);
+    }
+    100%
+    {
+        background-image: url(viseu.jpg);
+    }
+}
+
 .center{
     position: absolute;
     top: 50%;
@@ -13,6 +45,7 @@ body{
     transform: translate(-50%, -50%);
     width: 400px;  
     background: white;
+    opacity: 1;
     border-radius: 10px;
 }
   .center h1{
@@ -76,6 +109,10 @@ body{
     cursor: pointer;
 
 }
+.pass a{
+  color:#2691d9;
+  text-decoration: none;
+}
 .pass:hover{
     text-decoration: underline;
 }
@@ -86,7 +123,7 @@ input[type="submit"]{
     background: dodgerblue;
     border-radius: 25px;
     font-size: 18px;
-    color: silver;
+    color: white;
     font-weight: 700;
     cursor: pointer;
     outline: none;
