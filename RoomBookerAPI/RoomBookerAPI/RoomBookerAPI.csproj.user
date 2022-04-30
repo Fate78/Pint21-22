@@ -11,5 +11,6 @@
     <WebStackScaffolding_DbContextTypeFullName>RoomBookerAPI.Models.PintContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
+    <NameOfLastUsedPublishProfile>C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\RoomBookerAPI\RoomBookerAPI\Properties\PublishProfiles\RoomBookerAPI - Web Deploy1.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

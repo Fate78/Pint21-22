@@ -108,6 +108,7 @@ go
 create table CENTRO_GEOGRAFICO (
    ID_CENTRO            int                  IDENTITY(1,1) not null,
    NOME_CENTRO          varchar(1024)        UNIQUE not null,
+   IMAGEM               varbinary            null,
    ATIVO                bit                  not null,
    constraint PK_CENTRO_GEOGRAFICO primary key (ID_CENTRO)
 )
