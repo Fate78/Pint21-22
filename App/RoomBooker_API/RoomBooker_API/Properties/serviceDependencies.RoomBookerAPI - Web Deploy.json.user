@@ -1,0 +1,63 @@
+{
+  "dependencies": {
+    "apis1": {
+      "restored": true,
+      "restoreTime": "2022-05-02T18:08:38.8420296Z"
+    },
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2022-05-02T19:43:15.8351955Z"
+    },
+    "secrets1": {
+      "restored": true,
+      "restoreTime": "2022-05-02T19:43:13.5619179Z"
+    }
+  },
+  "parameters": {
+    "RoomBookerAPI.resourceName": {
+      "Name": "RoomBookerAPI.resourceName",
+      "Type": null,
+      "Value": "RoomBookerAPI"
+    },
+    "apis1.resourceGroupName": {
+      "Name": "apis1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "RoomBookerAPI20220430185159ResourceGroup"
+    },
+    "RoomBookerAPI.subscriptionId": {
+      "Name": "RoomBookerAPI.subscriptionId",
+      "Type": "subscription",
+      "Value": "fbb2c1af-c960-4c63-ac35-94df6e29c0ff"
+    },
+    "secrets1.resourceGroupName": {
+      "Name": "secrets1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "RoomBookerAPI20220430185159ResourceGroup"
+    },
+    "subscriptionId": {
+      "Name": "subscriptionId",
+      "Type": "subscription",
+      "Value": "fbb2c1af-c960-4c63-ac35-94df6e29c0ff"
+    },
+    "apis1.subscriptionId": {
+      "Name": "apis1.subscriptionId",
+      "Type": "subscription",
+      "Value": "fbb2c1af-c960-4c63-ac35-94df6e29c0ff"
+    },
+    "RoomBookerAPI.resourceGroupName": {
+      "Name": "RoomBookerAPI.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "RoomBookerAPI20220430185159ResourceGroup"
+    },
+    "secrets1.subscriptionId": {
+      "Name": "secrets1.subscriptionId",
+      "Type": "subscription",
+      "Value": "fbb2c1af-c960-4c63-ac35-94df6e29c0ff"
+    },
+    "RoomBookerAPI.resourceGroupLocation": {
+      "Name": "RoomBookerAPI.resourceGroupLocation",
+      "Type": null,
+      "Value": "westeurope"
+    }
+  }
+}
