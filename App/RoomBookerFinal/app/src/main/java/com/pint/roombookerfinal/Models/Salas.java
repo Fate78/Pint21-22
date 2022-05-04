@@ -3,6 +3,7 @@ package com.pint.roombookerfinal.Models;
 import java.util.List;
 
 public class Salas {
+    private List<Salas> salasList;
     private Integer idSala;
     private Integer idCentro;
     private Integer nSala;
@@ -74,5 +75,13 @@ public class Salas {
 
     public void setReservas(List<Object> reservas) {
         this.reservas = reservas;
+    }
+
+    public List<Salas> getSalasList() {
+        return salasList;
+    }
+
+    public void setSalasList(List<Salas> salasList) {
+        this.salasList = salasList;
     }
 }

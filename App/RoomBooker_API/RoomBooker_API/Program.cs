@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RoomBooker_API.Models;
 using RoomBooker_API.Service;
-using Azure.Identity;
 
 
 var builder = WebApplication.CreateBuilder(args);

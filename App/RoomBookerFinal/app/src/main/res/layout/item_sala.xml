@@ -6,7 +6,7 @@
     android:layout_height="75dp">
 
     <TextView
-        android:id="@+id/tv_NSala"
+        android:id="@+id/txt_nsala"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

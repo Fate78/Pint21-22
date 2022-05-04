@@ -59,10 +59,3 @@ C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBook
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\RoomBooker_API.pdb
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\RoomBooker_API.genruntimeconfig.cache
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\ref\RoomBooker_API.dll
-C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\bin\Release\net6.0\Azure.Core.dll
-C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\bin\Release\net6.0\Azure.Extensions.AspNetCore.Configuration.Secrets.dll
-C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\bin\Release\net6.0\Azure.Identity.dll
-C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\bin\Release\net6.0\Azure.Security.KeyVault.Secrets.dll
-C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\bin\Release\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
-C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\bin\Release\net6.0\Microsoft.Identity.Client.Extensions.Msal.dll
-C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\bin\Release\net6.0\System.Memory.Data.dll

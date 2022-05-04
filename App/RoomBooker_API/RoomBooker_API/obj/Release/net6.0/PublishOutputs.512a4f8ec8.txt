@@ -4,11 +4,6 @@ C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBook
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\RoomBooker_API.dll
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\RoomBooker_API.runtimeconfig.json
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\RoomBooker_API.pdb
-C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\Azure.Core.dll
-C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\Azure.Extensions.AspNetCore.Configuration.Secrets.dll
-C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\Azure.Identity.dll
-C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\Azure.Security.KeyVault.Secrets.dll
-C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\Microsoft.Data.SqlClient.dll
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.dll
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -16,7 +11,6 @@ C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBook
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.SqlServer.dll
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.Caching.Memory.dll
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\Microsoft.Identity.Client.dll
-C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\Microsoft.Identity.Client.Extensions.Msal.dll
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\Microsoft.IdentityModel.JsonWebTokens.dll
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\Microsoft.IdentityModel.Logging.dll
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\Microsoft.IdentityModel.Protocols.dll
@@ -30,7 +24,6 @@ C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBook
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\System.Configuration.ConfigurationManager.dll
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\System.Drawing.Common.dll
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\System.IdentityModel.Tokens.Jwt.dll
-C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\System.Memory.Data.dll
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\System.Runtime.Caching.dll
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\PubTmp\Out\System.Security.Permissions.dll
