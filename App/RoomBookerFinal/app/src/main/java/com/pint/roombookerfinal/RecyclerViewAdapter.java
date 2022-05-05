@@ -17,7 +17,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private List<Salas> salasList;
     private Context mCtx;
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView n_sala;
 
@@ -27,16 +26,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 
-    public RecyclerViewAdapter(Context mCtx, List<Salas> listsalas){
-
+    public RecyclerViewAdapter(Context mCtx, List<Salas> salasList){
+        this.salasList = salasList;
+        this.mCtx = mCtx;
     }
 
     @NonNull
     @org.jetbrains.annotations.NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @org.jetbrains.annotations.NotNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.item_sala, null);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.item_sala, parent, false);
         ViewHolder holder = new ViewHolder(view);
 
         return holder;
@@ -50,7 +50,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return 0;
+        return salasList.size();
     }
 
 

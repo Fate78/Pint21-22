@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.rv_salas);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
 
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
         Call<List<Salas>> call = apiInterface.getSalas();
@@ -32,21 +33,15 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<Salas>>() {
             @Override
             public void onResponse(Call<List<Salas>> call, Response<List<Salas>> response) {
-                System.out.println(response);
+                Log.e("Success",response.body().toString());
                 List<Salas> salasList = response.body();
-                if(response.isSuccessful()){
-                    Log.e("Success",response.body().toString());
-                    System.out.println("++++++ on Response ++++++");
-                    for (Salas salas:salasList) {
-                        String content = "";
-                        content += "Sala Nº " + salas.getnSala() + "\n";
-                        System.out.println(content);
-                    }
-                    recyclerView.setAdapter(new RecyclerViewAdapter(MainActivity.this, salasList) );
+                System.out.println("++++++ on Response ++++++");
+                for (Salas salas:salasList) {
+                    String content = "";
+                    content += "Sala Nº " + salas.getnSala() + "\n";
+                    System.out.println(content);
                 }
-                else{
-                    System.out.println("++++++ Response not Successful ++++++");
-                }
+                recyclerView.setAdapter(new RecyclerViewAdapter(MainActivity.this, salasList) );
             }
 
             @Override
