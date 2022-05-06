@@ -1,9 +1,24 @@
 package com.pint.roombookerfinal.Utilizador;
 
-public class ContentLogin {
+public class ContentPerfil {
     private int id, id_tipo;
     private String email, password, confirmarPassword, nome_utilizador, nome_completo, data_nascimento;
-    private boolean isEmailValid, isPasswordValid;
+
+    public int getId_tipo() {
+        return id_tipo;
+    }
+
+    public void setId_tipo(int id_tipo) {
+        this.id_tipo = id_tipo;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getEmail() {
         return email;
@@ -19,6 +34,14 @@ public class ContentLogin {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmarPassword() {
+        return confirmarPassword;
+    }
+
+    public void setConfirmarPassword(String confirmarPassword) {
+        this.confirmarPassword = confirmarPassword;
     }
 
     public String getNome_utilizador() {
@@ -43,37 +66,5 @@ public class ContentLogin {
 
     public void setData_nascimento(String data_nascimento) {
         this.data_nascimento = data_nascimento;
-    }
-
-    public boolean isEmailValid() {
-        return isEmailValid;
-    }
-
-    public void setEmailValid(boolean emailValid) {
-        isEmailValid = emailValid;
-    }
-
-    public boolean isPasswordValid() {
-        return isPasswordValid;
-    }
-
-    public void setPasswordValid(boolean passwordValid) {
-        isPasswordValid = passwordValid;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId_tipo() {
-        return id_tipo;
-    }
-
-    public void setId_tipo(int id_tipo) {
-        this.id_tipo = id_tipo;
     }
 }

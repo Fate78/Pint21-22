@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Utilizador {
     private List<Utilizador> utilizadoresList;
-    private float idUtilizador;
-    private float idTipo;
+    private Integer idUtilizador;
+    private Integer idTipo;
     private String nomeUtilizador;
     private String nomeCompleto;
     private String palavraPasse;
@@ -22,11 +22,11 @@ public class Utilizador {
 
     // Getter Methods
 
-    public float getIdUtilizador() {
+    public Integer getIdUtilizador() {
         return idUtilizador;
     }
 
-    public float getIdTipo() {
+    public Integer getIdTipo() {
         return idTipo;
     }
 
@@ -64,11 +64,11 @@ public class Utilizador {
 
     // Setter Methods
 
-    public void setIdUtilizador(float idUtilizador) {
+    public void setIdUtilizador(Integer idUtilizador) {
         this.idUtilizador = idUtilizador;
     }
 
-    public void setIdTipo(float idTipo) {
+    public void setIdTipo(Integer idTipo) {
         this.idTipo = idTipo;
     }
 
