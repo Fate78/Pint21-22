@@ -58,7 +58,11 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.2.3, )"
+              "version": "[6.3.1, )"
+            },
+            "Web.UI.WebControls": {
+              "target": "Package",
+              "version": "[1.0.2.226, )"
             }
           },
           "imports": [

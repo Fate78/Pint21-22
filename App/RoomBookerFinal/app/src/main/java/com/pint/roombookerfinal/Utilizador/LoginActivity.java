@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.pint.roombookerfinal.ApiClient;
 import com.pint.roombookerfinal.ApiInterface;
-import com.pint.roombookerfinal.MainActivity;
 import com.pint.roombookerfinal.Models.Utilizador;
 import com.pint.roombookerfinal.R;
 
@@ -61,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                 validarLogin(email_input, password_input);
                 if(contentLogin.isEmailValid() && contentLogin.isPasswordValid()){
                     System.out.println("Logged in: " + contentLogin.getNome_completo());
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), PerfilActivity.class);
                     intent.putExtra("id_utilizador", contentLogin.getId());
                     startActivity(intent);
                 }
