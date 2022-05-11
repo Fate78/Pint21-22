@@ -29,11 +29,16 @@ namespace RoomBooker_API.Service
             return utilizador;
         }
 
-        private void SearchByEmail(ref IQueryable<Utilizador> utilizadores, string email)
+        public ActionResult<Utilizador> GetbyUsername(string username)
         {
-            if (!utilizadores.Any() || string.IsNullOrWhiteSpace(email))
-                return;
-            utilizadores = utilizadores.Where(o => o.Email.Contains(email.Trim()));
+            var utilizador = pintContext.Utilizadores.Single(user => user.NomeUtilizador == username);
+            //Check if null, return notfound
+            if (utilizador == null)
+            {
+                return new NotFoundResult();
+            }
+
+            return utilizador;
         }
 
         public async Task<IActionResult> Put(int id, Utilizador utilizador)

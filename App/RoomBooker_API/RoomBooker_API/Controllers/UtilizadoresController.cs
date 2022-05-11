@@ -30,10 +30,17 @@ namespace RoomBooker_API.Controllers
         }
 
         // GET: api/Utilizadores/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public ActionResult<Utilizador> GetUtilizador(int id)
         {
             return utilizadoresService.Get(id);
+        }
+
+        //GET: api/Utilizadores/username
+        [HttpGet("{username}")]
+        public ActionResult<Utilizador> GetUtilizadorbyUsername(string username)
+        {
+            return utilizadoresService.GetbyUsername(username);
         }
 
         // PUT: api/Utilizadores/5
