@@ -3,7 +3,7 @@ package com.pint.roombookerfinal.Utilizador;
 public class ContentLogin {
     private int id, id_tipo;
     private String email, password, confirmarPassword, nome_utilizador, nome_completo, data_nascimento;
-    private boolean isEmailValid, isPasswordValid;
+    private boolean isUsernameValid, isEmailValid, isPasswordValid;
 
     public String getEmail() {
         return email;
@@ -75,5 +75,13 @@ public class ContentLogin {
 
     public void setId_tipo(int id_tipo) {
         this.id_tipo = id_tipo;
+    }
+
+    public boolean isUsernameValid() {
+        return isUsernameValid;
+    }
+
+    public void setUsernameValid(boolean usernameValid) {
+        isUsernameValid = usernameValid;
     }
 }

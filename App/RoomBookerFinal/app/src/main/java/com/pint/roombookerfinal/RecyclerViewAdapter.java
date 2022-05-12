@@ -1,5 +1,6 @@
 package com.pint.roombookerfinal;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,10 +43,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return holder;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull @org.jetbrains.annotations.NotNull RecyclerViewAdapter.ViewHolder holder, int position) {
         Salas salas = salasList.get(position);
-        holder.n_sala.setText(salas.getnSala());
+        holder.n_sala.setText("Sala nº" + salas.getnSala().toString());
+
     }
 
     @Override

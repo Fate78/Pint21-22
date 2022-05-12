@@ -17,11 +17,11 @@ import com.pint.roombookerfinal.ApiClient;
 import com.pint.roombookerfinal.ApiInterface;
 import com.pint.roombookerfinal.Models.Utilizador;
 import com.pint.roombookerfinal.R;
+import com.pint.roombookerfinal.SharedPrefManager;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.security.MessageDigest;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,12 +30,13 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
     private ContentLogin contentLogin;
     SharedPreferences sharedPreferences;
+    private SharedPrefManager sharedPrefManager;
     Context mCtx;
 
-    EditText email, password;
+    EditText username_input, password_input;
     Button btn_login;
     Utilizador utilizador;
-    String email_input, password_input;
+    String username, password;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -45,27 +46,23 @@ public class LoginActivity extends AppCompatActivity {
         mCtx = this;
 
         contentLogin = new ContentLogin();
-        email = (EditText) findViewById(R.id.edtext_email);
-        password = (EditText) findViewById(R.id.edtext_password);
+        username_input = (EditText) findViewById(R.id.edtext_email);
+        password_input = (EditText) findViewById(R.id.edtext_password);
         btn_login = (Button) findViewById(R.id.btn_login);
 
-        sharedPreferences = mCtx.getSharedPreferences("ProfileSharedPref", Context.MODE_PRIVATE);
-
         btn_login.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View view) {
-                email_input = email.getText().toString();
-                password_input = getSha256(password.getText().toString());
-                validarLogin(email_input, password_input);
-                if(contentLogin.isEmailValid() && contentLogin.isPasswordValid()){
+                username = username_input.getText().toString();
+                password = getSha256(password_input.getText().toString());
+                validarLogin(username, password);
+                if(contentLogin.isUsernameValid() && contentLogin.isPasswordValid()){
                     System.out.println("Logged in: " + contentLogin.getNome_completo());
                     Intent intent = new Intent(getApplicationContext(), PerfilActivity.class);
-                    intent.putExtra("id_utilizador", contentLogin.getId());
                     startActivity(intent);
                 }
                 else{
-                    System.out.println(contentLogin.isEmailValid());
+                    System.out.println(contentLogin.isUsernameValid());
                     System.out.println(contentLogin.isPasswordValid());
                     System.out.println("Failed to Login");
                 }
@@ -90,36 +87,36 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void validarLogin(String email, String password){
+    public void validarLogin(String username, String password){
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
-        Call<List<Utilizador>> call = apiInterface.getUtilizadores();
+        Call<Utilizador> call = apiInterface.getUtilizador(username);
 
-        call.enqueue(new Callback<List<Utilizador>>() {
+        call.enqueue(new Callback<Utilizador>() {
             @Override
-            public void onResponse(@NotNull Call<List<Utilizador>> call, @NotNull Response<List<Utilizador>> response) {
+            public void onResponse(@NotNull Call<Utilizador> call, @NotNull Response<Utilizador> response) {
                 Log.e("Success", response.body().toString());
-                List<Utilizador> utilizadoresList = response.body();
+                Utilizador utilizador = response.body();
                 System.out.println("++++In Response++++");
-                for (Utilizador utilizador:utilizadoresList){
-                    if (utilizador.getEmail().equals(email) && utilizador.getPalavraPasse().equals(password)){
-                        SharedPreferences.Editor profile = sharedPreferences.edit();
-                        profile.putFloat("id_utilizador", utilizador.getIdUtilizador());
-                        profile.apply();
-                        contentLogin.setId(utilizador.getIdUtilizador());
-                        contentLogin.setEmail(utilizador.getEmail());
-                        contentLogin.setNome_utilizador(utilizador.getNomeUtilizador());
-                        contentLogin.setNome_completo(utilizador.getNomeCompleto());
-                        contentLogin.setData_nascimento(utilizador.getDataNascimento());
-
-                        contentLogin.setEmailValid(true);
-                        contentLogin.setPasswordValid(true);
-                    }
+                if (utilizador.getNomeUtilizador().equals(username) && utilizador.getPalavraPasse().equals(password)){
+                    saveLoginDetails(username, password);
+                    contentLogin.setUsernameValid(true);
+                    contentLogin.setPasswordValid(true);
+                    contentLogin.setId(utilizador.getIdUtilizador());
+                    contentLogin.setEmail(utilizador.getEmail());
+                    contentLogin.setNome_utilizador(utilizador.getNomeUtilizador());
+                    contentLogin.setNome_completo(utilizador.getNomeCompleto());
+                    contentLogin.setData_nascimento(utilizador.getDataNascimento());
                 }
+
             }
             @Override
-            public void onFailure(@NotNull Call<List<Utilizador>> call, @NotNull Throwable t) {
+            public void onFailure(@NotNull Call<Utilizador> call, @NotNull Throwable t) {
                 Log.e("Failure", t.getLocalizedMessage());
             }
         });
+    }
+
+    private void saveLoginDetails(String username, String password){
+        new SharedPrefManager(this).saveLoginDetails(username, password);
     }
 }

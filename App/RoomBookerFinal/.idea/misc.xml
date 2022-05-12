@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/App/RoomBookerFinal/app/src/main/res/layout/activity_main.xml" value="0.16" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/App/RoomBookerFinal/app/src/main/res/layout/activity_perfil.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/App/RoomBookerFinal/app/src/main/res/layout/content_navigation_drawer.xml" value="0.176" />
+        <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/App/RoomBookerFinal/app/src/main/res/layout/item_sala.xml" value="0.176" />
       </map>
     </option>
   </component>

@@ -23,6 +23,6 @@ public interface ApiInterface {
     @GET("/api/utilizadores")
     public Call<List<Utilizador>> getUtilizadores();
 
-    @GET("api/utilizadores/{id}")
-    public Call<Utilizador> getUtilizador(@Path("id") int id);
+    @GET("api/utilizadores/{username}")
+    public Call<Utilizador> getUtilizador(@Path("username") String username);
 }
