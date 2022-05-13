@@ -1,4 +1,4 @@
-package com.pint.roombookerfinal.ui.slideshow;
+package com.pint.roombookerfinal.ui.reservas;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,14 +12,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.pint.roombookerfinal.databinding.FragmentSlideshowBinding;
 
-public class SlideshowFragment extends Fragment {
+public class ReservasFragment extends Fragment {
 
     private FragmentSlideshowBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+        ReservasViewModel slideshowViewModel =
+                new ViewModelProvider(this).get(ReservasViewModel.class);
 
         binding = FragmentSlideshowBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

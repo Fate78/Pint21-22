@@ -1,6 +1,5 @@
 package com.pint.roombookerfinal;
 
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -30,19 +29,13 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityNavigationDrawerBinding binding;
     private SharedPrefManager sharedPrefManager;
-    Context mCtx;
     TextView username, email;
+    String s_username, s_email;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        username = findViewById(R.id.txt_nav_username);
-        email = findViewById(R.id.txt_nav_email);
-
-        username.setText(new SharedPrefManager(mCtx).getUsername());
-        email.setText(new SharedPrefManager(mCtx).getEmail());
 
         binding = ActivityNavigationDrawerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -71,6 +64,12 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.navigation_drawer, menu);
+        username = (TextView) findViewById(R.id.txt_nav_username);
+        email = (TextView) findViewById(R.id.txt_nav_email);
+        s_username = new SharedPrefManager(this).getUsername();
+        s_email = new SharedPrefManager(this).getEmail();
+        username.setText(s_username);
+        email.setText(s_email);
         return true;
     }
 
