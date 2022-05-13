@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.pint.roombookerfinal.ApiClient;
 import com.pint.roombookerfinal.ApiInterface;
 import com.pint.roombookerfinal.Models.Utilizador;
+import com.pint.roombookerfinal.NavigationDrawerActivity;
 import com.pint.roombookerfinal.R;
 import com.pint.roombookerfinal.SharedPrefManager;
 
@@ -58,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                 validarLogin(username, password);
                 if(contentLogin.isUsernameValid() && contentLogin.isPasswordValid()){
                     System.out.println("Logged in: " + contentLogin.getNome_completo());
-                    Intent intent = new Intent(getApplicationContext(), PerfilActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
                     startActivity(intent);
                 }
                 else{
@@ -98,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                 Utilizador utilizador = response.body();
                 System.out.println("++++In Response++++");
                 if (utilizador.getNomeUtilizador().equals(username) && utilizador.getPalavraPasse().equals(password)){
-                    saveLoginDetails(username, password);
+                    saveLoginDetails(username, utilizador.getEmail(), password);
                     contentLogin.setUsernameValid(true);
                     contentLogin.setPasswordValid(true);
                     contentLogin.setId(utilizador.getIdUtilizador());
@@ -116,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void saveLoginDetails(String username, String password){
-        new SharedPrefManager(this).saveLoginDetails(username, password);
+    private void saveLoginDetails(String username, String email, String password){
+        new SharedPrefManager(this).saveLoginDetails(username, email, password);
     }
 }
