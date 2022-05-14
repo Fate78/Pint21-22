@@ -22,4 +22,9 @@
         android:name="com.pint.roombookerfinal.ui.reservas.ReservasFragment"
         android:label="@string/menu_reservas"
         tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.pint.roombookerfinal.ui.logout.LogoutFragment"
+        android:label="Logout"
+        tools:layout="@layout/fragment_logout" />
 </navigation>

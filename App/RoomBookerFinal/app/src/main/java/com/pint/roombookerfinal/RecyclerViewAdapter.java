@@ -2,15 +2,18 @@ package com.pint.roombookerfinal;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pint.roombookerfinal.Models.Salas;
+import com.pint.roombookerfinal.ui.salas.SalaDetailsFragment;
 
 import java.util.List;
 
@@ -46,9 +49,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull @org.jetbrains.annotations.NotNull RecyclerViewAdapter.ViewHolder holder, int position) {
+
         Salas salas = salasList.get(position);
         holder.n_sala.setText("Sala nº" + salas.getnSala().toString());
-
+        holder.n_sala.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SalaDetailsFragment salaDetailsFragment = new SalaDetailsFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("IdSala", salas.getIdSala());
+                salaDetailsFragment.setArguments(bundle);
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_container, salaDetailsFragment).commit();
+            }
+        });
     }
 
     @Override
@@ -56,5 +70,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return salasList.size();
     }
 
+    private void sendSalaId(int id){
 
+    }
 }

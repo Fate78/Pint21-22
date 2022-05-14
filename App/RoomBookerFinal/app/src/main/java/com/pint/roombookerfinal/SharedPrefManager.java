@@ -20,6 +20,13 @@ public class SharedPrefManager {
         editor.apply();
     }
 
+    public void clearLoginDetails(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(loginPreferences, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
     public String getUsername(){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(loginPreferences, Context.MODE_PRIVATE);
         return sharedPreferences.getString("Username","");
@@ -29,6 +36,7 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(loginPreferences, Context.MODE_PRIVATE);
         return sharedPreferences.getString("Email","");
     }
+
 
     public boolean isUserLoggedOut(){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(loginPreferences, Context.MODE_PRIVATE);

@@ -38,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btn_login;
     Utilizador utilizador;
     String username, password;
+    Boolean isLoggedout;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -50,7 +51,13 @@ public class LoginActivity extends AppCompatActivity {
         username_input = (EditText) findViewById(R.id.edtext_email);
         password_input = (EditText) findViewById(R.id.edtext_password);
         btn_login = (Button) findViewById(R.id.btn_login);
+        isLoggedout = new SharedPrefManager(this).isUserLoggedOut();
 
+        if(!isLoggedout)
+        {
+            Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
+            startActivity(intent);
+        }
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,20 +102,21 @@ public class LoginActivity extends AppCompatActivity {
         call.enqueue(new Callback<Utilizador>() {
             @Override
             public void onResponse(@NotNull Call<Utilizador> call, @NotNull Response<Utilizador> response) {
-                Log.e("Success", response.body().toString());
-                Utilizador utilizador = response.body();
-                System.out.println("++++In Response++++");
-                if (utilizador.getNomeUtilizador().equals(username) && utilizador.getPalavraPasse().equals(password)){
-                    saveLoginDetails(username, utilizador.getEmail(), password);
-                    contentLogin.setUsernameValid(true);
-                    contentLogin.setPasswordValid(true);
-                    contentLogin.setId(utilizador.getIdUtilizador());
-                    contentLogin.setEmail(utilizador.getEmail());
-                    contentLogin.setNome_utilizador(utilizador.getNomeUtilizador());
-                    contentLogin.setNome_completo(utilizador.getNomeCompleto());
-                    contentLogin.setData_nascimento(utilizador.getDataNascimento());
+                if (response.body() != null) {
+                    Log.e("Success", response.body().toString());
+                    Utilizador utilizador = response.body();
+                    System.out.println("++++In Response++++");
+                    if (utilizador.getNomeUtilizador().equals(username) && utilizador.getPalavraPasse().equals(password)){
+                        saveLoginDetails(username, utilizador.getEmail(), password);
+                        contentLogin.setUsernameValid(true);
+                        contentLogin.setPasswordValid(true);
+                        contentLogin.setId(utilizador.getIdUtilizador());
+                        contentLogin.setEmail(utilizador.getEmail());
+                        contentLogin.setNome_utilizador(utilizador.getNomeUtilizador());
+                        contentLogin.setNome_completo(utilizador.getNomeCompleto());
+                        contentLogin.setData_nascimento(utilizador.getDataNascimento());
+                    }
                 }
-
             }
             @Override
             public void onFailure(@NotNull Call<Utilizador> call, @NotNull Throwable t) {
