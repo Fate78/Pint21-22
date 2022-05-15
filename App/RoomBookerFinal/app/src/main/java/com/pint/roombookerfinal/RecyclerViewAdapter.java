@@ -2,18 +2,17 @@ package com.pint.roombookerfinal;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Bundle;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pint.roombookerfinal.Models.Salas;
-import com.pint.roombookerfinal.ui.salas.SalaDetailsFragment;
+import com.pint.roombookerfinal.Sala.SalaActivity;
 
 import java.util.List;
 
@@ -21,6 +20,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private List<Salas> salasList;
     private Context mCtx;
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView n_sala;
 
@@ -55,12 +55,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.n_sala.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SalaDetailsFragment salaDetailsFragment = new SalaDetailsFragment();
-                Bundle bundle = new Bundle();
-                bundle.putInt("IdSala", salas.getIdSala());
-                salaDetailsFragment.setArguments(bundle);
-                AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_container, salaDetailsFragment).commit();
+                Intent intent = new Intent(v.getContext(), SalaActivity.class);
+                intent.putExtra("IdSala", salas.getIdSala());
+                v.getContext().startActivity(intent);
             }
         });
     }

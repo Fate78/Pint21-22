@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -22,7 +23,6 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.pint.roombookerfinal.databinding.ActivityNavigationDrawerBinding;
-import com.pint.roombookerfinal.ui.salas.SalasFragment;
 
 public class NavigationDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -89,15 +89,18 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         if(id == R.id.nav_home) {
 
         }else if(id == R.id.nav_salas){
-            fragment = new SalasFragment();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.nav_host_fragment_container, fragment)
-                    .commit();
+
         }else if(id == R.id.nav_logout){
 
         }
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onBackPressed(){
+        Toast.makeText(NavigationDrawerActivity.this, "There is no back action", Toast.LENGTH_LONG).show();
+        return;
     }
 }
