@@ -1,10 +1,12 @@
 package com.pint.roombookerfinal;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.pint.roombookerfinal.Utilizador.PerfilActivity;
 import com.pint.roombookerfinal.databinding.ActivityNavigationDrawerBinding;
 
 public class NavigationDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -31,6 +34,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
     private SharedPrefManager sharedPrefManager;
     TextView username, email;
     String s_username, s_email;
+    ImageView img_profile;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -64,12 +68,24 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.navigation_drawer, menu);
+
+        //Get username and email
         username = (TextView) findViewById(R.id.txt_nav_username);
         email = (TextView) findViewById(R.id.txt_nav_email);
         s_username = new SharedPrefManager(this).getUsername();
         s_email = new SharedPrefManager(this).getEmail();
         username.setText(s_username);
         email.setText(s_email);
+
+        //Profile Click
+        img_profile = (ImageView) findViewById(R.id.img_profile);
+        img_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), PerfilActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
         return true;
     }
 
