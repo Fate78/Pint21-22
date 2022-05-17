@@ -19,7 +19,7 @@ import com.pint.roombookerfinal.ApiClient;
 import com.pint.roombookerfinal.ApiInterface;
 import com.pint.roombookerfinal.Models.Salas;
 import com.pint.roombookerfinal.R;
-import com.pint.roombookerfinal.RecyclerViewAdapter;
+import com.pint.roombookerfinal.Sala.SalasRecyclerViewAdapter;
 import com.pint.roombookerfinal.databinding.FragmentSalasBinding;
 
 import java.util.List;
@@ -62,7 +62,7 @@ public class SalasFragment extends Fragment {
                     String content = "";
                     content += "Sala Nº " + salas.getnSala() + "\n";
                 }
-                recyclerView.setAdapter(new RecyclerViewAdapter(mCtx, salasList) );
+                recyclerView.setAdapter(new SalasRecyclerViewAdapter(mCtx, salasList) );
             }
 
             @Override

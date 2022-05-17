@@ -25,4 +25,5 @@ public interface ApiInterface {
 
     @GET("api/utilizadores/{username}")
     public Call<Utilizador> getUtilizador(@Path("username") String username);
+
 }

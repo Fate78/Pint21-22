@@ -14,13 +14,16 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".Sala.ReservasSalaActivity"
+            android:exported="false" />
+        <activity
             android:name=".Sala.SalaActivity"
             android:exported="false" />
         <activity
             android:name=".NavigationDrawerActivity"
             android:exported="true"
             android:label="@string/title_activity_navigation_drawer"
-            android:theme="@style/Theme.RoomBookerFinal.NoActionBar"></activity>
+            android:theme="@style/Theme.RoomBookerFinal.NoActionBar" />
         <activity android:name=".Utilizador.PerfilActivity" />
         <activity
             android:name=".Utilizador.LoginActivity"

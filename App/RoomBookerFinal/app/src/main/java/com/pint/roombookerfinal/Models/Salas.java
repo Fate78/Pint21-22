@@ -11,7 +11,7 @@ public class Salas {
     private String tempoMinLimp;
     private Boolean ativo;
     private Object idCentroNavigation;
-    private List<Object> reservas = null;
+    private List<Reservas> reservas = null;
 
     public Integer getIdSala() {
         return idSala;
@@ -69,11 +69,11 @@ public class Salas {
         this.idCentroNavigation = idCentroNavigation;
     }
 
-    public List<Object> getReservas() {
+    public List<Reservas> getReservas() {
         return reservas;
     }
 
-    public void setReservas(List<Object> reservas) {
+    public void setReservas(List<Reservas> reservas) {
         this.reservas = reservas;
     }
 
