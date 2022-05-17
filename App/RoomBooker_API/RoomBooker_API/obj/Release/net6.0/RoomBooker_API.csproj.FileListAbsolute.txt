@@ -59,3 +59,8 @@ C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBook
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\RoomBooker_API.pdb
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\RoomBooker_API.genruntimeconfig.cache
 C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\obj\Release\net6.0\ref\RoomBooker_API.dll
+C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\bin\Release\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\bin\Release\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\bin\Release\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\bin\Release\net6.0\Newtonsoft.Json.dll
+C:\Users\Daniel\OneDrive\Documentos\GitHub\Pint21-22\App\RoomBooker_API\RoomBooker_API\bin\Release\net6.0\Newtonsoft.Json.Bson.dll
