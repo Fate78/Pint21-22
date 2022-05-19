@@ -1,0 +1,4 @@
+#Tue Apr 26 11:59:30 BST 2022
+base.0=C\:\\Users\\andre\\OneDrive - ESTGV\\Ambiente de Trabalho\\Curso\\pint\\GitHub\\Pint21-22\\RoomBooker\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
