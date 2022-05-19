@@ -10,14 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.pint.roombookerfinal.Models.Reservas;
+import com.pint.roombookerfinal.Models.Reserva;
 import com.pint.roombookerfinal.R;
 
 import java.util.List;
 
 public class ReservasRecyclerViewAdapter extends RecyclerView.Adapter<ReservasRecyclerViewAdapter.ViewHolder> {
 
-    private List<Reservas> reservasList;
+    private List<Reserva> reservasList;
     private Context mCtx;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -33,7 +33,7 @@ public class ReservasRecyclerViewAdapter extends RecyclerView.Adapter<ReservasRe
         }
     }
 
-    public ReservasRecyclerViewAdapter(Context mCtx, List<Reservas> reservasList){
+    public ReservasRecyclerViewAdapter(Context mCtx, List<Reserva> reservasList){
         this.reservasList = reservasList;
         this.mCtx = mCtx;
     }
@@ -53,10 +53,10 @@ public class ReservasRecyclerViewAdapter extends RecyclerView.Adapter<ReservasRe
     @Override
     public void onBindViewHolder(@NonNull @org.jetbrains.annotations.NotNull ReservasRecyclerViewAdapter.ViewHolder holder, int position) {
 
-        Reservas reservas = reservasList.get(position);
-        holder.hora_inicio.setText(formatTime(reservas.getHoraInicio().toString()));
-        holder.hora_fim.setText(formatTime(reservas.getHoraFim().toString()));
-        holder.data_reserva.setText(formatDate(reservas.getDataReserva().toString()));
+        Reserva reserva = reservasList.get(position);
+        holder.hora_inicio.setText(formatTime(reserva.getHoraInicio().toString()));
+        holder.hora_fim.setText(formatTime(reserva.getHoraFim().toString()));
+        holder.data_reserva.setText(formatDate(reserva.getDataReserva().toString()));
     }
 
     @Override

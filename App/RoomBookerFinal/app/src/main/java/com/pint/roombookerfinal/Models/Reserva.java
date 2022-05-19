@@ -1,6 +1,6 @@
 package com.pint.roombookerfinal.Models;
 
-public class Reservas {
+public class Reserva {
     private int idReserva;
     private int idSala;
     private int idUtilizador;

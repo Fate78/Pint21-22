@@ -54,7 +54,8 @@ public class PerfilActivity extends AppCompatActivity {
                 Utilizador utilizador = response.body();
                 nome_completo.setText(utilizador.getNomeCompleto());
                 email.setText(utilizador.getEmail());
-                data_nascimento.setText(utilizador.getDataNascimento());
+                data_nascimento.setText(formatDate(utilizador.getDataNascimento()));
+
             }
 
             @Override
@@ -62,5 +63,10 @@ public class PerfilActivity extends AppCompatActivity {
                 Log.e("Failure", t.getLocalizedMessage());
             }
         });
+    }
+
+    private String formatDate(String date){
+        date = date.split("T")[0];
+        return date;
     }
 }
