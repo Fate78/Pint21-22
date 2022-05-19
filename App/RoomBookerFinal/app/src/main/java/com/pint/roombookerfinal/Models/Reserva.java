@@ -8,6 +8,7 @@ public class Reserva {
     private String horaFim;
     private String dataReserva;
     private int numPessoas;
+    private Sala idSalaNavigation;
     private boolean ativo;
 
     public int getIdReserva() {
@@ -72,5 +73,13 @@ public class Reserva {
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public Sala getIdSalaNavigation() {
+        return idSalaNavigation;
+    }
+
+    public void setIdSalaNavigation(Sala idSalaNavigation) {
+        this.idSalaNavigation = idSalaNavigation;
     }
 }

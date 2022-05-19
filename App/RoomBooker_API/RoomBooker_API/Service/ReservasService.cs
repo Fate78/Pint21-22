@@ -14,12 +14,14 @@ namespace RoomBooker_API.Service
 
         public IEnumerable<Reserva> GetAll()
         {
-            return pintContext.Reservas;
+            return pintContext.Reservas.Include(i => i.IdSalaNavigation);
         }
 
         public ActionResult<Reserva> Get(int id)
         {
-            var reserva = pintContext.Reservas.Find(id);
+            var reserva = pintContext.Reservas
+                .Include(i => i.IdSalaNavigation)
+                .FirstOrDefault(i => i.IdReserva == id);
             //Check if null, return notfound
             if (reserva == null)
             {

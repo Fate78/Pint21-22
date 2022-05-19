@@ -3,8 +3,6 @@ package com.pint.roombookerfinal.Sala;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,14 +25,12 @@ public class ReservasSalaActivity extends AppCompatActivity {
     private int salaId;
     RecyclerView recyclerView;
     Context mCtx;
-    Button btn_reservar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservas_sala);
 
-        btn_reservar = (Button) findViewById(R.id.btn_reservar);
         salaId = getIntent().getIntExtra("IdSala",0);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
@@ -70,12 +66,6 @@ public class ReservasSalaActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Sala> call, Throwable t) {
                 Log.e("Failure", t.getLocalizedMessage());
-            }
-        });
-        btn_reservar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
             }
         });
     }
