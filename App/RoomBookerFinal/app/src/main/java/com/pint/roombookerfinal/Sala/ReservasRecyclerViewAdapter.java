@@ -1,18 +1,19 @@
 package com.pint.roombookerfinal.Sala;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.text.InputType;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pint.roombookerfinal.ApiClient;
@@ -37,6 +38,8 @@ public class ReservasRecyclerViewAdapter extends RecyclerView.Adapter<ReservasRe
     private String input_num_pessoas;
     private String nsala;
     private String lotacao;
+    private EditText ed_hora_inicio, ed_hora_fim, ed_data_reserva, ed_num_pessoas, ed_lotacao;
+    private Button btn_accept, btn_cancel;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView hora_inicio;
@@ -77,13 +80,10 @@ public class ReservasRecyclerViewAdapter extends RecyclerView.Adapter<ReservasRe
         holder.data_reserva.setText(formatDate(reserva.getDataReserva().toString()));
 
         holder.data_reserva.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
-                final EditText ed_hora_inicio = new EditText(v.getContext());
-                final EditText ed_hora_fim = new EditText(v.getContext());
-                final EditText ed_data_reserva = new EditText(v.getContext());
-                final EditText ed_num_pessoas = new EditText(v.getContext());
-                final TextView txt_lotacao = new TextView(v.getContext());
+
 
                 ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
                 Call<Sala> call = apiInterface.getSala(reserva.getIdSala());
@@ -105,41 +105,40 @@ public class ReservasRecyclerViewAdapter extends RecyclerView.Adapter<ReservasRe
                         Log.e("Failure", t.getLocalizedMessage());
                     }
                 });
+                final Dialog dialog = new Dialog(v.getContext());
+                dialog.setContentView(R.layout.reservar_dialog);
+                dialog.setTitle("Reservar Sala " + nsala);
 
-                AlertDialog.Builder dialog_reservar = new AlertDialog.Builder(v.getContext());
-                dialog_reservar.setTitle("Reservar Sala " + nsala);
-
-                ed_hora_inicio.setInputType(InputType.TYPE_CLASS_DATETIME);
-                ed_hora_fim.setInputType(InputType.TYPE_CLASS_DATETIME);
-                ed_data_reserva.setInputType(InputType.TYPE_CLASS_DATETIME);
-                ed_num_pessoas.setInputType(InputType.TYPE_CLASS_NUMBER);
-                dialog_reservar.setView(ed_hora_inicio);
-                dialog_reservar.setView(ed_hora_fim);
-                dialog_reservar.setView(ed_data_reserva);
-                dialog_reservar.setView(ed_num_pessoas);
-                dialog_reservar.setView(txt_lotacao);
+                ed_hora_inicio =  dialog.findViewById(R.id.ed_hora_inicio);
+                ed_hora_fim = dialog.findViewById(R.id.ed_hora_fim);
+                ed_data_reserva = dialog.findViewById(R.id.ed_data_reserva);
+                ed_num_pessoas = dialog.findViewById(R.id.ed_num_pessoas);
+                ed_lotacao = dialog.findViewById(R.id.ed_lotacao);
+                btn_accept = dialog.findViewById(R.id.btn_accept);
+                btn_cancel = dialog.findViewById(R.id.btn_cancel);
 
                 ed_hora_inicio.setText(formatTime(reserva.getHoraInicio().toString()));
                 ed_hora_fim.setText(formatTime(reserva.getHoraFim().toString()));
-                ed_data_reserva.setText(formatTime(reserva.getDataReserva().toString()));
-                txt_lotacao.setText(lotacao);
+                ed_data_reserva.setText(formatDate(reserva.getDataReserva().toString()));
+                ed_lotacao.setText(lotacao);
 
-                dialog_reservar.setPositiveButton("Reservar", new DialogInterface.OnClickListener() {
+                dialog.show();
+
+                btn_accept.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View v) {
                         input_hora_inicio = ed_hora_inicio.getText().toString();
                         input_hora_fim = ed_hora_fim.getText().toString();
                         input_data_reserva = ed_data_reserva.getText().toString();
                         input_num_pessoas = ed_num_pessoas.getText().toString();
                     }
                 });
-                dialog_reservar.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                btn_cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
+                    public void onClick(View v) {
+                        dialog.dismiss();
                     }
                 });
-                dialog_reservar.show();
             }
         });
     }
