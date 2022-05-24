@@ -145,7 +145,7 @@ public class ReservasRecyclerViewAdapter extends RecyclerView.Adapter<ReservasRe
                             public void onResponse(Call<Reserva> call, Response<Reserva> response) {
                                 Reserva responseReserva = response.body();
                                 if(response.isSuccessful() && responseReserva != null){
-                                    Toast.makeText(v.getContext(), String.format("Reserva para dia %s das %s às %s na sala %s foi criada",
+                                    Toast.makeText(v.getContext(), String.format("Reserva para dia %s das %s às %s foi criada",
                                             responseReserva.getDataReserva(),
                                             responseReserva.getHoraInicio(),
                                             responseReserva.getHoraFim()),
