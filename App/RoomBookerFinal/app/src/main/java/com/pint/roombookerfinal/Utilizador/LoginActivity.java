@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                     Utilizador utilizador = response.body();
                     System.out.println("++++In Response++++");
                     if (utilizador.getNomeUtilizador().equals(username) && utilizador.getPalavraPasse().equals(password)){
-                        saveLoginDetails(username, utilizador.getEmail(), password);
+                        saveLoginDetails(utilizador.getIdUtilizador(), username, utilizador.getEmail(), password);
                         contentLogin.setUsernameValid(true);
                         contentLogin.setPasswordValid(true);
                         contentLogin.setId(utilizador.getIdUtilizador());
@@ -125,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void saveLoginDetails(String username, String email, String password){
-        new SharedPrefManager(this).saveLoginDetails(username, email, password);
+    private void saveLoginDetails(Integer userId, String username, String email, String password){
+        new SharedPrefManager(this).saveLoginDetails(userId, username, email, password);
     }
 }

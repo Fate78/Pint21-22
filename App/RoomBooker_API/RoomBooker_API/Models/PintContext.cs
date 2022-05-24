@@ -9,6 +9,7 @@ namespace RoomBooker_API.Models
     {
         public PintContext()
         {
+            
         }
 
         public PintContext(DbContextOptions<PintContext> options)
@@ -220,7 +221,7 @@ namespace RoomBooker_API.Models
                 entity.Property(e => e.Verificado).HasColumnName("VERIFICADO");
 
                 entity.HasOne(d => d.IdTipoNavigation)
-                    .WithMany(p => p.Utilizadors)
+                    .WithMany(p => p.Utilizadores)
                     .HasForeignKey(d => d.IdTipo)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UTILIZAD_RELATIONS_TIPO_UTI");

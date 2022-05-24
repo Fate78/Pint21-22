@@ -16,14 +16,16 @@ namespace RoomBooker_API.Controllers
         }
 
         // GET: api/Reservas
-        [HttpGet]
+        [ActionName("GetReservas")]
+        [HttpGet(Name ="GetReservas")]
         public IEnumerable<Reserva> GetReservas()
         {
             return reservasService.GetAll();
         }
 
         // GET: api/Reservas/5
-        [HttpGet("{id}")]
+        [ActionName("GetReserva")]
+        [HttpGet("{id}", Name ="GetReserva")]
         public ActionResult<Reserva> GetReserva(int id)
         {
             return reservasService.Get(id);

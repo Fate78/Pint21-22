@@ -14,7 +14,7 @@ namespace RoomBooker_API.Service
 
         public IEnumerable<Reserva> GetAll()
         {
-            return pintContext.Reservas.Include(i => i.IdSalaNavigation);
+            return pintContext.Reservas;
         }
 
         public ActionResult<Reserva> Get(int id)
@@ -63,7 +63,7 @@ namespace RoomBooker_API.Service
             pintContext.Reservas.Add(reserva);
             await pintContext.SaveChangesAsync();
 
-            return new CreatedAtActionResult("GetReserva", "GetReservas", new { id = reserva.IdReserva }, reserva);
+            return new CreatedAtRouteResult("GetReservas", new { id = reserva.IdReserva }, reserva);
         }
         private bool ReservaExists(int id)
         {

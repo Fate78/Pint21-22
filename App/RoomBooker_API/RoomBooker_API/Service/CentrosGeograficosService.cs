@@ -61,7 +61,7 @@ namespace RoomBooker_API.Service
             pintContext.CentrosGeograficos.Add(centroGeografico);
             await pintContext.SaveChangesAsync();
 
-            return new CreatedAtActionResult("GetCentroGeografico", "GetCentrosGeograficos", new { id = centroGeografico.IdCentro }, centroGeografico);
+            return new CreatedAtRouteResult("GetCentrosGeograficos", new { id = centroGeografico.IdCentro }, centroGeografico);
         }
         private bool CentroGeograficoExists(int id)
         {

@@ -65,7 +65,7 @@ namespace RoomBooker_API.Service
             pintContext.Salas.Add(sala);
             await pintContext.SaveChangesAsync();
 
-            return new CreatedAtActionResult("GetSala", "GetSalas", new { id = sala.IdSala }, sala);
+            return new CreatedAtRouteResult("GetSalas", new { id = sala.IdSala }, sala);
         }
         private bool SalaExists(int id)
         {

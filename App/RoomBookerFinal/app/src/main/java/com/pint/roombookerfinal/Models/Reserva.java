@@ -11,6 +11,16 @@ public class Reserva {
     private Sala idSalaNavigation;
     private boolean ativo;
 
+    public Reserva(int idSala, int idUtilizador, String horaInicio, String horaFim, String dataReserva, int numPessoas, boolean ativo){
+        this.idSala = idSala;
+        this.idUtilizador = idUtilizador;
+        this.horaInicio = horaInicio;
+        this.horaFim = horaFim;
+        this.dataReserva = dataReserva;
+        this.numPessoas = numPessoas;
+        this.ativo = ativo;
+    }
+
     public int getIdReserva() {
         return idReserva;
     }

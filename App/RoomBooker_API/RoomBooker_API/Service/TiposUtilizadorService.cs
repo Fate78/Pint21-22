@@ -62,7 +62,7 @@ namespace RoomBooker_API.Service
             pintContext.TiposUtilizador.Add(tipoUtilizador);
             await pintContext.SaveChangesAsync();
 
-            return new CreatedAtActionResult("GetTipoUtilizador", "GetTiposUtilizador", new { id = tipoUtilizador.IdTipo }, tipoUtilizador);
+            return new CreatedAtRouteResult("GetTiposUtilizador", new { id = tipoUtilizador.IdTipo }, tipoUtilizador);
         }
         private bool TipoUtilizadorExists(int id)
         {

@@ -73,7 +73,7 @@ namespace RoomBooker_API.Service
             pintContext.Utilizadores.Add(utilizador);
             await pintContext.SaveChangesAsync();
 
-            return new CreatedAtActionResult("GetUtilizador", "GetUtilizadores", new { id = utilizador.IdUtilizador }, utilizador);
+            return new CreatedAtRouteResult("GetUtilizadores", new { id = utilizador.IdUtilizador }, utilizador);
         }
         private bool UtilizadorExists(int id)
         {

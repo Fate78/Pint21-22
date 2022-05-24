@@ -7,13 +7,13 @@ namespace RoomBooker_API.Models
     {
         public TipoUtilizador()
         {
-            Utilizadors = new HashSet<Utilizador>();
+            Utilizadores = new HashSet<Utilizador>();
         }
 
         public int IdTipo { get; set; }
         public string NomeTipo { get; set; } = null!;
         public string? Descricao { get; set; }
 
-        public virtual ICollection<Utilizador> Utilizadors { get; set; }
+        public virtual ICollection<Utilizador> Utilizadores { get; set; }
     }
 }
