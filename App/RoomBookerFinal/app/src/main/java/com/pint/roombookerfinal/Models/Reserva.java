@@ -1,6 +1,6 @@
 package com.pint.roombookerfinal.Models;
 
-public class Reservas {
+public class Reserva {
     private int idReserva;
     private int idSala;
     private int idUtilizador;
@@ -8,6 +8,7 @@ public class Reservas {
     private String horaFim;
     private String dataReserva;
     private int numPessoas;
+    private Sala idSalaNavigation;
     private boolean ativo;
 
     public int getIdReserva() {
@@ -72,5 +73,13 @@ public class Reservas {
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public Sala getIdSalaNavigation() {
+        return idSalaNavigation;
+    }
+
+    public void setIdSalaNavigation(Sala idSalaNavigation) {
+        this.idSalaNavigation = idSalaNavigation;
     }
 }

@@ -11,14 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.pint.roombookerfinal.Models.Salas;
+import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.R;
 
 import java.util.List;
 
 public class SalasRecyclerViewAdapter extends RecyclerView.Adapter<SalasRecyclerViewAdapter.ViewHolder> {
 
-    private List<Salas> salasList;
+    private List<Sala> salasList;
     private Context mCtx;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -30,7 +30,7 @@ public class SalasRecyclerViewAdapter extends RecyclerView.Adapter<SalasRecycler
         }
     }
 
-    public SalasRecyclerViewAdapter(Context mCtx, List<Salas> salasList){
+    public SalasRecyclerViewAdapter(Context mCtx, List<Sala> salasList){
         this.salasList = salasList;
         this.mCtx = mCtx;
     }
@@ -50,13 +50,13 @@ public class SalasRecyclerViewAdapter extends RecyclerView.Adapter<SalasRecycler
     @Override
     public void onBindViewHolder(@NonNull @org.jetbrains.annotations.NotNull SalasRecyclerViewAdapter.ViewHolder holder, int position) {
 
-        Salas salas = salasList.get(position);
-        holder.n_sala.setText("Sala nº" + salas.getnSala().toString());
+        Sala sala = salasList.get(position);
+        holder.n_sala.setText("Sala nº" + sala.getnSala().toString());
         holder.n_sala.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), SalaActivity.class);
-                intent.putExtra("IdSala", salas.getIdSala());
+                intent.putExtra("IdSala", sala.getIdSala());
                 v.getContext().startActivity(intent);
             }
         });

@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pint.roombookerfinal.ApiClient;
 import com.pint.roombookerfinal.ApiInterface;
-import com.pint.roombookerfinal.Models.Salas;
+import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.R;
 import com.pint.roombookerfinal.Sala.SalasRecyclerViewAdapter;
 import com.pint.roombookerfinal.databinding.FragmentSalasBinding;
@@ -49,24 +49,24 @@ public class SalasFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
-        Call<List<Salas>> call = apiInterface.getSalas();
+        Call<List<Sala>> call = apiInterface.getSalas();
         System.out.println("++++++ Request ++++++");
 
-        call.enqueue(new Callback<List<Salas>>() {
+        call.enqueue(new Callback<List<Sala>>() {
             @Override
-            public void onResponse(Call<List<Salas>> call, Response<List<Salas>> response) {
+            public void onResponse(Call<List<Sala>> call, Response<List<Sala>> response) {
                 Log.e("Success",response.body().toString());
-                List<Salas> salasList = response.body();
+                List<Sala> salasList = response.body();
                 System.out.println("++++++ on Response ++++++");
-                for (Salas salas:salasList) {
+                for (Sala sala :salasList) {
                     String content = "";
-                    content += "Sala Nº " + salas.getnSala() + "\n";
+                    content += "Sala Nº " + sala.getnSala() + "\n";
                 }
                 recyclerView.setAdapter(new SalasRecyclerViewAdapter(mCtx, salasList) );
             }
 
             @Override
-            public void onFailure(Call<List<Salas>> call, Throwable t) {
+            public void onFailure(Call<List<Sala>> call, Throwable t) {
                 Log.e("Failure", t.getLocalizedMessage());
             }
         });

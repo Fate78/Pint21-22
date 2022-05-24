@@ -2,16 +2,16 @@ package com.pint.roombookerfinal.Models;
 
 import java.util.List;
 
-public class Salas {
-    private List<Salas> salasList;
+public class Sala {
+    private List<Sala> salasList;
     private Integer idSala;
     private Integer idCentro;
     private Integer nSala;
     private Integer lotacaoMax;
     private String tempoMinLimp;
     private Boolean ativo;
-    private Object idCentroNavigation;
-    private List<Reservas> reservas = null;
+    private CentroGeografico idCentroNavigation;
+    private List<Reserva> reservas = null;
 
     public Integer getIdSala() {
         return idSala;
@@ -61,27 +61,27 @@ public class Salas {
         this.ativo = ativo;
     }
 
-    public Object getIdCentroNavigation() {
+    public CentroGeografico getIdCentroNavigation() {
         return idCentroNavigation;
     }
 
-    public void setIdCentroNavigation(Object idCentroNavigation) {
+    public void setIdCentroNavigation(CentroGeografico idCentroNavigation) {
         this.idCentroNavigation = idCentroNavigation;
     }
 
-    public List<Reservas> getReservas() {
+    public List<Reserva> getReservas() {
         return reservas;
     }
 
-    public void setReservas(List<Reservas> reservas) {
+    public void setReservas(List<Reserva> reservas) {
         this.reservas = reservas;
     }
 
-    public List<Salas> getSalasList() {
+    public List<Sala> getSalasList() {
         return salasList;
     }
 
-    public void setSalasList(List<Salas> salasList) {
+    public void setSalasList(List<Sala> salasList) {
         this.salasList = salasList;
     }
 }

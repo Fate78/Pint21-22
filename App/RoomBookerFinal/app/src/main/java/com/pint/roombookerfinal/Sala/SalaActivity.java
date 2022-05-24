@@ -15,7 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.pint.roombookerfinal.ApiClient;
 import com.pint.roombookerfinal.ApiInterface;
-import com.pint.roombookerfinal.Models.Salas;
+import com.pint.roombookerfinal.Models.CentroGeografico;
+import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.R;
 
 import retrofit2.Call;
@@ -40,20 +41,21 @@ public class SalaActivity extends AppCompatActivity {
 
         salaId = getIntent().getIntExtra("IdSala",0);
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
-        Call<Salas> call = apiInterface.getSala(salaId);
+        Call<Sala> call = apiInterface.getSala(salaId);
 
-        call.enqueue(new Callback<Salas>() {
+        call.enqueue(new Callback<Sala>() {
             @SuppressLint("SetTextI18n")
             @Override
-            public void onResponse(@NonNull Call<Salas> call, @NonNull Response<Salas> response) {
+            public void onResponse(@NonNull Call<Sala> call, @NonNull Response<Sala> response) {
                 if (response.body() != null) {
                     Log.e("Success",response.body().toString());
-                    Salas sala = response.body();
+                    Sala sala = response.body();
                     System.out.println("++++++ on Response ++++++");
                     edNSala.setText(sala.getnSala().toString());
-                    edLocalizacao.setText("TBD");
                     edLotacao.setText(sala.getLotacaoMax().toString());
                     edLimpeza.setText(formatTime(sala.getTempoMinLimp().toString()));
+                    CentroGeografico centroGeografico = response.body().getIdCentroNavigation();
+                    edLocalizacao.setText(centroGeografico.getNomeCentro());
                 }
                 else
                 {
@@ -62,7 +64,7 @@ public class SalaActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(@NonNull Call<Salas> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<Sala> call, @NonNull Throwable t) {
                 Log.e("Failure", t.getLocalizedMessage());
             }
         });

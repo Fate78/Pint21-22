@@ -1,6 +1,6 @@
 package com.pint.roombookerfinal;
 
-import com.pint.roombookerfinal.Models.Salas;
+import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.Models.Utilizador;
 
 import java.util.List;
@@ -14,10 +14,10 @@ public interface ApiInterface {
     //Salas
     @Headers("Accept: application/json")
     @GET("/api/salas")
-    public Call<List<Salas>> getSalas();
+    public Call<List<Sala>> getSalas();
 
     @GET("/api/salas/{n_sala}")
-    public Call<Salas> getSala(@Path("n_sala") int n_sala);
+    public Call<Sala> getSala(@Path("n_sala") int n_sala);
 
     //Utilizador
     @GET("/api/utilizadores")

@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pint.roombookerfinal.ApiClient;
 import com.pint.roombookerfinal.ApiInterface;
-import com.pint.roombookerfinal.Models.Reservas;
-import com.pint.roombookerfinal.Models.Salas;
+import com.pint.roombookerfinal.Models.Reserva;
+import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.R;
 
 import java.util.List;
@@ -39,20 +39,20 @@ public class ReservasSalaActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
-        Call<Salas> call = apiInterface.getSala(salaId);
+        Call<Sala> call = apiInterface.getSala(salaId);
 
-        call.enqueue(new Callback<Salas>() {
+        call.enqueue(new Callback<Sala>() {
             @Override
-            public void onResponse(Call<Salas> call, Response<Salas> response) {
+            public void onResponse(Call<Sala> call, Response<Sala> response) {
                 if (response.body() != null) {
                     Log.e("Success",response.body().toString());
-                    Salas sala = response.body();
+                    Sala sala = response.body();
                     System.out.println("++++++ on Response ++++++");
-                    List<Reservas> reservasList = (List<Reservas>) response.body().getReservas();
-                    for (Reservas reservas:reservasList) {
+                    List<Reserva> reservasList = (List<Reserva>) response.body().getReservas();
+                    for (Reserva reserva :reservasList) {
                         String content = "";
-                        content += "Horario Inicio: " + reservas.getHoraInicio() + "\n";
-                        content += "Horario Fim: " + reservas.getHoraFim() + "\n";
+                        content += "Horario Inicio: " + reserva.getHoraInicio() + "\n";
+                        content += "Horario Fim: " + reserva.getHoraFim() + "\n";
                         System.out.println(content);
                     }
                     recyclerView.setAdapter(new ReservasRecyclerViewAdapter(mCtx, reservasList) );
@@ -64,7 +64,7 @@ public class ReservasSalaActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Salas> call, Throwable t) {
+            public void onFailure(Call<Sala> call, Throwable t) {
                 Log.e("Failure", t.getLocalizedMessage());
             }
         });
