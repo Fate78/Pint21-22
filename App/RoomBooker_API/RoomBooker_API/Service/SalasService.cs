@@ -21,8 +21,19 @@ namespace RoomBooker_API.Service
         public ActionResult<Sala> Get(int id)
         {
             var sala = pintContext.Salas
-                .Include(i => i.IdCentroNavigation)
-                .Include(i => i.Reservas)
+                .FirstOrDefault(i => i.IdSala == id);
+            //Check if null, return notfound
+            if (sala == null)
+            {
+                return new NotFoundResult();
+            }
+
+            return sala;
+        }
+
+        public ActionResult<Sala> GetReservasbySala(int id)
+        {
+            var sala = pintContext.Salas.Include(i => i.Reservas)
                 .FirstOrDefault(i => i.IdSala == id);
             //Check if null, return notfound
             if (sala == null)

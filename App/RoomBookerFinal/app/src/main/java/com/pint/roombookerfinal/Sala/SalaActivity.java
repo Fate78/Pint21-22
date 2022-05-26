@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.pint.roombookerfinal.ApiClient;
 import com.pint.roombookerfinal.ApiInterface;
-import com.pint.roombookerfinal.Models.CentroGeografico;
+import com.pint.roombookerfinal.Models.CentroGeo;
 import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.R;
 
@@ -54,7 +54,7 @@ public class SalaActivity extends AppCompatActivity {
                     edNSala.setText(sala.getnSala().toString());
                     edLotacao.setText(sala.getLotacaoMax().toString());
                     edLimpeza.setText(formatTime(sala.getTempoMinLimp().toString()));
-                    CentroGeografico centroGeografico = response.body().getIdCentroNavigation();
+                    CentroGeo centroGeografico = response.body().getIdCentroNavigation();
                     edLocalizacao.setText(centroGeografico.getNomeCentro());
                 }
                 else

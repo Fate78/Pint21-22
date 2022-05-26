@@ -2,7 +2,7 @@ package com.pint.roombookerfinal.Models;
 
 import java.util.ArrayList;
 
-public class CentroGeografico {
+public class CentroGeo {
     private int idCentro;
     private String nomeCentro;
     private Object imagem;

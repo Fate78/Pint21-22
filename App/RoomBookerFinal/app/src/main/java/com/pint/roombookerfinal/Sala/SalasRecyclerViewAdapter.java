@@ -23,10 +23,12 @@ public class SalasRecyclerViewAdapter extends RecyclerView.Adapter<SalasRecycler
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView n_sala;
+        public TextView nomecentro;
 
         public ViewHolder(View view){
             super(view);
             n_sala = (TextView) view.findViewById(R.id.txt_nsala);
+            nomecentro = (TextView) view.findViewById(R.id.txt_nomecentro);
         }
     }
 
@@ -52,6 +54,7 @@ public class SalasRecyclerViewAdapter extends RecyclerView.Adapter<SalasRecycler
 
         Sala sala = salasList.get(position);
         holder.n_sala.setText("Sala nº" + sala.getnSala().toString());
+        holder.nomecentro.setText("Centro: " + sala.getIdCentroNavigation().getNomeCentro().toString());
         holder.n_sala.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -11,7 +11,7 @@ builder.Services.AddDbContext<PintContext>(options => options.UseSqlServer(build
 builder.Services.AddScoped<IUtilizadoresService, UtilizadoresService>();
 builder.Services.AddScoped<ITiposUtilizadorService, TiposUtilizadorService>();
 builder.Services.AddScoped<ISalasService, SalasService>();
-builder.Services.AddScoped<ICentrosGeograficosService, CentrosGeograficosService>();
+builder.Services.AddScoped<ICentrosService, CentrosService>();
 builder.Services.AddScoped<IUtilizadoresCentrosService, UtilizadoresCentrosService>();
 builder.Services.AddScoped<ITicketsService, TicketsService>();
 builder.Services.AddScoped<IReservasService, ReservasService>();

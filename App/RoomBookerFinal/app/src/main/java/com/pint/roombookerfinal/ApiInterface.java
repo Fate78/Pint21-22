@@ -1,5 +1,6 @@
 package com.pint.roombookerfinal;
 
+import com.pint.roombookerfinal.Models.CentroGeo;
 import com.pint.roombookerfinal.Models.Reserva;
 import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.Models.Utilizador;
@@ -14,6 +15,14 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface ApiInterface {
+
+    //Centros
+    @GET("/api/centros")
+    public Call<List<CentroGeo>> getCentros();
+
+    @GET("/api/centros/{centroName}")
+    public Call<CentroGeo> getCentro(@Path("centroName") String centroName);
+
     //Salas
     @Headers("Accept: application/json")
     @GET("/api/salas")

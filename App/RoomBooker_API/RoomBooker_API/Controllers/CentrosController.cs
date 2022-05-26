@@ -13,43 +13,50 @@ namespace RoomBooker_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CentrosGeograficosController : Controller
+    public class CentrosController : Controller
     {
-        private readonly ICentrosGeograficosService centrosGeograficosService;
+        private readonly ICentrosService centrosService;
 
-        public CentrosGeograficosController(ICentrosGeograficosService service)
+        public CentrosController(ICentrosService service)
         {
-            centrosGeograficosService = service;
+            centrosService = service;
         }
 
         // GET: api/CentrosGeograficos
         [HttpGet]
-        public IEnumerable<CentroGeografico> GetCentrosGeograficos()
+        public IEnumerable<Centro> GetCentros()
         {
-            return centrosGeograficosService.GetAll();
+            return centrosService.GetAll();
         }
 
         // GET: api/CentrosGeograficos/5
-        [HttpGet("{id}")]
-        public ActionResult<CentroGeografico> GetCentrosGeografico(int id)
+        [HttpGet("{id:int}")]
+        public ActionResult<Centro> GetCentros(int id)
         {
-            return centrosGeograficosService.Get(id);
+            return centrosService.Get(id);
+        }
+
+        //GET: api/Centros/name
+        [HttpGet("{centroName}")]
+        public ActionResult<Centro> GetCentrobyName(string centroName)
+        {
+            return centrosService.GetbyName(centroName);
         }
 
         // PUT: api/CentrosGeograficos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public Task<IActionResult> PutCentroGeografico(int id, CentroGeografico centroGeografico)
+        public Task<IActionResult> PutCentro(int id, Centro centro)
         {
-            return centrosGeograficosService.Put(id, centroGeografico);
+            return centrosService.Put(id, centro);
         }
 
         //// POST: api/CentrosGeograficos
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public Task<ActionResult<CentroGeografico>> PostCentroGeografico(CentroGeografico centroGeografico)
+        public Task<ActionResult<Centro>> PostCentro(Centro centro)
         {
-            return centrosGeograficosService.Post(centroGeografico);
+            return centrosService.Post(centro);
         }
     }
 }

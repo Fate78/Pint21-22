@@ -17,7 +17,7 @@ namespace RoomBooker_API.Models
         {
         }
 
-        public virtual DbSet<CentroGeografico> CentrosGeograficos { get; set; } = null!;
+        public virtual DbSet<Centro> Centros { get; set; } = null!;
         public virtual DbSet<Reserva> Reservas { get; set; } = null!;
         public virtual DbSet<Sala> Salas { get; set; } = null!;
         public virtual DbSet<Ticket> Tickets { get; set; } = null!;
@@ -35,7 +35,7 @@ namespace RoomBooker_API.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CentroGeografico>(entity =>
+            modelBuilder.Entity<Centro>(entity =>
             {
                 entity.HasKey(e => e.IdCentro);
 

@@ -10,7 +10,7 @@ public class Sala {
     private Integer lotacaoMax;
     private String tempoMinLimp;
     private Boolean ativo;
-    private CentroGeografico idCentroNavigation;
+    private CentroGeo idCentroNavigation;
     private List<Reserva> reservas = null;
 
     public Integer getIdSala() {
@@ -61,11 +61,11 @@ public class Sala {
         this.ativo = ativo;
     }
 
-    public CentroGeografico getIdCentroNavigation() {
+    public CentroGeo getIdCentroNavigation() {
         return idCentroNavigation;
     }
 
-    public void setIdCentroNavigation(CentroGeografico idCentroNavigation) {
+    public void setIdCentroNavigation(CentroGeo idCentroNavigation) {
         this.idCentroNavigation = idCentroNavigation;
     }
 
