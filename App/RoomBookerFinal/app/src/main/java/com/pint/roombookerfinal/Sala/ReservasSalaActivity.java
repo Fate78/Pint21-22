@@ -39,7 +39,7 @@ public class ReservasSalaActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
-        Call<Sala> call = apiInterface.getSala(salaId);
+        Call<Sala> call = apiInterface.getSalaReservas(salaId);
 
         call.enqueue(new Callback<Sala>() {
             @Override

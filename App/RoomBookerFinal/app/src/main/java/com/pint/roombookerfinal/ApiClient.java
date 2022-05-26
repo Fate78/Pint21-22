@@ -32,18 +32,4 @@ public class ApiClient {
     public static <S> S createService(Class<S> serviceClass) {
         return retrofit.create(serviceClass);
     }
-
-    /*
-    OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
-    HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-    loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-    clientBuilder.addInterceptor(loggingInterceptor);
-
-    Retrofit retrofit = new Retrofit.Builder()
-        .baseUrl(NetworkCalls.BASE_URL)
-        .client(clientBuilder.build())
-        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create())
-        .build();
-     */
 }

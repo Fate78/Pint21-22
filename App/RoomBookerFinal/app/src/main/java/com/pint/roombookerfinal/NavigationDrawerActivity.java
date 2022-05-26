@@ -56,7 +56,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_salas, R.id.nav_reservas, R.id.nav_logout)
+                R.id.nav_home, R.id.nav_salas, R.id.nav_reservas, R.id.nav_centros, R.id.nav_logout)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_navigation_drawer);
@@ -105,6 +105,8 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         if(id == R.id.nav_home) {
 
         }else if(id == R.id.nav_salas){
+
+        }else if(id == R.id.nav_centros){
 
         }else if(id == R.id.nav_logout){
 

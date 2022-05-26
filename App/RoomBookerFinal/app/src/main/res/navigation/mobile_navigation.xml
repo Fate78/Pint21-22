@@ -21,7 +21,12 @@
         android:id="@+id/nav_reservas"
         android:name="com.pint.roombookerfinal.ui.reservas.ReservasFragment"
         android:label="@string/menu_reservas"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_reservas" />
+    <fragment
+        android:id="@+id/nav_centros"
+        android:name="com.pint.roombookerfinal.ui.centros.CentrosFragment"
+        android:label="@string/menu_centros"
+        tools:layout="@layout/fragment_centros" />
     <fragment
         android:id="@+id/nav_logout"
         android:name="com.pint.roombookerfinal.ui.logout.LogoutFragment"

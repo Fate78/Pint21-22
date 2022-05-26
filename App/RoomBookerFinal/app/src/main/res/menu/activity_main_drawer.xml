@@ -17,6 +17,10 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_reservas" />
         <item
+            android:id="@+id/nav_centros"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_centros" />
+        <item
             android:id="@+id/nav_logout"
             android:title="@string/menu_logout" />
     </group>

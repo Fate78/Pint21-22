@@ -31,10 +31,11 @@ namespace RoomBooker_API.Service
             return sala;
         }
 
-        public ActionResult<Sala> GetReservasbySala(int id)
+        public ActionResult<Sala> GetReservasbySala(int n_sala)
         {
-            var sala = pintContext.Salas.Include(i => i.Reservas)
-                .FirstOrDefault(i => i.IdSala == id);
+            var sala = pintContext.Salas
+                .Include(i => i.Reservas)
+                .Single(sala => sala.NSala == n_sala);
             //Check if null, return notfound
             if (sala == null)
             {

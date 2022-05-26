@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 public class SharedPrefManager {
     Context mCtx;
     String loginPreferences = "LoginDetails";
+    String centroPreferences = "CentroId";
     public SharedPrefManager(Context mCtx)
     {
         this.mCtx = mCtx;
@@ -26,6 +27,24 @@ public class SharedPrefManager {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
+    }
+
+    public void saveCentro(Integer centroId, String centroNome){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(centroPreferences, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("CentroId", centroId);
+        editor.putString("CentroNome", centroNome);
+        editor.apply();
+    }
+
+    public Integer getCentroId(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(centroPreferences, Context.MODE_PRIVATE);
+        return sharedPreferences.getInt("CentroId", 0);
+    }
+
+    public String getCentroNome(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(centroPreferences, Context.MODE_PRIVATE);
+        return sharedPreferences.getString("CentroNome", "");
     }
 
     public Integer getUserId(){

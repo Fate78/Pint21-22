@@ -54,7 +54,6 @@ public class SalasRecyclerViewAdapter extends RecyclerView.Adapter<SalasRecycler
 
         Sala sala = salasList.get(position);
         holder.n_sala.setText("Sala nº" + sala.getnSala().toString());
-        holder.nomecentro.setText("Centro: " + sala.getIdCentroNavigation().getNomeCentro().toString());
         holder.n_sala.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

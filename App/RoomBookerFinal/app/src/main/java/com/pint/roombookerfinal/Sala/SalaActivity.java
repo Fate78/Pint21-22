@@ -15,9 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.pint.roombookerfinal.ApiClient;
 import com.pint.roombookerfinal.ApiInterface;
-import com.pint.roombookerfinal.Models.CentroGeo;
 import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.R;
+import com.pint.roombookerfinal.SharedPrefManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +28,8 @@ public class SalaActivity extends AppCompatActivity {
     Context mCtx;
     EditText edNSala, edLocalizacao, edLotacao, edLimpeza;
     Button btn_reservas;
+    private String selectedCentroName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +56,8 @@ public class SalaActivity extends AppCompatActivity {
                     edNSala.setText(sala.getnSala().toString());
                     edLotacao.setText(sala.getLotacaoMax().toString());
                     edLimpeza.setText(formatTime(sala.getTempoMinLimp().toString()));
-                    CentroGeo centroGeografico = response.body().getIdCentroNavigation();
-                    edLocalizacao.setText(centroGeografico.getNomeCentro());
+                    selectedCentroName = new SharedPrefManager(getApplicationContext()).getCentroNome();
+                    edLocalizacao.setText(selectedCentroName);
                 }
                 else
                 {

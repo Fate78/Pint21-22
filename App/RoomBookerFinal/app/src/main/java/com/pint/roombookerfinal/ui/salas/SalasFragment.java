@@ -17,9 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pint.roombookerfinal.ApiClient;
 import com.pint.roombookerfinal.ApiInterface;
+import com.pint.roombookerfinal.Models.CentroGeo;
 import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.R;
 import com.pint.roombookerfinal.Sala.SalasRecyclerViewAdapter;
+import com.pint.roombookerfinal.SharedPrefManager;
 import com.pint.roombookerfinal.databinding.FragmentSalasBinding;
 
 import java.util.List;
@@ -31,9 +33,12 @@ import retrofit2.Response;
 public class SalasFragment extends Fragment {
 
     private FragmentSalasBinding binding;
+    private SharedPrefManager sharedPrefManager;
     RecyclerView recyclerView;
     Context mCtx;
     FragmentManager fragmentManager;
+    Integer centroId;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         SalasViewModel galleryViewModel =
@@ -48,15 +53,17 @@ public class SalasFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
 
+        centroId = new SharedPrefManager(getActivity()).getCentroId();
+
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
-        Call<List<Sala>> call = apiInterface.getSalas();
+        Call<CentroGeo> call = apiInterface.getCentrobyId(centroId);
         System.out.println("++++++ Request ++++++");
 
-        call.enqueue(new Callback<List<Sala>>() {
+        call.enqueue(new Callback<CentroGeo>() {
             @Override
-            public void onResponse(Call<List<Sala>> call, Response<List<Sala>> response) {
+            public void onResponse(Call<CentroGeo> call, Response<CentroGeo> response) {
                 Log.e("Success",response.body().toString());
-                List<Sala> salasList = response.body();
+                List<Sala> salasList = response.body().getSalas();
                 System.out.println("++++++ on Response ++++++");
                 for (Sala sala :salasList) {
                     String content = "";
@@ -66,7 +73,7 @@ public class SalasFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<Sala>> call, Throwable t) {
+            public void onFailure(Call<CentroGeo> call, Throwable t) {
                 Log.e("Failure", t.getLocalizedMessage());
             }
         });

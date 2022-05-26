@@ -23,13 +23,19 @@ public interface ApiInterface {
     @GET("/api/centros/{centroName}")
     public Call<CentroGeo> getCentro(@Path("centroName") String centroName);
 
+    @GET("/api/centros/{id}")
+    public Call<CentroGeo> getCentrobyId(@Path("id") Integer centroId);
+
     //Salas
     @Headers("Accept: application/json")
     @GET("/api/salas")
     public Call<List<Sala>> getSalas();
 
-    @GET("/api/salas/{n_sala}")
-    public Call<Sala> getSala(@Path("n_sala") int n_sala);
+    @GET("/api/salas/{id}")
+    public Call<Sala> getSala(@Path("id") int id);
+
+    @GET("/api/salas/{id}/reservas")
+    public Call<Sala> getSalaReservas(@Path("id") int id);
 
     //Utilizador
     @GET("/api/utilizadores")
