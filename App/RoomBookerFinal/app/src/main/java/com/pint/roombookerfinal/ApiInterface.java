@@ -5,6 +5,7 @@ import com.pint.roombookerfinal.Models.Reserva;
 import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.Models.Utilizador;
 
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -45,6 +46,9 @@ public interface ApiInterface {
     public Call<Utilizador> getUtilizador(@Path("username") String username);
 
     //Reservas
+    @GET("api/reservas/{date}")
+    public Call<Reserva> getReservasbyDate(@Path("date") Date date);
+
     @POST("api/reservas")
     public Call<Reserva> createReserva(@Body Reserva reserva);
 

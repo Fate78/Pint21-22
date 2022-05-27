@@ -82,7 +82,7 @@ public class ReservarRecyclerViewAdapter extends RecyclerView.Adapter<ReservarRe
 
         holder.hora_inicio.setText(formatTime(reserva.getHoraInicio().toString()));
         holder.hora_fim.setText(formatTime(reserva.getHoraFim().toString()));
-        holder.data_reserva.setText(formatDate(reserva.getDataReserva().toString()));
+        holder.data_reserva.setText(reserva.getDataReserva().toString());
 
         holder.data_reserva.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -124,7 +124,7 @@ public class ReservarRecyclerViewAdapter extends RecyclerView.Adapter<ReservarRe
 
                 ed_hora_inicio.setText(formatTime(reserva.getHoraInicio().toString()));
                 ed_hora_fim.setText(formatTime(reserva.getHoraFim().toString()));
-                ed_data_reserva.setText(formatDate(reserva.getDataReserva().toString()));
+                ed_data_reserva.setText(reserva.getDataReserva().toString());
                 ed_lotacao.setText(lotacao);
 
                 dialog.show();
@@ -137,10 +137,15 @@ public class ReservarRecyclerViewAdapter extends RecyclerView.Adapter<ReservarRe
                         input_data_reserva = ed_data_reserva.getText().toString();
                         input_num_pessoas = Integer.parseInt(ed_num_pessoas.getText().toString());
                         userId = new SharedPrefManager(v.getContext()).getUserId();
+
+                        //Converter string para data -> Verificar data_input >= hoje
+                        //Call<Reserva> reservaCall = apiInterface.getReservasbyDate(input_data_reserva);
+
+                        //Nova Reserva
                         Reserva newReserva = new Reserva(reserva.getIdSala(), userId, input_hora_inicio, input_hora_fim, input_data_reserva, input_num_pessoas, true);
 
-                        Call<Reserva> reservaCall = apiInterface.createReserva(newReserva);
-                        reservaCall.enqueue(new Callback<Reserva>() {
+                        Call<Reserva> reservaPost = apiInterface.createReserva(newReserva);
+                        reservaPost.enqueue(new Callback<Reserva>() {
                             @Override
                             public void onResponse(Call<Reserva> call, Response<Reserva> response) {
                                 Reserva responseReserva = response.body();

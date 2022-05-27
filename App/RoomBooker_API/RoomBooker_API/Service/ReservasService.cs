@@ -33,6 +33,13 @@ namespace RoomBooker_API.Service
             return reserva;
         }
 
+        public IEnumerable<Reserva> GetAllbyDate(DateTime date)
+        {
+            return pintContext.Reservas
+                .Where(reserva => reserva.DataReserva == date)
+                .OrderByDescending(i => i.HoraInicio);
+        }
+
         public async Task<IActionResult> Put(int id, Reserva reserva)
         {
             if (id != reserva.IdReserva)

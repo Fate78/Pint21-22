@@ -10,6 +10,8 @@ namespace RoomBooker_API.Service
 
         ActionResult<Reserva> Get(int id);
 
+        IEnumerable<Reserva> GetAllbyDate(DateTime date);
+
         Task<IActionResult> Put(int id, Reserva reserva);
 
         Task<ActionResult<Reserva>> Post(Reserva reserva);

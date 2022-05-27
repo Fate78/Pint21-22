@@ -24,6 +24,7 @@ builder.Services.AddMvc().AddNewtonsoftJson(options => {
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
     options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
     options.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+    options.SerializerSettings.DateFormatString = "dd-MM-yyyy";
 });
 
 var app = builder.Build();

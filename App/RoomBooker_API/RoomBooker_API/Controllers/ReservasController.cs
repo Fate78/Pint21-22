@@ -25,10 +25,17 @@ namespace RoomBooker_API.Controllers
 
         // GET: api/Reservas/5
         [ActionName("GetReserva")]
-        [HttpGet("{id}", Name ="GetReserva")]
+        [HttpGet("{id:int}", Name ="GetReserva")]
         public ActionResult<Reserva> GetReserva(int id)
         {
             return reservasService.Get(id);
+        }
+
+        //GET: api/Reservas/date
+        [HttpGet("{date}")]
+        public IEnumerable<Reserva> GetAllbyDate(DateTime date)
+        {
+            return reservasService.GetAllbyDate(date);
         }
 
         // PUT: api/Reservas/5
