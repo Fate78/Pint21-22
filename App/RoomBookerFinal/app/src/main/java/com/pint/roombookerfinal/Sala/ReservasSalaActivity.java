@@ -47,15 +47,8 @@ public class ReservasSalaActivity extends AppCompatActivity {
                 if (response.body() != null) {
                     Log.e("Success",response.body().toString());
                     Sala sala = response.body();
-                    System.out.println("++++++ on Response ++++++");
                     List<Reserva> reservasList = (List<Reserva>) response.body().getReservas();
-                    for (Reserva reserva :reservasList) {
-                        String content = "";
-                        content += "Horario Inicio: " + reserva.getHoraInicio() + "\n";
-                        content += "Horario Fim: " + reserva.getHoraFim() + "\n";
-                        System.out.println(content);
-                    }
-                    recyclerView.setAdapter(new ReservasRecyclerViewAdapter(mCtx, reservasList) );
+                    recyclerView.setAdapter(new ReservarRecyclerViewAdapter(mCtx, reservasList) );
                     if(reservasList.isEmpty())
                     {
                         Toast.makeText(ReservasSalaActivity.this, "Não foram encontradas reservas!!", Toast.LENGTH_SHORT).show();

@@ -52,7 +52,6 @@ public class SalaActivity extends AppCompatActivity {
                 if (response.body() != null) {
                     Log.e("Success",response.body().toString());
                     Sala sala = response.body();
-                    System.out.println("++++++ on Response ++++++");
                     edNSala.setText(sala.getnSala().toString());
                     edLotacao.setText(sala.getLotacaoMax().toString());
                     edLimpeza.setText(formatTime(sala.getTempoMinLimp().toString()));

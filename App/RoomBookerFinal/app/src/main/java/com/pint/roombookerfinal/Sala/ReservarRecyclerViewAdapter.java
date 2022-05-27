@@ -30,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ReservasRecyclerViewAdapter extends RecyclerView.Adapter<ReservasRecyclerViewAdapter.ViewHolder> {
+public class ReservarRecyclerViewAdapter extends RecyclerView.Adapter<ReservarRecyclerViewAdapter.ViewHolder> {
 
     private SharedPrefManager sharedPrefManager;
     private List<Reserva> reservasList;
@@ -58,7 +58,7 @@ public class ReservasRecyclerViewAdapter extends RecyclerView.Adapter<ReservasRe
         }
     }
 
-    public ReservasRecyclerViewAdapter(Context mCtx, List<Reserva> reservasList){
+    public ReservarRecyclerViewAdapter(Context mCtx, List<Reserva> reservasList){
         this.reservasList = reservasList;
         this.mCtx = mCtx;
     }
@@ -76,7 +76,7 @@ public class ReservasRecyclerViewAdapter extends RecyclerView.Adapter<ReservasRe
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull @org.jetbrains.annotations.NotNull ReservasRecyclerViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull @org.jetbrains.annotations.NotNull ReservarRecyclerViewAdapter.ViewHolder holder, int position) {
 
         Reserva reserva = reservasList.get(position);
 

@@ -105,7 +105,6 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.body() != null) {
                     Log.e("Success", response.body().toString());
                     Utilizador utilizador = response.body();
-                    System.out.println("++++In Response++++");
                     if (utilizador.getNomeUtilizador().equals(username) && utilizador.getPalavraPasse().equals(password)){
                         saveLoginDetails(utilizador.getIdUtilizador(), username, utilizador.getEmail(), password);
                         contentLogin.setUsernameValid(true);

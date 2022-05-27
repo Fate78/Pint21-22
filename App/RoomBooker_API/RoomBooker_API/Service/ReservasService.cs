@@ -14,7 +14,9 @@ namespace RoomBooker_API.Service
 
         public IEnumerable<Reserva> GetAll()
         {
-            return pintContext.Reservas;
+            return pintContext.Reservas
+                .OrderByDescending(i => i.DataReserva)
+                .ThenByDescending(i => i.HoraInicio);
         }
 
         public ActionResult<Reserva> Get(int id)
