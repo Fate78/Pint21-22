@@ -38,6 +38,7 @@ public class ReservasSalaActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
 
+        //api/salas/{id}/reservas
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
         Call<Sala> call = apiInterface.getSalaReservas(salaId);
 

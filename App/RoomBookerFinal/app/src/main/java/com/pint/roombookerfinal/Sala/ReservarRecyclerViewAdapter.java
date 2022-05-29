@@ -19,11 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pint.roombookerfinal.ApiClient;
 import com.pint.roombookerfinal.ApiInterface;
+import com.pint.roombookerfinal.Methods;
+import com.pint.roombookerfinal.MethodsInterface;
 import com.pint.roombookerfinal.Models.Reserva;
 import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.R;
 import com.pint.roombookerfinal.SharedPrefManager;
 
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -36,13 +39,14 @@ public class ReservarRecyclerViewAdapter extends RecyclerView.Adapter<ReservarRe
     private List<Reserva> reservasList;
     private Context mCtx;
     private Integer userId;
-    private String input_hora_inicio;
-    private String input_hora_fim;
-    private String input_data_reserva;
-    private Integer input_num_pessoas;
+    private String hora_inicio;
+    private String hora_fim;
+    private String string_data_reserva;
+    private Integer num_pessoas;
     private String nsala;
     private String lotacao;
-    private EditText ed_hora_inicio, ed_hora_fim, ed_data_reserva, ed_num_pessoas, ed_lotacao;
+    private String tempo_limp;
+    private EditText ed_hora_inicio, ed_hora_fim, ed_data_reserva, ed_num_pessoas, ed_lotacao, ed_tempo_limp;
     private Button btn_accept, btn_cancel;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -79,10 +83,11 @@ public class ReservarRecyclerViewAdapter extends RecyclerView.Adapter<ReservarRe
     public void onBindViewHolder(@NonNull @org.jetbrains.annotations.NotNull ReservarRecyclerViewAdapter.ViewHolder holder, int position) {
 
         Reserva reserva = reservasList.get(position);
+        MethodsInterface methodsInterface = new Methods();
 
-        holder.hora_inicio.setText(formatTime(reserva.getHoraInicio().toString()));
-        holder.hora_fim.setText(formatTime(reserva.getHoraFim().toString()));
-        holder.data_reserva.setText(reserva.getDataReserva().toString());
+        holder.hora_inicio.setText(methodsInterface.formatTimeForUser(reserva.getHoraInicio().toString()));
+        holder.hora_fim.setText(methodsInterface.formatTimeForUser(reserva.getHoraFim().toString()));
+        holder.data_reserva.setText(methodsInterface.formatDateForUser(reserva.getDataReserva().toString()));
 
         holder.data_reserva.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -101,6 +106,7 @@ public class ReservarRecyclerViewAdapter extends RecyclerView.Adapter<ReservarRe
                             Sala sala = response.body();
                             lotacao = sala.getLotacaoMax().toString();
                             nsala = sala.getnSala().toString();
+                            tempo_limp = methodsInterface.formatTimeForUser(sala.getTempoMinLimp().toString());
                             System.out.println("++++++ on Response ++++++");
                         }
                     }
@@ -119,35 +125,40 @@ public class ReservarRecyclerViewAdapter extends RecyclerView.Adapter<ReservarRe
                 ed_data_reserva = dialog.findViewById(R.id.ed_data_reserva);
                 ed_num_pessoas = dialog.findViewById(R.id.ed_num_pessoas);
                 ed_lotacao = dialog.findViewById(R.id.ed_lotacao);
+                ed_tempo_limp = dialog.findViewById(R.id.ed_tempo_limpeza);
                 btn_accept = dialog.findViewById(R.id.btn_accept);
                 btn_cancel = dialog.findViewById(R.id.btn_cancel);
 
-                ed_hora_inicio.setText(formatTime(reserva.getHoraInicio().toString()));
-                ed_hora_fim.setText(formatTime(reserva.getHoraFim().toString()));
-                ed_data_reserva.setText(reserva.getDataReserva().toString());
+                ed_hora_inicio.setText(methodsInterface.formatTimeForUser(reserva.getHoraInicio().toString()));
+                ed_hora_fim.setText(methodsInterface.formatTimeForUser(reserva.getHoraFim().toString()));
+                ed_data_reserva.setText(methodsInterface.formatDateForUser(reserva.getDataReserva().toString()));
                 ed_lotacao.setText(lotacao);
+                ed_tempo_limp.setText(tempo_limp);
 
                 dialog.show();
 
                 btn_accept.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        input_hora_inicio = ed_hora_inicio.getText().toString();
-                        input_hora_fim = ed_hora_fim.getText().toString();
-                        input_data_reserva = ed_data_reserva.getText().toString();
-                        input_num_pessoas = Integer.parseInt(ed_num_pessoas.getText().toString());
+                        hora_inicio = ed_hora_inicio.getText().toString();
+                        hora_fim = ed_hora_fim.getText().toString();
+                        string_data_reserva = ed_data_reserva.getText().toString();
+                        num_pessoas = Integer.parseInt(ed_num_pessoas.getText().toString());
                         userId = new SharedPrefManager(v.getContext()).getUserId();
 
                         //Converter string para data -> Verificar data_input >= hoje
-                        //Call<Reserva> reservaCall = apiInterface.getReservasbyDate(input_data_reserva);
-
+                        Date data_reserva = methodsInterface.stringToDate(string_data_reserva);
+                        if (data_reserva.compareTo(methodsInterface.getDateToday())>=0) //>=0 bigger or equal to today
+                        {
+                            Call<Reserva> reservaCall = apiInterface.getReservasbyDate(data_reserva);
+                        }
                         //Nova Reserva
-                        Reserva newReserva = new Reserva(reserva.getIdSala(), userId, input_hora_inicio, input_hora_fim, input_data_reserva, input_num_pessoas, true);
+                        Reserva newReserva = new Reserva(reserva.getIdSala(), userId, hora_inicio, hora_fim, string_data_reserva, num_pessoas, true);
 
                         Call<Reserva> reservaPost = apiInterface.createReserva(newReserva);
                         reservaPost.enqueue(new Callback<Reserva>() {
                             @Override
-                            public void onResponse(Call<Reserva> call, Response<Reserva> response) {
+                            public void onResponse(@NonNull Call<Reserva> call, @NonNull Response<Reserva> response) {
                                 Reserva responseReserva = response.body();
                                 if(response.isSuccessful() && responseReserva != null){
                                     Toast.makeText(v.getContext(), String.format("Reserva para dia %s das %s às %s foi criada",
@@ -162,7 +173,7 @@ public class ReservarRecyclerViewAdapter extends RecyclerView.Adapter<ReservarRe
                             }
 
                             @Override
-                            public void onFailure(Call<Reserva> call, Throwable t) {
+                            public void onFailure(@NonNull Call<Reserva> call, @NonNull Throwable t) {
                                 Log.e("Failure", t.getLocalizedMessage());
                             }
                         });
@@ -183,14 +194,4 @@ public class ReservarRecyclerViewAdapter extends RecyclerView.Adapter<ReservarRe
         return reservasList.size();
     }
 
-    private String formatDate(String date){
-        date = date.split("T")[0];
-        return date;
-    }
-
-    private String formatTime(String time){
-        StringBuilder sb = new StringBuilder(time);
-        sb.delete(sb.length()-3, sb.length());
-        return sb.toString();
-    }
 }
