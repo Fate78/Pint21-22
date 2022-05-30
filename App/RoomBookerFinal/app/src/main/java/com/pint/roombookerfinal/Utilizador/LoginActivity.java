@@ -13,15 +13,16 @@ import android.widget.EditText;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.pint.roombookerfinal.ApiClient;
-import com.pint.roombookerfinal.ApiInterface;
+import com.pint.roombookerfinal.API.ApiClient;
+import com.pint.roombookerfinal.API.ApiInterface;
 import com.pint.roombookerfinal.Models.Utilizador;
-import com.pint.roombookerfinal.NavigationDrawerActivity;
+import com.pint.roombookerfinal.NavigationUI.NavigationDrawerActivity;
 import com.pint.roombookerfinal.R;
 import com.pint.roombookerfinal.SharedPrefManager;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
 import retrofit2.Call;
@@ -48,9 +49,9 @@ public class LoginActivity extends AppCompatActivity {
         mCtx = this;
 
         contentLogin = new ContentLogin();
-        username_input = (EditText) findViewById(R.id.edtext_email);
-        password_input = (EditText) findViewById(R.id.edtext_password);
-        btn_login = (Button) findViewById(R.id.btn_login);
+        username_input = findViewById(R.id.edtext_email);
+        password_input = findViewById(R.id.edtext_password);
+        btn_login = findViewById(R.id.btn_login);
         isLoggedout = new SharedPrefManager(this).isUserLoggedOut();
 
         if(!isLoggedout)
@@ -58,22 +59,19 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
             startActivity(intent);
         }
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                username = username_input.getText().toString();
-                password = getSha256(password_input.getText().toString());
-                validarLogin(username, password);
-                if(contentLogin.isUsernameValid() && contentLogin.isPasswordValid()){
-                    System.out.println("Logged in: " + contentLogin.getNome_completo());
-                    Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
-                    startActivity(intent);
-                }
-                else{
-                    System.out.println(contentLogin.isUsernameValid());
-                    System.out.println(contentLogin.isPasswordValid());
-                    System.out.println("Failed to Login");
-                }
+        btn_login.setOnClickListener(view -> {
+            username = username_input.getText().toString();
+            password = getSha256(password_input.getText().toString());
+            validarLogin(username, password);
+            if(contentLogin.isUsernameValid() && contentLogin.isPasswordValid()){
+                System.out.println("Logged in: " + contentLogin.getNome_completo());
+                Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
+                startActivity(intent);
+            }
+            else{
+                System.out.println(contentLogin.isUsernameValid());
+                System.out.println(contentLogin.isPasswordValid());
+                System.out.println("Failed to Login");
             }
         });
     }
@@ -81,11 +79,11 @@ public class LoginActivity extends AppCompatActivity {
     public static String getSha256(final String base) {
         try{
             final MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            final byte[] hash = digest.digest(base.getBytes("UTF-8"));
+            final byte[] hash = digest.digest(base.getBytes(StandardCharsets.UTF_8));
             final StringBuilder hexString = new StringBuilder();
-            for (int i = 0; i < hash.length; i++) {
-                final String hex = Integer.toHexString(0xff & hash[i]);
-                if(hex.length() == 1)
+            for (byte b : hash) {
+                final String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1)
                     hexString.append('0');
                 hexString.append(hex);
             }

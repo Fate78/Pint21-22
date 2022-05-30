@@ -20,7 +20,7 @@
             android:name=".Sala.SalaActivity"
             android:exported="false" />
         <activity
-            android:name=".NavigationDrawerActivity"
+            android:name=".NavigationUI.NavigationDrawerActivity"
             android:exported="true"
             android:label="@string/title_activity_navigation_drawer"
             android:theme="@style/Theme.RoomBookerFinal.NoActionBar" />

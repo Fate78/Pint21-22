@@ -1,4 +1,4 @@
-package com.pint.roombookerfinal.ui.logout;
+package com.pint.roombookerfinal.NavigationUI.logout;
 
 import androidx.lifecycle.ViewModel;
 

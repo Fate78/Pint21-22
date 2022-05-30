@@ -1,4 +1,4 @@
-package com.pint.roombookerfinal;
+package com.pint.roombookerfinal.API;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -9,7 +9,7 @@ public class ApiClient {
     private static final String BASE_URL = "http://192.168.56.1:8082/";
     private static ApiInterface apiInterface;
 
-    private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+    private static final OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
     private static Retrofit.Builder builder()
     {
@@ -17,15 +17,13 @@ public class ApiClient {
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         httpClient.addInterceptor(logging);
 
-        Retrofit.Builder builder = new Retrofit.Builder()
+        return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpClient.build());
-
-        return builder;
     }
 
-    private static Retrofit retrofit = builder()
+    private static final Retrofit retrofit = builder()
             .build();
 
 

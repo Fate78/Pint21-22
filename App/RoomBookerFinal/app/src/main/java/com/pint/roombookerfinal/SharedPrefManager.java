@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class SharedPrefManager {
-    Context mCtx;
-    String loginPreferences = "LoginDetails";
-    String centroPreferences = "CentroId";
+    final Context mCtx;
+    final String loginPreferences = "LoginDetails";
+    final String centroPreferences = "CentroId";
     public SharedPrefManager(Context mCtx)
     {
         this.mCtx = mCtx;

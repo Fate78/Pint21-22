@@ -1,16 +1,16 @@
-package com.pint.roombookerfinal.ui.reservas;
+package com.pint.roombookerfinal.NavigationUI.salas;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ReservasViewModel extends ViewModel {
+public class SalasViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public ReservasViewModel() {
+    public SalasViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow fragment");
+        mText.setValue("This is gallery fragment");
     }
 
     public LiveData<String> getText() {

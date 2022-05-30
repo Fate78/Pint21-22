@@ -1,4 +1,4 @@
-package com.pint.roombookerfinal.ui.home;
+package com.pint.roombookerfinal.NavigationUI.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

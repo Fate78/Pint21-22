@@ -1,4 +1,4 @@
-package com.pint.roombookerfinal;
+package com.pint.roombookerfinal.API;
 
 import com.pint.roombookerfinal.Models.CentroGeo;
 import com.pint.roombookerfinal.Models.Reserva;
@@ -19,37 +19,37 @@ public interface ApiInterface {
 
     //Centros
     @GET("/api/centros")
-    public Call<List<CentroGeo>> getCentros();
+    Call<List<CentroGeo>> getCentros();
 
     @GET("/api/centros/{centroName}")
-    public Call<CentroGeo> getCentro(@Path("centroName") String centroName);
+    Call<CentroGeo> getCentro(@Path("centroName") String centroName);
 
     @GET("/api/centros/{id}")
-    public Call<CentroGeo> getCentrobyId(@Path("id") Integer centroId);
+    Call<CentroGeo> getCentrobyId(@Path("id") Integer centroId);
 
     //Salas
     @Headers("Accept: application/json")
     @GET("/api/salas")
-    public Call<List<Sala>> getSalas();
+    Call<List<Sala>> getSalas();
 
     @GET("/api/salas/{id}")
-    public Call<Sala> getSala(@Path("id") int id);
+    Call<Sala> getSala(@Path("id") int id);
 
     @GET("/api/salas/{id}/reservas")
-    public Call<Sala> getSalaReservas(@Path("id") int id);
+    Call<Sala> getSalaReservas(@Path("id") int id);
 
     //Utilizador
     @GET("/api/utilizadores")
-    public Call<List<Utilizador>> getUtilizadores();
+    Call<List<Utilizador>> getUtilizadores();
 
     @GET("api/utilizadores/{username}")
-    public Call<Utilizador> getUtilizador(@Path("username") String username);
+    Call<Utilizador> getUtilizador(@Path("username") String username);
 
     //Reservas
     @GET("api/reservas/{date}")
-    public Call<Reserva> getReservasbyDate(@Path("date") Date date);
+    Call<Reserva> getReservasbyDate(@Path("date") Date date);
 
     @POST("api/reservas")
-    public Call<Reserva> createReserva(@Body Reserva reserva);
+    Call<Reserva> createReserva(@Body Reserva reserva);
 
 }

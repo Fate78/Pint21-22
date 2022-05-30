@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.centros.CentrosFragment">
+    tools:context=".NavigationUI.centros.CentrosFragment">
 
     <RadioGroup
         android:id="@+id/centros_radio_group"

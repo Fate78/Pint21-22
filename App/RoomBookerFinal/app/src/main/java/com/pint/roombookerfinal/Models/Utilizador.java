@@ -15,9 +15,9 @@ public class Utilizador {
     private boolean verificado;
     private boolean ativo;
     private String idTipoNavigation = null;
-    ArrayList< Object > reservas = new ArrayList < Object > ();
-    ArrayList < Object > tickets = new ArrayList < Object > ();
-    ArrayList < Object > utilizadorCentros = new ArrayList < Object > ();
+    ArrayList< Object > reservas = new ArrayList<>();
+    ArrayList < Object > tickets = new ArrayList<>();
+    ArrayList < Object > utilizadorCentros = new ArrayList<>();
 
 
     // Getter Methods

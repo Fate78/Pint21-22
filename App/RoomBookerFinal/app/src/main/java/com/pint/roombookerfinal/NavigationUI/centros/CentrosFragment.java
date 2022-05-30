@@ -1,6 +1,5 @@
-package com.pint.roombookerfinal.ui.centros;
+package com.pint.roombookerfinal.NavigationUI.centros;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +10,9 @@ import android.widget.RadioGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.pint.roombookerfinal.ApiClient;
-import com.pint.roombookerfinal.ApiInterface;
+import com.pint.roombookerfinal.API.ApiClient;
+import com.pint.roombookerfinal.API.ApiInterface;
 import com.pint.roombookerfinal.Models.CentroGeo;
 import com.pint.roombookerfinal.R;
 import com.pint.roombookerfinal.SharedPrefManager;
@@ -28,14 +26,11 @@ import retrofit2.Response;
 
 public class CentrosFragment extends Fragment {
 
-    private CentrosViewModel mViewModel;
     private FragmentCentrosBinding binding;
-    private SharedPrefManager sharedPrefManager;
     RadioButton radioButton;
     RadioGroup radioGroup;
     Integer selectedCentroId;
     String selectedCentroName;
-    Context mCtx;
 
     public static CentrosFragment newInstance() {
         return new CentrosFragment();
@@ -44,8 +39,6 @@ public class CentrosFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mViewModel =
-                new ViewModelProvider(this).get(CentrosViewModel.class);
 
         binding = FragmentCentrosBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -56,31 +49,32 @@ public class CentrosFragment extends Fragment {
         Call<List<CentroGeo>> call = apiInterface.getCentros();
         call.enqueue(new Callback<List<CentroGeo>>() {
             @Override
-            public void onResponse(Call<List<CentroGeo>> call, Response<List<CentroGeo>> response) {
+            public void onResponse(@NonNull Call<List<CentroGeo>> call,
+                                   @NonNull Response<List<CentroGeo>> response)
+            {
                 List<CentroGeo> centroGeoList = response.body();
-                for (CentroGeo centroGeo :centroGeoList){
-                    RadioButton button = new RadioButton(getActivity());
-                    button.setId(centroGeo.getIdCentro());
-                    button.setText(centroGeo.getNomeCentro());
-                    radioGroup.addView(button);
+                if (centroGeoList != null) {
+                    for (CentroGeo centroGeo :centroGeoList){
+                        RadioButton button = new RadioButton(getActivity());
+                        button.setId(centroGeo.getIdCentro());
+                        button.setText(centroGeo.getNomeCentro());
+                        radioGroup.addView(button);
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<List<CentroGeo>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<CentroGeo>> call, @NonNull Throwable t) {
 
             }
         });
 
         selectedCentroId = new SharedPrefManager(getActivity()).getCentroId();
         radioGroup.check(selectedCentroId);
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                radioButton = getActivity().findViewById(checkedId);
-                selectedCentroName = radioButton.getText().toString();
-                saveCentro(checkedId, selectedCentroName);
-            }
+        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            radioButton = getActivity().findViewById(checkedId);
+            selectedCentroName = radioButton.getText().toString();
+            saveCentro(checkedId, selectedCentroName);
         });
 
         return root;

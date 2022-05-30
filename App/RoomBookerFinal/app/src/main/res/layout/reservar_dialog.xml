@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    android:layout_height="match_parent">
 
     <EditText
         android:id="@+id/ed_hora_inicio"
@@ -22,7 +22,7 @@
     <EditText
         android:id="@+id/ed_data_reserva"
         android:layout_width="100dp"
-        android:layout_height="0dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
@@ -130,14 +130,16 @@
     <EditText
         android:id="@+id/ed_tempo_limpeza"
         android:layout_width="48dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
         android:autofillHints="0"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintTop_toBottomOf="@+id/ed_lotacao"
-        tools:ignore="LabelFor"
-        tools:layout_editor_absoluteX="115dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ed_hora_fim"
+        tools:ignore="LabelFor" />
 
     <TextView
         android:id="@+id/textView8"
@@ -153,22 +155,22 @@
 
     <Button
         android:id="@+id/btn_accept"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="334dp"
+        android:layout_width="98dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginBottom="4dp"
         android:text="Aceitar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="131dp"
-        android:layout_marginRight="131dp"
-        android:layout_marginBottom="334dp"
+        android:layout_width="114dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="4dp"
         android:text="Cancelar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -177,10 +179,10 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="46dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
         android:text="Limpeza"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintEnd_toStartOf="@+id/ed_tempo_limpeza"
+        app:layout_constraintTop_toBottomOf="@+id/ed_data_reserva" />
 </androidx.constraintlayout.widget.ConstraintLayout>

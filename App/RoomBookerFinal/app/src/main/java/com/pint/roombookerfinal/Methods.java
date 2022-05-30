@@ -1,9 +1,13 @@
 package com.pint.roombookerfinal;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Date;
 
 public class Methods implements MethodsInterface{
@@ -19,9 +23,7 @@ public class Methods implements MethodsInterface{
 
         Date date = stringToDate(string_date);
 
-        String new_string_date = formatter.format(date);
-
-        return new_string_date;
+        return formatter.format(date);
     }
 
     public Date stringToDate(String string_date){
@@ -41,5 +43,10 @@ public class Methods implements MethodsInterface{
         Date today = new Date();
         String formattedDate = formatter.format(today);
         return stringToDate(formattedDate);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public LocalTime stringToTime(String string_time){
+        return LocalTime.parse(string_time);
     }
 }

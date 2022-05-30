@@ -1,4 +1,4 @@
-package com.pint.roombookerfinal.ui.centros;
+package com.pint.roombookerfinal.NavigationUI.centros;
 
 import androidx.lifecycle.ViewModel;
 
