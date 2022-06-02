@@ -11,7 +11,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,19 +34,12 @@ import retrofit2.Response;
 public class ReservarRecyclerViewAdapter extends
         RecyclerView.Adapter<ReservarRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Reserva> reservasList;
-    private Integer userId;
-    private String hora_inicio;
-    private String hora_fim;
-    private String string_data_reserva;
-    private Integer num_pessoas;
-    private String nsala;
-    private String lotacao;
-    private String tempo_limp;
-    private Integer is_hora_invalid;
+    private Integer userId, num_pessoas, is_hora_invalid;
+    private String hora_inicio, hora_fim, string_data_reserva, nsala, lotacao, tempo_limp;
     private EditText ed_hora_inicio, ed_hora_fim, ed_data_reserva,
             ed_num_pessoas, ed_lotacao, ed_tempo_limp;
     private Button btn_accept, btn_cancel;
+    private final List<Reserva> reservasList;
     final MethodsInterface methodsInterface = new Methods();
     final ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
 
@@ -86,13 +78,12 @@ public class ReservarRecyclerViewAdapter extends
                                  int position) {
 
         Reserva reserva = reservasList.get(position);
-
         holder.hora_inicio.setText(
                 methodsInterface.formatTimeForUser(reserva.getHoraInicio()));
         holder.hora_fim.setText(
                 methodsInterface.formatTimeForUser(reserva.getHoraFim()));
         holder.data_reserva.setText(
-                methodsInterface.formatDateForUser(reserva.getDataReserva().toString()));
+                (reserva.getDataReserva().toString()));
 
         holder.data_reserva.setOnClickListener(v -> {
             Call<Sala> call = apiInterface.getSala(reserva.getIdSala());
@@ -134,8 +125,8 @@ public class ReservarRecyclerViewAdapter extends
                     reserva.getHoraInicio()));
             ed_hora_fim.setText(methodsInterface.formatTimeForUser(
                     reserva.getHoraFim()));
-            ed_data_reserva.setText(methodsInterface.formatDateForUser(
-                    reserva.getDataReserva().toString()));
+            ed_data_reserva.setText(
+                    reserva.getDataReserva().toString());
             ed_lotacao.setText(lotacao);
             ed_tempo_limp.setText(tempo_limp);
 
@@ -155,7 +146,7 @@ public class ReservarRecyclerViewAdapter extends
                 {
                     System.out.println("Nova reserva criada");
                     //Create new Reserva
-                    Reserva newReserva = new Reserva(
+                    /*Reserva newReserva = new Reserva(
                             reserva.getIdSala(), userId, hora_inicio, hora_fim,
                             methodsInterface.stringToDate(string_data_reserva), num_pessoas, true);
 
@@ -181,7 +172,7 @@ public class ReservarRecyclerViewAdapter extends
                         public void onFailure(@NonNull Call<Reserva> call1, @NonNull Throwable t) {
                             Log.e("Failure", t.getLocalizedMessage());
                         }
-                    });
+                    });*/
                 }else
                     System.out.println("Não é possível criar reserva neste horário");
             });

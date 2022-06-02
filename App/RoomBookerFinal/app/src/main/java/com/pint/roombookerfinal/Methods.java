@@ -29,13 +29,12 @@ public class Methods implements MethodsInterface{
     public Date stringToDate(String string_date){
         @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-        Date date = null;
         try {
-            date = formatter.parse(string_date);
+            return formatter.parse(string_date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return date;
+        return null;
     }
 
     public Date getDateToday(){

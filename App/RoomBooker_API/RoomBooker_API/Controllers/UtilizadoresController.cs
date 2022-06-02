@@ -43,6 +43,18 @@ namespace RoomBooker_API.Controllers
             return utilizadoresService.GetbyUsername(username);
         }
 
+        [HttpGet("{id:int}/Reservas")]
+        public ActionResult<Utilizador> GetReservasbyUtilizadorId(int id)
+        {
+            return utilizadoresService.GetReservasbyUtilizadorId(id);
+        }
+
+        [HttpGet("{username}/Reservas")]
+        public ActionResult<Utilizador> GetReservasbyUtilizador(string username)
+        {
+            return utilizadoresService.GetReservasbyUtilizador(username);
+        }
+
         // PUT: api/Utilizadores/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

@@ -11,6 +11,10 @@ namespace RoomBooker_API.Service
 
         ActionResult<Utilizador> GetbyUsername(string name);
 
+        ActionResult<Utilizador> GetReservasbyUtilizadorId(int id_utilizador);
+
+        ActionResult<Utilizador> GetReservasbyUtilizador(string username);
+
         Task<IActionResult> Put(int id, Utilizador utilizador);
 
         Task<ActionResult<Utilizador>> Post(Utilizador utilizador);

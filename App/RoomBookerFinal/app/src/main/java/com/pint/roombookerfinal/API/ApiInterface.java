@@ -45,6 +45,9 @@ public interface ApiInterface {
     @GET("api/utilizadores/{username}")
     Call<Utilizador> getUtilizador(@Path("username") String username);
 
+    @GET("api/utilizadores/{username}/")
+    Call<Utilizador> getUtilizadorReservas(@Path("username") String username);
+
     //Reservas
     @GET("api/reservas/{date}")
     Call<Reserva> getReservasbyDate(@Path("date") Date date);
