@@ -1,4 +1,4 @@
-package com.pint.roombookerfinal.ui.reservas;
+package com.pint.roombookerfinal.NavigationUI.reservas;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,18 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.pint.roombookerfinal.databinding.FragmentSlideshowBinding;
+import com.pint.roombookerfinal.databinding.FragmentReservasBinding;
 
 public class ReservasFragment extends Fragment {
 
-    private FragmentSlideshowBinding binding;
+    private FragmentReservasBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         ReservasViewModel slideshowViewModel =
                 new ViewModelProvider(this).get(ReservasViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentReservasBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textSlideshow;

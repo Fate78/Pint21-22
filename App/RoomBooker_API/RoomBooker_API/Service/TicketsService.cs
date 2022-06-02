@@ -63,7 +63,7 @@ namespace RoomBooker_API.Service
             pintContext.Tickets.Add(ticket);
             await pintContext.SaveChangesAsync();
 
-            return new CreatedAtActionResult("GetTicket", "GetTickets", new { id = ticket.IdTicket }, ticket);
+            return new CreatedAtRouteResult("GetTickets", new { id = ticket.IdTicket }, ticket);
         }
         private bool TicketExists(int id)
         {

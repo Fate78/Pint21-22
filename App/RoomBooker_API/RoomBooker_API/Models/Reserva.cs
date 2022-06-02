@@ -15,6 +15,6 @@ namespace RoomBooker_API.Models
         public bool Ativo { get; set; }
 
         public virtual Sala? IdSalaNavigation { get; set; }
-        public virtual Utilizador IdUtilizadorNavigation { get; set; } = null!;
+        public virtual Utilizador? IdUtilizadorNavigation { get; set; } = null;
     }
 }

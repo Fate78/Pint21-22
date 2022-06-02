@@ -14,7 +14,9 @@ namespace RoomBooker_API.Service
 
         public IEnumerable<Reserva> GetAll()
         {
-            return pintContext.Reservas.Include(i => i.IdSalaNavigation);
+            return pintContext.Reservas
+                .OrderByDescending(i => i.DataReserva)
+                .ThenByDescending(i => i.HoraInicio);
         }
 
         public ActionResult<Reserva> Get(int id)
@@ -29,6 +31,13 @@ namespace RoomBooker_API.Service
             }
 
             return reserva;
+        }
+
+        public IEnumerable<Reserva> GetAllbyDate(DateTime date)
+        {
+            return pintContext.Reservas
+                .Where(reserva => reserva.DataReserva == date)
+                .OrderByDescending(i => i.HoraInicio);
         }
 
         public async Task<IActionResult> Put(int id, Reserva reserva)
@@ -63,7 +72,7 @@ namespace RoomBooker_API.Service
             pintContext.Reservas.Add(reserva);
             await pintContext.SaveChangesAsync();
 
-            return new CreatedAtActionResult("GetReserva", "GetReservas", new { id = reserva.IdReserva }, reserva);
+            return new CreatedAtRouteResult("GetReservas", new { id = reserva.IdReserva }, reserva);
         }
         private bool ReservaExists(int id)
         {

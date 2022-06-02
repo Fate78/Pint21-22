@@ -7,24 +7,29 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.pint.roombookerfinal.ui.home.HomeFragment"
+        android:name="com.pint.roombookerfinal.NavigationUI.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_salas"
-        android:name="com.pint.roombookerfinal.ui.salas.SalasFragment"
+        android:name="com.pint.roombookerfinal.NavigationUI.salas.SalasFragment"
         android:label="@string/menu_salas"
         tools:layout="@layout/fragment_salas" />
 
     <fragment
         android:id="@+id/nav_reservas"
-        android:name="com.pint.roombookerfinal.ui.reservas.ReservasFragment"
+        android:name="com.pint.roombookerfinal.NavigationUI.reservas.ReservasFragment"
         android:label="@string/menu_reservas"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_reservas" />
+    <fragment
+        android:id="@+id/nav_centros"
+        android:name="com.pint.roombookerfinal.NavigationUI.centros.CentrosFragment"
+        android:label="@string/menu_centros"
+        tools:layout="@layout/fragment_centros" />
     <fragment
         android:id="@+id/nav_logout"
-        android:name="com.pint.roombookerfinal.ui.logout.LogoutFragment"
+        android:name="com.pint.roombookerfinal.NavigationUI.logout.LogoutFragment"
         android:label="Logout"
         tools:layout="@layout/fragment_logout" />
 </navigation>

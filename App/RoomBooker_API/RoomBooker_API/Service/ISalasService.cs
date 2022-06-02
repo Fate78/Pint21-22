@@ -9,6 +9,8 @@ namespace RoomBooker_API.Service
 
         ActionResult<Sala> Get(int id);
 
+        ActionResult<Sala> GetReservasbySala(int id);
+
         Task<IActionResult> Put(int id, Sala sala);
 
         Task<ActionResult<Sala>> Post(Sala sala);

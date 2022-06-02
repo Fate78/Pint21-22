@@ -9,7 +9,7 @@ namespace RoomBooker_API.Models
         public int IdCentro { get; set; }
         public bool Ativo { get; set; }
 
-        public virtual CentroGeografico IdCentroNavigation { get; set; } = null!;
+        public virtual Centro IdCentroNavigation { get; set; } = null!;
         public virtual Utilizador IdUtilizadorNavigation { get; set; } = null!;
     }
 }

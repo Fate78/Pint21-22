@@ -36,6 +36,12 @@ namespace RoomBooker_API.Controllers
             return salasService.Get(id);
         }
 
+        [HttpGet("{id}/Reservas")]
+        public ActionResult<Sala> GetReservasbySala(int id)
+        {
+            return salasService.GetReservasbySala(id);
+        }
+
         // PUT: api/Salas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

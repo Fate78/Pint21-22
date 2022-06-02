@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace RoomBooker_API.Models
 {
-    public partial class CentroGeografico
+    public partial class Centro
     {
-        public CentroGeografico()
+        public Centro()
         {
             Salas = new HashSet<Sala>();
             UtilizadorCentros = new HashSet<UtilizadorCentro>();

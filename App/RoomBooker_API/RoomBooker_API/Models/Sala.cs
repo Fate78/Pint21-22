@@ -17,7 +17,7 @@ namespace RoomBooker_API.Models
         public TimeSpan TempoMinLimp { get; set; }
         public bool Ativo { get; set; }
 
-        public virtual CentroGeografico? IdCentroNavigation { get; set; }
+        public virtual Centro IdCentroNavigation { get; set; }
         public virtual ICollection<Reserva> Reservas { get; set; }
     }
 }

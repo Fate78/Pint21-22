@@ -21,9 +21,21 @@ namespace RoomBooker_API.Service
         public ActionResult<Sala> Get(int id)
         {
             var sala = pintContext.Salas
-                .Include(i => i.IdCentroNavigation)
-                .Include(i => i.Reservas)
                 .FirstOrDefault(i => i.IdSala == id);
+            //Check if null, return notfound
+            if (sala == null)
+            {
+                return new NotFoundResult();
+            }
+
+            return sala;
+        }
+
+        public ActionResult<Sala> GetReservasbySala(int n_sala)
+        {
+            var sala = pintContext.Salas
+                .Include(i => i.Reservas)
+                .Single(sala => sala.NSala == n_sala);
             //Check if null, return notfound
             if (sala == null)
             {
@@ -65,7 +77,7 @@ namespace RoomBooker_API.Service
             pintContext.Salas.Add(sala);
             await pintContext.SaveChangesAsync();
 
-            return new CreatedAtActionResult("GetSala", "GetSalas", new { id = sala.IdSala }, sala);
+            return new CreatedAtRouteResult("GetSalas", new { id = sala.IdSala }, sala);
         }
         private bool SalaExists(int id)
         {

@@ -18,21 +18,21 @@ import java.util.List;
 
 public class SalasRecyclerViewAdapter extends RecyclerView.Adapter<SalasRecyclerViewAdapter.ViewHolder> {
 
-    private List<Sala> salasList;
-    private Context mCtx;
+    private final List<Sala> salasList;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView n_sala;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public final TextView n_sala;
+        public final TextView nomecentro;
 
         public ViewHolder(View view){
             super(view);
-            n_sala = (TextView) view.findViewById(R.id.txt_nsala);
+            n_sala = view.findViewById(R.id.txt_nsala);
+            nomecentro = view.findViewById(R.id.txt_nomecentro);
         }
     }
 
     public SalasRecyclerViewAdapter(Context mCtx, List<Sala> salasList){
         this.salasList = salasList;
-        this.mCtx = mCtx;
     }
 
     @NonNull
@@ -41,9 +41,8 @@ public class SalasRecyclerViewAdapter extends RecyclerView.Adapter<SalasRecycler
     public ViewHolder onCreateViewHolder(@NonNull @org.jetbrains.annotations.NotNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.item_sala, parent, false);
-        ViewHolder holder = new ViewHolder(view);
 
-        return holder;
+        return new ViewHolder(view);
     }
 
     @SuppressLint("SetTextI18n")
@@ -52,13 +51,10 @@ public class SalasRecyclerViewAdapter extends RecyclerView.Adapter<SalasRecycler
 
         Sala sala = salasList.get(position);
         holder.n_sala.setText("Sala nº" + sala.getnSala().toString());
-        holder.n_sala.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), SalaActivity.class);
-                intent.putExtra("IdSala", sala.getIdSala());
-                v.getContext().startActivity(intent);
-            }
+        holder.n_sala.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), SalaActivity.class);
+            intent.putExtra("IdSala", sala.getIdSala());
+            v.getContext().startActivity(intent);
         });
     }
 

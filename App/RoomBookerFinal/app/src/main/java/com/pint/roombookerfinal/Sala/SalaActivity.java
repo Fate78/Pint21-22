@@ -13,11 +13,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.pint.roombookerfinal.ApiClient;
-import com.pint.roombookerfinal.ApiInterface;
-import com.pint.roombookerfinal.Models.CentroGeografico;
+import com.pint.roombookerfinal.API.ApiClient;
+import com.pint.roombookerfinal.API.ApiInterface;
 import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.R;
+import com.pint.roombookerfinal.SharedPrefManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,16 +28,18 @@ public class SalaActivity extends AppCompatActivity {
     Context mCtx;
     EditText edNSala, edLocalizacao, edLotacao, edLimpeza;
     Button btn_reservas;
+    private String selectedCentroName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sala);
 
-        edNSala = (EditText) findViewById(R.id.edNSala);
-        edLocalizacao = (EditText) findViewById(R.id.edLocalizacao);
-        edLotacao = (EditText) findViewById(R.id.edLotacao);
-        edLimpeza = (EditText) findViewById(R.id.edLimpeza);
-        btn_reservas = (Button) findViewById(R.id.btn_reservas);
+        edNSala = findViewById(R.id.edNSala);
+        edLocalizacao = findViewById(R.id.edLocalizacao);
+        edLotacao = findViewById(R.id.edLotacao);
+        edLimpeza = findViewById(R.id.edLimpeza);
+        btn_reservas = findViewById(R.id.btn_reservas);
 
         salaId = getIntent().getIntExtra("IdSala",0);
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
@@ -50,12 +52,11 @@ public class SalaActivity extends AppCompatActivity {
                 if (response.body() != null) {
                     Log.e("Success",response.body().toString());
                     Sala sala = response.body();
-                    System.out.println("++++++ on Response ++++++");
                     edNSala.setText(sala.getnSala().toString());
                     edLotacao.setText(sala.getLotacaoMax().toString());
-                    edLimpeza.setText(formatTime(sala.getTempoMinLimp().toString()));
-                    CentroGeografico centroGeografico = response.body().getIdCentroNavigation();
-                    edLocalizacao.setText(centroGeografico.getNomeCentro());
+                    edLimpeza.setText(formatTime(sala.getTempoMinLimp()));
+                    selectedCentroName = new SharedPrefManager(getApplicationContext()).getCentroNome();
+                    edLocalizacao.setText(selectedCentroName);
                 }
                 else
                 {
@@ -69,13 +70,10 @@ public class SalaActivity extends AppCompatActivity {
             }
         });
 
-        btn_reservas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ReservasSalaActivity.class);
-                intent.putExtra("IdSala", salaId);
-                v.getContext().startActivity(intent);
-            }
+        btn_reservas.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), ReservasSalaActivity.class);
+            intent.putExtra("IdSala", salaId);
+            v.getContext().startActivity(intent);
         });
     }
 

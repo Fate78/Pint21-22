@@ -9,6 +9,7 @@ namespace RoomBooker_API.Models
     {
         public PintContext()
         {
+            
         }
 
         public PintContext(DbContextOptions<PintContext> options)
@@ -16,7 +17,7 @@ namespace RoomBooker_API.Models
         {
         }
 
-        public virtual DbSet<CentroGeografico> CentrosGeograficos { get; set; } = null!;
+        public virtual DbSet<Centro> Centros { get; set; } = null!;
         public virtual DbSet<Reserva> Reservas { get; set; } = null!;
         public virtual DbSet<Sala> Salas { get; set; } = null!;
         public virtual DbSet<Ticket> Tickets { get; set; } = null!;
@@ -34,7 +35,7 @@ namespace RoomBooker_API.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CentroGeografico>(entity =>
+            modelBuilder.Entity<Centro>(entity =>
             {
                 entity.HasKey(e => e.IdCentro);
 
@@ -220,7 +221,7 @@ namespace RoomBooker_API.Models
                 entity.Property(e => e.Verificado).HasColumnName("VERIFICADO");
 
                 entity.HasOne(d => d.IdTipoNavigation)
-                    .WithMany(p => p.Utilizadors)
+                    .WithMany(p => p.Utilizadores)
                     .HasForeignKey(d => d.IdTipo)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UTILIZAD_RELATIONS_TIPO_UTI");

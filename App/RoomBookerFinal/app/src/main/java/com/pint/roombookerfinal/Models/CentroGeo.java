@@ -1,13 +1,14 @@
 package com.pint.roombookerfinal.Models;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class CentroGeografico {
+public class CentroGeo {
     private int idCentro;
     private String nomeCentro;
     private Object imagem;
     private boolean ativo;
-    private ArrayList<Sala> salas;
+    private List<Sala> salas;
     private ArrayList<Object> utilizadorCentros;
 
     public int getIdCentro() {
@@ -42,7 +43,7 @@ public class CentroGeografico {
         this.ativo = ativo;
     }
 
-    public ArrayList<Sala> getSalas() {
+    public List<Sala> getSalas() {
         return salas;
     }
 
