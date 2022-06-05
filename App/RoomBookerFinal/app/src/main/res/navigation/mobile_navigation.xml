@@ -6,6 +6,11 @@
     app:startDestination="@+id/nav_home">
 
     <fragment
+        android:id="@+id/nav_historico_reservas"
+        android:name="com.pint.roombookerfinal.NavigationUI.historico_reservas.HistoricoReservasFragment"
+        android:label="@string/menu_historico_reservas"
+        tools:layout="@layout/fragment_historico_reservas" />
+    <fragment
         android:id="@+id/nav_home"
         android:name="com.pint.roombookerfinal.NavigationUI.home.HomeFragment"
         android:label="@string/menu_home"

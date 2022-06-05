@@ -1,8 +1,10 @@
 package com.pint.roombookerfinal.Models;
 
 import java.util.Date;
+import java.util.List;
 
 public class Reserva {
+    private List<Reserva> reservaList;
     private int idReserva;
     private int idSala;
     private int idUtilizador;
@@ -93,5 +95,13 @@ public class Reserva {
 
     public void setIdSalaNavigation(Sala idSalaNavigation) {
         this.idSalaNavigation = idSalaNavigation;
+    }
+
+    public List<Reserva> getReservaList() {
+        return reservaList;
+    }
+
+    public void setReservaList(List<Reserva> reservaList) {
+        this.reservaList = reservaList;
     }
 }

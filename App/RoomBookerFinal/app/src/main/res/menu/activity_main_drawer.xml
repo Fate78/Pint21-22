@@ -17,6 +17,10 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_reservas" />
         <item
+            android:id="@+id/nav_historico_reservas"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_historico_reservas" />
+        <item
             android:id="@+id/nav_centros"
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_centros" />

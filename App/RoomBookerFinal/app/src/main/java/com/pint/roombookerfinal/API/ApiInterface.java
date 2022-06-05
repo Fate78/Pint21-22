@@ -45,7 +45,7 @@ public interface ApiInterface {
     @GET("api/utilizadores/{username}")
     Call<Utilizador> getUtilizador(@Path("username") String username);
 
-    @GET("api/utilizadores/{username}/")
+    @GET("api/utilizadores/{username}/reservas")
     Call<Utilizador> getUtilizadorReservas(@Path("username") String username);
 
     //Reservas
