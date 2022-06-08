@@ -1,19 +1,21 @@
 package com.pint.roombookerfinal.Models;
 
-import com.google.type.DateTime;
+import java.time.LocalDate;
+import java.util.List;
 
 public class Reserva {
+    private List<Reserva> reservaList;
     private int idReserva;
     private int idSala;
     private int idUtilizador;
     private String horaInicio;
     private String horaFim;
-    private DateTime dataReserva;
+    private String dataReserva;
     private int numPessoas;
     private Sala idSalaNavigation;
     private boolean ativo;
 
-    public Reserva(int idSala, int idUtilizador, String horaInicio, String horaFim, DateTime dataReserva, int numPessoas, boolean ativo){
+    public Reserva(int idSala, int idUtilizador, String horaInicio, String horaFim, String dataReserva, int numPessoas, boolean ativo){
         this.idSala = idSala;
         this.idUtilizador = idUtilizador;
         this.horaInicio = horaInicio;
@@ -63,11 +65,11 @@ public class Reserva {
         this.horaFim = horaFim;
     }
 
-    public DateTime getDataReserva() {
+    public String getDataReserva() {
         return dataReserva;
     }
 
-    public void setDataReserva(DateTime dataReserva) {
+    public void setDataReserva(String dataReserva) {
         this.dataReserva = dataReserva;
     }
 
@@ -93,5 +95,13 @@ public class Reserva {
 
     public void setIdSalaNavigation(Sala idSalaNavigation) {
         this.idSalaNavigation = idSalaNavigation;
+    }
+
+    public List<Reserva> getReservaList() {
+        return reservaList;
+    }
+
+    public void setReservaList(List<Reserva> reservaList) {
+        this.reservaList = reservaList;
     }
 }

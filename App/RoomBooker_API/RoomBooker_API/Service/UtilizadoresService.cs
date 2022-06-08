@@ -41,6 +41,34 @@ namespace RoomBooker_API.Service
             return utilizador;
         }
 
+        public ActionResult<Utilizador> GetReservasbyUtilizadorId(int id_utilizador)
+        {
+            var utilizador = pintContext.Utilizadores
+                .Include(i => i.Reservas)
+                .Single(utilizador => utilizador.IdUtilizador == id_utilizador);
+            //Check if null, return notfound
+            if (utilizador == null)
+            {
+                return new NotFoundResult();
+            }
+
+            return utilizador;
+        }
+
+        public ActionResult<Utilizador> GetReservasbyUtilizador(string username)
+        {
+            var utilizador = pintContext.Utilizadores
+                .Include(i => i.Reservas)
+                .Single(utilizador => utilizador.NomeUtilizador == username);
+            //Check if null, return notfound
+            if (utilizador == null)
+            {
+                return new NotFoundResult();
+            }
+
+            return utilizador;
+        }
+
         public async Task<IActionResult> Put(int id, Utilizador utilizador)
         {
             if (id != utilizador.IdUtilizador)

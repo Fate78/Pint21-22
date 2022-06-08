@@ -1,6 +1,5 @@
 package com.pint.roombookerfinal.Models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Utilizador {
@@ -15,9 +14,9 @@ public class Utilizador {
     private boolean verificado;
     private boolean ativo;
     private String idTipoNavigation = null;
-    ArrayList< Object > reservas = new ArrayList<>();
-    ArrayList < Object > tickets = new ArrayList<>();
-    ArrayList < Object > utilizadorCentros = new ArrayList<>();
+    private List<Reserva> reservas = null;
+    private List < Object > tickets = null;
+    private List < Object > utilizadorCentros = null;
 
 
     // Getter Methods
@@ -102,5 +101,29 @@ public class Utilizador {
 
     public void setIdTipoNavigation(String idTipoNavigation) {
         this.idTipoNavigation = idTipoNavigation;
+    }
+
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
+    }
+
+    public List<Object> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Object> tickets) {
+        this.tickets = tickets;
+    }
+
+    public List<Object> getUtilizadorCentros() {
+        return utilizadorCentros;
+    }
+
+    public void setUtilizadorCentros(List<Object> utilizadorCentros) {
+        this.utilizadorCentros = utilizadorCentros;
     }
 }

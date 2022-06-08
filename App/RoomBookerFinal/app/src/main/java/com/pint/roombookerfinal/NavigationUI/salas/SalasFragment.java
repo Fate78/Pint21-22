@@ -18,7 +18,6 @@ import com.pint.roombookerfinal.API.ApiInterface;
 import com.pint.roombookerfinal.Models.CentroGeo;
 import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.R;
-import com.pint.roombookerfinal.Sala.SalasRecyclerViewAdapter;
 import com.pint.roombookerfinal.SharedPrefManager;
 import com.pint.roombookerfinal.databinding.FragmentSalasBinding;
 
@@ -51,7 +50,6 @@ public class SalasFragment extends Fragment {
 
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
         Call<CentroGeo> call = apiInterface.getCentrobyId(centroId);
-        System.out.println("++++++ Request ++++++");
 
         call.enqueue(new Callback<CentroGeo>() {
             @Override

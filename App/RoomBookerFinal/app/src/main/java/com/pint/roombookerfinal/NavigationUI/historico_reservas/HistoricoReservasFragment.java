@@ -1,4 +1,4 @@
-package com.pint.roombookerfinal.NavigationUI.reservas;
+package com.pint.roombookerfinal.NavigationUI.historico_reservas;
 
 import android.content.Context;
 import android.os.Build;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -21,11 +22,11 @@ import com.pint.roombookerfinal.Methods;
 import com.pint.roombookerfinal.MethodsInterface;
 import com.pint.roombookerfinal.Models.Reserva;
 import com.pint.roombookerfinal.Models.Utilizador;
+import com.pint.roombookerfinal.NavigationUI.reservas.ReservasUtilizadorRecyclerViewAdapter;
 import com.pint.roombookerfinal.R;
 import com.pint.roombookerfinal.SharedPrefManager;
 import com.pint.roombookerfinal.databinding.FragmentReservasBinding;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -33,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ReservasFragment extends Fragment {
+public class HistoricoReservasFragment extends Fragment {
 
     private FragmentReservasBinding binding;
     RecyclerView recyclerView;
@@ -41,9 +42,9 @@ public class ReservasFragment extends Fragment {
     String username;
     final MethodsInterface methodsInterface = new Methods();
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         binding = FragmentReservasBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         final FragmentActivity fragmentActivity = getActivity();
@@ -69,14 +70,14 @@ public class ReservasFragment extends Fragment {
 
                     while(iterator.hasNext())
                     {
-                        String string_data_reserva = iterator.next().getDataReserva();
-                        LocalDate data_reserva = methodsInterface.stringToDate(string_data_reserva);
-                        LocalDate today = methodsInterface.getDateToday();
-                        if (data_reserva.compareTo(today)<0)
+                        String data_reserva = iterator.next().getDataReserva();
+
+                        if (data_reserva.compareTo(methodsInterface.getDateToday().toString())>=0)
                         {
                             iterator.remove();
                         }
                     }
+
                     recyclerView.setAdapter(new ReservasUtilizadorRecyclerViewAdapter(mCtx, reservasList) );
                 }
             }
@@ -89,9 +90,4 @@ public class ReservasFragment extends Fragment {
         return root;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
 }

@@ -1,4 +1,4 @@
-package com.pint.roombookerfinal.Sala;
+package com.pint.roombookerfinal.NavigationUI.salas;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.R;
+import com.pint.roombookerfinal.Sala.SalaActivity;
 
 import java.util.List;
 
