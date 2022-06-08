@@ -56,7 +56,7 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
         holder.hora_fim.setText(
                 methodsInterface.formatTimeForUser(reserva.getHoraFim()));
         holder.data_reserva.setText(
-                (reserva.getDataReserva().toString()));
+                (methodsInterface.formatDateForUser(reserva.getDataReserva())));
     }
 
     @Override

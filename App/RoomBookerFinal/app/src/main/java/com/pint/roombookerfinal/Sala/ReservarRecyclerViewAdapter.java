@@ -3,6 +3,7 @@ package com.pint.roombookerfinal.Sala;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +12,10 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pint.roombookerfinal.API.ApiClient;
@@ -24,7 +27,7 @@ import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.R;
 import com.pint.roombookerfinal.SharedPrefManager;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import retrofit2.Call;
@@ -71,6 +74,7 @@ public class ReservarRecyclerViewAdapter extends
         return new ViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull @org.jetbrains.annotations.NotNull
@@ -83,7 +87,7 @@ public class ReservarRecyclerViewAdapter extends
         holder.hora_fim.setText(
                 methodsInterface.formatTimeForUser(reserva.getHoraFim()));
         holder.data_reserva.setText(
-                (reserva.getDataReserva().toString()));
+                (methodsInterface.formatDateForUser(reserva.getDataReserva())));
 
         holder.data_reserva.setOnClickListener(v -> {
             Call<Sala> call = apiInterface.getSala(reserva.getIdSala());
@@ -146,9 +150,9 @@ public class ReservarRecyclerViewAdapter extends
                 {
                     System.out.println("Nova reserva criada");
                     //Create new Reserva
-                    /*Reserva newReserva = new Reserva(
+                    Reserva newReserva = new Reserva(
                             reserva.getIdSala(), userId, hora_inicio, hora_fim,
-                            methodsInterface.stringToDate(string_data_reserva), num_pessoas, true);
+                            string_data_reserva, num_pessoas, true);
 
                     Call<Reserva> reservaPost = apiInterface.createReserva(newReserva);
                     reservaPost.enqueue(new Callback<Reserva>() {
@@ -172,7 +176,7 @@ public class ReservarRecyclerViewAdapter extends
                         public void onFailure(@NonNull Call<Reserva> call1, @NonNull Throwable t) {
                             Log.e("Failure", t.getLocalizedMessage());
                         }
-                    });*/
+                    });
                 }else
                     System.out.println("Não é possível criar reserva neste horário");
             });
@@ -185,11 +189,12 @@ public class ReservarRecyclerViewAdapter extends
         return reservasList.size();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public boolean verifyReservaHorario(String string_data_reserva, String hora_inicio,
                                         String hora_fim)
     {
         is_hora_invalid = 0;
-        Date data_reserva = methodsInterface.stringToDate(string_data_reserva);
+        LocalDate data_reserva = methodsInterface.stringToDate(string_data_reserva);
         if (data_reserva.compareTo(methodsInterface.getDateToday())>=0)
         {
             Call<Reserva> reservaCall = apiInterface.getReservasbyDate(data_reserva);
@@ -197,14 +202,16 @@ public class ReservarRecyclerViewAdapter extends
                 @Override
                 public void onResponse(@NonNull Call<Reserva> call, @NonNull Response<Reserva> response)
                 {
-                    Log.e("Success",response.body().toString());
-                    List<Reserva> reservaList = (List<Reserva>) response.body();
-                    if (reservaList != null) {
-                        for (Reserva reserva :reservaList){
-                            if(hora_inicio.compareTo(reserva.getHoraInicio())>=0 &&
-                                    hora_inicio.compareTo(reserva.getHoraFim())<=0)
-                            {
-                                is_hora_invalid++;
+                    if (response.body() != null) {
+                        Log.e("Success",response.body().toString());
+                        List<Reserva> reservaList = (List<Reserva>) response.body();
+                        if (reservaList != null) {
+                            for (Reserva reserva :reservaList){
+                                if(hora_inicio.compareTo(reserva.getHoraInicio())>=0 &&
+                                        hora_inicio.compareTo(reserva.getHoraFim())<=0)
+                                {
+                                    is_hora_invalid++;
+                                }
                             }
                         }
                     }

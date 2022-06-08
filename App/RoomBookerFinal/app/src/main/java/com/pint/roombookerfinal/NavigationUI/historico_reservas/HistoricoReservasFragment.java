@@ -1,6 +1,7 @@
 package com.pint.roombookerfinal.NavigationUI.historico_reservas;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,7 +27,6 @@ import com.pint.roombookerfinal.R;
 import com.pint.roombookerfinal.SharedPrefManager;
 import com.pint.roombookerfinal.databinding.FragmentReservasBinding;
 
-import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -59,6 +60,7 @@ public class HistoricoReservasFragment extends Fragment {
         Call<Utilizador> call = apiInterface.getUtilizadorReservas(username);
 
         call.enqueue(new Callback<Utilizador>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(@NonNull Call<Utilizador> call, @NonNull Response<Utilizador> response) {
                 if (response.body() != null){
@@ -68,9 +70,9 @@ public class HistoricoReservasFragment extends Fragment {
 
                     while(iterator.hasNext())
                     {
-                        Date data_reserva = iterator.next().getDataReserva();
+                        String data_reserva = iterator.next().getDataReserva();
 
-                        if (data_reserva.compareTo(methodsInterface.getDateToday())>=0)
+                        if (data_reserva.compareTo(methodsInterface.getDateToday().toString())>=0)
                         {
                             iterator.remove();
                         }

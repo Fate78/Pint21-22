@@ -38,7 +38,6 @@ public class ReservasSalaActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
 
-        //api/salas/{id}/reservas
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
         Call<Sala> call = apiInterface.getSalaReservas(salaId);
 
@@ -47,7 +46,7 @@ public class ReservasSalaActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<Sala> call, @NonNull Response<Sala> response) {
                 if (response.body() != null) {
                     Log.e("Success",response.body().toString());
-                    Sala sala = response.body();
+
                     List<Reserva> reservasList = response.body().getReservas();
                     recyclerView.setAdapter(new ReservarRecyclerViewAdapter(mCtx, reservasList) );
                     if(reservasList.isEmpty())
