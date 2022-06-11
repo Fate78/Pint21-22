@@ -4,6 +4,7 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -26,6 +27,16 @@ public class Methods implements MethodsInterface{
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
+    public String formatDateForAPI(String string_date){
+
+        DateTimeFormatter date_format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(string_date, date_format);
+
+        return formatter.format(date);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public LocalDate stringToDate(String string_date){
         LocalDate date = LocalDate.parse(string_date);
         return date;
@@ -42,5 +53,17 @@ public class Methods implements MethodsInterface{
     @RequiresApi(api = Build.VERSION_CODES.O)
     public LocalTime stringToTime(String string_time){
         return LocalTime.parse(string_time);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public LocalTime addDurationToHour(LocalTime hora, Duration duration){
+        LocalTime nova_hora = (LocalTime) duration.addTo(hora);
+        return nova_hora;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public Duration stringToDuration(String duration)
+    {
+        return Duration.between(LocalTime.MIN, LocalTime.parse(duration));
     }
 }

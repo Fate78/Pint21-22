@@ -5,7 +5,6 @@ import com.pint.roombookerfinal.Models.Reserva;
 import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.Models.Utilizador;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import retrofit2.Call;
@@ -50,7 +49,7 @@ public interface ApiInterface {
 
     //Reservas
     @GET("api/reservas/{date}")
-    Call<Reserva> getReservasbyDate(@Path("date") LocalDate date);
+    Call<List<Reserva>> getReservasbyDate(@Path("date") String date);
 
     @POST("api/reservas")
     Call<Reserva> createReserva(@Body Reserva reserva);

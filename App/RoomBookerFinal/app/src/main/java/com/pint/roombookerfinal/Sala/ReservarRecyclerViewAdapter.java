@@ -12,7 +12,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -27,7 +26,9 @@ import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.R;
 import com.pint.roombookerfinal.SharedPrefManager;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import retrofit2.Call;
@@ -37,7 +38,7 @@ import retrofit2.Response;
 public class ReservarRecyclerViewAdapter extends
         RecyclerView.Adapter<ReservarRecyclerViewAdapter.ViewHolder> {
 
-    private Integer userId, num_pessoas, is_hora_invalid;
+    private Integer userId, num_pessoas, error_counter;
     private String hora_inicio, hora_fim, string_data_reserva, nsala, lotacao, tempo_limp;
     private EditText ed_hora_inicio, ed_hora_fim, ed_data_reserva,
             ed_num_pessoas, ed_lotacao, ed_tempo_limp;
@@ -129,8 +130,8 @@ public class ReservarRecyclerViewAdapter extends
                     reserva.getHoraInicio()));
             ed_hora_fim.setText(methodsInterface.formatTimeForUser(
                     reserva.getHoraFim()));
-            ed_data_reserva.setText(
-                    reserva.getDataReserva().toString());
+            ed_data_reserva.setText(methodsInterface.formatDateForUser(
+                    reserva.getDataReserva()));
             ed_lotacao.setText(lotacao);
             ed_tempo_limp.setText(tempo_limp);
 
@@ -145,14 +146,13 @@ public class ReservarRecyclerViewAdapter extends
                 num_pessoas = Integer.parseInt(ed_num_pessoas.getText().toString());
                 userId = new SharedPrefManager(v12.getContext()).getUserId();
 
-                //Reserva Horario is valid
-                if (verifyReservaHorario(string_data_reserva, hora_inicio, hora_fim))
+                if (verifyReservaHorario(string_data_reserva, hora_inicio, hora_fim, tempo_limp))
                 {
                     System.out.println("Nova reserva criada");
-                    //Create new Reserva
-                    Reserva newReserva = new Reserva(
+                    /*Reserva newReserva = new Reserva(
                             reserva.getIdSala(), userId, hora_inicio, hora_fim,
-                            string_data_reserva, num_pessoas, true);
+                            methodsInterface.formatDateForAPI(string_data_reserva),
+                            num_pessoas, true);
 
                     Call<Reserva> reservaPost = apiInterface.createReserva(newReserva);
                     reservaPost.enqueue(new Callback<Reserva>() {
@@ -176,7 +176,7 @@ public class ReservarRecyclerViewAdapter extends
                         public void onFailure(@NonNull Call<Reserva> call1, @NonNull Throwable t) {
                             Log.e("Failure", t.getLocalizedMessage());
                         }
-                    });
+                    });*/
                 }else
                     System.out.println("Não é possível criar reserva neste horário");
             });
@@ -190,42 +190,56 @@ public class ReservarRecyclerViewAdapter extends
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public boolean verifyReservaHorario(String string_data_reserva, String hora_inicio,
-                                        String hora_fim)
+    public boolean verifyReservaHorario(String string_data_reserva, String string_hora_inicio,
+                                        String string_hora_fim, String string_tempo_limp)
     {
-        is_hora_invalid = 0;
-        LocalDate data_reserva = methodsInterface.stringToDate(string_data_reserva);
+
+
+        error_counter = 0;
+        String formattedDate = methodsInterface.formatDateForAPI(string_data_reserva);
+        LocalDate data_reserva = methodsInterface.stringToDate(formattedDate);
+        LocalTime hora_inicio = methodsInterface.stringToTime(string_hora_inicio);
+        LocalTime hora_fim = methodsInterface.stringToTime(string_hora_fim);
+        Duration tempo_limp = methodsInterface.stringToDuration(string_tempo_limp);
+
         if (data_reserva.compareTo(methodsInterface.getDateToday())>=0)
         {
-            Call<Reserva> reservaCall = apiInterface.getReservasbyDate(data_reserva);
-            reservaCall.enqueue(new Callback<Reserva>() {
+            Call<List<Reserva>> reservaCall = apiInterface.getReservasbyDate(formattedDate);
+            reservaCall.enqueue(new Callback<List<Reserva>>() {
                 @Override
-                public void onResponse(@NonNull Call<Reserva> call, @NonNull Response<Reserva> response)
+                public void onResponse(@NonNull Call<List<Reserva>> call, @NonNull Response<List<Reserva>> response)
                 {
                     if (response.body() != null) {
+                        int next_index = 0;
+                        next_index++;
                         Log.e("Success",response.body().toString());
                         List<Reserva> reservaList = (List<Reserva>) response.body();
-                        if (reservaList != null) {
-                            for (Reserva reserva :reservaList){
-                                if(hora_inicio.compareTo(reserva.getHoraInicio())>=0 &&
-                                        hora_inicio.compareTo(reserva.getHoraFim())<=0)
-                                {
-                                    is_hora_invalid++;
-                                }
+                        for (Reserva reserva :reservaList){
+                            Reserva next_reserva = reservaList.get(next_index);
+                            LocalTime res_hora_inicio = methodsInterface.stringToTime(reserva.getHoraInicio());
+                            LocalTime res_hora_fim = methodsInterface.stringToTime(reserva.getHoraFim());
+                            LocalTime next_hora_inicio = methodsInterface.stringToTime(next_reserva.getHoraInicio());
+                            LocalTime hora_inicio_min = methodsInterface.addDurationToHour(res_hora_fim, tempo_limp);
+                            LocalTime hora_fim_max = methodsInterface.addDurationToHour(hora_fim, tempo_limp);
+
+                            if(hora_inicio.compareTo(hora_inicio_min)<0 && hora_fim_max.compareTo(next_hora_inicio)>0)
+                            {
+                                error_counter++;
                             }
                         }
                     }
                 }
 
                 @Override
-                public void onFailure(@NonNull Call<Reserva> call, @NonNull Throwable t) {
+                public void onFailure(@NonNull Call<List<Reserva>> call, @NonNull Throwable t) {
                     Log.e("Failure", t.getLocalizedMessage());
+                    error_counter++;
                 }
             });
-        }
-        if(is_hora_invalid>0)
+            System.out.println("Errors: "+error_counter);
+            return error_counter <= 0;
+        }else{
             return false;
-        else
-            return true;
+        }
     }
 }

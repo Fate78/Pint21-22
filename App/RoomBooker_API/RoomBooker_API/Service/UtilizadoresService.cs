@@ -20,7 +20,7 @@ namespace RoomBooker_API.Service
         public ActionResult<Utilizador> Get(int id)
         {
             var utilizador = pintContext.Utilizadores.Find(id);
-            //Check if null, return notfound
+            
             if(utilizador == null)
             {
                 return new NotFoundResult();
@@ -29,10 +29,17 @@ namespace RoomBooker_API.Service
             return utilizador;
         }
 
-        public ActionResult<Utilizador> GetbyUsername(string username)
+        public ActionResult<Utilizador> GetbyString(string string_input)
         {
-            var utilizador = pintContext.Utilizadores.Single(user => user.NomeUtilizador == username);
-            //Check if null, return notfound
+            var utilizador = new Utilizador();
+
+            //Is string Email
+            if (IsValidEmail(string_input))
+            {
+                utilizador = pintContext.Utilizadores.Single(user => user.Email == string_input);
+            }
+            else { utilizador = pintContext.Utilizadores.Single(user => user.NomeUtilizador == string_input); }
+            
             if (utilizador == null)
             {
                 return new NotFoundResult();
@@ -41,12 +48,31 @@ namespace RoomBooker_API.Service
             return utilizador;
         }
 
+        bool IsValidEmail(string email)
+        {
+            var trimmedEmail = email.Trim();
+
+            if (trimmedEmail.EndsWith("."))
+            {
+                return false;
+            }
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == trimmedEmail;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public ActionResult<Utilizador> GetReservasbyUtilizadorId(int id_utilizador)
         {
             var utilizador = pintContext.Utilizadores
                 .Include(i => i.Reservas)
                 .Single(utilizador => utilizador.IdUtilizador == id_utilizador);
-            //Check if null, return notfound
+            
             if (utilizador == null)
             {
                 return new NotFoundResult();
@@ -60,7 +86,7 @@ namespace RoomBooker_API.Service
             var utilizador = pintContext.Utilizadores
                 .Include(i => i.Reservas)
                 .Single(utilizador => utilizador.NomeUtilizador == username);
-            //Check if null, return notfound
+           
             if (utilizador == null)
             {
                 return new NotFoundResult();

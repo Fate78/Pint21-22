@@ -9,7 +9,7 @@ namespace RoomBooker_API.Service
 
         ActionResult<Utilizador> Get(int id);
 
-        ActionResult<Utilizador> GetbyUsername(string name);
+        ActionResult<Utilizador> GetbyString(string string_input);
 
         ActionResult<Utilizador> GetReservasbyUtilizadorId(int id_utilizador);
 

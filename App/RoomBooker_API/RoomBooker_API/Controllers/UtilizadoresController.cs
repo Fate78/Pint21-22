@@ -37,10 +37,10 @@ namespace RoomBooker_API.Controllers
         }
 
         //GET: api/Utilizadores/username
-        [HttpGet("{username}")]
-        public ActionResult<Utilizador> GetUtilizadorbyUsername(string username)
+        [HttpGet("{string_input}")]
+        public ActionResult<Utilizador> GetUtilizadorbyString(string string_input)
         {
-            return utilizadoresService.GetbyUsername(username);
+            return utilizadoresService.GetbyString(string_input);
         }
 
         [HttpGet("{id:int}/Reservas")]
