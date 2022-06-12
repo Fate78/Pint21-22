@@ -12,6 +12,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -39,7 +40,7 @@ public class ReservarRecyclerViewAdapter extends
         RecyclerView.Adapter<ReservarRecyclerViewAdapter.ViewHolder> {
 
     private Integer userId, num_pessoas, error_counter;
-    private String hora_inicio, hora_fim, string_data_reserva, nsala, lotacao, tempo_limp;
+    private String string_hora_inicio, string_hora_fim, string_data_reserva, nsala, lotacao, string_tempo_limp;
     private EditText ed_hora_inicio, ed_hora_fim, ed_data_reserva,
             ed_num_pessoas, ed_lotacao, ed_tempo_limp;
     private Button btn_accept, btn_cancel;
@@ -102,7 +103,7 @@ public class ReservarRecyclerViewAdapter extends
                         Sala sala = response.body();
                         lotacao = sala.getLotacaoMax().toString();
                         nsala = sala.getnSala().toString();
-                        tempo_limp = methodsInterface.formatTimeForUser(
+                        string_tempo_limp = methodsInterface.formatTimeForUser(
                                 sala.getTempoMinLimp());
                     }
                 }
@@ -133,52 +134,72 @@ public class ReservarRecyclerViewAdapter extends
             ed_data_reserva.setText(methodsInterface.formatDateForUser(
                     reserva.getDataReserva()));
             ed_lotacao.setText(lotacao);
-            ed_tempo_limp.setText(tempo_limp);
+            ed_tempo_limp.setText(string_tempo_limp);
 
             dialog.show();
             Window window = dialog.getWindow();
             window.setLayout(1000,900);
 
             btn_accept.setOnClickListener(v12 -> {
-                hora_inicio = ed_hora_inicio.getText().toString();
-                hora_fim = ed_hora_fim.getText().toString();
+                string_hora_inicio = ed_hora_inicio.getText().toString();
+                string_hora_fim = ed_hora_fim.getText().toString();
                 string_data_reserva = ed_data_reserva.getText().toString();
                 num_pessoas = Integer.parseInt(ed_num_pessoas.getText().toString());
                 userId = new SharedPrefManager(v12.getContext()).getUserId();
 
-                if (verifyReservaHorario(string_data_reserva, hora_inicio, hora_fim, tempo_limp))
-                {
-                    System.out.println("Nova reserva criada");
-                    /*Reserva newReserva = new Reserva(
-                            reserva.getIdSala(), userId, hora_inicio, hora_fim,
-                            methodsInterface.formatDateForAPI(string_data_reserva),
-                            num_pessoas, true);
+                String formattedDate = methodsInterface.formatDateForAPI(string_data_reserva);
+                LocalDate data_reserva = methodsInterface.stringToDate(formattedDate);
+                LocalTime hora_inicio = methodsInterface.stringToTime(string_hora_inicio);
+                LocalTime hora_fim = methodsInterface.stringToTime(string_hora_fim);
+                Duration tempo_limp = methodsInterface.stringToDuration(string_tempo_limp);
 
-                    Call<Reserva> reservaPost = apiInterface.createReserva(newReserva);
-                    reservaPost.enqueue(new Callback<Reserva>() {
+                if (data_reserva.compareTo(methodsInterface.getDateToday())>=0)
+                {
+                    Call<List<Reserva>> reservaCall = apiInterface.getReservasbyDate(formattedDate);
+                    reservaCall.enqueue(new Callback<List<Reserva>>() {
                         @Override
-                        public void onResponse(@NonNull Call<Reserva> call1,
-                                               @NonNull Response<Reserva> response) {
-                            Reserva responseReserva = response.body();
-                            if (response.isSuccessful() && responseReserva != null) {
-                                Toast.makeText(v12.getContext(), String.format(
-                                                "Reserva para dia %s das %s às %s foi criada",
-                                                responseReserva.getDataReserva(),
-                                                responseReserva.getHoraInicio(),
-                                                responseReserva.getHoraFim()),
-                                        Toast.LENGTH_LONG).show();
-                            } else {
-                                System.out.println(response.message());
+                        public void onResponse(@NonNull Call<List<Reserva>> call, @NonNull Response<List<Reserva>> response)
+                        {
+                            if (response.body() != null) {
+                                int next_index = 0;
+                                error_counter = 0;
+                                Log.e("Success",response.body().toString());
+                                List<Reserva> reservaList = (List<Reserva>) response.body();
+                                for (Reserva reserva :reservaList){
+                                    Reserva next_reserva = reservaList.get(next_index);
+                                    next_index++;
+                                    LocalTime res_hora_inicio = methodsInterface.stringToTime(reserva.getHoraInicio());
+                                    LocalTime res_hora_fim = methodsInterface.stringToTime(reserva.getHoraFim());
+                                    LocalTime next_hora_inicio = methodsInterface.stringToTime(next_reserva.getHoraInicio());
+                                    LocalTime hora_inicio_min = methodsInterface.addDurationToHour(res_hora_fim, tempo_limp);
+                                    LocalTime hora_fim_max = methodsInterface.addDurationToHour(hora_fim, tempo_limp);
+
+                                    if(hora_inicio.compareTo(hora_inicio_min)<0 || hora_fim_max.compareTo(next_hora_inicio)>0)
+                                    {
+                                        error_counter++;
+                                    }
+                                }
+                                if(error_counter==0)
+                                {
+                                    System.out.println("Nova reserva criada");
+                                    Reserva newReserva = new Reserva(
+                                            reserva.getIdSala(), userId, string_hora_inicio, string_hora_fim,
+                                            methodsInterface.formatDateForAPI(string_data_reserva),
+                                            num_pessoas, true);
+                                    criarReserva(newReserva, v12.getContext());
+                                }
+                                else
+                                    System.out.println(error_counter);
                             }
                         }
 
                         @Override
-                        public void onFailure(@NonNull Call<Reserva> call1, @NonNull Throwable t) {
+                        public void onFailure(@NonNull Call<List<Reserva>> call, @NonNull Throwable t) {
                             Log.e("Failure", t.getLocalizedMessage());
                         }
-                    });*/
+                    });
                 }else
-                    System.out.println("Não é possível criar reserva neste horário");
+                    System.out.println("Não é possível criar reserva nesta data");
             });
             btn_cancel.setOnClickListener(v1 -> dialog.dismiss());
         });
@@ -189,57 +210,30 @@ public class ReservarRecyclerViewAdapter extends
         return reservasList.size();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public boolean verifyReservaHorario(String string_data_reserva, String string_hora_inicio,
-                                        String string_hora_fim, String string_tempo_limp)
+    public void criarReserva(Reserva reserva, Context mCtx)
     {
-
-
-        error_counter = 0;
-        String formattedDate = methodsInterface.formatDateForAPI(string_data_reserva);
-        LocalDate data_reserva = methodsInterface.stringToDate(formattedDate);
-        LocalTime hora_inicio = methodsInterface.stringToTime(string_hora_inicio);
-        LocalTime hora_fim = methodsInterface.stringToTime(string_hora_fim);
-        Duration tempo_limp = methodsInterface.stringToDuration(string_tempo_limp);
-
-        if (data_reserva.compareTo(methodsInterface.getDateToday())>=0)
-        {
-            Call<List<Reserva>> reservaCall = apiInterface.getReservasbyDate(formattedDate);
-            reservaCall.enqueue(new Callback<List<Reserva>>() {
-                @Override
-                public void onResponse(@NonNull Call<List<Reserva>> call, @NonNull Response<List<Reserva>> response)
-                {
-                    if (response.body() != null) {
-                        int next_index = 0;
-                        next_index++;
-                        Log.e("Success",response.body().toString());
-                        List<Reserva> reservaList = (List<Reserva>) response.body();
-                        for (Reserva reserva :reservaList){
-                            Reserva next_reserva = reservaList.get(next_index);
-                            LocalTime res_hora_inicio = methodsInterface.stringToTime(reserva.getHoraInicio());
-                            LocalTime res_hora_fim = methodsInterface.stringToTime(reserva.getHoraFim());
-                            LocalTime next_hora_inicio = methodsInterface.stringToTime(next_reserva.getHoraInicio());
-                            LocalTime hora_inicio_min = methodsInterface.addDurationToHour(res_hora_fim, tempo_limp);
-                            LocalTime hora_fim_max = methodsInterface.addDurationToHour(hora_fim, tempo_limp);
-
-                            if(hora_inicio.compareTo(hora_inicio_min)<0 && hora_fim_max.compareTo(next_hora_inicio)>0)
-                            {
-                                error_counter++;
-                            }
-                        }
-                    }
+        Call<Reserva> reservaPost = apiInterface.createReserva(reserva);
+        reservaPost.enqueue(new Callback<Reserva>() {
+            @Override
+            public void onResponse(@NonNull Call<Reserva> call1,
+                                   @NonNull Response<Reserva> response) {
+                Reserva responseReserva = response.body();
+                if (response.isSuccessful() && responseReserva != null) {
+                    Toast.makeText(mCtx, String.format(
+                                    "Reserva para dia %s das %s às %s foi criada",
+                                    responseReserva.getDataReserva(),
+                                    responseReserva.getHoraInicio(),
+                                    responseReserva.getHoraFim()),
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    System.out.println(response.message());
                 }
+            }
 
-                @Override
-                public void onFailure(@NonNull Call<List<Reserva>> call, @NonNull Throwable t) {
-                    Log.e("Failure", t.getLocalizedMessage());
-                    error_counter++;
-                }
-            });
-            System.out.println("Errors: "+error_counter);
-            return error_counter <= 0;
-        }else{
-            return false;
-        }
+            @Override
+            public void onFailure(@NonNull Call<Reserva> call1, @NonNull Throwable t) {
+                Log.e("Failure", t.getLocalizedMessage());
+            }
+        });
     }
 }
