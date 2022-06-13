@@ -1,22 +1,26 @@
 package com.pint.roombookerfinal.Sala;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pint.roombookerfinal.API.ApiClient;
 import com.pint.roombookerfinal.API.ApiInterface;
+import com.pint.roombookerfinal.MethodsInterface;
 import com.pint.roombookerfinal.Models.Reserva;
 import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.R;
 
 import java.util.List;
+import java.util.ListIterator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,6 +29,7 @@ import retrofit2.Response;
 public class ReservasSalaActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     Context mCtx;
+    MethodsInterface methodsInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +47,32 @@ public class ReservasSalaActivity extends AppCompatActivity {
         Call<Sala> call = apiInterface.getSalaReservas(salaId);
 
         call.enqueue(new Callback<Sala>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(@NonNull Call<Sala> call, @NonNull Response<Sala> response) {
                 if (response.body() != null) {
                     Log.e("Success",response.body().toString());
 
                     List<Reserva> reservasList = response.body().getReservas();
-                    recyclerView.setAdapter(new ReservarRecyclerViewAdapter(mCtx, reservasList) );
+                    ListIterator<Reserva> iterator = reservasList.listIterator();
                     if(reservasList.isEmpty())
                     {
                         Toast.makeText(ReservasSalaActivity.this, "Não foram encontradas reservas!!", Toast.LENGTH_SHORT).show();
                     }
+                    else{
+                        while(iterator.hasNext())
+                        {
+                            String string_data_reserva = iterator.next().getDataReserva();
+                            System.out.println(string_data_reserva);
+                            /*LocalDate data_reserva = methodsInterface.stringToDate(string_data_reserva);
+                            LocalDate today = methodsInterface.getDateToday();
+                            if (data_reserva.compareTo(today)<0)
+                            {
+                                iterator.remove();
+                            }*/
+                        }
+                    }
+                    recyclerView.setAdapter(new ReservarRecyclerViewAdapter(mCtx, reservasList) );
                 }
             }
 
