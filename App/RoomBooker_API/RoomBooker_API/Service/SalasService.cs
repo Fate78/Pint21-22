@@ -34,7 +34,8 @@ namespace RoomBooker_API.Service
         public ActionResult<Sala> GetReservasbySala(int n_sala)
         {
             var sala = pintContext.Salas
-                .Include(i => i.Reservas)
+                .Include(i => i.Reservas.OrderByDescending(i => i.DataReserva)
+                .ThenByDescending(i => i.HoraInicio))
                 .Single(sala => sala.NSala == n_sala);
             //Check if null, return notfound
             if (sala == null)

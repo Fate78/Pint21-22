@@ -14,11 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pint.roombookerfinal.API.ApiClient;
 import com.pint.roombookerfinal.API.ApiInterface;
+import com.pint.roombookerfinal.Methods;
 import com.pint.roombookerfinal.MethodsInterface;
 import com.pint.roombookerfinal.Models.Reserva;
 import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.R;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -29,7 +31,7 @@ import retrofit2.Response;
 public class ReservasSalaActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     Context mCtx;
-    MethodsInterface methodsInterface;
+    MethodsInterface methodsInterface = new Methods();;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,13 +65,12 @@ public class ReservasSalaActivity extends AppCompatActivity {
                         while(iterator.hasNext())
                         {
                             String string_data_reserva = iterator.next().getDataReserva();
-                            System.out.println(string_data_reserva);
-                            /*LocalDate data_reserva = methodsInterface.stringToDate(string_data_reserva);
+                            LocalDate data_reserva = methodsInterface.stringToDate(string_data_reserva);
                             LocalDate today = methodsInterface.getDateToday();
                             if (data_reserva.compareTo(today)<0)
                             {
                                 iterator.remove();
-                            }*/
+                            }
                         }
                     }
                     recyclerView.setAdapter(new ReservarRecyclerViewAdapter(mCtx, reservasList) );
