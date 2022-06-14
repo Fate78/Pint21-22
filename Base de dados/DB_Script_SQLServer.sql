@@ -139,6 +139,7 @@ create table SALA (
    N_SALA               int                  not null,
    LOTACAO_MAX          int                  not null,
    TEMPO_MIN_LIMP       time(0)              not null,
+   LIMPO                bit                  not null,
    ATIVO                bit                  not null,
    constraint PK_SALA primary key (ID_SALA)
 )
