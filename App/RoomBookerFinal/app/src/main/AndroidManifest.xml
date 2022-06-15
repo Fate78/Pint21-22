@@ -15,10 +15,12 @@
         tools:targetApi="m">
         <activity
             android:name=".Sala.ReservasSalaActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/menu_reservas" />
         <activity
             android:name=".Sala.SalaActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/detalhes_sala" />
         <activity
             android:name=".NavigationUI.NavigationDrawerActivity"
             android:exported="true"

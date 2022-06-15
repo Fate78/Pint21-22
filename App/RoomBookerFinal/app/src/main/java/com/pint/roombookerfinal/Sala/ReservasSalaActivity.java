@@ -39,6 +39,10 @@ public class ReservasSalaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reservas_sala);
 
         int salaId = getIntent().getIntExtra("IdSala", 0);
+        String nSala = getIntent().getStringExtra("NSala");
+        String activityTitle = "Reservas Sala " + nSala;
+        setTitle(activityTitle);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
         recyclerView = findViewById(R.id.rv_reservas);
@@ -61,14 +65,13 @@ public class ReservasSalaActivity extends AppCompatActivity {
                     {
                         Toast.makeText(ReservasSalaActivity.this, "Não foram encontradas reservas!!", Toast.LENGTH_SHORT).show();
                     }
-                    else{
-                        while(iterator.hasNext())
-                        {
+                    else {
+                        while (iterator.hasNext()) {
                             String string_data_reserva = iterator.next().getDataReserva();
                             LocalDate data_reserva = methodsInterface.stringToDate(string_data_reserva);
                             LocalDate today = methodsInterface.getDateToday();
-                            if (data_reserva.compareTo(today)<0)
-                            {
+
+                            if (data_reserva.compareTo(today) < 0) {
                                 iterator.remove();
                             }
                         }

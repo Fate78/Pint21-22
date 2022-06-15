@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -28,7 +27,7 @@ public class SalaActivity extends AppCompatActivity {
     Context mCtx;
     EditText edNSala, edLocalizacao, edLotacao, edLimpeza;
     Button btn_reservas;
-    private String selectedCentroName;
+    private String selectedCentroName, nSala;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +51,11 @@ public class SalaActivity extends AppCompatActivity {
                 if (response.body() != null) {
                     Log.e("Success",response.body().toString());
                     Sala sala = response.body();
-                    edNSala.setText(sala.getnSala().toString());
+                    String activityTitle = "Detalhes Sala " + sala.getnSala();
+                    setTitle(activityTitle);
+
+                    nSala = sala.getnSala().toString();
+                    edNSala.setText(nSala);
                     edLotacao.setText(sala.getLotacaoMax().toString());
                     edLimpeza.setText(formatTime(sala.getTempoMinLimp()));
                     selectedCentroName = new SharedPrefManager(getApplicationContext()).getCentroNome();
@@ -73,6 +76,7 @@ public class SalaActivity extends AppCompatActivity {
         btn_reservas.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), ReservasSalaActivity.class);
             intent.putExtra("IdSala", salaId);
+            intent.putExtra("NSala", nSala);
             v.getContext().startActivity(intent);
         });
     }
