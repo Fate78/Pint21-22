@@ -17,7 +17,7 @@ import com.pint.roombookerfinal.Sala.SalaActivity;
 
 import java.util.List;
 
-public class SalasRecyclerViewAdapter extends RecyclerView.Adapter<SalasRecyclerViewAdapter.ViewHolder> {
+public class SalasRecyclerViewAdapter extends RecyclerView.Adapter<SalasRecyclerViewAdapter.ViewHolder>{
 
     private final List<Sala> salasList;
 

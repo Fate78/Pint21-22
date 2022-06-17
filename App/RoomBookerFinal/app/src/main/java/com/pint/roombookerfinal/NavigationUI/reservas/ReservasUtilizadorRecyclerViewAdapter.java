@@ -1,5 +1,6 @@
 package com.pint.roombookerfinal.NavigationUI.reservas;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +18,22 @@ import com.pint.roombookerfinal.R;
 import java.util.List;
 
 public class ReservasUtilizadorRecyclerViewAdapter extends
-        RecyclerView.Adapter<ReservasUtilizadorRecyclerViewAdapter.ViewHolder>{
+        RecyclerView.Adapter<ReservasUtilizadorRecyclerViewAdapter.ViewHolder> implements View.OnClickListener {
 
     private final List<Reserva> reservasList;
     final MethodsInterface methodsInterface = new Methods();
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.txt_data:
+            case R.id.txt_hora_inicio:
+            case R.id.txt_hora_fim:
+                //Open Dialog to update or cancel reserva if possible
+                break;
+        }
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView hora_inicio;
@@ -57,6 +70,9 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
                 methodsInterface.formatTimeForUser(reserva.getHoraFim()));
         holder.data_reserva.setText(
                 (methodsInterface.formatDateForUser(reserva.getDataReserva())));
+        holder.data_reserva.setOnClickListener(this);
+        holder.hora_inicio.setOnClickListener(this);
+        holder.hora_fim.setOnClickListener(this);
     }
 
     @Override

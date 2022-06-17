@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Esse arquivo é usado pelo processo de publicação/pacote do seu projeto Web. É possível personalizar o comportamento deste processo
+ao editar este arquivo MSBuild. Para saber mais sobre isso, visite https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA7QZBaN2k0k2OJu7D3+AhOwAAAAACAAAAAAAQZgAAAAEAACAAAAAQcFd1ixz91yh/23Kq9R3B1rP1rRJDU7je+14D7D7vkAAAAAAOgAAAAAIAACAAAADcV3OXoCOIkfMzIv3KZEFPao4jPeUgk4N37ZqiZ11i4oAAAAAO8VwtxDWFJcf8EK10JA6bo5UnoO3+tvAczG5MQCi3hwFMXwQ53LsaSW1Pj84lplh17jPnNpu+9BWBE7KF/8xfZlTfR3TcQV1dat1YugpDh/74h1V0+IMaLavQEvgrjQBNSi/8BCfp21xdB437fK41BI5KssUL3K01QvtzDRedcUAAAABr/iJXcx0fCxQb+RZxoCmsamLNlOfnN3j+Uj4JjAf9/4FaAk7soYfsJ+yxt6AKixbLoJO+OyAezK87MCwfZhbe</EncryptedPassword>
+    <History>False|2022-06-17T17:57:24.3156638Z;False|2022-06-17T14:49:06.1106285+01:00;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <EFMigrations Include="RoomBooker_API.Models.PintContext">
+      <Value>Data Source=DESKTOP-LODJ3UU%3bInitial Catalog=Pint%3bUser ID=pint%3bPassword=pint</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

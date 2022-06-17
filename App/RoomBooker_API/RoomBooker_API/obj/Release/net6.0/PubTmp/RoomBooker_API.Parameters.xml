@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
-  <parameter name="IIS Web Application Name" description="" value="RoomBooker_API" tags="IisApp">
+  <parameter name="IIS Web Application Name" description="" value="RoomBookerAPI" tags="IisApp">
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Daniel\\OneDrive\\Documentos\\GitHub\\Pint21-22\\App\\RoomBooker_API\\RoomBooker_API\\obj\\Release\\net6\.0\\PubTmp\\Out\\$" />
+  </parameter>
+  <parameter name="RoomBooker_API.Models.PintContext" description="" value="Data Source=DESKTOP-LODJ3UU;Initial Catalog=Pint;User ID=pint;Password=pint" tags="dbfullsql">
+    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^C:\\Users\\Daniel\\OneDrive\\Documentos\\GitHub\\Pint21-22\\App\\RoomBooker_API\\RoomBooker_API\\obj\\Release\\net6\.0\\PubTmp\\EFSQLScripts\\RoomBooker_API\.Models\.PintContext\.sql$" />
   </parameter>
 </parameters>
