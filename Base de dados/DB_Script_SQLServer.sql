@@ -164,7 +164,7 @@ go
 /*==============================================================*/
 create table TIPO_UTILIZADOR (
    ID_TIPO              int                  UNIQUE not null,
-   NOME_TIPO            varchar(1024)        not null,
+   NOME_TIPO            varchar(1024)        UNIQUE not null,
    DESCRICAO            varchar(1024)        null,
    constraint PK_TIPO_UTILIZADOR primary key (ID_TIPO)
 )

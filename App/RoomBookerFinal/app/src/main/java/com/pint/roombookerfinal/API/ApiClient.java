@@ -6,7 +6,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    private static final String BASE_URL = "http://192.168.56.1:8082/";
+    private static final String BASE_URL = "https://roombookerapi.azurewebsites.net/";
     private static ApiInterface apiInterface;
 
     private static final OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
