@@ -238,8 +238,7 @@ class Pagina extends React.Component {
               </nav>
               <div class="container-fluid">
 
-                  <h1 class="h3 mb-4 text-gray-800">Utilizadores Registados</h1>
-                  {this.loadFillData()}
+                  <h1 class="h3 mb-4 text-gray-800">Salas Mais Utilizadas</h1>
               </div>
 
           </div>
