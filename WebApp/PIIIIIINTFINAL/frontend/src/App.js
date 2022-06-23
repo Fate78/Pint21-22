@@ -2,13 +2,23 @@ import {BrowserRouter, BrowserRouter as Router, Route, Routes} from "react-route
 import './App.css';
 
 import Utilizadores from './menu/listar/utilizadores'
-import Notificacoes from './menu/listar/notificacoes'
+import SalasMaisUtilizadas from './menu/stats/salasmaisutilizadas'
+import GestaoSalas from './menu/gestao/gestaosalas'
+import Login from './menu/login/login'
+import Dashboard from './menu/dashboard/dashboard'
+import Limpeza from './menu/gestao/limpeza'
+
 function App() {
   return (
+    
     <Router>
       <Routes>
         <Route path='/utilizador' element={<Utilizadores />} />
-        <Route path='/tickets' element={< Notificacoes/>} />
+        <Route path='/salasmaisutilizadas' element={<SalasMaisUtilizadas />} />
+        <Route path='/gestaosalas' element={<GestaoSalas />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/limpeza' element={<Limpeza />} />
       </Routes>
     </Router>
   );
