@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from "react-router-dom"
 import '../../assets/bootstrap/bootstrap/css/bootstrap.css';
 import '../../assets/CSS/stylesdashboard1.css';
+const baseUrl = "https://roombookerapi.azurewebsites.net/api";
 
 class Pagina extends React.Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class Pagina extends React.Component {
 
   componentDidMount() {
     // get all entities - GET
-    fetch("https://roombookerapi.azurewebsites.net/api/salas", {
+    fetch(baseUrl + "/salas", {
         "method": "GET",
         "headers": {
             "Accept": "application/json",
