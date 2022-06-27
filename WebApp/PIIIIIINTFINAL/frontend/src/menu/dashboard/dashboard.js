@@ -13,11 +13,6 @@ class Pagina extends React.Component {
       nomeUtilizador: '',
       nomeCompleto: '',
     };
-
-    this.create = this.create.bind(this);
-    this.update = this.update.bind(this);
-    this.delete = this.delete.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -39,28 +34,6 @@ class Pagina extends React.Component {
     });
 
 }
-
-  create(e) {
-    // add entity - POST
-    e.preventDefault();
-
-  }
-
-  update(e) {
-    // update entity - PUT
-    e.preventDefault();
-
-  }
-
-  delete(e) {
-    // delete entity - DELETE
-    e.preventDefault();
-
-  }
-
-  handleChange(changeObject) {
-    this.setState(changeObject)
-  }
 
   render() {
     return (
@@ -237,54 +210,12 @@ class Pagina extends React.Component {
                   </ul>
 
               </nav>
+              <div class="container-fluid">
 
+                  <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
+              </div>
 
-
-
-
-                  <h1 class="h3 mb-4 text-gray-800">Utilizadores Registados</h1>
-                <div class="container-fluid">
-
-
-                    
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"> Lista De Utilizadores Registados</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                
-                                        <tr>
-                                            <th>ID Utilizador</th>
-                                            <th>Nome Utilizador</th>
-                                            <th>Reservas</th>
-                                            <th>ID Tipo</th>
-                                            <th>Tickets</th>
-                                            <th>Utilizador de Centros</th>
-                                            <th>Nome Completo</th>
-                                            <th>Email </th>
-                                            <th>Data de Nascimento</th>
-                                            <th>Ativo</th>
-                                            <th>Verificado</th>
-                                        </tr> 
-                                    </thead>
-                                    <tfoot>
-
-                                    </tfoot>
-                                    <tbody>
-                                        {this.loadFillData()}
-                                       </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
+          </div>
           <footer class="sticky-footer bg-white">
               <div class="container my-auto">
                   <div class="copyright text-center my-auto">
@@ -325,17 +256,8 @@ class Pagina extends React.Component {
         return(
             <tr key={index}>
                 
-                <td>{data.idUtilizador}</td>
                 <td>{data.nomeUtilizador}</td>
-                <td>{data.reservas}</td>
-                <td>{data.idTipo}</td>
-                <td>{data.tickets}</td>
-                <td>{data.utilizadorCentros}</td>
                 <td>{data.nomeCompleto}</td>
-                <td>{data.email}</td>
-                <td>{data.dataNascimento}</td>
-                <td>{data.ativo}</td>
-                <td>{data.verificado}</td>
                     
             </tr>
         )
@@ -343,4 +265,3 @@ class Pagina extends React.Component {
 }
 }
 export default Pagina;
-

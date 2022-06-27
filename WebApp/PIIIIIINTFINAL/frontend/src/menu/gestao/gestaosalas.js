@@ -9,20 +9,14 @@ class Pagina extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      utilizadores: [],
-      nomeUtilizador: '',
-      nomeCompleto: '',
+      gestaosalas: [],
     };
 
-    this.create = this.create.bind(this);
-    this.update = this.update.bind(this);
-    this.delete = this.delete.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
     // get all entities - GET
-    fetch(baseUrl + "/utilizadores", {
+    fetch(baseUrl + "/salas", {
         "method": "GET",
         "headers": {
             "Accept": "application/json",
@@ -32,35 +26,17 @@ class Pagina extends React.Component {
     .then(response => response.json())
     .then(response => {
         this.setState({
-        utilizadores: response
+        gestaosalas: response
         })
+        
     })
     .catch(err => { console.log(err); 
     });
-
+    
+    
+    
 }
 
-  create(e) {
-    // add entity - POST
-    e.preventDefault();
-
-  }
-
-  update(e) {
-    // update entity - PUT
-    e.preventDefault();
-
-  }
-
-  delete(e) {
-    // delete entity - DELETE
-    e.preventDefault();
-
-  }
-
-  handleChange(changeObject) {
-    this.setState(changeObject)
-  }
 
   render() {
     return (
@@ -237,54 +213,28 @@ class Pagina extends React.Component {
                   </ul>
 
               </nav>
+              <div class="container-fluid">
 
+                  <h1 class="h3 mb-4 text-gray-800">Gestão de Salas</h1>
+                    <table class="table table-striped table-dark table-bordered">
+                        <thead calss="thead-dark">
+                            <tr>
+                                <th scope="col">idCentro</th>
+                                <th scope="col">Número de sala</th>
+                                <th scope="col">Lotação Máxima</th>
+                                <th scope="col">Tempo Minimo Limpo</th>
+                                <th scope="col">Limpo</th>
+                                <th scope="col">ativo</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbody-light">
+                            {this.loadFillData()}
+                        </tbody>
+                    </table>
+            
+              </div>
 
-
-
-
-                  <h1 class="h3 mb-4 text-gray-800">Utilizadores Registados</h1>
-                <div class="container-fluid">
-
-
-                    
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"> Lista De Utilizadores Registados</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                
-                                        <tr>
-                                            <th>ID Utilizador</th>
-                                            <th>Nome Utilizador</th>
-                                            <th>Reservas</th>
-                                            <th>ID Tipo</th>
-                                            <th>Tickets</th>
-                                            <th>Utilizador de Centros</th>
-                                            <th>Nome Completo</th>
-                                            <th>Email </th>
-                                            <th>Data de Nascimento</th>
-                                            <th>Ativo</th>
-                                            <th>Verificado</th>
-                                        </tr> 
-                                    </thead>
-                                    <tfoot>
-
-                                    </tfoot>
-                                    <tbody>
-                                        {this.loadFillData()}
-                                       </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
+        </div>
           <footer class="sticky-footer bg-white">
               <div class="container my-auto">
                   <div class="copyright text-center my-auto">
@@ -321,26 +271,40 @@ class Pagina extends React.Component {
   }
 
   loadFillData() {
-    return this.state.utilizadores.map((data, index) =>{
+    
+    return this.state.gestaosalas.map((data, index) =>{
+        
         return(
             <tr key={index}>
                 
-                <td>{data.idUtilizador}</td>
-                <td>{data.nomeUtilizador}</td>
-                <td>{data.reservas}</td>
-                <td>{data.idTipo}</td>
-                <td>{data.tickets}</td>
-                <td>{data.utilizadorCentros}</td>
-                <td>{data.nomeCompleto}</td>
-                <td>{data.email}</td>
-                <td>{data.dataNascimento}</td>
+                <td>{data.idCentro}</td>
+                <td>{data.nSala}</td>
+                <td>{data.lotacaoMax}</td>
+                <td>{data.tempoMinLimp}</td>
+                <td>{data.limpo}</td>
                 <td>{data.ativo}</td>
-                <td>{data.verificado}</td>
-                    
             </tr>
+            
+        )
+    })
+}
+loadFillData() {
+    
+    return this.state.gestaosalas.map((data, index) =>{
+        
+        return(
+            <tr key={index}>
+                
+                <td>{data.idCentro}</td>
+                <td>{data.nSala}</td>
+                <td>{data.lotacaoMax}</td>
+                <td>{data.tempoMinLimp}</td>
+                <td>{data.limpo}</td>
+                <td>{data.ativo}</td>
+            </tr>
+            
         )
     })
 }
 }
 export default Pagina;
-

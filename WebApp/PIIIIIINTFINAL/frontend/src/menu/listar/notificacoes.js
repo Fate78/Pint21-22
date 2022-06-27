@@ -9,7 +9,7 @@ class Pagina extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      utilizadores: [],
+      tickets: [],
       nomeUtilizador: '',
       nomeCompleto: '',
     };
@@ -22,7 +22,7 @@ class Pagina extends React.Component {
 
   componentDidMount() {
     // get all entities - GET
-    fetch(baseUrl + "/utilizadores", {
+    fetch(baseUrl + "/tickets", {
         "method": "GET",
         "headers": {
             "Accept": "application/json",
@@ -32,7 +32,7 @@ class Pagina extends React.Component {
     .then(response => response.json())
     .then(response => {
         this.setState({
-        utilizadores: response
+        tickets: response
         })
     })
     .catch(err => { console.log(err); 
@@ -156,52 +156,12 @@ class Pagina extends React.Component {
                               <i class="fas fa-search fa-fw"></i>
                           </a>
                       </li>
-                      <li class="nav-item dropdown no-arrow mx-1">
-                          <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <i class="fas fa-bell fa-fw"></i>
-                              <span class="badge badge-danger badge-counter">3+</span>
+                      <li class="nav-item no-arrow mx-1">
+                          <a class="nav-link" href="#" id="alerts" role="button" aria-haspopup="true" aria-expanded="false">
+                          <span class="mr-2 d-none d-lg-inline text-gray-600 small">Notificações</span>
+                              <span class="badge badge-danger badge-counter">!</span>
                           </a>
-                          <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                              aria-labelledby="alertsDropdown">
-                              <h6 class="dropdown-header">
-                                  Notificações
-                              </h6>
-                              <a class="dropdown-item d-flex align-items-center" href="#">
-                                  <div class="mr-3">
-                                      <div class=" bg-primary">
-                                          <i class=" text-white"></i>
-                                      </div>
-                                  </div>
-                                  <div>
-                                      <div class="small text-gray-500">December 12, 2019</div>
-                                      <span class="font-weight">A new monthly report is ready to download!</span>
-                                  </div>
-                              </a>
-                              <a class="dropdown-item d-flex align-items-center" href="#">
-                                  <div class="mr-3">
-                                      <div class="bg-success">
-                                          <i class=" text-white"></i>
-                                      </div>
-                                  </div>
-                                  <div>
-                                      <div class="small text-gray-500">December 7, 2019</div>
-                                      $290.29 has been deposited into your account!
-                                  </div>
-                              </a>
-                              <a class="dropdown-item d-flex align-items-center" href="#">
-                                  <div class="mr-3">
-                                      <div class=" bg-warning">
-                                          <i class=" text-white"></i>
-                                      </div>
-                                  </div>
-                                  <div>
-                                      <div class="small text-gray-500">December 2, 2019</div>
-                                      Spending Alert: We've noticed unusually high spending for your account.
-                                  </div>
-                              </a>
-                              <a class="dropdown-item text-center small text-gray-500" href="#">Mostrar mais</a>
-                          </div>
+                         
                       </li>
 
                       <div class="topbar-divider d-none d-sm-block"></div>
@@ -242,14 +202,14 @@ class Pagina extends React.Component {
 
 
 
-                  <h1 class="h3 mb-4 text-gray-800">Utilizadores Registados</h1>
+                  <h1 class="h3 mb-4 text-gray-800">Notificações</h1>
                 <div class="container-fluid">
 
 
                     
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"> Lista De Utilizadores Registados</h6>
+                            <h6 class="m-0 font-weight-bold text-primary"> Tickets</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -257,17 +217,13 @@ class Pagina extends React.Component {
                                     <thead>
                                 
                                         <tr>
+                                            <th>Resolvido</th>
+                                            <th>ID Ticket</th>
                                             <th>ID Utilizador</th>
-                                            <th>Nome Utilizador</th>
-                                            <th>Reservas</th>
-                                            <th>ID Tipo</th>
-                                            <th>Tickets</th>
-                                            <th>Utilizador de Centros</th>
-                                            <th>Nome Completo</th>
-                                            <th>Email </th>
-                                            <th>Data de Nascimento</th>
-                                            <th>Ativo</th>
-                                            <th>Verificado</th>
+                                            <th>Assunto</th>
+                                            <th>Categoria</th>
+                                            <th>Descrição</th>
+                                           
                                         </tr> 
                                     </thead>
                                     <tfoot>
@@ -321,21 +277,16 @@ class Pagina extends React.Component {
   }
 
   loadFillData() {
-    return this.state.utilizadores.map((data, index) =>{
+    return this.state.tickets.map((data, index) =>{
         return(
             <tr key={index}>
                 
+                <td>{data.resolvido='false'}</td>
+                <td>{data.idTicket}</td>
                 <td>{data.idUtilizador}</td>
-                <td>{data.nomeUtilizador}</td>
-                <td>{data.reservas}</td>
-                <td>{data.idTipo}</td>
-                <td>{data.tickets}</td>
-                <td>{data.utilizadorCentros}</td>
-                <td>{data.nomeCompleto}</td>
-                <td>{data.email}</td>
-                <td>{data.dataNascimento}</td>
-                <td>{data.ativo}</td>
-                <td>{data.verificado}</td>
+                <td>{data.assunto}</td>
+                <td>{data.categoria}</td>
+                <td>{data.descricao}</td>
                     
             </tr>
         )
@@ -343,4 +294,3 @@ class Pagina extends React.Component {
 }
 }
 export default Pagina;
-
