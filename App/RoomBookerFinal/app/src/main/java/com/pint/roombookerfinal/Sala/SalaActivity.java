@@ -5,11 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.pint.roombookerfinal.API.ApiClient;
@@ -27,12 +29,15 @@ public class SalaActivity extends AppCompatActivity {
     Context mCtx;
     EditText edNSala, edLocalizacao, edLotacao, edLimpeza;
     Button btn_reservas;
-    private String selectedCentroName, nSala;
+    private String selectedCentroName, nSala, tempo_limpeza, lotacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sala);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         edNSala = findViewById(R.id.edNSala);
         edLocalizacao = findViewById(R.id.edLocalizacao);
@@ -55,9 +60,11 @@ public class SalaActivity extends AppCompatActivity {
                     setTitle(activityTitle);
 
                     nSala = sala.getnSala().toString();
+                    tempo_limpeza = formatTime(sala.getTempoMinLimp());
+                    lotacao = sala.getLotacaoMax().toString();
                     edNSala.setText(nSala);
-                    edLotacao.setText(sala.getLotacaoMax().toString());
-                    edLimpeza.setText(formatTime(sala.getTempoMinLimp()));
+                    edLotacao.setText(lotacao);
+                    edLimpeza.setText(tempo_limpeza);
                     selectedCentroName = new SharedPrefManager(getApplicationContext()).getCentroNome();
                     edLocalizacao.setText(selectedCentroName);
                 }
@@ -77,8 +84,20 @@ public class SalaActivity extends AppCompatActivity {
             Intent intent = new Intent(v.getContext(), ReservasSalaActivity.class);
             intent.putExtra("IdSala", salaId);
             intent.putExtra("NSala", nSala);
+            intent.putExtra("Lotacao", lotacao);
+            intent.putExtra("TempoLimpeza", tempo_limpeza);
             v.getContext().startActivity(intent);
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private String formatTime(String time){

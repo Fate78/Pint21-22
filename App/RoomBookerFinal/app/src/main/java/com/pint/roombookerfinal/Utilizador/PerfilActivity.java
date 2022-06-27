@@ -2,9 +2,11 @@ package com.pint.roombookerfinal.Utilizador;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.pint.roombookerfinal.API.ApiClient;
@@ -26,6 +28,9 @@ public class PerfilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         username = findViewById(R.id.edtext_username);
         nome_completo = findViewById(R.id.edtext_nome);
@@ -56,6 +61,16 @@ public class PerfilActivity extends AppCompatActivity {
                 Log.e("Failure", t.getLocalizedMessage());
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private String formatDate(String date){

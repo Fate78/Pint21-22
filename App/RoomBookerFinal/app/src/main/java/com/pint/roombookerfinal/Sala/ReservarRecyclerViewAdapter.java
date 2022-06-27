@@ -39,11 +39,7 @@ import retrofit2.Response;
 public class ReservarRecyclerViewAdapter extends
         RecyclerView.Adapter<ReservarRecyclerViewAdapter.ViewHolder> {
 
-    private Integer userId, num_pessoas, error_counter;
-    private String string_hora_inicio, string_hora_fim, string_data_reserva, nsala, lotacao, string_tempo_limp;
-    private EditText ed_hora_inicio, ed_hora_fim, ed_data_reserva,
-            ed_num_pessoas, ed_lotacao, ed_tempo_limp;
-    private Button btn_accept, btn_cancel;
+    private String lotacao, nsala, string_tempo_limp;
     private final List<Reserva> reservasList;
     final MethodsInterface methodsInterface = new Methods();
     final ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
@@ -113,120 +109,125 @@ public class ReservarRecyclerViewAdapter extends
                     Log.e("Failure", t.getLocalizedMessage());
                 }
             });
-            final Dialog dialog = new Dialog(v.getContext());
-            dialog.setContentView(R.layout.reservar_dialog);
-
-            dialog.setTitle("Reservar Sala " + nsala);
-
-            ed_hora_inicio =  dialog.findViewById(R.id.ed_hora_inicio);
-            ed_hora_fim = dialog.findViewById(R.id.ed_hora_fim);
-            ed_data_reserva = dialog.findViewById(R.id.ed_data_reserva);
-            ed_num_pessoas = dialog.findViewById(R.id.ed_num_pessoas);
-            ed_lotacao = dialog.findViewById(R.id.ed_lotacao);
-            ed_tempo_limp = dialog.findViewById(R.id.ed_tempo_limpeza);
-            btn_accept = dialog.findViewById(R.id.btn_accept);
-            btn_cancel = dialog.findViewById(R.id.btn_cancel);
-
-            ed_hora_inicio.setText(methodsInterface.formatTimeForUser(
-                    reserva.getHoraInicio()));
-            ed_hora_fim.setText(methodsInterface.formatTimeForUser(
-                    reserva.getHoraFim()));
-            ed_data_reserva.setText(methodsInterface.formatDateForUser(
-                    reserva.getDataReserva()));
-            ed_lotacao.setText(lotacao);
-            ed_tempo_limp.setText(string_tempo_limp);
-
-            dialog.show();
-            Window window = dialog.getWindow();
-            window.setLayout(1000,900);
-
-            btn_accept.setOnClickListener(v12 -> {
-                string_hora_inicio = ed_hora_inicio.getText().toString();
-                string_hora_fim = ed_hora_fim.getText().toString();
-                string_data_reserva = ed_data_reserva.getText().toString();
-                num_pessoas = Integer.parseInt(ed_num_pessoas.getText().toString());
-                userId = new SharedPrefManager(v12.getContext()).getUserId();
-
-                String formattedDate = methodsInterface.formatDateForAPI(string_data_reserva);
-                LocalDate data_reserva = methodsInterface.stringToDate(formattedDate);
-                LocalTime hora_inicio = methodsInterface.stringToTime(string_hora_inicio);
-                LocalTime hora_fim = methodsInterface.stringToTime(string_hora_fim);
-                Duration tempo_limp = methodsInterface.stringToDuration(string_tempo_limp);
-
-                if (data_reserva.compareTo(methodsInterface.getDateToday())>=0)
-                {
-                    Call<List<Reserva>> reservaCall = apiInterface.getReservasbyDate(formattedDate);
-                    reservaCall.enqueue(new Callback<List<Reserva>>() {
-                        @Override
-                        public void onResponse(@NonNull Call<List<Reserva>> call, @NonNull Response<List<Reserva>> response)
-                        {
-                            error_counter = 0;
-                            if (response.body() != null) {
-                                int next_index = 1;
-                                Log.e("Success",response.body().toString());
-                                List<Reserva> reservaList = (List<Reserva>) response.body();
-                                for (Reserva reserva :reservaList){
-                                    Reserva next_reserva = null;
-                                    LocalTime next_hora_inicio = null;
-                                    LocalTime hora_fim_max = null;
-                                    LocalTime res_hora_inicio = null;
-                                    LocalTime res_hora_fim = null;
-                                    LocalTime hora_inicio_min = null;
-
-                                    //If next exists
-                                    if (reservaList.size()>=next_index+1)
-                                    {
-                                        next_reserva = reservaList.get(next_index);
-                                        next_index++;
-                                        next_hora_inicio = methodsInterface.stringToTime(next_reserva.getHoraInicio());
-                                        hora_fim_max = methodsInterface.addDurationToHour(hora_fim, tempo_limp);
-                                    }
-                                    else
-                                    {
-                                        hora_fim_max = LocalTime.parse("23:00");
-                                        next_hora_inicio = LocalTime.parse("23:00");
-                                    }
-                                    res_hora_inicio = methodsInterface.stringToTime(reserva.getHoraInicio());
-                                    res_hora_fim = methodsInterface.stringToTime(reserva.getHoraFim());
-                                    hora_inicio_min = methodsInterface.addDurationToHour(res_hora_fim, tempo_limp);
-
-                                    System.out.println(hora_inicio_min);
-                                    System.out.println(hora_fim_max);
-                                    System.out.println(next_hora_inicio);
-                                    if(hora_inicio.compareTo(hora_inicio_min)<0 || hora_fim_max.compareTo(next_hora_inicio)>0)
-                                    {
-                                        error_counter++;
-                                    }
-                                }
-                            }
-                            if(error_counter==0)
-                            {
-                                System.out.println("Nova reserva criada");
-                                Reserva newReserva = new Reserva(
-                                        reserva.getIdSala(), userId, string_hora_inicio, string_hora_fim,
-                                        methodsInterface.formatDateForAPI(string_data_reserva),
-                                        num_pessoas, true);
-                                criarReserva(newReserva, v12.getContext());
-                            }
-                            else
-                                System.out.println(error_counter);
-                        }
-
-                        @Override
-                        public void onFailure(@NonNull Call<List<Reserva>> call, @NonNull Throwable t) {
-                            Log.e("Failure", t.getLocalizedMessage());
-                        }
-                    });
-                }else
-                    System.out.println("Não é possível criar reserva nesta data");
-            });
-            btn_cancel.setOnClickListener(v1 -> dialog.dismiss());
+            createDialogReservar(v.getContext(), reserva);
         });
     }
 
     @Override
     public int getItemCount() {
         return reservasList.size();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void createDialogReservar(Context mCtx, Reserva reserva){
+        final Dialog dialog = new Dialog(mCtx);
+        dialog.setContentView(R.layout.reservar_dialog);
+
+        dialog.setTitle("Reservar Sala " + nsala);
+
+        EditText ed_hora_inicio =  dialog.findViewById(R.id.ed_hora_inicio);
+        EditText ed_hora_fim = dialog.findViewById(R.id.ed_hora_fim);
+        EditText ed_data_reserva = dialog.findViewById(R.id.ed_data_reserva);
+        EditText ed_num_pessoas = dialog.findViewById(R.id.ed_num_pessoas);
+        EditText ed_lotacao = dialog.findViewById(R.id.ed_lotacao);
+        EditText ed_tempo_limp = dialog.findViewById(R.id.ed_tempo_limpeza);
+        Button btn_accept = dialog.findViewById(R.id.btn_accept);
+        Button btn_cancel = dialog.findViewById(R.id.btn_cancel);
+
+        ed_hora_inicio.setText(methodsInterface.formatTimeForUser(
+                reserva.getHoraInicio()));
+        ed_hora_fim.setText(methodsInterface.formatTimeForUser(
+                reserva.getHoraFim()));
+        ed_data_reserva.setText(methodsInterface.formatDateForUser(
+                reserva.getDataReserva()));
+        ed_lotacao.setText(lotacao);
+        ed_tempo_limp.setText(string_tempo_limp);
+
+        dialog.show();
+        Window window = dialog.getWindow();
+        window.setLayout(1000,900);
+
+        btn_accept.setOnClickListener(v12 -> {
+            String string_hora_inicio = ed_hora_inicio.getText().toString();
+            String string_hora_fim = ed_hora_fim.getText().toString();
+            String string_data_reserva = ed_data_reserva.getText().toString();
+            Integer num_pessoas = Integer.parseInt(ed_num_pessoas.getText().toString());
+            Integer userId = new SharedPrefManager(v12.getContext()).getUserId();
+
+            String formattedDate = methodsInterface.formatDateForAPI(string_data_reserva);
+            LocalDate data_reserva = methodsInterface.stringToDate(formattedDate);
+            LocalTime hora_inicio = methodsInterface.stringToTime(string_hora_inicio);
+            LocalTime hora_fim = methodsInterface.stringToTime(string_hora_fim);
+            Duration tempo_limp = methodsInterface.stringToDuration(string_tempo_limp);
+
+            if (data_reserva.compareTo(methodsInterface.getDateToday())>=0)
+            {
+                Call<List<Reserva>> reservaCall = apiInterface.getReservasbyDate(formattedDate);
+                reservaCall.enqueue(new Callback<List<Reserva>>() {
+                    @Override
+                    public void onResponse(@NonNull Call<List<Reserva>> call, @NonNull Response<List<Reserva>> response)
+                    {
+                        Integer error_counter = 0;
+                        if (response.body() != null) {
+                            int next_index = 1;
+                            Log.e("Success",response.body().toString());
+                            List<Reserva> reservaList = (List<Reserva>) response.body();
+                            for (Reserva reserva :reservaList){
+                                Reserva next_reserva = null;
+                                LocalTime next_hora_inicio = null;
+                                LocalTime hora_fim_max = null;
+                                LocalTime res_hora_inicio = null;
+                                LocalTime res_hora_fim = null;
+                                LocalTime hora_inicio_min = null;
+
+                                //If next exists
+                                if (reservaList.size()>=next_index+1)
+                                {
+                                    next_reserva = reservaList.get(next_index);
+                                    next_index++;
+                                    next_hora_inicio = methodsInterface.stringToTime(next_reserva.getHoraInicio());
+                                    hora_fim_max = methodsInterface.addDurationToHour(hora_fim, tempo_limp);
+                                }
+                                else
+                                {
+                                    hora_fim_max = LocalTime.parse("23:00");
+                                    next_hora_inicio = LocalTime.parse("23:00");
+                                }
+                                res_hora_inicio = methodsInterface.stringToTime(reserva.getHoraInicio());
+                                res_hora_fim = methodsInterface.stringToTime(reserva.getHoraFim());
+                                hora_inicio_min = methodsInterface.addDurationToHour(res_hora_fim, tempo_limp);
+
+                                System.out.println(hora_inicio_min);
+                                System.out.println(hora_fim_max);
+                                System.out.println(next_hora_inicio);
+                                if(hora_inicio.compareTo(hora_inicio_min)<0 || hora_fim_max.compareTo(next_hora_inicio)>0)
+                                {
+                                    error_counter++;
+                                }
+                            }
+                        }
+                        if(error_counter==0)
+                        {
+                            System.out.println("Nova reserva criada");
+                            Reserva newReserva = new Reserva(
+                                    reserva.getIdSala(), userId, string_hora_inicio, string_hora_fim,
+                                    methodsInterface.formatDateForAPI(string_data_reserva),
+                                    num_pessoas, true);
+                            criarReserva(newReserva, v12.getContext());
+                        }
+                        else
+                            System.out.println(error_counter);
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<List<Reserva>> call, @NonNull Throwable t) {
+                        Log.e("Failure", t.getLocalizedMessage());
+                    }
+                });
+            }else
+                System.out.println("Não é possível criar reserva nesta data");
+        });
+        btn_cancel.setOnClickListener(v1 -> dialog.dismiss());
     }
 
     public void criarReserva(Reserva reserva, Context mCtx)

@@ -28,6 +28,7 @@
     <string name="menu_historico_reservas">Histórico Reservas</string>
     <string name="menu_perfil">Perfil</string>
     <string name="menu_logout">Logout</string>
+    <string name="menu_add_reserva">Adicionar Reserva</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
