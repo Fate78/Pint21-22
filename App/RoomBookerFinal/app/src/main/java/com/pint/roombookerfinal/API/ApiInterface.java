@@ -12,6 +12,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ApiInterface {
@@ -53,5 +54,8 @@ public interface ApiInterface {
 
     @POST("api/reservas")
     Call<Reserva> createReserva(@Body Reserva reserva);
+
+    @PUT("api/reservas")
+    Call<Reserva> updateReserva(@Path("id") int id, @Body Reserva reserva);
 
 }

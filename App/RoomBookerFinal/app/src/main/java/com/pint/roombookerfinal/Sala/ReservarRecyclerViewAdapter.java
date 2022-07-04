@@ -238,7 +238,7 @@ public class ReservarRecyclerViewAdapter extends
             public void onResponse(@NonNull Call<Reserva> call1,
                                    @NonNull Response<Reserva> response) {
                 Reserva responseReserva = response.body();
-                if (response.isSuccessful() && responseReserva != null) {
+                if (responseReserva != null) {
                     Toast.makeText(mCtx, String.format(
                                     "Reserva para dia %s das %s às %s foi criada",
                                     responseReserva.getDataReserva(),

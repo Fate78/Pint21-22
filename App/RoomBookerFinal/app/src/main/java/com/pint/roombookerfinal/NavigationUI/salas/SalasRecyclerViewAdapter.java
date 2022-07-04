@@ -20,7 +20,7 @@ import java.util.List;
 public class SalasRecyclerViewAdapter extends RecyclerView.Adapter<SalasRecyclerViewAdapter.ViewHolder>{
 
     private final List<Sala> salasList;
-
+    private final String centro;
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView n_sala;
         public final TextView nomecentro;
@@ -32,8 +32,9 @@ public class SalasRecyclerViewAdapter extends RecyclerView.Adapter<SalasRecycler
         }
     }
 
-    public SalasRecyclerViewAdapter(Context mCtx, List<Sala> salasList){
+    public SalasRecyclerViewAdapter(Context mCtx, List<Sala> salasList, String centro){
         this.salasList = salasList;
+        this.centro = centro;
     }
 
     @NonNull
@@ -51,7 +52,8 @@ public class SalasRecyclerViewAdapter extends RecyclerView.Adapter<SalasRecycler
     public void onBindViewHolder(@NonNull @org.jetbrains.annotations.NotNull SalasRecyclerViewAdapter.ViewHolder holder, int position) {
 
         Sala sala = salasList.get(position);
-        holder.n_sala.setText("Sala nº" + sala.getnSala().toString());
+        holder.n_sala.setText("Sala " + sala.getnSala().toString());
+        holder.nomecentro.setText("Centro " + centro);
         holder.n_sala.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), SalaActivity.class);
             intent.putExtra("IdSala", sala.getIdSala());

@@ -56,8 +56,10 @@ public class SalasFragment extends Fragment {
             public void onResponse(@NonNull Call<CentroGeo> call, @NonNull Response<CentroGeo> response) {
                 if (response.body() != null) {
                     Log.e("Success",response.body().toString());
+
                     List<Sala> salasList = response.body().getSalas();
-                    recyclerView.setAdapter(new SalasRecyclerViewAdapter(mCtx, salasList) );
+                    String centro = response.body().getNomeCentro();
+                    recyclerView.setAdapter(new SalasRecyclerViewAdapter(mCtx, salasList, centro) );
                 }
             }
 

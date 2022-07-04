@@ -72,7 +72,7 @@ public class CentrosFragment extends Fragment {
         selectedCentroId = new SharedPrefManager(getActivity()).getCentroId();
         radioGroup.check(selectedCentroId);
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            radioButton = getActivity().findViewById(checkedId);
+            radioButton = requireActivity().findViewById(checkedId);
             selectedCentroName = radioButton.getText().toString();
             saveCentro(checkedId, selectedCentroName);
         });
