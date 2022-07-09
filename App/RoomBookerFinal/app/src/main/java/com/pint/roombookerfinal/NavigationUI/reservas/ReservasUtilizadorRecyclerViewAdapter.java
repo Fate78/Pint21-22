@@ -1,5 +1,6 @@
 package com.pint.roombookerfinal.NavigationUI.reservas;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Build;
@@ -21,6 +22,7 @@ import com.pint.roombookerfinal.API.ApiClient;
 import com.pint.roombookerfinal.API.ApiInterface;
 import com.pint.roombookerfinal.Methods;
 import com.pint.roombookerfinal.MethodsInterface;
+import com.pint.roombookerfinal.Models.CentroGeo;
 import com.pint.roombookerfinal.Models.Reserva;
 import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.R;
@@ -39,7 +41,8 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
         RecyclerView.Adapter<ReservasUtilizadorRecyclerViewAdapter.ViewHolder> {
 
     private final List<Reserva> reservasList;
-    private String lotacao, nsala, string_tempo_limp;
+    private int id_centro;
+    private String lotacao, nsala, string_tempo_limp, centro_name;
     final MethodsInterface methodsInterface = new Methods();
     final ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
 
@@ -48,12 +51,16 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
         public final TextView hora_inicio;
         public final TextView hora_fim;
         public final TextView data_reserva;
+        public final TextView centro_name;
+        public final TextView n_sala;
 
         public ViewHolder(View view){
             super(view);
             hora_inicio = view.findViewById(R.id.txt_hora_inicio);
             hora_fim = view.findViewById(R.id.txt_hora_fim);
             data_reserva = view.findViewById(R.id.txt_data);
+            centro_name = view.findViewById(R.id.txt_centro);
+            n_sala = view.findViewById(R.id.txt_sala);
         }
     }
 
@@ -74,34 +81,56 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
     @Override
     public void onBindViewHolder(@NonNull ReservasUtilizadorRecyclerViewAdapter.ViewHolder holder, int position) {
         Reserva reserva = reservasList.get(position);
+
         holder.hora_inicio.setText(
                 methodsInterface.formatTimeForUser(reserva.getHoraInicio()));
         holder.hora_fim.setText(
                 methodsInterface.formatTimeForUser(reserva.getHoraFim()));
         holder.data_reserva.setText(
                 (methodsInterface.formatDateForUser(reserva.getDataReserva())));
+
+        Call<Sala> call = apiInterface.getSala(reserva.getIdSala());
+        call.enqueue(new Callback<Sala>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(@NonNull Call<Sala> call, @NonNull Response<Sala> response)
+            {
+                if (response.body() != null) {
+                    Log.e("Success",response.body().toString());
+                    Sala sala = response.body();
+                    lotacao = sala.getLotacaoMax().toString();
+                    nsala = sala.getnSala().toString();
+                    string_tempo_limp = methodsInterface.formatTimeForUser(
+                            sala.getTempoMinLimp());
+                    id_centro = sala.getIdCentro();
+                    holder.n_sala.setText("Sala " + nsala);
+
+                    Call<CentroGeo> callCentro = apiInterface.getCentrobyId(id_centro);
+                    callCentro.enqueue(new Callback<CentroGeo>() {
+                        @Override
+                        public void onResponse(@NonNull Call<CentroGeo> call, @NonNull Response<CentroGeo> response) {
+                            if (response.body() != null) {
+                                Log.e("Success",response.body().toString());
+                                String nome_centro = response.body().getNomeCentro();
+                                holder.centro_name.setText(nome_centro);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<CentroGeo> call, @NonNull Throwable t) {
+                            Log.e("Failure", t.getLocalizedMessage());
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Sala> call, @NonNull Throwable t) {
+                Log.e("Failure", t.getLocalizedMessage());
+            }
+        });
+
         holder.data_reserva.setOnClickListener(v -> {
-            Call<Sala> call = apiInterface.getSala(reserva.getIdSala());
-
-            call.enqueue(new Callback<Sala>() {
-                @Override
-                public void onResponse(@NonNull Call<Sala> call, @NonNull Response<Sala> response)
-                {
-                    if (response.body() != null) {
-                        Log.e("Success",response.body().toString());
-                        Sala sala = response.body();
-                        lotacao = sala.getLotacaoMax().toString();
-                        nsala = sala.getnSala().toString();
-                        string_tempo_limp = methodsInterface.formatTimeForUser(
-                                sala.getTempoMinLimp());
-                    }
-                }
-
-                @Override
-                public void onFailure(@NonNull Call<Sala> call, @NonNull Throwable t) {
-                    Log.e("Failure", t.getLocalizedMessage());
-                }
-            });
             createDialogUpdateReserva(v.getContext(), reserva);
         });
     }
