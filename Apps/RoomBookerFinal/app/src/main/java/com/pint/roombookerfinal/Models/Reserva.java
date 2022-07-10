@@ -1,6 +1,5 @@
 package com.pint.roombookerfinal.Models;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class Reserva {
@@ -16,6 +15,17 @@ public class Reserva {
     private boolean ativo;
 
     public Reserva(int idSala, int idUtilizador, String horaInicio, String horaFim, String dataReserva, int numPessoas, boolean ativo){
+        this.idSala = idSala;
+        this.idUtilizador = idUtilizador;
+        this.horaInicio = horaInicio;
+        this.horaFim = horaFim;
+        this.dataReserva = dataReserva;
+        this.numPessoas = numPessoas;
+        this.ativo = ativo;
+    }
+
+    public Reserva(int idReserva, int idSala, int idUtilizador, String horaInicio, String horaFim, String dataReserva, int numPessoas, boolean ativo){
+        this.idReserva = idReserva;
         this.idSala = idSala;
         this.idUtilizador = idUtilizador;
         this.horaInicio = horaInicio;

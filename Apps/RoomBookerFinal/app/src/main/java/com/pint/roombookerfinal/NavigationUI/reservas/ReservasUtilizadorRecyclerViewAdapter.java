@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +54,7 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
         public final TextView data_reserva;
         public final TextView centro_name;
         public final TextView n_sala;
+        public final ImageButton btn_delete;
 
         public ViewHolder(View view){
             super(view);
@@ -61,6 +63,7 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
             data_reserva = view.findViewById(R.id.txt_data);
             centro_name = view.findViewById(R.id.txt_centro);
             n_sala = view.findViewById(R.id.txt_sala);
+            btn_delete = view.findViewById(R.id.imgBtn_delete);
         }
     }
 
@@ -81,6 +84,11 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
     @Override
     public void onBindViewHolder(@NonNull ReservasUtilizadorRecyclerViewAdapter.ViewHolder holder, int position) {
         Reserva reserva = reservasList.get(position);
+
+        if (reserva.getDataReserva().compareTo(methodsInterface.getDateToday().toString())>=0)
+            holder.btn_delete.setVisibility(View.VISIBLE);
+        else
+            holder.btn_delete.setVisibility(View.GONE);
 
         holder.hora_inicio.setText(
                 methodsInterface.formatTimeForUser(reserva.getHoraInicio()));
@@ -133,6 +141,9 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
         holder.data_reserva.setOnClickListener(v -> {
             createDialogUpdateReserva(v.getContext(), reserva);
         });
+        holder.btn_delete.setOnClickListener(v -> {
+            deleteReserva(v.getContext(), reserva);
+        });
     }
 
     @Override
@@ -158,7 +169,6 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
         Button btn_update = dialog.findViewById(R.id.btn_accept);
         btn_update.setText("Update");
         Button btn_cancel = dialog.findViewById(R.id.btn_cancel);
-        btn_cancel.setText("Cancelar Reserva");
 
         ed_hora_inicio.setText(methodsInterface.formatTimeForUser(
                 reserva.getHoraInicio()));
@@ -239,7 +249,9 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
                                     reserva.getIdSala(), userId, string_hora_inicio, string_hora_fim,
                                     methodsInterface.formatDateForAPI(string_data_reserva),
                                     num_pessoas, true);
-                            updateReserva(id_reserva, newReserva, v12.getContext());
+                            updateReserva(id_reserva, newReserva, v12.getContext(),
+                                    "Reserva Atualizada para dia " + string_data_reserva
+                                    + " das " + string_hora_inicio + " às " + string_hora_fim);
                         }
                         else
                             System.out.println(error_counter);
@@ -256,18 +268,30 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
         btn_cancel.setOnClickListener(v1 -> dialog.dismiss());
     }
 
-    public void updateReserva(int id_reserva, Reserva reserva, Context mCtx) {
+    public void deleteReserva(Context mCtx, Reserva reserva){
+        int id_reserva = reserva.getIdReserva();
+
+        String string_hora_inicio = reserva.getHoraInicio();
+        String string_hora_fim = reserva.getHoraFim();
+        String string_data_reserva = reserva.getDataReserva();
+        int num_pessoas = reserva.getNumPessoas();
+        Integer userId = new SharedPrefManager(mCtx).getUserId();
+
+        Reserva newReserva = new Reserva(id_reserva,
+                reserva.getIdSala(), userId, string_hora_inicio, string_hora_fim, string_data_reserva,
+                num_pessoas, false);
+        updateReserva(id_reserva, newReserva, mCtx,
+                "Reserva Cancelada");
+    }
+
+    public void updateReserva(int id_reserva, Reserva reserva, Context mCtx, String message) {
         Call<Reserva> updateReserva = apiInterface.updateReserva(id_reserva, reserva);
         updateReserva.enqueue(new Callback<Reserva>() {
             @Override
             public void onResponse(@NonNull Call<Reserva> call, @NonNull Response<Reserva> response) {
                 Reserva responseReserva = response.body();
                 if (responseReserva != null) {
-                    Toast.makeText(mCtx, String.format(
-                                    "Reserva foi atualizada para dia %s das %s às %s",
-                                    responseReserva.getDataReserva(),
-                                    responseReserva.getHoraInicio(),
-                                    responseReserva.getHoraFim()),
+                    Toast.makeText(mCtx, message,
                             Toast.LENGTH_LONG).show();
                 } else {
                     System.out.println(response.message());
@@ -276,7 +300,7 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
 
             @Override
             public void onFailure(@NonNull Call<Reserva> call, @NonNull Throwable t) {
-
+                Log.e("Failure", t.getLocalizedMessage());
             }
         });
     }

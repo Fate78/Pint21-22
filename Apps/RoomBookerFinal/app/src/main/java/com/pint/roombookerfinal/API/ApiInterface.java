@@ -55,7 +55,7 @@ public interface ApiInterface {
     @POST("api/reservas")
     Call<Reserva> createReserva(@Body Reserva reserva);
 
-    @PUT("api/reservas")
+    @PUT("api/reservas/{id}")
     Call<Reserva> updateReserva(@Path("id") int id, @Body Reserva reserva);
 
 }

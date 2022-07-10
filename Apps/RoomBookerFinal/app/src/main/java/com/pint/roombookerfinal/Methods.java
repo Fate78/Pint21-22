@@ -27,13 +27,17 @@ public class Methods implements MethodsInterface{
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public String formatDateForAPI(String string_date){
+    public String formatDateForAPI(String string_date) {
 
-        DateTimeFormatter date_format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate date = LocalDate.parse(string_date, date_format);
-
-        return formatter.format(date);
+        try {
+            DateTimeFormatter date_format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate date = LocalDate.parse(string_date, date_format);
+            return formatter.format(date);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return string_date;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

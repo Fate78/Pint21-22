@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
             else{
                 System.out.println(contentLogin.isUsernameValid());
                 System.out.println(contentLogin.isPasswordValid());
-                System.out.println("Failed to Login");
+                Toast.makeText(LoginActivity.this, "Failed to Login \nPlease try again", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -118,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                             contentLogin.setData_nascimento(utilizador.getDataNascimento());
                         }
                         else{
-                            Toast.makeText(LoginActivity.this, "Email is invalid!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Email not found!", Toast.LENGTH_SHORT).show();
                         }
                     }
                     else{
@@ -133,7 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                             contentLogin.setData_nascimento(utilizador.getDataNascimento());
                         }
                         else{
-                            Toast.makeText(LoginActivity.this, "Username is invalid", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "User not found!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }

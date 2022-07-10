@@ -70,12 +70,14 @@ public class ReservasFragment extends Fragment {
                     while(iterator.hasNext())
                     {
                         String string_data_reserva = iterator.next().getDataReserva();
+                        boolean ativo = iterator.next().isAtivo();
                         LocalDate data_reserva = methodsInterface.stringToDate(string_data_reserva);
                         LocalDate today = methodsInterface.getDateToday();
                         if (data_reserva.compareTo(today)<0)
-                        {
                             iterator.remove();
-                        }
+                        else if(!ativo)
+                            iterator.remove();
+
                     }
                     recyclerView.setAdapter(new ReservasUtilizadorRecyclerViewAdapter(mCtx, reservasList) );
                 }
