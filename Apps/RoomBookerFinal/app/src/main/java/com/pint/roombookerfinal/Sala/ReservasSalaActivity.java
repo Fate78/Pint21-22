@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
@@ -87,11 +88,13 @@ public class ReservasSalaActivity extends AppCompatActivity {
                     }
                     else {
                         while (iterator.hasNext()) {
-                            String string_data_reserva = iterator.next().getDataReserva();
+                            Reserva next_iterator = iterator.next();
+                            String string_data_reserva = next_iterator.getDataReserva();
+                            boolean ativo = next_iterator.isAtivo();
                             LocalDate data_reserva = methodsInterface.stringToDate(string_data_reserva);
                             LocalDate today = methodsInterface.getDateToday();
 
-                            if (data_reserva.compareTo(today) < 0) {
+                            if (data_reserva.compareTo(today) < 0 || !ativo) {
                                 iterator.remove();
                             }
                         }
@@ -145,6 +148,37 @@ public class ReservasSalaActivity extends AppCompatActivity {
         EditText ed_tempo_limp = dialog.findViewById(R.id.ed_tempo_limpeza);
         Button btn_accept = dialog.findViewById(R.id.btn_accept);
         Button btn_cancel = dialog.findViewById(R.id.btn_cancel);
+
+        //disable keyboard
+        methodsInterface.disableSoftInputFromAppearing(ed_hora_inicio);
+        methodsInterface.disableSoftInputFromAppearing(ed_hora_fim);
+        methodsInterface.disableSoftInputFromAppearing(ed_data_reserva);
+        methodsInterface.disableSoftInputFromAppearing(ed_lotacao);
+        methodsInterface.disableSoftInputFromAppearing(ed_tempo_limp);
+
+        ed_hora_inicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText ed_hora_inicio = dialog.findViewById(R.id.ed_hora_inicio);
+                methodsInterface.popTimePicker(v, ed_hora_inicio);
+            }
+        });
+
+        ed_hora_fim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText ed_hora_fim = dialog.findViewById(R.id.ed_hora_fim);
+                methodsInterface.popTimePicker(v, ed_hora_fim);
+            }
+        });
+
+        ed_data_reserva.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText ed_data_reserva = dialog.findViewById(R.id.ed_data_reserva);
+                methodsInterface.popDatePicker(v, ed_data_reserva);
+            }
+        }));
 
         ed_lotacao.setText(getIntent().getStringExtra("Lotacao"));
         ed_tempo_limp.setText(getIntent().getStringExtra("TempoLimpeza"));

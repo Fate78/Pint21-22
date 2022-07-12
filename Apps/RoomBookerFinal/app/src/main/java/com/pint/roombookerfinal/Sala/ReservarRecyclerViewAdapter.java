@@ -22,6 +22,7 @@ import com.pint.roombookerfinal.API.ApiClient;
 import com.pint.roombookerfinal.API.ApiInterface;
 import com.pint.roombookerfinal.Methods;
 import com.pint.roombookerfinal.MethodsInterface;
+import com.pint.roombookerfinal.Models.CentroGeo;
 import com.pint.roombookerfinal.Models.Reserva;
 import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.R;
@@ -40,6 +41,7 @@ public class ReservarRecyclerViewAdapter extends
         RecyclerView.Adapter<ReservarRecyclerViewAdapter.ViewHolder> {
 
     private String lotacao, nsala, string_tempo_limp;
+    int hour, minute, view_id, id_centro;
     private final List<Reserva> reservasList;
     final MethodsInterface methodsInterface = new Methods();
     final ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
@@ -48,12 +50,16 @@ public class ReservarRecyclerViewAdapter extends
         public final TextView hora_inicio;
         public final TextView hora_fim;
         public final TextView data_reserva;
+        public final TextView centro_name;
+        public final TextView n_sala;
 
         public ViewHolder(View view){
             super(view);
             hora_inicio = view.findViewById(R.id.txt_hora_inicio);
             hora_fim = view.findViewById(R.id.txt_hora_fim);
             data_reserva = view.findViewById(R.id.txt_data);
+            centro_name = view.findViewById(R.id.txt_centro);
+            n_sala = view.findViewById(R.id.txt_sala);
         }
     }
 
@@ -87,28 +93,48 @@ public class ReservarRecyclerViewAdapter extends
         holder.data_reserva.setText(
                 (methodsInterface.formatDateForUser(reserva.getDataReserva())));
 
+        Call<Sala> call = apiInterface.getSala(reserva.getIdSala());
+
+        call.enqueue(new Callback<Sala>() {
+            @Override
+            public void onResponse(@NonNull Call<Sala> call, @NonNull Response<Sala> response)
+            {
+                if (response.body() != null) {
+                    Log.e("Success",response.body().toString());
+                    Sala sala = response.body();
+                    lotacao = sala.getLotacaoMax().toString();
+                    nsala = sala.getnSala().toString();
+                    string_tempo_limp = methodsInterface.formatTimeForUser(
+                            sala.getTempoMinLimp());
+                    id_centro = sala.getIdCentro();
+                    holder.n_sala.setText("Sala " + nsala);
+
+                    Call<CentroGeo> callCentro = apiInterface.getCentrobyId(id_centro);
+                    callCentro.enqueue(new Callback<CentroGeo>() {
+                        @Override
+                        public void onResponse(@NonNull Call<CentroGeo> call, @NonNull Response<CentroGeo> response) {
+                            if (response.body() != null) {
+                                Log.e("Success",response.body().toString());
+                                String nome_centro = response.body().getNomeCentro();
+                                holder.centro_name.setText(nome_centro);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<CentroGeo> call, @NonNull Throwable t) {
+                            Log.e("Failure", t.getLocalizedMessage());
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Sala> call, @NonNull Throwable t) {
+                Log.e("Failure", t.getLocalizedMessage());
+            }
+        });
+
         holder.data_reserva.setOnClickListener(v -> {
-            Call<Sala> call = apiInterface.getSala(reserva.getIdSala());
-
-            call.enqueue(new Callback<Sala>() {
-                @Override
-                public void onResponse(@NonNull Call<Sala> call, @NonNull Response<Sala> response)
-                {
-                    if (response.body() != null) {
-                        Log.e("Success",response.body().toString());
-                        Sala sala = response.body();
-                        lotacao = sala.getLotacaoMax().toString();
-                        nsala = sala.getnSala().toString();
-                        string_tempo_limp = methodsInterface.formatTimeForUser(
-                                sala.getTempoMinLimp());
-                    }
-                }
-
-                @Override
-                public void onFailure(@NonNull Call<Sala> call, @NonNull Throwable t) {
-                    Log.e("Failure", t.getLocalizedMessage());
-                }
-            });
             createDialogReservar(v.getContext(), reserva);
         });
     }
@@ -134,14 +160,46 @@ public class ReservarRecyclerViewAdapter extends
         Button btn_accept = dialog.findViewById(R.id.btn_accept);
         Button btn_cancel = dialog.findViewById(R.id.btn_cancel);
 
+        //disable keyboard
+        methodsInterface.disableSoftInputFromAppearing(ed_hora_inicio);
+        methodsInterface.disableSoftInputFromAppearing(ed_hora_fim);
+        methodsInterface.disableSoftInputFromAppearing(ed_data_reserva);
+        methodsInterface.disableSoftInputFromAppearing(ed_lotacao);
+        methodsInterface.disableSoftInputFromAppearing(ed_tempo_limp);
+
+        ed_lotacao.setText(lotacao);
         ed_hora_inicio.setText(methodsInterface.formatTimeForUser(
                 reserva.getHoraInicio()));
         ed_hora_fim.setText(methodsInterface.formatTimeForUser(
                 reserva.getHoraFim()));
         ed_data_reserva.setText(methodsInterface.formatDateForUser(
                 reserva.getDataReserva()));
-        ed_lotacao.setText(lotacao);
         ed_tempo_limp.setText(string_tempo_limp);
+
+        ed_hora_inicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText ed_hora_inicio = dialog.findViewById(R.id.ed_hora_inicio);
+
+                methodsInterface.popTimePicker(v, ed_hora_inicio);
+            }
+        });
+
+        ed_hora_fim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText ed_hora_fim = dialog.findViewById(R.id.ed_hora_fim);
+                methodsInterface.popTimePicker(v, ed_hora_fim);
+            }
+        });
+
+        ed_data_reserva.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText ed_data_reserva = dialog.findViewById(R.id.ed_data_reserva);
+                methodsInterface.popDatePicker(v, ed_data_reserva);
+            }
+        }));
 
         dialog.show();
         Window window = dialog.getWindow();

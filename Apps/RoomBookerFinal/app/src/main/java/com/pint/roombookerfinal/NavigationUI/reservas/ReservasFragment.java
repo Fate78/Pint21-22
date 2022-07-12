@@ -69,13 +69,12 @@ public class ReservasFragment extends Fragment {
 
                     while(iterator.hasNext())
                     {
-                        String string_data_reserva = iterator.next().getDataReserva();
-                        boolean ativo = iterator.next().isAtivo();
+                        Reserva next_iterator = iterator.next();
+                        String string_data_reserva = next_iterator.getDataReserva();
+                        boolean ativo = next_iterator.isAtivo();
                         LocalDate data_reserva = methodsInterface.stringToDate(string_data_reserva);
                         LocalDate today = methodsInterface.getDateToday();
-                        if (data_reserva.compareTo(today)<0)
-                            iterator.remove();
-                        else if(!ativo)
+                        if (data_reserva.compareTo(today)<0 || !ativo)
                             iterator.remove();
 
                     }

@@ -170,6 +170,13 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
         btn_update.setText("Update");
         Button btn_cancel = dialog.findViewById(R.id.btn_cancel);
 
+        //disable keyboard
+        methodsInterface.disableSoftInputFromAppearing(ed_hora_inicio);
+        methodsInterface.disableSoftInputFromAppearing(ed_hora_fim);
+        methodsInterface.disableSoftInputFromAppearing(ed_data_reserva);
+        methodsInterface.disableSoftInputFromAppearing(ed_lotacao);
+        methodsInterface.disableSoftInputFromAppearing(ed_tempo_limp);
+
         ed_hora_inicio.setText(methodsInterface.formatTimeForUser(
                 reserva.getHoraInicio()));
         ed_hora_fim.setText(methodsInterface.formatTimeForUser(
@@ -178,6 +185,31 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
                 reserva.getDataReserva()));
         ed_lotacao.setText(lotacao);
         ed_tempo_limp.setText(string_tempo_limp);
+
+        ed_hora_inicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText ed_hora_inicio = dialog.findViewById(R.id.ed_hora_inicio);
+
+                methodsInterface.popTimePicker(v, ed_hora_inicio);
+            }
+        });
+
+        ed_hora_fim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText ed_hora_fim = dialog.findViewById(R.id.ed_hora_fim);
+                methodsInterface.popTimePicker(v, ed_hora_fim);
+            }
+        });
+
+        ed_data_reserva.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText ed_data_reserva = dialog.findViewById(R.id.ed_data_reserva);
+                methodsInterface.popDatePicker(v, ed_data_reserva);
+            }
+        }));
 
         dialog.show();
         Window window = dialog.getWindow();

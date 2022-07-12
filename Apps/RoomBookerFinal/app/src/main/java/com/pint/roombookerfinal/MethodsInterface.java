@@ -1,5 +1,8 @@
 package com.pint.roombookerfinal;
 
+import android.view.View;
+import android.widget.EditText;
+
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -20,4 +23,10 @@ public interface MethodsInterface {
     LocalTime addDurationToHour(LocalTime hora, Duration duration);
 
     Duration stringToDuration(String duration);
+
+    void disableSoftInputFromAppearing(EditText editText);
+
+    void popTimePicker(View view, EditText editText);
+
+    void popDatePicker(View view, EditText editText);
 }
