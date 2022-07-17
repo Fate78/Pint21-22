@@ -11,7 +11,6 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
-import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -49,8 +48,8 @@ public interface ApiInterface {
     @GET("api/utilizadores/{username}/reservas")
     Call<Utilizador> getUtilizadorReservas(@Path("username") String username);
 
-    //Patch
-    @PATCH("api/utilizadores/{id}")
+    //Edit User
+    @PUT("api/utilizadores/{id}")
     Call<Utilizador> updateUtilizador(@Path("id") int id, @Body Utilizador utilizador);
 
     //Reservas

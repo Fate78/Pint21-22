@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,11 +29,13 @@ import retrofit2.Response;
 public class PerfilActivity extends AppCompatActivity {
 
     EditText username, nome_completo, email, data_nascimento;
-    String s_username, s_nome_completo, s_email, s_data_nascimento;
-    int id_user;
+    String s_username, s_nome_completo, s_email, s_data_nascimento, api_data_nascimento, s_palavra_passe;
+    boolean verificado, ativo;
+    int id_user, id_tipo;
     final MethodsInterface methodsInterface = new Methods();
     final ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
     Button btn_guardar;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,11 @@ public class PerfilActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        progressBar = findViewById(R.id.progressBarPerfil);
+        btn_guardar = findViewById(R.id.btn_save);
+        progressBar.setVisibility(View.VISIBLE);
+        btn_guardar.setVisibility(View.GONE);
+
         username = findViewById(R.id.ed_username_perfil);
         nome_completo = findViewById(R.id.ed_nome_perfil);
         email = findViewById(R.id.ed_email_perfil);
@@ -51,6 +59,10 @@ public class PerfilActivity extends AppCompatActivity {
         s_username = new SharedPrefManager(this).getUsername();
         id_user = new SharedPrefManager(this).getUserId();
         username.setText(s_username);
+
+        methodsInterface.disableSoftInputFromAppearing(data_nascimento);
+        username.setEnabled(false);
+        email.setEnabled(false);
 
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
         Call<Utilizador> call = apiInterface.getUtilizador(s_username);
@@ -63,27 +75,43 @@ public class PerfilActivity extends AppCompatActivity {
                 if (response.body() != null) {
                     Log.e("Success", response.body().toString());
                     Utilizador utilizador = response.body();
+
+                    id_tipo = utilizador.getIdTipo();
                     s_nome_completo = utilizador.getNomeCompleto();
                     s_email = utilizador.getEmail();
-                    s_data_nascimento = methodsInterface.formatDateForUser(utilizador.getDataNascimento());
+                    api_data_nascimento = utilizador.getDataNascimento();
+                    s_data_nascimento = methodsInterface.formatDateForUser(api_data_nascimento);
+                    s_palavra_passe = utilizador.getPalavraPasse();
+                    verificado = utilizador.getVerificado();
+                    ativo = utilizador.getAtivo();
 
                     nome_completo.setText(s_nome_completo);
                     email.setText(s_email);
                     data_nascimento.setText(s_data_nascimento);
 
-                    btn_guardar = findViewById(R.id.btn_save);
+                    data_nascimento.setOnClickListener(v -> {
+                        methodsInterface.popDatePicker(v, data_nascimento);
+                    });
+
+                    progressBar.setVisibility(View.GONE);
+                    btn_guardar.setVisibility(View.VISIBLE);
                     btn_guardar.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
 
-                            String new_nome_completo = username.getText().toString();
-                            String new_email = nome_completo.getText().toString();
+                            progressBar.setVisibility(View.VISIBLE);
+                            btn_guardar.setVisibility(View.GONE);
+
+                            String new_nome_completo = nome_completo.getText().toString();
                             String new_data_nascimento = methodsInterface.formatDateForAPI(data_nascimento.getText().toString());
 
-                            if(!s_nome_completo.equals(new_nome_completo) || !s_email.equals(new_email) || !s_data_nascimento.equals(new_data_nascimento))
+                            if(!s_nome_completo.equals(new_nome_completo) || !s_data_nascimento.equals(new_data_nascimento))
                             {
-                                /*Utilizador utilizador = new Utilizador(new_nome_completo, new_email, new_data_nascimento);
-                                updateUtilizador(id_user, utilizador, v.getContext());*/
+                                Utilizador utilizador = new Utilizador(id_user, id_tipo, s_username, new_nome_completo, s_palavra_passe, s_email, new_data_nascimento, verificado, ativo);
+                                updateUtilizador(id_user, utilizador, v.getContext());
+
+                                progressBar.setVisibility(View.GONE);
+                                btn_guardar.setVisibility(View.VISIBLE);
                             }
                         }
                     });

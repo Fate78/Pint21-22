@@ -18,8 +18,21 @@ public class Utilizador {
     private List < Object > tickets = null;
     private List < Object > utilizadorCentros = null;
 
-    // Getter Methods
+    public Utilizador(int idUtilizador, int idTipo, String nomeUtilizador, String nomeCompleto, String palavraPasse, String email,
+                      String dataNascimento, boolean verificado, boolean ativo)
+    {
+        this.idUtilizador = idUtilizador;
+        this.nomeUtilizador = nomeUtilizador;
+        this.nomeCompleto = nomeCompleto;
+        this.palavraPasse = palavraPasse;
+        this.email = email;
+        this.dataNascimento = dataNascimento;
+        this.verificado = verificado;
+        this.ativo = ativo;
+        this.idTipo = idTipo;
+    }
 
+    // Getter Methods
     public Integer getIdUtilizador() {
         return idUtilizador;
     }

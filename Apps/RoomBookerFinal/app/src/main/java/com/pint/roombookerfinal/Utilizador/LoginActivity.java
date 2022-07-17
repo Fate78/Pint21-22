@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         ed_login_input = findViewById(R.id.edtext_email);
         ed_password_input = findViewById(R.id.edtext_password);
         btn_login = findViewById(R.id.btn_login);
-        progressBar = findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBarLogin);
         isLoggedout = new SharedPrefManager(this).isUserLoggedOut();
 
         if(!isLoggedout)
@@ -105,13 +105,6 @@ public class LoginActivity extends AppCompatActivity {
                     {
                         if (utilizador.getEmail().equals(login_input) && utilizador.getPalavraPasse().equals(password)){
                             saveLoginDetails(utilizador.getIdUtilizador(), utilizador.getNomeUtilizador(), utilizador.getEmail(), utilizador.getPalavraPasse());
-                            /*contentLogin.setUsernameValid(true);
-                            contentLogin.setPasswordValid(true);
-                            contentLogin.setId(utilizador.getIdUtilizador());
-                            contentLogin.setEmail(utilizador.getEmail());
-                            contentLogin.setNome_utilizador(utilizador.getNomeUtilizador());
-                            contentLogin.setNome_completo(utilizador.getNomeCompleto());
-                            contentLogin.setData_nascimento(utilizador.getDataNascimento());*/
                             Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
                             startActivity(intent);
                         }
@@ -124,13 +117,6 @@ public class LoginActivity extends AppCompatActivity {
                     else{
                         if (utilizador.getNomeUtilizador().equals(login_input) && utilizador.getPalavraPasse().equals(password)){
                             saveLoginDetails(utilizador.getIdUtilizador(), utilizador.getNomeUtilizador(), utilizador.getEmail(), utilizador.getPalavraPasse());
-                            /*contentLogin.setUsernameValid(true);
-                            contentLogin.setPasswordValid(true);
-                            contentLogin.setId(utilizador.getIdUtilizador());
-                            contentLogin.setEmail(utilizador.getEmail());
-                            contentLogin.setNome_utilizador(utilizador.getNomeUtilizador());
-                            contentLogin.setNome_completo(utilizador.getNomeCompleto());
-                            contentLogin.setData_nascimento(utilizador.getDataNascimento());*/
                             Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
                             startActivity(intent);
                         }
