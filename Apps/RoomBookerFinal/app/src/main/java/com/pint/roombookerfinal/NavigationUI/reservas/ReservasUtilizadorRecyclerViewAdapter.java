@@ -1,8 +1,10 @@
 package com.pint.roombookerfinal.NavigationUI.reservas;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -85,17 +87,27 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
     public void onBindViewHolder(@NonNull ReservasUtilizadorRecyclerViewAdapter.ViewHolder holder, int position) {
         Reserva reserva = reservasList.get(position);
 
-        if (reserva.getDataReserva().compareTo(methodsInterface.getDateToday().toString())>=0)
-            holder.btn_delete.setVisibility(View.VISIBLE);
-        else
-            holder.btn_delete.setVisibility(View.GONE);
-
         holder.hora_inicio.setText(
                 methodsInterface.formatTimeForUser(reserva.getHoraInicio()));
         holder.hora_fim.setText(
                 methodsInterface.formatTimeForUser(reserva.getHoraFim()));
         holder.data_reserva.setText(
                 (methodsInterface.formatDateForUser(reserva.getDataReserva())));
+
+        if (reserva.getDataReserva().compareTo(methodsInterface.getDateToday().toString())>=0) {
+            holder.btn_delete.setVisibility(View.VISIBLE);
+            holder.data_reserva.setOnClickListener(v -> {
+                createDialogUpdateReserva(v.getContext(), reserva);
+            });
+            holder.btn_delete.setOnClickListener(v -> {
+                confirmationDialog(v.getContext(), reserva);
+
+            });
+        }
+        else {
+            holder.btn_delete.setVisibility(View.GONE);
+
+        }
 
         Call<Sala> call = apiInterface.getSala(reserva.getIdSala());
         call.enqueue(new Callback<Sala>() {
@@ -138,12 +150,7 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
             }
         });
 
-        holder.data_reserva.setOnClickListener(v -> {
-            createDialogUpdateReserva(v.getContext(), reserva);
-        });
-        holder.btn_delete.setOnClickListener(v -> {
-            deleteReserva(v.getContext(), reserva);
-        });
+
     }
 
     @Override
@@ -335,5 +342,27 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
                 Log.e("Failure", t.getLocalizedMessage());
             }
         });
+    }
+
+    public void confirmationDialog(Context mCtx, Reserva reserva)
+    {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        deleteReserva(mCtx, reserva);
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        dialog.dismiss();
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(mCtx);
+        builder.setMessage("Tem a certeza?").setNegativeButton("Não", dialogClickListener)
+                .setPositiveButton("Sim", dialogClickListener).show();
     }
 }

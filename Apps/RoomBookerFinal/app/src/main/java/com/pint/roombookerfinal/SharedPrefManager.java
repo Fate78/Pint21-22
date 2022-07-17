@@ -29,6 +29,13 @@ public class SharedPrefManager {
         editor.apply();
     }
 
+    public void clearCentroDetails(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(centroPreferences, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
     public void saveCentro(Integer centroId, String centroNome){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(centroPreferences, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

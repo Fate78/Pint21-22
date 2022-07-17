@@ -18,7 +18,6 @@ public class Utilizador {
     private List < Object > tickets = null;
     private List < Object > utilizadorCentros = null;
 
-
     // Getter Methods
 
     public Integer getIdUtilizador() {

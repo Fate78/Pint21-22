@@ -7,7 +7,7 @@
     tools:context=".Utilizador.PerfilActivity">
 
     <EditText
-        android:id="@+id/edtext_username"
+        android:id="@+id/ed_username_perfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.22" />
 
     <EditText
-        android:id="@+id/edtext_nome"
+        android:id="@+id/ed_nome_perfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -37,7 +37,7 @@
         app:layout_constraintVertical_bias="0.354" />
 
     <EditText
-        android:id="@+id/edtext_email_perfil"
+        android:id="@+id/ed_email_perfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -51,7 +51,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/edtext_data_nascimento"
+        android:id="@+id/ed_data_nascimento_perfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Data Nascimento"

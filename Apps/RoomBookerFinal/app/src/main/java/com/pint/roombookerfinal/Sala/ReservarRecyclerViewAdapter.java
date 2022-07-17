@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +53,7 @@ public class ReservarRecyclerViewAdapter extends
         public final TextView data_reserva;
         public final TextView centro_name;
         public final TextView n_sala;
+        public final ImageButton btn_delete;
 
         public ViewHolder(View view){
             super(view);
@@ -60,6 +62,7 @@ public class ReservarRecyclerViewAdapter extends
             data_reserva = view.findViewById(R.id.txt_data);
             centro_name = view.findViewById(R.id.txt_centro);
             n_sala = view.findViewById(R.id.txt_sala);
+            btn_delete = view.findViewById(R.id.imgBtn_delete);
         }
     }
 
@@ -85,6 +88,7 @@ public class ReservarRecyclerViewAdapter extends
                                              ReservarRecyclerViewAdapter.ViewHolder holder,
                                  int position) {
 
+        holder.btn_delete.setVisibility(View.GONE);
         Reserva reserva = reservasList.get(position);
         holder.hora_inicio.setText(
                 methodsInterface.formatTimeForUser(reserva.getHoraInicio()));
