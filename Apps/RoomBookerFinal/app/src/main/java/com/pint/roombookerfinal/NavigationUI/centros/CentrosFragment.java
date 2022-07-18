@@ -1,6 +1,7 @@
 package com.pint.roombookerfinal.NavigationUI.centros;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ import retrofit2.Response;
 public class CentrosFragment extends Fragment {
 
     private FragmentCentrosBinding binding;
-    RadioButton radioButton;
+    RadioButton radioButton, radioButtonCheck;
     RadioGroup radioGroup;
     Integer selectedCentroId;
     String selectedCentroName;
@@ -52,25 +53,29 @@ public class CentrosFragment extends Fragment {
             public void onResponse(@NonNull Call<List<CentroGeo>> call,
                                    @NonNull Response<List<CentroGeo>> response)
             {
-                List<CentroGeo> centroGeoList = response.body();
-                if (centroGeoList != null) {
-                    for (CentroGeo centroGeo :centroGeoList){
-                        RadioButton button = new RadioButton(getActivity());
-                        button.setId(centroGeo.getIdCentro());
-                        button.setText(centroGeo.getNomeCentro());
-                        radioGroup.addView(button);
+                if (response.body() != null) {
+                    Log.e("Success",response.body().toString());
+                    List<CentroGeo> centroGeoList = response.body();
+                    if (centroGeoList != null) {
+                        for (CentroGeo centroGeo :centroGeoList){
+                            RadioButton button = new RadioButton(getActivity());
+                            button.setId(centroGeo.getIdCentro());
+                            button.setText(centroGeo.getNomeCentro());
+                            radioGroup.addView(button);
+                            selectedCentroId = new SharedPrefManager(getActivity()).getCentroId();
+                            if(centroGeo.getIdCentro() == selectedCentroId)
+                                radioGroup.check(selectedCentroId);
+                        }
                     }
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<List<CentroGeo>> call, @NonNull Throwable t) {
-
+                Log.e("Failure", t.getLocalizedMessage());
             }
         });
 
-        selectedCentroId = new SharedPrefManager(getActivity()).getCentroId();
-        radioGroup.check(selectedCentroId);
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             radioButton = requireActivity().findViewById(checkedId);
             selectedCentroName = radioButton.getText().toString();
