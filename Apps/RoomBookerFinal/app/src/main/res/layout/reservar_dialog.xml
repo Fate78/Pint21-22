@@ -108,6 +108,7 @@
         android:layout_marginTop="8dp"
         android:autofillHints="0"
         android:ems="10"
+        android:enabled="false"
         android:inputType="number"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/ed_num_pessoas"
@@ -129,13 +130,14 @@
 
     <EditText
         android:id="@+id/ed_tempo_limpeza"
-        android:layout_width="48dp"
+        android:layout_width="55dp"
         android:layout_height="48dp"
         android:layout_marginTop="136dp"
         android:layout_marginEnd="56dp"
         android:layout_marginRight="56dp"
         android:autofillHints="0"
         android:ems="10"
+        android:enabled="false"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

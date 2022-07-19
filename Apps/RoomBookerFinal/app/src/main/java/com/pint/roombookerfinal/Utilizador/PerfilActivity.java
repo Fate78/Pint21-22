@@ -1,6 +1,7 @@
 package com.pint.roombookerfinal.Utilizador;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -11,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +23,8 @@ import com.pint.roombookerfinal.MethodsInterface;
 import com.pint.roombookerfinal.Models.Utilizador;
 import com.pint.roombookerfinal.R;
 import com.pint.roombookerfinal.SharedPrefManager;
+
+import java.time.LocalDate;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -96,23 +100,29 @@ public class PerfilActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     btn_guardar.setVisibility(View.VISIBLE);
                     btn_guardar.setOnClickListener(new View.OnClickListener() {
+                        @RequiresApi(api = Build.VERSION_CODES.O)
                         @Override
                         public void onClick(View v) {
 
                             progressBar.setVisibility(View.VISIBLE);
                             btn_guardar.setVisibility(View.GONE);
 
-                            String new_nome_completo = nome_completo.getText().toString();
-                            String new_data_nascimento = methodsInterface.formatDateForAPI(data_nascimento.getText().toString());
+                            String input_date = methodsInterface.formatDateForAPI(data_nascimento.getText().toString());
+                            LocalDate data_nascimento = methodsInterface.stringToDate(input_date);
 
-                            if(!s_nome_completo.equals(new_nome_completo) || !s_data_nascimento.equals(new_data_nascimento))
-                            {
-                                Utilizador utilizador = new Utilizador(id_user, id_tipo, s_username, new_nome_completo, s_palavra_passe, s_email, new_data_nascimento, verificado, ativo);
-                                updateUtilizador(id_user, utilizador, v.getContext());
-
-                                progressBar.setVisibility(View.GONE);
-                                btn_guardar.setVisibility(View.VISIBLE);
+                            if (nome_completo.getText().toString().isEmpty() || data_nascimento.compareTo(methodsInterface.getDateToday()) >= 0) {
+                                Toast.makeText(v.getContext(), "Preencha todos os campos corretamente!", Toast.LENGTH_LONG).show();
                             }
+                            else {
+                                String new_nome_completo = nome_completo.getText().toString();
+                                if (!s_nome_completo.equals(new_nome_completo) || !s_data_nascimento.equals(input_date)) {
+                                    Utilizador utilizador = new Utilizador(id_user, id_tipo, s_username, new_nome_completo, s_palavra_passe, s_email, input_date, verificado, ativo);
+                                    updateUtilizador(id_user, utilizador, v.getContext());
+                                    Toast.makeText(v.getContext(), "Perfil Atualizado!", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                            progressBar.setVisibility(View.GONE);
+                            btn_guardar.setVisibility(View.VISIBLE);
                         }
                     });
                 }
