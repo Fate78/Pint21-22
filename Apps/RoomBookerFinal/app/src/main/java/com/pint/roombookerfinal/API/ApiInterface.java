@@ -48,6 +48,10 @@ public interface ApiInterface {
     @GET("api/utilizadores/{username}/reservas")
     Call<Utilizador> getUtilizadorReservas(@Path("username") String username);
 
+    //Edit User
+    @PUT("api/utilizadores/{id}")
+    Call<Utilizador> updateUtilizador(@Path("id") int id, @Body Utilizador utilizador);
+
     //Reservas
     @GET("api/reservas/{date}")
     Call<List<Reserva>> getReservasbyDate(@Path("date") String date);

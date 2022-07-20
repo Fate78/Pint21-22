@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -54,6 +55,12 @@ public class SalasFragment extends Fragment {
         call.enqueue(new Callback<CentroGeo>() {
             @Override
             public void onResponse(@NonNull Call<CentroGeo> call, @NonNull Response<CentroGeo> response) {
+                if(response.code() == 404)
+                {
+                    Toast.makeText(getContext(), "Por Favor Selecione Um Centro",
+                            Toast.LENGTH_LONG).show();
+                }
+
                 if (response.body() != null) {
                     Log.e("Success",response.body().toString());
 

@@ -42,6 +42,7 @@ public class LogoutFragment extends Fragment {
         intent = new Intent(getActivity(), LoginActivity.class);
         sharedPrefManager = new SharedPrefManager(this.getActivity());
         sharedPrefManager.clearLoginDetails();
+        sharedPrefManager.clearCentroDetails();
         startActivity(intent);
     }
 }

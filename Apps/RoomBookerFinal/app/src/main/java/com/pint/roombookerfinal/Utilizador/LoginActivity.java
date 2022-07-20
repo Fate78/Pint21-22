@@ -6,8 +6,10 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -31,13 +33,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    private ContentLogin contentLogin;
     SharedPreferences sharedPreferences;
     private SharedPrefManager sharedPrefManager;
     Context mCtx;
 
     EditText ed_login_input, ed_password_input;
     Button btn_login;
+    ProgressBar progressBar;
     Utilizador utilizador;
     String login_input, password;
     Boolean isLoggedout;
@@ -49,10 +51,10 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         mCtx = this;
 
-        contentLogin = new ContentLogin();
         ed_login_input = findViewById(R.id.edtext_email);
         ed_password_input = findViewById(R.id.edtext_password);
         btn_login = findViewById(R.id.btn_login);
+        progressBar = findViewById(R.id.progressBarLogin);
         isLoggedout = new SharedPrefManager(this).isUserLoggedOut();
 
         if(!isLoggedout)
@@ -63,17 +65,9 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(view -> {
             login_input = ed_login_input.getText().toString();
             password = getSha256(ed_password_input.getText().toString());
+            btn_login.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
             validarLogin(login_input, password);
-            if(contentLogin.isUsernameValid() && contentLogin.isPasswordValid()){
-                System.out.println("Logged in: " + contentLogin.getNome_completo());
-                Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
-                startActivity(intent);
-            }
-            else{
-                System.out.println(contentLogin.isUsernameValid());
-                System.out.println(contentLogin.isPasswordValid());
-                Toast.makeText(LoginActivity.this, "Failed to Login \nPlease try again", Toast.LENGTH_SHORT).show();
-            }
         });
     }
 
@@ -96,53 +90,58 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void validarLogin(String login_input, String password){
-        ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
-        Call<Utilizador> call = apiInterface.getUtilizador(login_input);
+        if(login_input.isEmpty() || password.isEmpty()){
+            Toast.makeText(LoginActivity.this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
+            btn_login.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
+        }
+        else{
+            ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
+            Call<Utilizador> call = apiInterface.getUtilizador(login_input);
 
-        call.enqueue(new Callback<Utilizador>() {
-            @Override
-            public void onResponse(@NotNull Call<Utilizador> call, @NotNull Response<Utilizador> response) {
-                if (response.body() != null) {
-                    Log.e("Success", response.body().toString());
-                    Utilizador utilizador = response.body();
-                    if(isEmailValid(login_input))
-                    {
-                        if (utilizador.getEmail().equals(login_input) && utilizador.getPalavraPasse().equals(password)){
-                            saveLoginDetails(utilizador.getIdUtilizador(), utilizador.getNomeUtilizador(), utilizador.getEmail(), utilizador.getPalavraPasse());
-                            contentLogin.setUsernameValid(true);
-                            contentLogin.setPasswordValid(true);
-                            contentLogin.setId(utilizador.getIdUtilizador());
-                            contentLogin.setEmail(utilizador.getEmail());
-                            contentLogin.setNome_utilizador(utilizador.getNomeUtilizador());
-                            contentLogin.setNome_completo(utilizador.getNomeCompleto());
-                            contentLogin.setData_nascimento(utilizador.getDataNascimento());
+            call.enqueue(new Callback<Utilizador>() {
+                @Override
+                public void onResponse(@NotNull Call<Utilizador> call, @NotNull Response<Utilizador> response) {
+
+                    if (response.isSuccessful() && response.body() != null) {
+                        Log.e("Success", response.body().toString());
+                        Utilizador utilizador = response.body();
+                        if (isEmailValid(login_input)) {
+                            if (utilizador.getEmail().equals(login_input) && utilizador.getPalavraPasse().equals(password)) {
+                                saveLoginDetails(utilizador.getIdUtilizador(), utilizador.getNomeUtilizador(), utilizador.getEmail(), utilizador.getPalavraPasse());
+                                Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Email ou palavra passe errados!", Toast.LENGTH_SHORT).show();
+                                btn_login.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.GONE);
+                            }
+                        } else {
+                            if (utilizador.getNomeUtilizador().equals(login_input) && utilizador.getPalavraPasse().equals(password)) {
+                                saveLoginDetails(utilizador.getIdUtilizador(), utilizador.getNomeUtilizador(), utilizador.getEmail(), utilizador.getPalavraPasse());
+                                Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Utilizador ou palavra passe errados!", Toast.LENGTH_SHORT).show();
+                                btn_login.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.GONE);
+                            }
                         }
-                        else{
-                            Toast.makeText(LoginActivity.this, "Email not found!", Toast.LENGTH_SHORT).show();
-                        }
+                    } else {
+                        btn_login.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
                     }
-                    else{
-                        if (utilizador.getNomeUtilizador().equals(login_input) && utilizador.getPalavraPasse().equals(password)){
-                            saveLoginDetails(utilizador.getIdUtilizador(), utilizador.getNomeUtilizador(), utilizador.getEmail(), utilizador.getPalavraPasse());
-                            contentLogin.setUsernameValid(true);
-                            contentLogin.setPasswordValid(true);
-                            contentLogin.setId(utilizador.getIdUtilizador());
-                            contentLogin.setEmail(utilizador.getEmail());
-                            contentLogin.setNome_utilizador(utilizador.getNomeUtilizador());
-                            contentLogin.setNome_completo(utilizador.getNomeCompleto());
-                            contentLogin.setData_nascimento(utilizador.getDataNascimento());
-                        }
-                        else{
-                            Toast.makeText(LoginActivity.this, "User not found!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
+
                 }
-            }
-            @Override
-            public void onFailure(@NotNull Call<Utilizador> call, @NotNull Throwable t) {
-                Log.e("Failure", t.getLocalizedMessage());
-            }
-        });
+
+                @Override
+                public void onFailure(@NotNull Call<Utilizador> call, @NotNull Throwable t) {
+                    Log.e("Failure", t.getLocalizedMessage());
+                    btn_login.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
+                }
+            });
+        }
     }
 
     private void saveLoginDetails(Integer userId, String username, String email, String password){
