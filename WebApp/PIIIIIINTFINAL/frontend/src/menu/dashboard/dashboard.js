@@ -37,16 +37,16 @@ class Pagina extends React.Component {
 
   render() {
     return (
-      <div id="wrapper">
+      <div id="wrapper" style={{overflow: 'scroll'}}>
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark" id="Sidebar">
 
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard">
                 <div class="sidebar-brand-text mx-3">Room Booker</div>
             </a>
 
 
             <li class="nav-item">
-                <a class="nav-link" href="dashboard.html">
+                <a class="nav-link" href="dashboard">
                     <span>Dashboard</span></a>
             </li>
 
@@ -56,19 +56,19 @@ class Pagina extends React.Component {
             </div>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link collapsed" href="salasmaisutilizadas" aria-expanded="true" aria-controls="collapseTwo">
                     <span>Salas Mais Utilizadas</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                <a class="nav-link collapsed" href="gestaosalas" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <span>Gestão de Salas</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                <a class="nav-link collapsed" href="limpeza" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <span>Limpeza</span>
                 </a>
@@ -80,7 +80,7 @@ class Pagina extends React.Component {
             </div>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="utilizadores_registados.html" data-toggle="collapse" data-target="#collapseUtilities"
+                <a class="nav-link collapsed" href="utilizador" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <span>Utilizadores Registados</span>
                 </a>
@@ -98,7 +98,6 @@ class Pagina extends React.Component {
             </li>
         </ul>
 
-      
       <div id="content-wrapper" class="d-flex flex-column">
 
           <div id="content">
@@ -210,12 +209,72 @@ class Pagina extends React.Component {
                   </ul>
 
               </nav>
-              <div class="container-fluid">
-
+              
+              <div class="container-fluid" >
+            
                   <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
+                  
+
+
+                
+                  <p class="mb-4">Chart.js is a third party plugin that is used to generate the charts in this theme.
+                        The charts below have been customized - for further customization options, please visit the <a
+                            target="_blank" href="https://www.chartjs.org/docs/latest/">official Chart.js
+                            documentation</a>.</p>
+
+                    <div class="row">
+
+                        <div class="col-xl-8 col-lg-7">
+
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="myAreaChart"></canvas>
+                                    </div>
+                                    Styling for the area chart can be found in the
+                                    <code>/js/demo/chart-area-demo.js</code> file.
+                                </div>
+                            </div>
+
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-bar">
+                                        <canvas id="myBarChart"></canvas>
+                                    </div>
+                                    Styling for the bar chart can be found in the
+                                    <code>/js/demo/chart-bar-demo.js</code> file.
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-pie pt-4">
+                                        <canvas id="myPieChart"></canvas>
+                                    </div>
+                                    Styling for the donut chart can be found in the
+                                    <code>/js/demo/chart-pie-demo.js</code> file.
+                                </div>
+                            </div>
+                    </div>
+
+                </div>
+                
               </div>
 
           </div>
+          
           <footer class="sticky-footer bg-white">
               <div class="container my-auto">
                   <div class="copyright text-center my-auto">
