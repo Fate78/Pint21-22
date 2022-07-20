@@ -25,7 +25,7 @@ import com.pint.roombookerfinal.Models.Utilizador;
 import com.pint.roombookerfinal.NavigationUI.reservas.ReservasUtilizadorRecyclerViewAdapter;
 import com.pint.roombookerfinal.R;
 import com.pint.roombookerfinal.SharedPrefManager;
-import com.pint.roombookerfinal.databinding.FragmentReservasBinding;
+import com.pint.roombookerfinal.databinding.FragmentHistoricoReservasBinding;
 
 import java.util.List;
 import java.util.ListIterator;
@@ -36,7 +36,7 @@ import retrofit2.Response;
 
 public class HistoricoReservasFragment extends Fragment {
 
-    private FragmentReservasBinding binding;
+    private FragmentHistoricoReservasBinding binding;
     RecyclerView recyclerView;
     Context mCtx;
     String username;
@@ -45,12 +45,12 @@ public class HistoricoReservasFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        binding = FragmentReservasBinding.inflate(inflater, container, false);
+        binding = FragmentHistoricoReservasBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         final FragmentActivity fragmentActivity = getActivity();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(fragmentActivity);
 
-        recyclerView = root.findViewById(R.id.rv_reservas_utilizador);
+        recyclerView = root.findViewById(R.id.rv_reservas_historico);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
 
