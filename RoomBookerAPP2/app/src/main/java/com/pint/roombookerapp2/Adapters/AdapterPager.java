@@ -1,4 +1,4 @@
-package com.pint.roombookerapp2;
+package com.pint.roombookerapp2.Adapters;
 
 import android.os.Bundle;
 

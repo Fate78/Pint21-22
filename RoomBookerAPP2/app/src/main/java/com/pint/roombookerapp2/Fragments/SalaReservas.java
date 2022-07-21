@@ -5,7 +5,6 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -16,12 +15,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.pint.roombookerapp2.API.ApiClient;
 import com.pint.roombookerapp2.API.ApiInterface;
+import com.pint.roombookerapp2.Adapters.ReservasSalaRecyclerViewAdapter;
 import com.pint.roombookerapp2.Methods;
 import com.pint.roombookerapp2.MethodsInterface;
 import com.pint.roombookerapp2.Models.Reserva;
@@ -94,6 +92,20 @@ public class SalaReservas extends Fragment {
             public void onFailure(@NonNull Call<Sala> call, @NonNull Throwable t) {
                 Log.e("Failure", t.getLocalizedMessage());
             }
+        });
+
+        ed_data_inicio = root.findViewById(R.id.ed_data_inicio);
+        ed_data_fim = root.findViewById(R.id.ed_data_fim);
+        //Disable Keyboard
+        methodsInterface.disableSoftInputFromAppearing(ed_data_inicio);
+        methodsInterface.disableSoftInputFromAppearing(ed_data_fim);
+
+        ed_data_inicio.setOnClickListener(v -> {
+            methodsInterface.popDatePicker(v, ed_data_inicio);
+        });
+
+        ed_data_fim.setOnClickListener(v-> {
+            methodsInterface.popDatePicker(v, ed_data_fim);
         });
 
         return root;

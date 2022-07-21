@@ -84,7 +84,11 @@ public class Methods implements MethodsInterface{
     }
 
     public void disableSoftInputFromAppearing(EditText editText) {
-        editText.setRawInputType(InputType.TYPE_NULL);
+        try{
+            editText.setRawInputType(InputType.TYPE_NULL);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void popTimePicker(View view, EditText editText){
