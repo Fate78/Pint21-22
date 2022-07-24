@@ -25,7 +25,7 @@ public class AdapterPager extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         Fragment fragment = new SalaReservas();
         Bundle args = new Bundle();
-        args.putString(SalaInfo.TITLE, "Tab" + (position+1));
+        args.putString(SalaInfo.TITLE, "Detalhes");
         switch(position){
             case 0:
                 fragment = new SalaReservas();

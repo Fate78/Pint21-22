@@ -67,6 +67,11 @@ public class Methods implements MethodsInterface{
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
+    public LocalTime getTimeNow(){
+        return LocalTime.now();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public LocalTime stringToTime(String string_time){
         return LocalTime.parse(string_time);
     }

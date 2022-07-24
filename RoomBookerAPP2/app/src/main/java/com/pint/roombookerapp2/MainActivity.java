@@ -20,13 +20,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if((getResources().getConfiguration().screenLayout) == Configuration.SCREENLAYOUT_SIZE_LARGE)
-        {
-            setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        }
-        else
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         ViewPager2 viewPager2 = findViewById(R.id.pager);
 
@@ -36,7 +29,15 @@ public class MainActivity extends AppCompatActivity {
         new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                tab.setText("Tab " + (position+1));
+                switch (position){
+                    case 0:
+                        tab.setText("Reservas");
+                        break;
+                    case 1:
+                        tab.setText("Detalhes");
+                        break;
+                }
+
             }
         }).attach();
     }

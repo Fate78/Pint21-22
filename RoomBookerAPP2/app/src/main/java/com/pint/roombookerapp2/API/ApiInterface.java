@@ -38,6 +38,11 @@ public interface ApiInterface {
     @GET("/api/salas/{id}/reservas")
     Call<Sala> getSalaReservas(@Path("id") int id);
 
+    @GET("/api/salas/{id}/reservas/{dateBegin}/{dateEnd}")
+    Call<Sala> getReservasSalaBetweenDates(@Path("id") int id,
+                                           @Path("dateBegin") String dateBegin,
+                                           @Path("dateEnd") String dateEnd);
+
     //Utilizador
     @GET("/api/utilizadores")
     Call<List<Utilizador>> getUtilizadores();

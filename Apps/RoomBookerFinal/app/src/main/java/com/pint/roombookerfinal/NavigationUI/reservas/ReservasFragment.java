@@ -26,6 +26,7 @@ import com.pint.roombookerfinal.SharedPrefManager;
 import com.pint.roombookerfinal.databinding.FragmentReservasBinding;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -71,10 +72,15 @@ public class ReservasFragment extends Fragment {
                     {
                         Reserva next_iterator = iterator.next();
                         String string_data_reserva = next_iterator.getDataReserva();
+                        String string_hora_inicio_reserva = next_iterator.getHoraInicio();
                         boolean ativo = next_iterator.isAtivo();
                         LocalDate data_reserva = methodsInterface.stringToDate(string_data_reserva);
                         LocalDate today = methodsInterface.getDateToday();
-                        if (data_reserva.compareTo(today)<0 || !ativo)
+                        LocalTime hora_inicio = methodsInterface.stringToTime(string_hora_inicio_reserva);
+
+                        if ((data_reserva.compareTo(today)<=0 &&
+                                hora_inicio.compareTo(methodsInterface.getTimeNow())<0)
+                                || !ativo || data_reserva.compareTo(today)<=0)
                             iterator.remove();
 
                     }

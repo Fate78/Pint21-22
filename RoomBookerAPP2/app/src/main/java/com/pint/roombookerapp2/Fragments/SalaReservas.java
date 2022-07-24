@@ -11,11 +11,14 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.pint.roombookerapp2.API.ApiClient;
 import com.pint.roombookerapp2.API.ApiInterface;
@@ -61,8 +64,75 @@ public class SalaReservas extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
 
+        ed_data_inicio = root.findViewById(R.id.ed_data_inicio);
+        ed_data_fim = root.findViewById(R.id.ed_data_fim);
+        //Disable Keyboard
+        methodsInterface.disableSoftInputFromAppearing(ed_data_inicio);
+        methodsInterface.disableSoftInputFromAppearing(ed_data_fim);
+
+        ed_data_inicio.setOnClickListener(v -> {
+            methodsInterface.popDatePicker(v, ed_data_inicio);
+        });
+
+        ed_data_fim.setOnClickListener(v-> {
+            methodsInterface.popDatePicker(v, ed_data_fim);
+        });
+
+        ed_data_inicio.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!ed_data_inicio.getText().toString().isEmpty() && !ed_data_fim.getText().toString().isEmpty())
+                {
+                    String data_inicio,data_fim;
+                    data_inicio = methodsInterface.formatDateForAPI(ed_data_inicio.getText().toString());
+                    data_fim = methodsInterface.formatDateForAPI(ed_data_fim.getText().toString());
+                    getReservasBetweenDates(data_inicio, data_fim);
+                }
+            }
+        });
+
+        ed_data_fim.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!ed_data_inicio.getText().toString().isEmpty() && !ed_data_fim.getText().toString().isEmpty())
+                {
+                    String data_inicio,data_fim;
+                    data_inicio = methodsInterface.formatDateForAPI(ed_data_inicio.getText().toString());
+                    data_fim = methodsInterface.formatDateForAPI(ed_data_fim.getText().toString());
+                    getReservasBetweenDates(data_inicio, data_fim);
+                }
+            }
+        });
+
+        return root;
+    }
+
+    public void getReservasBetweenDates(String data_inicio, String data_fim)
+    {
+
+
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
-        Call<Sala> call = apiInterface.getSalaReservas(51);
+        Call<Sala> call = apiInterface.getReservasSalaBetweenDates(51, data_inicio, data_fim);
 
         call.enqueue(new Callback<Sala>() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -80,34 +150,24 @@ public class SalaReservas extends Fragment {
                         boolean ativo = next_iterator.isAtivo();
                         LocalDate data_reserva = methodsInterface.stringToDate(string_data_reserva);
                         LocalDate today = methodsInterface.getDateToday();
-                        if (data_reserva.compareTo(today)<0 || !ativo)
+                        if (!ativo)
                             iterator.remove();
-
                     }
-                    recyclerView.setAdapter(new ReservasSalaRecyclerViewAdapter(mCtx, reservasList) );
+                    if (reservasList.isEmpty())
+                        Toast.makeText(getContext(), "Não existem reservas para esta data",
+                                Toast.LENGTH_LONG).show();
+                    else
+                        recyclerView.setAdapter(new ReservasSalaRecyclerViewAdapter(mCtx, reservasList) );
+
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<Sala> call, @NonNull Throwable t) {
                 Log.e("Failure", t.getLocalizedMessage());
+                Toast.makeText(getContext(), "Falha na ligação",
+                        Toast.LENGTH_LONG).show();
             }
         });
-
-        ed_data_inicio = root.findViewById(R.id.ed_data_inicio);
-        ed_data_fim = root.findViewById(R.id.ed_data_fim);
-        //Disable Keyboard
-        methodsInterface.disableSoftInputFromAppearing(ed_data_inicio);
-        methodsInterface.disableSoftInputFromAppearing(ed_data_fim);
-
-        ed_data_inicio.setOnClickListener(v -> {
-            methodsInterface.popDatePicker(v, ed_data_inicio);
-        });
-
-        ed_data_fim.setOnClickListener(v-> {
-            methodsInterface.popDatePicker(v, ed_data_fim);
-        });
-
-        return root;
     }
 }
