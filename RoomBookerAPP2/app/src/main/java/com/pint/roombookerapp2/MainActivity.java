@@ -1,13 +1,11 @@
 package com.pint.roombookerapp2;
 
+import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
-
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
-import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -41,4 +39,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }).attach();
     }
+
+    @Override
+    public void onBackPressed(){
+        Toast.makeText(MainActivity.this, "There is no back action", Toast.LENGTH_LONG).show();
+    }
+
 }

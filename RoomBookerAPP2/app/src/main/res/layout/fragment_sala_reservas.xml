@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.SalaReservas">
 
+    <ImageButton
+        android:id="@+id/imBtn_settings"
+        android:layout_width="127dp"
+        android:layout_height="95dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:src="@android:drawable/ic_menu_manage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/img_qrCode"
         android:layout_width="192dp"
@@ -42,6 +52,7 @@
         android:layout_marginTop="340dp"
         android:ems="10"
         android:inputType="date"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,6 +63,7 @@
         android:layout_marginStart="204dp"
         android:layout_marginBottom="8dp"
         android:text="Data Início"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/ed_data_inicio"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -62,6 +74,7 @@
         android:layout_marginStart="524dp"
         android:layout_marginTop="228dp"
         android:text="Sala"
+        android:textSize="40sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,6 +86,7 @@
         android:layout_marginEnd="200dp"
         android:ems="10"
         android:inputType="date"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -83,6 +97,7 @@
         android:layout_marginEnd="288dp"
         android:layout_marginBottom="4dp"
         android:text="Data Fim"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/ed_data_fim"
         app:layout_constraintEnd_toEndOf="parent" />
 
