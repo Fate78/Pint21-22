@@ -1,8 +1,18 @@
 package com.pint.roombookerapp2.Fragments;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -11,15 +21,11 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Toast;
-
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.pint.roombookerapp2.API.ApiClient;
 import com.pint.roombookerapp2.API.ApiInterface;
 import com.pint.roombookerapp2.Adapters.ReservasSalaRecyclerViewAdapter;
@@ -47,13 +53,14 @@ public class SalaReservas extends Fragment {
     String username;
     final MethodsInterface methodsInterface = new Methods();
     EditText ed_data_inicio, ed_data_fim;
+    ImageView img_qrCode;
 
     public SalaReservas() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSalaReservasBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -66,6 +73,8 @@ public class SalaReservas extends Fragment {
 
         ed_data_inicio = root.findViewById(R.id.ed_data_inicio);
         ed_data_fim = root.findViewById(R.id.ed_data_fim);
+        img_qrCode = root.findViewById(R.id.img_qrCode);
+
         //Disable Keyboard
         methodsInterface.disableSoftInputFromAppearing(ed_data_inicio);
         methodsInterface.disableSoftInputFromAppearing(ed_data_fim);
@@ -124,6 +133,8 @@ public class SalaReservas extends Fragment {
             }
         });
 
+        generateQrCode("51");
+
         return root;
     }
 
@@ -169,5 +180,18 @@ public class SalaReservas extends Fragment {
                         Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public void generateQrCode(String idSala)
+    {
+        MultiFormatWriter writer = new MultiFormatWriter();
+        try {
+            BitMatrix matrix = writer.encode(idSala, BarcodeFormat.QR_CODE, 350, 350);
+            BarcodeEncoder encoder = new BarcodeEncoder();
+            Bitmap bitmap  = encoder.createBitmap(matrix);
+            img_qrCode.setImageBitmap(bitmap);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
     }
 }

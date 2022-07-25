@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.SalaReservas">
 
+    <ImageView
+        android:id="@+id/img_qrCode"
+        android:layout_width="192dp"
+        android:layout_height="203dp"
+        android:layout_marginEnd="304dp"
+        android:layout_marginBottom="216dp"
+        android:src="@android:drawable/ic_menu_gallery"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <ScrollView
         android:layout_width="492dp"
         android:layout_height="458dp"
