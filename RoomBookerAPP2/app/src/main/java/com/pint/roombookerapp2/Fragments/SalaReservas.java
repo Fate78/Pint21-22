@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -55,7 +54,6 @@ public class SalaReservas extends Fragment {
     final MethodsInterface methodsInterface = new Methods();
     EditText ed_data_inicio, ed_data_fim;
     ImageView img_qrCode;
-    ImageButton imBtn_settings;
 
     public SalaReservas() {
         // Required empty public constructor
@@ -76,7 +74,6 @@ public class SalaReservas extends Fragment {
         ed_data_inicio = root.findViewById(R.id.ed_data_inicio);
         ed_data_fim = root.findViewById(R.id.ed_data_fim);
         img_qrCode = root.findViewById(R.id.img_qrCode);
-        imBtn_settings = root.findViewById(R.id.imBtn_settings);
 
         //Disable Keyboard
         methodsInterface.disableSoftInputFromAppearing(ed_data_inicio);
