@@ -94,7 +94,12 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
         holder.data_reserva.setText(
                 (methodsInterface.formatDateForUser(reserva.getDataReserva())));
 
-        if (reserva.getDataReserva().compareTo(methodsInterface.getDateToday().toString())>=0) {
+        LocalTime hora_inicio = methodsInterface.stringToTime(reserva.getHoraInicio());
+
+        if (reserva.getDataReserva().compareTo(methodsInterface.getDateToday().toString())>0
+            || (reserva.getDataReserva().compareTo(methodsInterface.getDateToday().toString())>0 &&
+                hora_inicio.compareTo(methodsInterface.getTimeNow())>0))
+        {
             holder.btn_delete.setVisibility(View.VISIBLE);
             holder.data_reserva.setOnClickListener(v -> {
                 createDialogUpdateReserva(v.getContext(), reserva);
@@ -247,12 +252,13 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
                 {
                     Toast.makeText(mCtx, "Excedeu a lotação da sala!", Toast.LENGTH_LONG).show();
                 }
-                else if (data_reserva.compareTo(methodsInterface.getDateToday()) >= 0) {
+                else if (data_reserva.compareTo(methodsInterface.getDateToday()) >= 0)
+                {
                     Call<List<Reserva>> reservaCall = apiInterface.getReservasbyDate(formattedDate);
                     reservaCall.enqueue(new Callback<List<Reserva>>() {
                         @Override
                         public void onResponse(@NonNull Call<List<Reserva>> call, @NonNull Response<List<Reserva>> response) {
-                            Integer error_counter = 0;
+                            int error_counter = 0;
                             if (response.body() != null) {
                                 int next_index = 1;
                                 Log.e("Success", response.body().toString());

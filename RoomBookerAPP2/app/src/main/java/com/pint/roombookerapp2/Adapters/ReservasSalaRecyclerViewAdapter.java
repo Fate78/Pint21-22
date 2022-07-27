@@ -1,4 +1,4 @@
-package com.pint.roombookerapp2.Fragments;
+package com.pint.roombookerapp2.Adapters;
 
 import android.content.Context;
 import android.os.Build;
@@ -15,9 +15,7 @@ import com.pint.roombookerapp2.API.ApiClient;
 import com.pint.roombookerapp2.API.ApiInterface;
 import com.pint.roombookerapp2.Methods;
 import com.pint.roombookerapp2.MethodsInterface;
-import com.pint.roombookerapp2.Models.CentroGeo;
 import com.pint.roombookerapp2.Models.Reserva;
-import com.pint.roombookerapp2.Models.Sala;
 import com.pint.roombookerapp2.R;
 
 import java.util.List;

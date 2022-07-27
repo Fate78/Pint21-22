@@ -1,4 +1,4 @@
-package com.pint.roombookerapp2.Utilizador;
+package com.pint.roombookerfinal.Utilizador;
 
 public class ContentLogin {
     private int id, id_tipo;

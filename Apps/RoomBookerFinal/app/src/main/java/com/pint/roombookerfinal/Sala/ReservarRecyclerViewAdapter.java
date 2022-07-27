@@ -233,7 +233,7 @@ public class ReservarRecyclerViewAdapter extends
                 int num_pessoas = Integer.parseInt(ed_num_pessoas.getText().toString());
                 int lotacao = Integer.parseInt(ed_lotacao.getText().toString());
 
-                if (data_reserva.compareTo(methodsInterface.getDateToday()) >= 0 && ed_num_pessoas.getText() != null && ed_data_reserva.getText() != null && ed_hora_inicio.getText() != null
+                if (data_reserva.compareTo(methodsInterface.getDateToday()) >= 0 && hora_inicio.compareTo(methodsInterface.getTimeNow())>0 && ed_num_pessoas.getText() != null && ed_data_reserva.getText() != null && ed_hora_inicio.getText() != null
                         && ed_hora_fim.getText() != null && num_pessoas <= lotacao) {
 
                     Call<List<Reserva>> reservaCall = apiInterface.getReservasbyDate(formattedDate);
@@ -296,6 +296,9 @@ public class ReservarRecyclerViewAdapter extends
                     });
                 } else if (num_pessoas > lotacao)
                     Toast.makeText(mCtx, "Excedeu a lotação da sala",
+                            Toast.LENGTH_LONG).show();
+                else if (hora_inicio.compareTo(methodsInterface.getTimeNow())<=0)
+                    Toast.makeText(mCtx, "Hora inválida",
                             Toast.LENGTH_LONG).show();
                 else
                     Toast.makeText(mCtx, "Verifique que preencheu todos os campos",
