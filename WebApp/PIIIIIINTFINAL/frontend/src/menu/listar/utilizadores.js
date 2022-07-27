@@ -243,7 +243,7 @@ class Pagina extends React.Component {
 
 
                   <h1 class="h3 mb-4 text-gray-800">Utilizadores Registados</h1>
-                  <button type="" href="utilizadores2.js">Update</button>
+                  <button type="" href="utilizadores2.html">Update</button>
                 <div class="container-fluid">
 
 
