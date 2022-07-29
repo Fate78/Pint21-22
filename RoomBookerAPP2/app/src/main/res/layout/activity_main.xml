@@ -6,6 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/btn_sala"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Editar Sala"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        app:layout_constraintEnd_toEndOf="@+id/tab_layout"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
@@ -13,7 +29,7 @@
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_login2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"

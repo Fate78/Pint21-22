@@ -140,8 +140,6 @@ public class SalaReservas extends Fragment {
 
     public void getReservasBetweenDates(String data_inicio, String data_fim)
     {
-
-
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
         Call<Sala> call = apiInterface.getReservasSalaBetweenDates(51, data_inicio, data_fim);
 

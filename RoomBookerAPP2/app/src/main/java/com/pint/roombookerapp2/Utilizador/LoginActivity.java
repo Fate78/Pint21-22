@@ -57,9 +57,8 @@ public class LoginActivity extends AppCompatActivity {
 
         ed_login_input = findViewById(R.id.edtext_email);
         ed_password_input = findViewById(R.id.edtext_password);
-        btn_login = findViewById(R.id.btn_login);
+        btn_login = findViewById(R.id.btn_login2);
         progressBar = findViewById(R.id.progressBarLogin);
-        spinner = findViewById(R.id.spn_sala);
 
         isLoggedout = new SharedPrefManager(this).isUserLoggedOut();
 
@@ -69,8 +68,8 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        catAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, salasList);
-        spinner.setAdapter(catAdapter);
+        /*catAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, salasList);
+        spinner.setAdapter(catAdapter);*/
 
         btn_login.setOnClickListener(view -> {
             login_input = ed_login_input.getText().toString();
