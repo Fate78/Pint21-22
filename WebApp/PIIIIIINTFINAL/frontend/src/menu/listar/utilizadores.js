@@ -179,10 +179,54 @@ class Pagina extends React.Component {
               </nav>
 
                   <h1 class="h3 mb-4 text-gray-800">Utilizadores Registados</h1>
+<<<<<<< HEAD
                   <div className='box'>
                     {this.loadFillData()}
                   </div>
                 
+=======
+                  <button type="" href="utilizadores2.html">Update</button>
+                <div class="container-fluid">
+
+
+                    
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary"> Lista De Utilizadores Registados</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                
+                                        <tr>
+                                            <th>ID Utilizador</th>
+                                            <th>Nome Utilizador</th>
+                                            <th>Reservas</th>
+                                            <th>ID Tipo</th>
+                                            <th>Tickets</th>
+                                            <th>Utilizador de Centros</th>
+                                            <th>Nome Completo</th>
+                                            <th>Email </th>
+                                            <th>Data de Nascimento</th>
+                                            <th>Ativo</th>
+                                            <th>Verificado</th>
+                                        </tr> 
+                                    </thead>
+                                    <tfoot>
+
+                                    </tfoot>
+                                    <tbody>
+                                        {this.loadFillData()}
+                                       </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+>>>>>>> 5f4dcc453b0ad8009396eb3b1c9ddf252841e4b8
             </div>
 
           <footer class="sticky-footer bg-white">

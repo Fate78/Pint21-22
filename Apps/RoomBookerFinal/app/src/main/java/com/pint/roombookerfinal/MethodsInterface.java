@@ -16,6 +16,8 @@ public interface MethodsInterface {
 
     LocalDate getDateToday();
 
+    LocalTime getTimeNow();
+
     LocalTime stringToTime(String string_time);
 
     String formatDateForAPI(String string_date);
