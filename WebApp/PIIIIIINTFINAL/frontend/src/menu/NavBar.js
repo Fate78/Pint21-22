@@ -1,14 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-// ICONS
-import * as FaIcons from "react-icons/fa"; //Now i get access to all the icons
-import * as AiIcons from "react-icons/ai";
 
-import { IconContext } from "react-icons";
-
-// ROUTING
-
-import { Link } from "react-router-dom";
 
 export default function Navbar() {
    

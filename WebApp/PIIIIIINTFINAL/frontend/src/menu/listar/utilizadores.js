@@ -179,12 +179,12 @@ class Pagina extends React.Component {
               </nav>
 
                   <h1 class="h3 mb-4 text-gray-800">Utilizadores Registados</h1>
-<<<<<<< HEAD
+
                   <div className='box'>
                     {this.loadFillData()}
                   </div>
                 
-=======
+
                   <button type="" href="utilizadores2.html">Update</button>
                 <div class="container-fluid">
 
@@ -226,7 +226,6 @@ class Pagina extends React.Component {
 
                 </div>
 
->>>>>>> 5f4dcc453b0ad8009396eb3b1c9ddf252841e4b8
             </div>
 
           <footer class="sticky-footer bg-white">
