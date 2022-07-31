@@ -64,67 +64,7 @@ class Pagina extends React.Component {
 
   render() {
     return (
-      <div id="wrapper">
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark" id="Sidebar">
-
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.html">
-                <div class="sidebar-brand-text mx-3">Room Booker</div>
-            </a>
-
-
-            <li class="nav-item">
-                <a class="nav-link" href="dashboard.html">
-                    <span>Dashboard</span></a>
-            </li>
-
-
-            <div class="sidebar-heading">
-                Salas
-            </div>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" aria-expanded="true" aria-controls="collapseTwo">
-                    <span>Salas Mais Utilizadas</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <span>Gestão de Salas</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <span>Limpeza</span>
-                </a>
-            </li>
-
-
-            <div class="sidebar-heading">
-                Utilizadores
-            </div>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="utilizadores_registados.html" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <span>Utilizadores Registados</span>
-                </a>
-            </li>
-
-            <div class="sidebar-heading">
-                Necessita de Ajuda?
-            </div>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <span>Suporte</span>
-                </a>
-            </li>
-        </ul>
-
+      <div id="wrapper" style={{overflow: 'scroll'}}>
       
       <div id="content-wrapper" class="d-flex flex-column">
 
@@ -238,11 +178,13 @@ class Pagina extends React.Component {
 
               </nav>
 
-
-
-
-
                   <h1 class="h3 mb-4 text-gray-800">Utilizadores Registados</h1>
+
+                  <div className='box'>
+                    {this.loadFillData()}
+                  </div>
+                
+
                   <button type="" href="utilizadores2.html">Update</button>
                 <div class="container-fluid">
 
@@ -325,19 +267,10 @@ class Pagina extends React.Component {
     return this.state.utilizadores.map((data, index) =>{
         return(
             <tr key={index}>
-                
-                <td>{data.idUtilizador}</td>
-                <td>{data.nomeUtilizador}</td>
-                <td>{data.reservas}</td>
-                <td>{data.idTipo}</td>
-                <td>{data.tickets}</td>
-                <td>{data.utilizadorCentros}</td>
+                <div className='boxes'>
                 <td>{data.nomeCompleto}</td>
-                <td>{data.email}</td>
-                <td>{data.dataNascimento}</td>
-                <td>{data.ativo}</td>
-                <td>{data.verificado}</td>
-                    
+                <button class="button button2">Blue</button>
+                </div>
             </tr>
         )
     })
