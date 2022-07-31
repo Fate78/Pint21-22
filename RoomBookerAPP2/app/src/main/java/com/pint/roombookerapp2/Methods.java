@@ -3,14 +3,22 @@ package com.pint.roombookerapp2;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.text.InputType;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TimePicker;
 
 import androidx.annotation.RequiresApi;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -157,4 +165,16 @@ public class Methods implements MethodsInterface{
         return "01";
     }
 
+    public void generateQrCode(int idSala, ImageView img_qrCode)
+    {
+        MultiFormatWriter writer = new MultiFormatWriter();
+        try {
+            BitMatrix matrix = writer.encode(String.valueOf(idSala), BarcodeFormat.QR_CODE, 350, 350);
+            BarcodeEncoder encoder = new BarcodeEncoder();
+            Bitmap bitmap  = encoder.createBitmap(matrix);
+            img_qrCode.setImageBitmap(bitmap);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+    }
 }

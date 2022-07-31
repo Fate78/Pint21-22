@@ -1,7 +1,7 @@
 package com.pint.roombookerapp2.Fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,20 +12,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.pint.roombookerapp2.API.ApiClient;
 import com.pint.roombookerapp2.API.ApiInterface;
 import com.pint.roombookerapp2.Adapters.ReservasSalaRecyclerViewAdapter;
@@ -34,6 +31,7 @@ import com.pint.roombookerapp2.MethodsInterface;
 import com.pint.roombookerapp2.Models.Reserva;
 import com.pint.roombookerapp2.Models.Sala;
 import com.pint.roombookerapp2.R;
+import com.pint.roombookerapp2.SharedPrefManager;
 import com.pint.roombookerapp2.databinding.FragmentSalaReservasBinding;
 
 import java.time.LocalDate;
@@ -53,7 +51,9 @@ public class SalaReservas extends Fragment {
     String username;
     final MethodsInterface methodsInterface = new Methods();
     EditText ed_data_inicio, ed_data_fim;
+    TextView txt_nsala;
     ImageView img_qrCode;
+    Integer id_sala;
 
     public SalaReservas() {
         // Required empty public constructor
@@ -62,15 +62,24 @@ public class SalaReservas extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         binding = FragmentSalaReservasBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         final FragmentActivity fragmentActivity = getActivity();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(fragmentActivity);
 
+        FragmentTransaction ft = fragmentActivity.getSupportFragmentManager().beginTransaction();
+        if (Build.VERSION.SDK_INT >= 26) {
+            ft.setReorderingAllowed(false);
+        }
+        ft.detach(this).attach(this).commit();
+
+        id_sala = new SharedPrefManager(root.getContext()).getSalaId();
         recyclerView = root.findViewById(R.id.rv_reservas_sala);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
 
+        txt_nsala = root.findViewById(R.id.txt_NSala);
         ed_data_inicio = root.findViewById(R.id.ed_data_inicio);
         ed_data_fim = root.findViewById(R.id.ed_data_fim);
         img_qrCode = root.findViewById(R.id.img_qrCode);
@@ -105,7 +114,7 @@ public class SalaReservas extends Fragment {
                     String data_inicio,data_fim;
                     data_inicio = methodsInterface.formatDateForAPI(ed_data_inicio.getText().toString());
                     data_fim = methodsInterface.formatDateForAPI(ed_data_fim.getText().toString());
-                    getReservasBetweenDates(data_inicio, data_fim);
+                    getReservasBetweenDates(id_sala, data_inicio, data_fim);
                 }
             }
         });
@@ -128,22 +137,24 @@ public class SalaReservas extends Fragment {
                     String data_inicio,data_fim;
                     data_inicio = methodsInterface.formatDateForAPI(ed_data_inicio.getText().toString());
                     data_fim = methodsInterface.formatDateForAPI(ed_data_fim.getText().toString());
-                    getReservasBetweenDates(data_inicio, data_fim);
+                    getReservasBetweenDates(id_sala, data_inicio, data_fim);
                 }
             }
         });
 
-        generateQrCode("51");
+        getSala(id_sala);
+        methodsInterface.generateQrCode(id_sala, img_qrCode);
 
         return root;
     }
 
-    public void getReservasBetweenDates(String data_inicio, String data_fim)
+    public void getReservasBetweenDates(int id_sala, String data_inicio, String data_fim)
     {
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
-        Call<Sala> call = apiInterface.getReservasSalaBetweenDates(51, data_inicio, data_fim);
+        Call<Sala> call = apiInterface.getReservasSalaBetweenDates(id_sala, data_inicio, data_fim);
 
         call.enqueue(new Callback<Sala>() {
+            @SuppressLint("SetTextI18n")
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(@NonNull Call<Sala> call, @NonNull Response<Sala> response) {
@@ -180,16 +191,30 @@ public class SalaReservas extends Fragment {
         });
     }
 
-    public void generateQrCode(String idSala)
+    public void getSala(int id_sala)
     {
-        MultiFormatWriter writer = new MultiFormatWriter();
-        try {
-            BitMatrix matrix = writer.encode(idSala, BarcodeFormat.QR_CODE, 350, 350);
-            BarcodeEncoder encoder = new BarcodeEncoder();
-            Bitmap bitmap  = encoder.createBitmap(matrix);
-            img_qrCode.setImageBitmap(bitmap);
-        } catch (WriterException e) {
-            e.printStackTrace();
-        }
+        ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
+        Call<Sala> call = apiInterface.getSala(id_sala);
+
+        call.enqueue(new Callback<Sala>() {
+            @SuppressLint("SetTextI18n")
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onResponse(@NonNull Call<Sala> call, @NonNull Response<Sala> response) {
+                if (response.body() != null){
+                    Log.e("Success",response.body().toString());
+                    Sala sala = response.body();
+
+                    txt_nsala.setText("Sala " + sala.getnSala().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Sala> call, @NonNull Throwable t) {
+                Log.e("Failure", t.getLocalizedMessage());
+                Toast.makeText(getContext(), "Falha na ligação",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

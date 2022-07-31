@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         isLoggedout = new SharedPrefManager(this).isUserLoggedOut();
         sharedPrefManager = new SharedPrefManager(this);
 
-
         if(!isLoggedout) {
             btn_login.setVisibility(View.GONE);
             btn_logout.setVisibility(View.VISIBLE);

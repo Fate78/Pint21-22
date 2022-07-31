@@ -7,6 +7,8 @@ public class SharedPrefManager {
     final Context mCtx;
     final String loginPreferences = "LoginDetails";
     final String centroPreferences = "CentroId";
+    final String salaPreferences = "SalaDetails";
+
     public SharedPrefManager(Context mCtx)
     {
         this.mCtx = mCtx;
@@ -74,5 +76,17 @@ public class SharedPrefManager {
         boolean isUsernameEmpty = sharedPreferences.getString("Username","").isEmpty();
         boolean isPasswordEmpty = sharedPreferences.getString("Password","").isEmpty();
         return isUsernameEmpty || isPasswordEmpty;
+    }
+
+    public void saveSalaInfo(int id_sala){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(salaPreferences, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("SalaId", id_sala);
+        editor.apply();
+    }
+
+    public Integer getSalaId(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(salaPreferences, Context.MODE_PRIVATE);
+        return sharedPreferences.getInt("SalaId", 0);
     }
 }

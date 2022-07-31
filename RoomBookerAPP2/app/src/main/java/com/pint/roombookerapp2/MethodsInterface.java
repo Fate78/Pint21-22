@@ -2,6 +2,7 @@ package com.pint.roombookerapp2;
 
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -29,4 +30,6 @@ public interface MethodsInterface {
     void popTimePicker(View view, EditText editText);
 
     void popDatePicker(View view, EditText editText);
+
+    void generateQrCode(int idSala, ImageView img_qrCode);
 }

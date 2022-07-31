@@ -68,9 +68,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        /*catAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, salasList);
-        spinner.setAdapter(catAdapter);*/
-
         btn_login.setOnClickListener(view -> {
             login_input = ed_login_input.getText().toString();
             password = getSha256(ed_password_input.getText().toString());

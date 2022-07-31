@@ -1,5 +1,6 @@
 package com.pint.roombookerapp2.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
@@ -37,25 +38,30 @@ public class SpinAdapter extends ArrayAdapter<Sala> {
         return position;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // I created a dynamic TextView here, but you can reference your own  custom layout for each spinner item
         TextView label = (TextView) super.getView(position, convertView, parent);
         label.setTextColor(Color.BLACK);
+        label.setTextSize(20);
+        label.setHeight(55);
+        label.setWidth(228);
         // Then you can get the current item using the values array (Users array) and the current position
         // You can NOW reference each method you has created in your bean object (User class)
-        label.setText(values[position].getnSala());
+        label.setText(values[position].getnSala().toString());
 
         // And finally return your dynamic (or custom) view for each spinner item
         return label;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getDropDownView(int position, View convertView,
                                 @NonNull ViewGroup parent) {
         TextView label = (TextView) super.getDropDownView(position, convertView, parent);
         label.setTextColor(Color.BLACK);
-        label.setText(values[position].getnSala());
+        label.setText(values[position].getnSala().toString());
 
         return label;
     }
