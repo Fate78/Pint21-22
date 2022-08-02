@@ -19,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,6 +44,7 @@ import retrofit2.Response;
 public class SalaReservas extends Fragment {
 
     private FragmentSalaReservasBinding binding;
+    private boolean shouldRefreshOnResume = false;
     public static final String TITLE = "title";
     RecyclerView recyclerView;
     Context mCtx;
@@ -67,12 +67,6 @@ public class SalaReservas extends Fragment {
         View root = binding.getRoot();
         final FragmentActivity fragmentActivity = getActivity();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(fragmentActivity);
-
-        FragmentTransaction ft = fragmentActivity.getSupportFragmentManager().beginTransaction();
-        if (Build.VERSION.SDK_INT >= 26) {
-            ft.setReorderingAllowed(false);
-        }
-        ft.detach(this).attach(this).commit();
 
         id_sala = new SharedPrefManager(root.getContext()).getSalaId();
         recyclerView = root.findViewById(R.id.rv_reservas_sala);
@@ -146,6 +140,24 @@ public class SalaReservas extends Fragment {
         methodsInterface.generateQrCode(id_sala, img_qrCode);
 
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Check should we need to refresh the fragment
+        if(shouldRefreshOnResume){
+            // refresh fragment
+            id_sala = new SharedPrefManager(getContext()).getSalaId();
+            getSala(id_sala);
+            methodsInterface.generateQrCode(id_sala, img_qrCode);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        shouldRefreshOnResume = true;
     }
 
     public void getReservasBetweenDates(int id_sala, String data_inicio, String data_fim)

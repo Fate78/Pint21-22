@@ -16,8 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.pint.roombookerapp2.API.ApiClient;
 import com.pint.roombookerapp2.API.ApiInterface;
@@ -37,10 +35,12 @@ public class SalaInfo extends Fragment {
     public static final String TITLE = "title";
     private FragmentSalaInfoBinding binding;
     Integer id_sala;
+    String centro_name;
     EditText ed_centro, ed_lotacao, ed_limpeza;
     TextView txt_nsala;
     ImageView img_qrCode;
     final MethodsInterface methodsInterface = new Methods();
+    private boolean shouldRefreshOnResume = false;
 
     public SalaInfo() {
         // Required empty public constructor
@@ -54,14 +54,6 @@ public class SalaInfo extends Fragment {
         binding = FragmentSalaInfoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final FragmentActivity fragmentActivity = getActivity();
-        FragmentTransaction ft = fragmentActivity.getSupportFragmentManager().beginTransaction();
-        if (Build.VERSION.SDK_INT >= 26) {
-            ft.setReorderingAllowed(false);
-        }
-        ft.detach(this).attach(this).commit();
-
-
         ed_centro = root.findViewById(R.id.ed_info_centro);
         ed_lotacao = root.findViewById(R.id.ed_info_lotacao);
         ed_limpeza = root.findViewById(R.id.ed_info_limpeza);
@@ -69,8 +61,10 @@ public class SalaInfo extends Fragment {
         img_qrCode = root.findViewById(R.id.img_qrCode2);
 
         id_sala = new SharedPrefManager(root.getContext()).getSalaId();
+        centro_name = new SharedPrefManager(root.getContext()).getCentroName();
 
         getSalaInfo(id_sala);
+        ed_centro.setText(centro_name);
         methodsInterface.generateQrCode(id_sala, img_qrCode);
         return root;
     }
@@ -81,6 +75,26 @@ public class SalaInfo extends Fragment {
         if (getArguments() != null) {
             ((TextView)view.findViewById(R.id.textView)).setText(getArguments().getString(TITLE));
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Check should we need to refresh the fragment
+        if(shouldRefreshOnResume){
+            // refresh fragment
+            id_sala = new SharedPrefManager(getContext()).getSalaId();
+            centro_name = new SharedPrefManager(getContext()).getCentroName();
+            getSalaInfo(id_sala);
+            ed_centro.setText(centro_name);
+            methodsInterface.generateQrCode(id_sala, img_qrCode);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        shouldRefreshOnResume = true;
     }
 
     public void getSalaInfo(int id_sala)

@@ -78,15 +78,21 @@ public class SharedPrefManager {
         return isUsernameEmpty || isPasswordEmpty;
     }
 
-    public void saveSalaInfo(int id_sala){
+    public void saveSalaInfo(int id_sala, String name_centro){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(salaPreferences, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("SalaId", id_sala);
+        editor.putString("CentroName", name_centro);
         editor.apply();
     }
 
     public Integer getSalaId(){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(salaPreferences, Context.MODE_PRIVATE);
         return sharedPreferences.getInt("SalaId", 0);
+    }
+
+    public String getCentroName(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(salaPreferences, Context.MODE_PRIVATE);
+        return sharedPreferences.getString("CentroName", "");
     }
 }

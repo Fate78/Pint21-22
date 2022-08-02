@@ -45,6 +45,7 @@ public class EditarSalaActivity extends AppCompatActivity {
     Button btn_select, btn_update;
     Context mCtx;
     int id_sala;
+    String centro_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,10 @@ public class EditarSalaActivity extends AppCompatActivity {
         btn_select = findViewById(R.id.btn_select);
 
         id_sala = new SharedPrefManager(this).getSalaId();
+        centro_name = new SharedPrefManager(this).getCentroName();
+
         getSala(id_sala);
+        ed_centro.setText(centro_name);
 
         loadSpinnerCentro();
 
@@ -86,8 +90,7 @@ public class EditarSalaActivity extends AppCompatActivity {
                 btn_select.setOnClickListener(v -> {
                     int selectedCentroId = spinnerCentros.getSelectedItemPosition();
                     String selectedCentro = spinnerCentros.getItemAtPosition(selectedCentroId).toString();
-                    ed_centro.setText(selectedCentro);
-                    new SharedPrefManager(v.getContext()).saveSalaInfo(sala.getIdSala());
+                    new SharedPrefManager(v.getContext()).saveSalaInfo(sala.getIdSala(), selectedCentro);
                 });
             }
 
