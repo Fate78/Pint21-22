@@ -82,6 +82,12 @@ public class SalaReservas extends Fragment {
         methodsInterface.disableSoftInputFromAppearing(ed_data_inicio);
         methodsInterface.disableSoftInputFromAppearing(ed_data_fim);
 
+        String today = methodsInterface.formatDateForUser(methodsInterface.getDateToday().toString());
+        ed_data_inicio.setText(today);
+        ed_data_fim.setText(today);
+        getReservasBetweenDates(id_sala, methodsInterface.formatDateForAPI(today),
+                methodsInterface.formatDateForAPI(today));
+
         ed_data_inicio.setOnClickListener(v -> {
             methodsInterface.popDatePicker(v, ed_data_inicio);
         });
@@ -103,9 +109,10 @@ public class SalaReservas extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
+                String data_inicio,data_fim;
+
                 if(!ed_data_inicio.getText().toString().isEmpty() && !ed_data_fim.getText().toString().isEmpty())
                 {
-                    String data_inicio,data_fim;
                     data_inicio = methodsInterface.formatDateForAPI(ed_data_inicio.getText().toString());
                     data_fim = methodsInterface.formatDateForAPI(ed_data_fim.getText().toString());
                     getReservasBetweenDates(id_sala, data_inicio, data_fim);

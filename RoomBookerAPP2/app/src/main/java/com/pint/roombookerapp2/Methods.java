@@ -1,6 +1,5 @@
 package com.pint.roombookerapp2;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.graphics.Bitmap;
@@ -119,7 +118,7 @@ public class Methods implements MethodsInterface{
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month + 1;
-                String date = dayOfMonth + "-" + stringMonth(month) + "-" + year;
+                String date = stringDay(dayOfMonth) + "-" + stringMonth(month) + "-" + year;
                 editText.setText(date);
             }
         };
@@ -129,9 +128,34 @@ public class Methods implements MethodsInterface{
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
 
-        int style = AlertDialog.THEME_HOLO_LIGHT;
-        DatePickerDialog datePickerDialog = new DatePickerDialog(view.getContext(), style, dateSetListener, year, month, day);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(view.getContext(), dateSetListener, year, month, day);
         datePickerDialog.show();
+    }
+
+    public String stringDay(int day)
+    {
+        switch (day) {
+            case 1:
+                return "01";
+            case 2:
+                return "02";
+            case 3:
+                return "03";
+            case 4:
+                return "04";
+            case 5:
+                return "05";
+            case 6:
+                return "06";
+            case 7:
+                return "07";
+            case 8:
+                return "08";
+            case 9:
+                return "09";
+            default:
+                return String.valueOf(day);
+        }
     }
 
     public String stringMonth(int month)
