@@ -4,14 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/RoomBookerAPP2/app/src/main/res/drawable/cog_wheel.xml" value="0.2585" />
+        <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/RoomBookerAPP2/app/src/main/res/layout-land/activity_editar_sala.xml" value="0.136" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/RoomBookerAPP2/app/src/main/res/layout-land/activity_login.xml" value="0.128" />
+        <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/RoomBookerAPP2/app/src/main/res/layout-land/activity_main.xml" value="0.144" />
+        <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/RoomBookerAPP2/app/src/main/res/layout-land/fragment_sala_info.xml" value="0.144" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/RoomBookerAPP2/app/src/main/res/layout-land/fragment_sala_reservas.xml" value="0.144" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/RoomBookerAPP2/app/src/main/res/layout-land/item_reserva.xml" value="0.264" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/RoomBookerAPP2/app/src/main/res/layout-large/fragment_sala_reservas.xml" value="0.152" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/RoomBookerAPP2/app/src/main/res/layout-port/fragment_sala_reservas.xml" value="0.4" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/RoomBookerAPP2/app/src/main/res/layout-port/item_reserva.xml" value="0.2" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/RoomBookerAPP2/app/src/main/res/layout-sw600dp/fragment_sala_reservas.xml" value="0.264" />
-        <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/RoomBookerAPP2/app/src/main/res/layout/activity_editar_sala.xml" value="0.2" />
+        <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/RoomBookerAPP2/app/src/main/res/layout/activity_editar_sala.xml" value="0.152" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/RoomBookerAPP2/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/RoomBookerAPP2/app/src/main/res/layout/activity_main.xml" value="0.152" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/RoomBookerAPP2/app/src/main/res/layout/activity_settings.xml" value="0.176" />

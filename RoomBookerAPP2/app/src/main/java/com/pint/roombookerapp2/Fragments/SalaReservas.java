@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -36,6 +37,8 @@ import com.pint.roombookerapp2.databinding.FragmentSalaReservasBinding;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,6 +47,8 @@ import retrofit2.Response;
 public class SalaReservas extends Fragment {
 
     private FragmentSalaReservasBinding binding;
+    private Handler handler;
+    Timer timer;
     private boolean shouldRefreshOnResume = false;
     public static final String TITLE = "title";
     RecyclerView recyclerView;
@@ -85,8 +90,9 @@ public class SalaReservas extends Fragment {
         String today = methodsInterface.formatDateForUser(methodsInterface.getDateToday().toString());
         ed_data_inicio.setText(today);
         ed_data_fim.setText(today);
-        getReservasBetweenDates(id_sala, methodsInterface.formatDateForAPI(today),
-                methodsInterface.formatDateForAPI(today));
+
+        doAutoGetReservas();
+
 
         ed_data_inicio.setOnClickListener(v -> {
             methodsInterface.popDatePicker(v, ed_data_inicio);
@@ -109,13 +115,9 @@ public class SalaReservas extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String data_inicio,data_fim;
-
                 if(!ed_data_inicio.getText().toString().isEmpty() && !ed_data_fim.getText().toString().isEmpty())
                 {
-                    data_inicio = methodsInterface.formatDateForAPI(ed_data_inicio.getText().toString());
-                    data_fim = methodsInterface.formatDateForAPI(ed_data_fim.getText().toString());
-                    getReservasBetweenDates(id_sala, data_inicio, data_fim);
+                    doAutoGetReservas();
                 }
             }
         });
@@ -135,10 +137,7 @@ public class SalaReservas extends Fragment {
             public void afterTextChanged(Editable s) {
                 if(!ed_data_inicio.getText().toString().isEmpty() && !ed_data_fim.getText().toString().isEmpty())
                 {
-                    String data_inicio,data_fim;
-                    data_inicio = methodsInterface.formatDateForAPI(ed_data_inicio.getText().toString());
-                    data_fim = methodsInterface.formatDateForAPI(ed_data_fim.getText().toString());
-                    getReservasBetweenDates(id_sala, data_inicio, data_fim);
+                    doAutoGetReservas();
                 }
             }
         });
@@ -235,5 +234,30 @@ public class SalaReservas extends Fragment {
                         Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+
+    public void doAutoGetReservas() {
+        handler = new Handler();
+        timer = new Timer();
+
+        TimerTask getReservasTask = new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    public void run() {
+                        try {
+                            id_sala = new SharedPrefManager(getContext()).getSalaId();
+                            String data_inicio = methodsInterface.formatDateForAPI(ed_data_inicio.getText().toString());
+                            String data_fim = methodsInterface.formatDateForAPI(ed_data_fim.getText().toString());
+                            getReservasBetweenDates(id_sala, data_inicio, data_fim);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        };
+        timer.schedule(getReservasTask, 0, 60000);
     }
 }

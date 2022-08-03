@@ -10,12 +10,12 @@
         android:id="@+id/img_qrCode2"
         android:layout_width="192dp"
         android:layout_height="203dp"
-        android:layout_marginEnd="304dp"
-        android:layout_marginBottom="232dp"
-        android:src="@android:drawable/ic_menu_gallery"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="296dp"
+        android:layout_marginEnd="288dp"
         android:contentDescription="QRCode"
+        android:src="@android:drawable/ic_menu_gallery"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText" />
 
     <TextView
@@ -34,15 +34,15 @@
         android:id="@+id/ed_info_limpeza"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
         android:height="48dp"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="time"
         android:minHeight="48dp"
         app:layout_constraintStart_toEndOf="@+id/textView24"
         app:layout_constraintTop_toBottomOf="@+id/ed_info_lotacao"
-        android:importantForAutofill="no"
         tools:ignore="LabelFor" />
 
     <EditText
@@ -76,14 +76,14 @@
         android:id="@+id/ed_info_centro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="188dp"
-        android:layout_marginTop="116dp"
+        android:layout_marginStart="184dp"
+        android:layout_marginTop="120dp"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintStart_toEndOf="@+id/textView25"
         app:layout_constraintTop_toBottomOf="@+id/txt_NSala2"
-        android:importantForAutofill="no"
         tools:ignore="LabelFor" />
 
     <TextView
