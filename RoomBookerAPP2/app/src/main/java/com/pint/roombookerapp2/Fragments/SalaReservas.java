@@ -53,7 +53,7 @@ public class SalaReservas extends Fragment {
     public static final String TITLE = "title";
     RecyclerView recyclerView;
     Context mCtx;
-    String username;
+    String username, nSala;
     final MethodsInterface methodsInterface = new Methods();
     EditText ed_data_inicio, ed_data_fim;
     TextView txt_nsala;
@@ -143,7 +143,7 @@ public class SalaReservas extends Fragment {
         });
 
         getSala(id_sala);
-        methodsInterface.generateQrCode(id_sala, img_qrCode);
+
 
         return root;
     }
@@ -156,7 +156,6 @@ public class SalaReservas extends Fragment {
             // refresh fragment
             id_sala = new SharedPrefManager(getContext()).getSalaId();
             getSala(id_sala);
-            methodsInterface.generateQrCode(id_sala, img_qrCode);
         }
     }
 
@@ -222,8 +221,9 @@ public class SalaReservas extends Fragment {
                 if (response.body() != null){
                     Log.e("Success",response.body().toString());
                     Sala sala = response.body();
-
-                    txt_nsala.setText("Sala " + sala.getnSala().toString());
+                    int nSala = sala.getnSala();
+                    txt_nsala.setText("Sala " + nSala);
+                    methodsInterface.generateQrCode(id_sala, nSala, img_qrCode);
                 }
             }
 

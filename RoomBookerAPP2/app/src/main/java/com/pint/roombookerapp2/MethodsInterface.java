@@ -31,5 +31,5 @@ public interface MethodsInterface {
 
     void popDatePicker(View view, EditText editText);
 
-    void generateQrCode(int idSala, ImageView img_qrCode);
+    void generateQrCode(int idSala, int nSala,ImageView img_qrCode);
 }

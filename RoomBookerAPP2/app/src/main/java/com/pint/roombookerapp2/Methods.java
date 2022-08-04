@@ -13,6 +13,7 @@ import android.widget.TimePicker;
 
 import androidx.annotation.RequiresApi;
 
+import com.google.gson.JsonObject;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -189,11 +190,15 @@ public class Methods implements MethodsInterface{
         return "01";
     }
 
-    public void generateQrCode(int idSala, ImageView img_qrCode)
+    public void generateQrCode(int idSala, int nSala,ImageView img_qrCode)
     {
+        JsonObject jsonData = new JsonObject();
+        jsonData.addProperty("idSala", idSala);
+        jsonData.addProperty("nSala", nSala);
+
         MultiFormatWriter writer = new MultiFormatWriter();
         try {
-            BitMatrix matrix = writer.encode(String.valueOf(idSala), BarcodeFormat.QR_CODE, 350, 350);
+            BitMatrix matrix = writer.encode(jsonData.toString(), BarcodeFormat.QR_CODE, 350, 350);
             BarcodeEncoder encoder = new BarcodeEncoder();
             Bitmap bitmap  = encoder.createBitmap(matrix);
             img_qrCode.setImageBitmap(bitmap);

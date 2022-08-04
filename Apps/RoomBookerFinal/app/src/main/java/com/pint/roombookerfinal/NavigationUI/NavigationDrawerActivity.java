@@ -1,7 +1,6 @@
 package com.pint.roombookerfinal.NavigationUI;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,7 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -34,7 +32,6 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
     String s_username, s_email;
     ImageView img_profile;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +46,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_salas, R.id.nav_reservas, R.id.nav_historico_reservas, R.id.nav_centros, R.id.nav_logout)
+                R.id.nav_scanner, R.id.nav_salas, R.id.nav_reservas, R.id.nav_historico_reservas, R.id.nav_centros, R.id.nav_logout)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_navigation_drawer);

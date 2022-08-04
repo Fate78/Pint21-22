@@ -3,7 +3,6 @@ package com.pint.roombookerfinal.Utilizador;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.pint.roombookerfinal.API.ApiClient;
@@ -44,7 +42,6 @@ public class LoginActivity extends AppCompatActivity {
     String login_input, password;
     Boolean isLoggedout;
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static String getSha256(final String base) {
         try{
             final MessageDigest digest = MessageDigest.getInstance("SHA-256");
