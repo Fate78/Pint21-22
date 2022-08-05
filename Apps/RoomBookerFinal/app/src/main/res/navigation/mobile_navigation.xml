@@ -10,11 +10,6 @@
         android:name="com.pint.roombookerfinal.NavigationUI.historico_reservas.HistoricoReservasFragment"
         android:label="@string/menu_historico_reservas"
         tools:layout="@layout/fragment_historico_reservas" />
-    <fragment
-        android:id="@+id/nav_scanner"
-        android:name="com.pint.roombookerfinal.NavigationUI.scanner.ScannerFragment"
-        android:label="@string/menu_scanner"
-        tools:layout="@layout/fragment_scanner" />
 
     <fragment
         android:id="@+id/nav_salas"
