@@ -93,7 +93,6 @@ public class SalaReservas extends Fragment {
 
         doAutoGetReservas();
 
-
         ed_data_inicio.setOnClickListener(v -> {
             methodsInterface.popDatePicker(v, ed_data_inicio);
         });
@@ -143,7 +142,6 @@ public class SalaReservas extends Fragment {
         });
 
         getSala(id_sala);
-
 
         return root;
     }
@@ -258,6 +256,6 @@ public class SalaReservas extends Fragment {
                 });
             }
         };
-        timer.schedule(getReservasTask, 0, 60000);
+        timer.schedule(getReservasTask, 0, 30000);
     }
 }
