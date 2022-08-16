@@ -101,8 +101,10 @@ public class LoginActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
         }
         else{
+            String AuthToken = new SharedPrefManager(mCtx).getAuthToken();
+
             ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
-            Call<Utilizador> call = apiInterface.getUtilizador(login_input);
+            Call<Utilizador> call = apiInterface.getUtilizador(login_input, AuthToken);
 
             call.enqueue(new Callback<Utilizador>() {
                 @Override

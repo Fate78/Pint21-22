@@ -310,7 +310,9 @@ public class ReservarRecyclerViewAdapter extends
 
     public void criarReserva(Reserva reserva, Context mCtx)
     {
-        Call<Reserva> reservaPost = apiInterface.createReserva(reserva);
+        String AuthToken = new SharedPrefManager(mCtx).getAuthToken();
+
+        Call<Reserva> reservaPost = apiInterface.createReserva(reserva, AuthToken);
         reservaPost.enqueue(new Callback<Reserva>() {
             @Override
             public void onResponse(@NonNull Call<Reserva> call1,

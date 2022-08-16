@@ -56,8 +56,10 @@ public class ReservasFragment extends Fragment {
 
         username = new SharedPrefManager(getActivity()).getUsername();
 
+        String AuthToken = new SharedPrefManager(root.getContext()).getAuthToken();
+
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
-        Call<Utilizador> call = apiInterface.getUtilizadorReservas(username);
+        Call<Utilizador> call = apiInterface.getUtilizadorReservas(username, AuthToken);
 
         call.enqueue(new Callback<Utilizador>() {
             @RequiresApi(api = Build.VERSION_CODES.O)

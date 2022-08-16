@@ -7,23 +7,43 @@ public class SharedPrefManager {
     final Context mCtx;
     final String loginPreferences = "LoginDetails";
     final String centroPreferences = "CentroId";
+    final String authTokenPreferences = "Token";
+
     public SharedPrefManager(Context mCtx)
     {
         this.mCtx = mCtx;
     }
 
-    public void saveLoginDetails(Integer userId, String username, String email, String password){
+    public void saveLoginDetails(Integer userId, String username, String email){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(loginPreferences, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("UserId", userId);
         editor.putString("Username", username);
-        editor.putString("Password", password);
         editor.putString("Email", email);
         editor.apply();
     }
 
     public void clearLoginDetails(){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(loginPreferences, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
+    public String getAuthToken(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(authTokenPreferences, Context.MODE_PRIVATE);
+        return sharedPreferences.getString("Token", "");
+    }
+
+    public void saveAuthToken(String token){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(authTokenPreferences, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Token", token);
+        editor.apply();
+    }
+
+    public void clearAuthToken(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(authTokenPreferences, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
@@ -70,9 +90,7 @@ public class SharedPrefManager {
     }
 
     public boolean isUserLoggedOut(){
-        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(loginPreferences, Context.MODE_PRIVATE);
-        boolean isUsernameEmpty = sharedPreferences.getString("Username","").isEmpty();
-        boolean isPasswordEmpty = sharedPreferences.getString("Password","").isEmpty();
-        return isUsernameEmpty || isPasswordEmpty;
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(authTokenPreferences, Context.MODE_PRIVATE);
+        return sharedPreferences.getString("Token","").isEmpty();
     }
 }

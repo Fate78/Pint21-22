@@ -18,6 +18,13 @@ public class Utilizador {
     private List < Object > tickets = null;
     private List < Object > utilizadorCentros = null;
 
+    public Utilizador(int idUtilizador, String nomeUtilizador, String email)
+    {
+        this.idUtilizador = idUtilizador;
+        this.nomeUtilizador = nomeUtilizador;
+        this.email = email;
+    }
+
     public Utilizador(int idUtilizador, int idTipo, String nomeUtilizador, String nomeCompleto, String palavraPasse, String email,
                       String dataNascimento, boolean verificado, boolean ativo)
     {

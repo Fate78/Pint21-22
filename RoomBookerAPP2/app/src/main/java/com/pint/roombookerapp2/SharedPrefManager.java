@@ -8,6 +8,7 @@ public class SharedPrefManager {
     final String loginPreferences = "LoginDetails";
     final String centroPreferences = "CentroId";
     final String salaPreferences = "SalaDetails";
+    final String authTokenPreferences = "Token";
 
     public SharedPrefManager(Context mCtx)
     {
@@ -26,6 +27,25 @@ public class SharedPrefManager {
 
     public void clearLoginDetails(){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(loginPreferences, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
+    public String getAuthToken(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(authTokenPreferences, Context.MODE_PRIVATE);
+        return sharedPreferences.getString("Token", "");
+    }
+
+    public void saveAuthToken(String token){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(authTokenPreferences, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Token", token);
+        editor.apply();
+    }
+
+    public void clearAuthToken(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(authTokenPreferences, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();

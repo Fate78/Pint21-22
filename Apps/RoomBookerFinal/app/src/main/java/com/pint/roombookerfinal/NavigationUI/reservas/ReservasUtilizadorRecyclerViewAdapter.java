@@ -334,7 +334,9 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
     }
 
     public void updateReserva(int id_reserva, Reserva reserva, Context mCtx, String message) {
-        Call<Reserva> updateReserva = apiInterface.updateReserva(id_reserva, reserva);
+        String AuthToken = new SharedPrefManager(mCtx).getAuthToken();
+
+        Call<Reserva> updateReserva = apiInterface.updateReserva(id_reserva, reserva, AuthToken);
         updateReserva.enqueue(new Callback<Reserva>() {
             @Override
             public void onResponse(@NonNull Call<Reserva> call, @NonNull Response<Reserva> response) {

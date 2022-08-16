@@ -34,7 +34,7 @@ android {
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.annotation:annotation:1.4.0'
@@ -52,11 +52,13 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'org.jetbrains:annotations:23.0.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.10'
     //QrGenerator
     implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
     //QRCodeScanner
     implementation 'com.google.zxing:core:3.5.0'
     implementation 'me.dm7.barcodescanner:zxing:1.9'
+    //JWT Decoder
+    implementation 'com.auth0.android:jwtdecode:2.0.1'
 
 }

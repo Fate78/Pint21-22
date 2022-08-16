@@ -43,6 +43,7 @@ public class LogoutFragment extends Fragment {
         sharedPrefManager = new SharedPrefManager(this.getActivity());
         sharedPrefManager.clearLoginDetails();
         sharedPrefManager.clearCentroDetails();
+        sharedPrefManager.clearAuthToken();
         startActivity(intent);
     }
 }

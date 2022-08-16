@@ -10,6 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
     private static final String BASE_URL = "https://roombookerapi.azurewebsites.net/";
     private static ApiInterface apiInterface;
+    private static final TokenInterceptor tokenInterceptor = new TokenInterceptor();
 
     private static final OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 

@@ -68,8 +68,10 @@ public class PerfilActivity extends AppCompatActivity {
         username.setEnabled(false);
         email.setEnabled(false);
 
+        String AuthToken = new SharedPrefManager(this).getAuthToken();
+
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
-        Call<Utilizador> call = apiInterface.getUtilizador(s_username);
+        Call<Utilizador> call = apiInterface.getUtilizador(s_username, AuthToken);
 
         call.enqueue(new Callback<Utilizador>() {
             @Override
@@ -151,7 +153,9 @@ public class PerfilActivity extends AppCompatActivity {
     }
 
     public void updateUtilizador(int id, Utilizador utilizador, Context mCtx) {
-        Call<Utilizador> updateUtilizador = apiInterface.updateUtilizador(id, utilizador);
+
+        String AuthToken = new SharedPrefManager(mCtx).getAuthToken();
+        Call<Utilizador> updateUtilizador = apiInterface.updateUtilizador(id, utilizador, AuthToken);
         updateUtilizador.enqueue(new Callback<Utilizador>() {
             @Override
             public void onResponse(@NonNull Call<Utilizador> call, @NonNull Response<Utilizador> response) {
