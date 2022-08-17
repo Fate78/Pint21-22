@@ -46,8 +46,6 @@ public class CentrosFragment extends Fragment {
 
         radioGroup = root.findViewById(R.id.centros_radio_group);
 
-        String AuthToken = new SharedPrefManager(root.getContext()).getAuthToken();
-
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
         Call<List<CentroGeo>> call = apiInterface.getCentros();
         call.enqueue(new Callback<List<CentroGeo>>() {

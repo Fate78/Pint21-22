@@ -124,8 +124,7 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //scannerView.resumeCameraPreview(ScanActivity.this);
-                JsonParser jsonParser = new JsonParser();
-                JsonObject jsonObject = (JsonObject) jsonParser.parse(rawresult);
+                JsonObject jsonObject = (JsonObject) JsonParser.parseString(rawresult);
                 System.out.println(jsonObject);
                 JsonPrimitive jsIdSala = jsonObject.getAsJsonPrimitive("idSala");
                 JsonPrimitive jsNSala = jsonObject.getAsJsonPrimitive("nSala");

@@ -48,7 +48,7 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
     private String lotacao, nsala, string_tempo_limp, centro_name;
     final MethodsInterface methodsInterface = new Methods();
     final ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
-
+    String TokenType = "Bearer ";
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView hora_inicio;
@@ -336,7 +336,7 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
     public void updateReserva(int id_reserva, Reserva reserva, Context mCtx, String message) {
         String AuthToken = new SharedPrefManager(mCtx).getAuthToken();
 
-        Call<Reserva> updateReserva = apiInterface.updateReserva(id_reserva, reserva, AuthToken);
+        Call<Reserva> updateReserva = apiInterface.updateReserva(id_reserva, reserva, TokenType + AuthToken);
         updateReserva.enqueue(new Callback<Reserva>() {
             @Override
             public void onResponse(@NonNull Call<Reserva> call, @NonNull Response<Reserva> response) {

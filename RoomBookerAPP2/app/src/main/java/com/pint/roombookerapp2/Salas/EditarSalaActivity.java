@@ -46,6 +46,7 @@ public class EditarSalaActivity extends AppCompatActivity {
     Context mCtx;
     int id_sala;
     String centro_name;
+    String TokenType = "Bearer ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

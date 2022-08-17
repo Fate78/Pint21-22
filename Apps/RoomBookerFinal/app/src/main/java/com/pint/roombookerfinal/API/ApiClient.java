@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
     private static final String BASE_URL = "https://roombookerapi.azurewebsites.net/";
     private static ApiInterface apiInterface;
-    private static final TokenInterceptor tokenInterceptor = new TokenInterceptor();
+    private static final HeaderInterceptor headerInterceptor = new HeaderInterceptor();
 
     private static final OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
@@ -19,6 +19,7 @@ public class ApiClient {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         httpClient.addInterceptor(logging)
+                .addInterceptor(headerInterceptor)
                 .connectTimeout(40, TimeUnit.SECONDS)
                 .readTimeout(40, TimeUnit.SECONDS)
                 .writeTimeout(40, TimeUnit.SECONDS);

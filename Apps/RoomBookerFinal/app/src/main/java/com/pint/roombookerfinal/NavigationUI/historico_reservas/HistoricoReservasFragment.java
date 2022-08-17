@@ -42,6 +42,7 @@ public class HistoricoReservasFragment extends Fragment {
     Context mCtx;
     String username;
     final MethodsInterface methodsInterface = new Methods();
+    String TokenType = "Bearer ";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -60,7 +61,7 @@ public class HistoricoReservasFragment extends Fragment {
         String AuthToken = new SharedPrefManager(root.getContext()).getAuthToken();
 
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
-        Call<Utilizador> call = apiInterface.getUtilizadorReservas(username, AuthToken);
+        Call<Utilizador> call = apiInterface.getUtilizadorReservas(username, TokenType + AuthToken);
 
         call.enqueue(new Callback<Utilizador>() {
             @RequiresApi(api = Build.VERSION_CODES.O)

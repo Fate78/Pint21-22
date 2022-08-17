@@ -40,6 +40,7 @@ public class PerfilActivity extends AppCompatActivity {
     final ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
     Button btn_guardar;
     ProgressBar progressBar;
+    String TokenType = "Bearer ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,15 +72,22 @@ public class PerfilActivity extends AppCompatActivity {
         String AuthToken = new SharedPrefManager(this).getAuthToken();
 
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
-        Call<Utilizador> call = apiInterface.getUtilizador(s_username, AuthToken);
+        Call<Utilizador> call = apiInterface.getUtilizador(s_username, TokenType + AuthToken);
 
         call.enqueue(new Callback<Utilizador>() {
             @Override
             public void onResponse(@NonNull Call<Utilizador> call,
                                    @NonNull Response<Utilizador> response)
             {
+                if(response.code()==401)
+                {
+                    Toast.makeText(PerfilActivity.this, "O token de sessão expirou!", Toast.LENGTH_LONG).show();
+                    progressBar.setVisibility(View.GONE);
+                }
+
                 if (response.body() != null) {
                     Log.e("Success", response.body().toString());
+
                     Utilizador utilizador = response.body();
 
                     id_tipo = utilizador.getIdTipo();
@@ -133,6 +141,8 @@ public class PerfilActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Call<Utilizador> call, @NonNull Throwable t) {
                 Log.e("Failure", t.getLocalizedMessage());
+                Toast.makeText(PerfilActivity.this, "Falha na Request!", Toast.LENGTH_LONG).show();
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
@@ -155,7 +165,7 @@ public class PerfilActivity extends AppCompatActivity {
     public void updateUtilizador(int id, Utilizador utilizador, Context mCtx) {
 
         String AuthToken = new SharedPrefManager(mCtx).getAuthToken();
-        Call<Utilizador> updateUtilizador = apiInterface.updateUtilizador(id, utilizador, AuthToken);
+        Call<Utilizador> updateUtilizador = apiInterface.updateUtilizador(id, utilizador, TokenType + AuthToken);
         updateUtilizador.enqueue(new Callback<Utilizador>() {
             @Override
             public void onResponse(@NonNull Call<Utilizador> call, @NonNull Response<Utilizador> response) {

@@ -1,5 +1,7 @@
 package com.pint.roombookerapp2.API;
 
+import com.pint.roombookerapp2.Models.AuthToken;
+import com.pint.roombookerapp2.Models.Authenticate;
 import com.pint.roombookerapp2.Models.CentroGeo;
 import com.pint.roombookerapp2.Models.Reserva;
 import com.pint.roombookerapp2.Models.Sala;
@@ -45,6 +47,9 @@ public interface ApiInterface {
                                            @Path("dateEnd") String dateEnd);
 
     //Utilizador
+    @POST("/api/utilizadores/authenticate")
+    Call<AuthToken> authenticate(@Body Authenticate authenticate);
+
     @GET("/api/utilizadores")
     Call<List<Utilizador>> getUtilizadores(@Header("Authorization") String authToken);
 

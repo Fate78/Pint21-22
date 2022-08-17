@@ -15,12 +15,11 @@ public class SharedPrefManager {
         this.mCtx = mCtx;
     }
 
-    public void saveLoginDetails(Integer userId, String username, String email, String password){
+    public void saveLoginDetails(Integer userId, String username, String email){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(loginPreferences, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("UserId", userId);
         editor.putString("Username", username);
-        editor.putString("Password", password);
         editor.putString("Email", email);
         editor.apply();
     }
