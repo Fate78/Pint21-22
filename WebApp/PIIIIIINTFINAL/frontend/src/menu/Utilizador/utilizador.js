@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from "react-router";
-import '../CSS/stylesdashboard1.css';
-import '../CSS/style.css'
+import '../../CSS/stylesdashboard1.css';
+import '../../CSS/style.css'
 const baseUrl = "https://roombookerapi.azurewebsites.net/api";
 
 
@@ -9,22 +9,21 @@ const baseUrl = "https://roombookerapi.azurewebsites.net/api";
 
 export default function Pagina() {
     const [state, setState] = useState({
-        reservas: [],
-        idCentro: "",
-        nSala: "",
-        lotacaoMax: "",
-        tempoMinLimp: "",
-        limpo: "",
-        ativo: "",
+        idTipo: "",
+        nomeUtilizador: "",
+        nomeCompleto: "",
+        email: "",
+        dataNascimento: "",
+        verificado: "",
 
     })
 
 
 
-    const idSala = useLocation();
+    const idUtilizador = useLocation();
     useEffect(() => {
 
-        fetch(baseUrl + "/salas/" + idSala.pathname.split("/")[2], {
+        fetch(baseUrl + "/utilizadores/" + idUtilizador.pathname.split("/")[2], {
             "method": "GET",
             "headers": {
                 "Accept": "application/json",
@@ -35,20 +34,20 @@ export default function Pagina() {
             .then(response => {
                 console.log(response)
                 setState({
-                    idCentro: response.idCentro,
-                    nSala: response.nSala,
-                    lotacaoMax: response.lotacaoMax,
-                    tempoMinLimp: response.tempoMinLimp,
-                    limpo: response.limpo,
-                    ativo: response.ativo
+                    idTipo: response.idTipo,
+                    nomeUtilizador: response.nomeUtilizador,
+                    nomeCompleto: response.nomeCompleto,
+                    email: response.email,
+                    dataNascimento: response.dataNascimento,
+                    verificado: response.verificado
                 })
 
             })
             .catch(err => {
                 console.log(err);
             })
-    }, [idSala])
-    console.log(idSala)
+    }, [idUtilizador])
+    console.log(idUtilizador)
 
 
 
@@ -57,9 +56,9 @@ export default function Pagina() {
             <div className="main">
                 <h3 className="mb-4 text-gray-800">Informações da sala</h3>
                 <div className='budy'>
-                    <div className='tituloSala'><p><h1><b>Sala {state.nSala}</b></h1></p></div>
+                    <p>{state.nomeUtilizador}</p>
 
-                    <p>Esta sala encontra-se localizada no centro {state.idCentro}</p>
+                    <p>Esta sala encontra-se localizada no centro {state.nomeUtilizador}</p>
                 </div>
             </div>
 

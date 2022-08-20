@@ -5,11 +5,24 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { AuthProvider } from './context/AuthProvider';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './menu/Navs/NavBar';
+import NavBarTop from './menu/Navs/NavBarTop';
+import Footer from './menu/Navs/Footer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <AuthProvider>
+      <NavBarTop />
+        <Navbar />
+        <Routes>
+          <Route path="/*" element={<App />} />
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
