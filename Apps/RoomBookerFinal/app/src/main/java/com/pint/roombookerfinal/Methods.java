@@ -3,6 +3,8 @@ package com.pint.roombookerfinal;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.text.InputType;
 import android.view.View;
@@ -11,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 
 import androidx.annotation.RequiresApi;
+
+import com.pint.roombookerfinal.Utilizador.LoginActivity;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -22,6 +26,17 @@ import java.util.Locale;
 public class Methods implements MethodsInterface{
 
     int hour, minute;
+    SharedPrefManager sharedPrefManager;
+    public void logout(Context mCtx){
+
+        Intent intent;
+        intent = new Intent(mCtx, LoginActivity.class);
+        sharedPrefManager = new SharedPrefManager(mCtx);
+        sharedPrefManager.clearLoginDetails();
+        sharedPrefManager.clearCentroDetails();
+        sharedPrefManager.clearAuthToken();
+        mCtx.startActivity(intent);
+    }
 
     public String formatTimeForUser(String time){
         StringBuilder sb = new StringBuilder(time);

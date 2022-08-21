@@ -81,8 +81,7 @@ public class PerfilActivity extends AppCompatActivity {
             {
                 if(response.code()==401)
                 {
-                    Toast.makeText(PerfilActivity.this, "O token de sessão expirou!", Toast.LENGTH_LONG).show();
-                    progressBar.setVisibility(View.GONE);
+                    methodsInterface.logout(PerfilActivity.this);
                 }
 
                 if (response.body() != null) {

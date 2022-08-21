@@ -19,8 +19,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
-import com.pint.roombookerfinal.ScannerActivity;
 import com.pint.roombookerfinal.R;
+import com.pint.roombookerfinal.ScannerActivity;
 import com.pint.roombookerfinal.SharedPrefManager;
 import com.pint.roombookerfinal.Utilizador.PerfilActivity;
 import com.pint.roombookerfinal.databinding.ActivityNavigationDrawerBinding;

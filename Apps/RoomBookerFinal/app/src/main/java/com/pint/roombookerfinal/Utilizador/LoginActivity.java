@@ -3,6 +3,7 @@ package com.pint.roombookerfinal.Utilizador;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,11 +13,14 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.auth0.android.jwt.JWT;
 import com.pint.roombookerfinal.API.ApiClient;
 import com.pint.roombookerfinal.API.ApiInterface;
+import com.pint.roombookerfinal.Methods;
+import com.pint.roombookerfinal.MethodsInterface;
 import com.pint.roombookerfinal.Models.AuthToken;
 import com.pint.roombookerfinal.Models.Authenticate;
 import com.pint.roombookerfinal.Models.Utilizador;
@@ -26,6 +30,7 @@ import com.pint.roombookerfinal.SharedPrefManager;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import retrofit2.Call;
@@ -35,6 +40,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     private SharedPrefManager sharedPrefManager;
+    MethodsInterface methodsInterface = new Methods();
     Context mCtx;
 
     EditText ed_login_input, ed_password_input;
@@ -44,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     String login_input, password;
     Boolean isLoggedout;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +65,25 @@ public class LoginActivity extends AppCompatActivity {
 
         if(!isLoggedout)
         {
+            /*String token = new SharedPrefManager(this).getAuthToken();
+            JWT jwt = new JWT(token);
+            long tokenExpiration = jwt.getClaim("exp").asLong();
+
+            LocalDateTime dateTimeNow = LocalDateTime.now();
+            ZoneId zoneId = ZoneId.of("Europe/Lisbon");
+            ZoneOffset zoneOffset = zoneId.getRules().getOffset(dateTimeNow);
+            long secEpochNow = dateTimeNow.toEpochSecond(zoneOffset);
+            //If token is not expired
+            if(tokenExpiration>secEpochNow) {
+                Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
+                startActivity(intent);
+            }
+            else{
+                methodsInterface.logout(mCtx);
+            }*/
             Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
             startActivity(intent);
+
         }
         btn_login.setOnClickListener(view -> {
             login_input = ed_login_input.getText().toString();
@@ -109,7 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                         String token = authToken.getToken();
                         saveAuthToken(token);
                         JWT jwt = new JWT(token);
-                        int idUtilizador = Integer.parseInt(jwt.getClaim("ID").asString());
+                        int idUtilizador = Integer.parseInt(Objects.requireNonNull(jwt.getClaim("ID").asString()));
                         String nomeUtilizador = jwt.getClaim("unique_name").asString();
                         String emailUtilizador = jwt.getClaim("EMAIL").asString();
                         utilizador = new Utilizador(idUtilizador, nomeUtilizador, emailUtilizador);
@@ -127,51 +151,6 @@ public class LoginActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                 }
             });
-            /*ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
-            Call<Utilizador> call = apiInterface.getUtilizador(login_input);
-
-            call.enqueue(new Callback<Utilizador>() {
-                @Override
-                public void onResponse(@NotNull Call<Utilizador> call, @NotNull Response<Utilizador> response) {
-
-                    if (response.isSuccessful() && response.body() != null) {
-                        Log.e("Success", response.body().toString());
-                        Utilizador utilizador = response.body();
-                        if (isEmailValid(login_input)) {
-                            if (utilizador.getEmail().equals(login_input) && utilizador.getPalavraPasse().equals(password)) {
-                                saveLoginDetails(utilizador.getIdUtilizador(), utilizador.getNomeUtilizador(), utilizador.getEmail(), utilizador.getPalavraPasse());
-                                Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(LoginActivity.this, "Email ou palavra passe errados!", Toast.LENGTH_SHORT).show();
-                                btn_login.setVisibility(View.VISIBLE);
-                                progressBar.setVisibility(View.GONE);
-                            }
-                        } else {
-                            if (utilizador.getNomeUtilizador().equals(login_input) && utilizador.getPalavraPasse().equals(password)) {
-                                saveLoginDetails(utilizador.getIdUtilizador(), utilizador.getNomeUtilizador(), utilizador.getEmail(), utilizador.getPalavraPasse());
-                                Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(LoginActivity.this, "Utilizador ou palavra passe errados!", Toast.LENGTH_SHORT).show();
-                                btn_login.setVisibility(View.VISIBLE);
-                                progressBar.setVisibility(View.GONE);
-                            }
-                        }
-                    } else {
-                        btn_login.setVisibility(View.VISIBLE);
-                        progressBar.setVisibility(View.GONE);
-                    }
-
-                }
-
-                @Override
-                public void onFailure(@NotNull Call<Utilizador> call, @NotNull Throwable t) {
-                    Log.e("Failure", t.getLocalizedMessage());
-                    btn_login.setVisibility(View.VISIBLE);
-                    progressBar.setVisibility(View.GONE);
-                }
-            });*/
         }
     }
 

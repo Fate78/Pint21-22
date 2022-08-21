@@ -1,5 +1,6 @@
 package com.pint.roombookerfinal;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.EditText;
 
@@ -8,6 +9,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public interface MethodsInterface {
+
+    void logout(Context mCtx);
+
     String formatTimeForUser(String time);
 
     String formatDateForUser(String string_date);

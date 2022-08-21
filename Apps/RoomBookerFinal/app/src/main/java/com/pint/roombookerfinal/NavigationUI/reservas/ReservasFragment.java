@@ -66,6 +66,10 @@ public class ReservasFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(@NonNull Call<Utilizador> call, @NonNull Response<Utilizador> response) {
+                if(response.code() == 401)
+                {
+                    methodsInterface.logout(root.getContext());
+                }
                 if (response.body() != null){
                     Log.e("Success",response.body().toString());
                     List<Reserva> reservasList = response.body().getReservas();
