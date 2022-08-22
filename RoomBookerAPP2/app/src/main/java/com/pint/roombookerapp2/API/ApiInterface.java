@@ -46,6 +46,9 @@ public interface ApiInterface {
                                            @Path("dateBegin") String dateBegin,
                                            @Path("dateEnd") String dateEnd);
 
+    @PUT("api/salas/{id}")
+    Call<Sala> updateSala(@Path("id") int id, @Body Sala sala, @Header("Authorization") String authToken);
+
     //Utilizador
     @POST("/api/utilizadores/authenticate")
     Call<AuthToken> authenticate(@Body Authenticate authenticate);

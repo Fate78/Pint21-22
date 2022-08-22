@@ -91,10 +91,8 @@ public class SharedPrefManager {
     }
 
     public boolean isUserLoggedOut(){
-        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(loginPreferences, Context.MODE_PRIVATE);
-        boolean isUsernameEmpty = sharedPreferences.getString("Username","").isEmpty();
-        boolean isPasswordEmpty = sharedPreferences.getString("Password","").isEmpty();
-        return isUsernameEmpty || isPasswordEmpty;
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(authTokenPreferences, Context.MODE_PRIVATE);
+        return sharedPreferences.getString("Token","").isEmpty();
     }
 
     public void saveSalaInfo(int id_sala, String name_centro){

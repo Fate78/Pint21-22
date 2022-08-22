@@ -1,5 +1,6 @@
 package com.pint.roombookerapp2;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,4 +33,6 @@ public interface MethodsInterface {
     void popDatePicker(View view, EditText editText);
 
     void generateQrCode(int idSala, int nSala,ImageView img_qrCode);
+
+    void logout(Context mCtx);
 }

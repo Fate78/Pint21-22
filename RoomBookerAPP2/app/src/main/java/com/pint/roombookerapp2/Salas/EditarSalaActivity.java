@@ -42,6 +42,7 @@ public class EditarSalaActivity extends AppCompatActivity {
     Sala[] salas_array;
     EditText ed_nSala, ed_lotacao, ed_limpeza, ed_centro;
     final MethodsInterface methodsInterface = new Methods();
+    final ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
     Button btn_select, btn_update;
     Context mCtx;
     int id_sala;
@@ -218,6 +219,33 @@ public class EditarSalaActivity extends AppCompatActivity {
                 Log.e("Failure", t.getLocalizedMessage());
                 Toast.makeText(EditarSalaActivity.this, "Falha na ligação",
                         Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void updateSala(int id, Sala sala, Context mCtx){
+        String AuthToken = new SharedPrefManager(mCtx).getAuthToken();
+        Call<Sala> updateSala = apiInterface.updateSala(id, sala, TokenType + AuthToken);
+        updateSala.enqueue(new Callback<Sala>() {
+            @Override
+            public void onResponse(@NonNull Call<Sala> call, @NonNull Response<Sala> response) {
+                Sala responseSala = response.body();
+                if(response.code() == 401)
+                {
+                    methodsInterface.logout(mCtx);
+                }
+                if(responseSala!=null){
+                    Toast.makeText(mCtx, "Sala Atualizada",
+                            Toast.LENGTH_LONG).show();
+                }
+                else {
+                    System.out.println(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Sala> call, @NonNull Throwable t) {
+                Log.e("Failure", t.getLocalizedMessage());
             }
         });
     }

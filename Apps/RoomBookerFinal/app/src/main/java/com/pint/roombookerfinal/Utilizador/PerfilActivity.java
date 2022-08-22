@@ -169,6 +169,10 @@ public class PerfilActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<Utilizador> call, @NonNull Response<Utilizador> response) {
                 Utilizador responseUtilizador = response.body();
+                if(response.code() == 401)
+                {
+                    methodsInterface.logout(mCtx);
+                }
                 if (responseUtilizador != null) {
                     Toast.makeText(mCtx, "Perfil Atualizado",
                             Toast.LENGTH_LONG).show();

@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
 
         btn_login.setOnClickListener(view -> {
             login_input = ed_login_input.getText().toString();
-            password = getSha256(ed_password_input.getText().toString());
+            password = ed_password_input.getText().toString();
             btn_login.setVisibility(View.GONE);
             progressBar.setVisibility(View.VISIBLE);
             validarLogin(login_input, password);
@@ -118,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                         AuthToken authToken = response.body();
 
                         String token = authToken.getToken();
-                        sharedPrefManager.saveAuthToken(token);
+                        new SharedPrefManager(LoginActivity.this).saveAuthToken(token);
                         JWT jwt = new JWT(token);
                         int idUtilizador = Integer.parseInt(jwt.getClaim("ID").asString());
                         String nomeUtilizador = jwt.getClaim("unique_name").asString();
