@@ -12,20 +12,25 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.auth0.android.jwt.JWT;
 import com.pint.roombookerfinal.API.ApiClient;
 import com.pint.roombookerfinal.API.ApiInterface;
+import com.pint.roombookerfinal.Methods;
+import com.pint.roombookerfinal.MethodsInterface;
+import com.pint.roombookerfinal.Models.AuthToken;
+import com.pint.roombookerfinal.Models.Authenticate;
 import com.pint.roombookerfinal.Models.Utilizador;
 import com.pint.roombookerfinal.NavigationUI.NavigationDrawerActivity;
 import com.pint.roombookerfinal.R;
 import com.pint.roombookerfinal.SharedPrefManager;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import retrofit2.Call;
@@ -35,6 +40,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     private SharedPrefManager sharedPrefManager;
+    MethodsInterface methodsInterface = new Methods();
     Context mCtx;
 
     EditText ed_login_input, ed_password_input;
@@ -44,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     String login_input, password;
     Boolean isLoggedout;
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,19 +65,35 @@ public class LoginActivity extends AppCompatActivity {
 
         if(!isLoggedout)
         {
+            /*String token = new SharedPrefManager(this).getAuthToken();
+            JWT jwt = new JWT(token);
+            long tokenExpiration = jwt.getClaim("exp").asLong();
+
+            LocalDateTime dateTimeNow = LocalDateTime.now();
+            ZoneId zoneId = ZoneId.of("Europe/Lisbon");
+            ZoneOffset zoneOffset = zoneId.getRules().getOffset(dateTimeNow);
+            long secEpochNow = dateTimeNow.toEpochSecond(zoneOffset);
+            //If token is not expired
+            if(tokenExpiration>secEpochNow) {
+                Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
+                startActivity(intent);
+            }
+            else{
+                methodsInterface.logout(mCtx);
+            }*/
             Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
             startActivity(intent);
+
         }
         btn_login.setOnClickListener(view -> {
             login_input = ed_login_input.getText().toString();
-            password = getSha256(ed_password_input.getText().toString());
+            password = ed_password_input.getText().toString();
             btn_login.setVisibility(View.GONE);
             progressBar.setVisibility(View.VISIBLE);
             validarLogin(login_input, password);
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static String getSha256(final String base) {
         try{
             final MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -96,46 +118,34 @@ public class LoginActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
         }
         else{
+            Authenticate authenticate = new Authenticate(login_input, password);
+
             ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
-            Call<Utilizador> call = apiInterface.getUtilizador(login_input);
+            Call<AuthToken> call = apiInterface.authenticate(authenticate);
 
-            call.enqueue(new Callback<Utilizador>() {
+            call.enqueue(new Callback<AuthToken>() {
                 @Override
-                public void onResponse(@NotNull Call<Utilizador> call, @NotNull Response<Utilizador> response) {
-
+                public void onResponse(@NonNull Call<AuthToken> call, @NonNull Response<AuthToken> response) {
                     if (response.isSuccessful() && response.body() != null) {
                         Log.e("Success", response.body().toString());
-                        Utilizador utilizador = response.body();
-                        if (isEmailValid(login_input)) {
-                            if (utilizador.getEmail().equals(login_input) && utilizador.getPalavraPasse().equals(password)) {
-                                saveLoginDetails(utilizador.getIdUtilizador(), utilizador.getNomeUtilizador(), utilizador.getEmail(), utilizador.getPalavraPasse());
-                                Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(LoginActivity.this, "Email ou palavra passe errados!", Toast.LENGTH_SHORT).show();
-                                btn_login.setVisibility(View.VISIBLE);
-                                progressBar.setVisibility(View.GONE);
-                            }
-                        } else {
-                            if (utilizador.getNomeUtilizador().equals(login_input) && utilizador.getPalavraPasse().equals(password)) {
-                                saveLoginDetails(utilizador.getIdUtilizador(), utilizador.getNomeUtilizador(), utilizador.getEmail(), utilizador.getPalavraPasse());
-                                Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(LoginActivity.this, "Utilizador ou palavra passe errados!", Toast.LENGTH_SHORT).show();
-                                btn_login.setVisibility(View.VISIBLE);
-                                progressBar.setVisibility(View.GONE);
-                            }
-                        }
-                    } else {
-                        btn_login.setVisibility(View.VISIBLE);
-                        progressBar.setVisibility(View.GONE);
-                    }
+                        AuthToken authToken = response.body();
 
+                        String token = authToken.getToken();
+                        saveAuthToken(token);
+                        JWT jwt = new JWT(token);
+                        int idUtilizador = Integer.parseInt(Objects.requireNonNull(jwt.getClaim("ID").asString()));
+                        String nomeUtilizador = jwt.getClaim("unique_name").asString();
+                        String emailUtilizador = jwt.getClaim("EMAIL").asString();
+                        utilizador = new Utilizador(idUtilizador, nomeUtilizador, emailUtilizador);
+
+                        saveLoginDetails(utilizador.getIdUtilizador(), utilizador.getNomeUtilizador(), utilizador.getEmail());
+                        Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
+                        startActivity(intent);
+                    }
                 }
 
                 @Override
-                public void onFailure(@NotNull Call<Utilizador> call, @NotNull Throwable t) {
+                public void onFailure(@NonNull Call<AuthToken> call, @NonNull Throwable t) {
                     Log.e("Failure", t.getLocalizedMessage());
                     btn_login.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.GONE);
@@ -144,8 +154,12 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void saveLoginDetails(Integer userId, String username, String email, String password){
-        new SharedPrefManager(this).saveLoginDetails(userId, username, email, password);
+    private void saveLoginDetails(Integer userId, String username, String email){
+        new SharedPrefManager(this).saveLoginDetails(userId, username, email);
+    }
+
+    private void saveAuthToken(String token){
+        new SharedPrefManager(this).saveAuthToken(token);
     }
 
     public static boolean isEmailValid(String email)

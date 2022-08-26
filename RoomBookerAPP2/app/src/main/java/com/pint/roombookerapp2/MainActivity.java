@@ -39,29 +39,30 @@ public class MainActivity extends AppCompatActivity {
             btn_login.setVisibility(View.GONE);
             btn_logout.setVisibility(View.VISIBLE);
             btn_sala.setVisibility(View.VISIBLE);
-
-            btn_logout.setOnClickListener(v -> {
-                sharedPrefManager.clearLoginDetails();
-                btn_login.setVisibility(View.VISIBLE);
-                btn_sala.setVisibility(View.GONE);
-                btn_logout.setVisibility(View.GONE);
-                Toast.makeText(this, "Successfully logged out!", Toast.LENGTH_SHORT).show();
-            });
-            btn_sala.setOnClickListener(v->{
-                Intent intent = new Intent(getApplicationContext(), EditarSalaActivity.class);
-                startActivity(intent);
-            });
         }
         else{
             btn_login.setVisibility(View.VISIBLE);
             btn_logout.setVisibility(View.GONE);
             btn_sala.setVisibility(View.GONE);
-
-            btn_login.setOnClickListener(v -> {
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
-            });
         }
+
+        btn_login.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+        });
+
+        btn_logout.setOnClickListener(v -> {
+            sharedPrefManager.clearLoginDetails();
+            btn_login.setVisibility(View.VISIBLE);
+            btn_sala.setVisibility(View.GONE);
+            btn_logout.setVisibility(View.GONE);
+            Toast.makeText(this, "Successfully logged out!", Toast.LENGTH_SHORT).show();
+        });
+
+        btn_sala.setOnClickListener(v->{
+            Intent intent = new Intent(getApplicationContext(), EditarSalaActivity.class);
+            startActivity(intent);
+        });
 
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         ViewPager2 viewPager2 = findViewById(R.id.pager);

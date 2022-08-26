@@ -46,6 +46,7 @@ public class ReservarRecyclerViewAdapter extends
     private final List<Reserva> reservasList;
     final MethodsInterface methodsInterface = new Methods();
     final ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
+    String TokenType = "Bearer ";
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView hora_inicio;
@@ -233,8 +234,17 @@ public class ReservarRecyclerViewAdapter extends
                 int num_pessoas = Integer.parseInt(ed_num_pessoas.getText().toString());
                 int lotacao = Integer.parseInt(ed_lotacao.getText().toString());
 
-                if (data_reserva.compareTo(methodsInterface.getDateToday()) >= 0 && hora_inicio.compareTo(methodsInterface.getTimeNow())>0 && ed_num_pessoas.getText() != null && ed_data_reserva.getText() != null && ed_hora_inicio.getText() != null
-                        && ed_hora_fim.getText() != null && num_pessoas <= lotacao) {
+                if((data_reserva.compareTo(methodsInterface.getDateToday()) == 0 && hora_inicio.compareTo(methodsInterface.getTimeNow())<0)
+                        || data_reserva.compareTo(methodsInterface.getDateToday()) < 0 || num_pessoas > lotacao) {
+                    if (data_reserva.compareTo(methodsInterface.getDateToday()) == 0 && hora_inicio.compareTo(methodsInterface.getTimeNow())<0
+                            || data_reserva.compareTo(methodsInterface.getDateToday()) < 0)
+                    Toast.makeText(mCtx, "Hora inválida",
+                            Toast.LENGTH_LONG).show();
+                    if (num_pessoas > lotacao)
+                        Toast.makeText(mCtx, "Excedeu a lotação da sala",
+                                Toast.LENGTH_LONG).show();
+                }
+                else if (data_reserva.compareTo(methodsInterface.getDateToday()) >= 0) {
 
                     Call<List<Reserva>> reservaCall = apiInterface.getReservasbyDate(formattedDate);
                     reservaCall.enqueue(new Callback<List<Reserva>>() {
@@ -248,18 +258,32 @@ public class ReservarRecyclerViewAdapter extends
                                 for (Reserva reserva : reservaList) {
                                     Reserva next_reserva = null;
                                     LocalTime next_hora_inicio = null;
+                                    LocalTime next_hora_fim = null;
+                                    LocalDate next_date = null;
                                     LocalTime hora_fim_max = null;
+                                    LocalTime hora_fim_total = null;
                                     LocalTime res_hora_inicio = null;
                                     LocalTime res_hora_fim = null;
                                     LocalTime hora_inicio_min = null;
+                                    LocalTime res_hora_fim_total = null;
 
                                     if (reserva.isAtivo()) {
-                                        //If next exists
-                                        if (reservaList.size() >= next_index + 1) {
+                                        res_hora_inicio = methodsInterface.stringToTime(reserva.getHoraInicio());
+                                        res_hora_fim = methodsInterface.stringToTime(reserva.getHoraFim());
+                                        res_hora_fim_total = methodsInterface.addDurationToHour(res_hora_fim, tempo_limp);
+                                        hora_fim_total = methodsInterface.addDurationToHour(hora_fim, tempo_limp);
+                                        if (((hora_inicio.compareTo(res_hora_inicio) >= 0 && hora_inicio.compareTo(res_hora_fim_total) < 0)
+                                                || hora_fim_total.compareTo(res_hora_inicio)>=0 && hora_fim_total.compareTo(res_hora_fim_total)<0) || hora_inicio.compareTo(hora_fim) >= 0)
+                                            error_counter++;
+                                    }
+                                        //If next exists and date is same day
+                                        /*if (reservaList.size() >= next_index + 1) {
                                             next_reserva = reservaList.get(next_index);
                                             next_index++;
                                             next_hora_inicio = methodsInterface.stringToTime(next_reserva.getHoraInicio());
-                                            hora_fim_max = methodsInterface.addDurationToHour(hora_fim, tempo_limp);
+                                            next_hora_fim = methodsInterface.stringToTime(next_reserva.getHoraFim());
+                                            next_date = methodsInterface.stringToDate(next_reserva.getDataReserva());
+                                            hora_fim_max = methodsInterface.addDurationToHour(next_hora_fim, tempo_limp);
                                         } else {
                                             hora_fim_max = LocalTime.parse("23:00");
                                             next_hora_inicio = LocalTime.parse("23:00");
@@ -267,14 +291,16 @@ public class ReservarRecyclerViewAdapter extends
                                         res_hora_inicio = methodsInterface.stringToTime(reserva.getHoraInicio());
                                         res_hora_fim = methodsInterface.stringToTime(reserva.getHoraFim());
                                         hora_inicio_min = methodsInterface.addDurationToHour(res_hora_fim, tempo_limp);
+                                        hora_fim_total = methodsInterface.addDurationToHour(hora_fim, tempo_limp);
 
                                         System.out.println(hora_inicio_min);
                                         System.out.println(hora_fim_max);
                                         System.out.println(next_hora_inicio);
-                                        if (hora_inicio.compareTo(hora_inicio_min) < 0 || hora_fim_max.compareTo(next_hora_inicio) > 0) {
+                                        System.out.println(next_date);
+                                        if (hora_inicio.compareTo(hora_inicio_min) >= 0 || hora_fim_total.compareTo(next_hora_inicio) <= 0)
                                             error_counter++;
-                                        }
-                                    }
+
+                                    }*/
                                 }
                             }
                             if (error_counter == 0) {
@@ -284,25 +310,20 @@ public class ReservarRecyclerViewAdapter extends
                                         num_pessoas, true);
                                 criarReserva(newReserva, v12.getContext());
                                 dialog.dismiss();
-                            } else
+                            } else {
                                 Toast.makeText(mCtx, "O horário inserido é inválido!",
                                         Toast.LENGTH_LONG).show();
+                                System.out.println("O horário inserido é inválido!");
+                            }
                         }
 
                         @Override
                         public void onFailure(@NonNull Call<List<Reserva>> call, @NonNull Throwable t) {
                             Log.e("Failure", t.getLocalizedMessage());
+                            System.out.println("Erro no servidor!");
                         }
                     });
-                } else if (num_pessoas > lotacao)
-                    Toast.makeText(mCtx, "Excedeu a lotação da sala",
-                            Toast.LENGTH_LONG).show();
-                else if (hora_inicio.compareTo(methodsInterface.getTimeNow())<=0)
-                    Toast.makeText(mCtx, "Hora inválida",
-                            Toast.LENGTH_LONG).show();
-                else
-                    Toast.makeText(mCtx, "Verifique que preencheu todos os campos",
-                            Toast.LENGTH_LONG).show();
+                }
             }
         });
         btn_cancel.setOnClickListener(v1 -> dialog.dismiss());
@@ -310,18 +331,21 @@ public class ReservarRecyclerViewAdapter extends
 
     public void criarReserva(Reserva reserva, Context mCtx)
     {
-        Call<Reserva> reservaPost = apiInterface.createReserva(reserva);
+        String AuthToken = new SharedPrefManager(mCtx).getAuthToken();
+
+        Call<Reserva> reservaPost = apiInterface.createReserva(reserva, TokenType + AuthToken);
         reservaPost.enqueue(new Callback<Reserva>() {
             @Override
             public void onResponse(@NonNull Call<Reserva> call1,
                                    @NonNull Response<Reserva> response) {
                 Reserva responseReserva = response.body();
-                if (responseReserva != null) {
+                if(response.code() == 401)
+                    methodsInterface.logout(mCtx);
+
+                if (response.code() == 201 && responseReserva != null) {
                     Toast.makeText(mCtx, String.format(
-                                    "Reserva para dia %s das %s às %s foi criada",
-                                    responseReserva.getDataReserva(),
-                                    responseReserva.getHoraInicio(),
-                                    responseReserva.getHoraFim()),
+                                    "Reserva para dia %s foi criada",
+                                    responseReserva.getDataReserva()),
                             Toast.LENGTH_LONG).show();
                 } else {
                     System.out.println(response.message());
@@ -331,6 +355,7 @@ public class ReservarRecyclerViewAdapter extends
             @Override
             public void onFailure(@NonNull Call<Reserva> call1, @NonNull Throwable t) {
                 Log.e("Failure", t.getLocalizedMessage());
+                Toast.makeText(mCtx, "Falha na conexão ao servidor",Toast.LENGTH_LONG).show();
             }
         });
     }

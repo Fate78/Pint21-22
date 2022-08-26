@@ -1,7 +1,6 @@
 package com.pint.roombookerfinal.NavigationUI;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,7 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -22,6 +20,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.pint.roombookerfinal.R;
+import com.pint.roombookerfinal.ScannerActivity;
 import com.pint.roombookerfinal.SharedPrefManager;
 import com.pint.roombookerfinal.Utilizador.PerfilActivity;
 import com.pint.roombookerfinal.databinding.ActivityNavigationDrawerBinding;
@@ -32,9 +31,8 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
     private SharedPrefManager sharedPrefManager;
     TextView username, email;
     String s_username, s_email;
-    ImageView img_profile;
+    ImageView img_profile, img_qr_scanner;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +47,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_salas, R.id.nav_reservas, R.id.nav_historico_reservas, R.id.nav_centros, R.id.nav_logout)
+                R.id.nav_salas, R.id.nav_reservas, R.id.nav_historico_reservas, R.id.nav_centros, R.id.nav_logout)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_navigation_drawer);
@@ -75,6 +73,12 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         img_profile.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), PerfilActivity.class);
             v.getContext().startActivity(intent);
+        });
+
+        img_qr_scanner = findViewById(R.id.img_qr_scanner);
+        img_qr_scanner.setOnClickListener(v -> {
+            Intent intent = new Intent(NavigationDrawerActivity.this, ScannerActivity.class);
+            startActivity(intent);
         });
         return true;
     }

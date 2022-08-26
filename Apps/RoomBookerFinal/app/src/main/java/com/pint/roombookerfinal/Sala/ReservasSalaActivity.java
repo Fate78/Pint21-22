@@ -49,6 +49,7 @@ public class ReservasSalaActivity extends AppCompatActivity {
     private EditText ed_lotacao;
     private EditText ed_tempo_limp;
     private String nSala;
+    String TokenType = "Bearer ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -277,7 +278,9 @@ public class ReservasSalaActivity extends AppCompatActivity {
 
     public void criarReserva(Reserva reserva, Context mCtx)
     {
-        Call<Reserva> reservaPost = apiInterface.createReserva(reserva);
+        String AuthToken = new SharedPrefManager(mCtx).getAuthToken();
+
+        Call<Reserva> reservaPost = apiInterface.createReserva(reserva, TokenType + AuthToken);
         reservaPost.enqueue(new Callback<Reserva>() {
             @Override
             public void onResponse(@NonNull Call<Reserva> call1,

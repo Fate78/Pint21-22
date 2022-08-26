@@ -2,6 +2,8 @@ package com.pint.roombookerapp2;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.text.InputType;
@@ -13,11 +15,13 @@ import android.widget.TimePicker;
 
 import androidx.annotation.RequiresApi;
 
+import com.google.gson.JsonObject;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
+import com.pint.roombookerapp2.Utilizador.LoginActivity;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -29,6 +33,18 @@ import java.util.Locale;
 public class Methods implements MethodsInterface{
 
     int hour, minute;
+
+    SharedPrefManager sharedPrefManager;
+    public void logout(Context mCtx){
+
+        Intent intent;
+        intent = new Intent(mCtx, LoginActivity.class);
+        sharedPrefManager = new SharedPrefManager(mCtx);
+        sharedPrefManager.clearLoginDetails();
+        sharedPrefManager.clearCentroDetails();
+        sharedPrefManager.clearAuthToken();
+        mCtx.startActivity(intent);
+    }
 
     public String formatTimeForUser(String time){
         StringBuilder sb = new StringBuilder(time);
@@ -189,11 +205,15 @@ public class Methods implements MethodsInterface{
         return "01";
     }
 
-    public void generateQrCode(int idSala, ImageView img_qrCode)
+    public void generateQrCode(int idSala, int nSala,ImageView img_qrCode)
     {
+        JsonObject jsonData = new JsonObject();
+        jsonData.addProperty("idSala", idSala);
+        jsonData.addProperty("nSala", nSala);
+
         MultiFormatWriter writer = new MultiFormatWriter();
         try {
-            BitMatrix matrix = writer.encode(String.valueOf(idSala), BarcodeFormat.QR_CODE, 350, 350);
+            BitMatrix matrix = writer.encode(jsonData.toString(), BarcodeFormat.QR_CODE, 350, 350);
             BarcodeEncoder encoder = new BarcodeEncoder();
             Bitmap bitmap  = encoder.createBitmap(matrix);
             img_qrCode.setImageBitmap(bitmap);

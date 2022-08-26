@@ -48,7 +48,7 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
     private String lotacao, nsala, string_tempo_limp, centro_name;
     final MethodsInterface methodsInterface = new Methods();
     final ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
-
+    String TokenType = "Bearer ";
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView hora_inicio;
@@ -260,41 +260,27 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
                         public void onResponse(@NonNull Call<List<Reserva>> call, @NonNull Response<List<Reserva>> response) {
                             int error_counter = 0;
                             if (response.body() != null) {
-                                int next_index = 1;
                                 Log.e("Success", response.body().toString());
                                 List<Reserva> reservaList = (List<Reserva>) response.body();
                                 for (Reserva reserva : reservaList) {
-                                    Reserva next_reserva = null;
-                                    LocalTime next_hora_inicio = null;
-                                    LocalTime hora_fim_max = null;
                                     LocalTime res_hora_inicio = null;
                                     LocalTime res_hora_fim = null;
-                                    LocalTime hora_inicio_min = null;
+                                    LocalTime res_hora_fim_total = null;
+                                    LocalTime hora_fim_total = null;
 
-                                    //If next exists
-                                    if (reservaList.size() >= next_index + 1) {
-                                        next_reserva = reservaList.get(next_index);
-                                        next_index++;
-                                        next_hora_inicio = methodsInterface.stringToTime(next_reserva.getHoraInicio());
-                                        hora_fim_max = methodsInterface.addDurationToHour(hora_fim, tempo_limp);
-                                    } else {
-                                        hora_fim_max = LocalTime.parse("23:00");
-                                        next_hora_inicio = LocalTime.parse("23:00");
-                                    }
-                                    res_hora_inicio = methodsInterface.stringToTime(reserva.getHoraInicio());
-                                    res_hora_fim = methodsInterface.stringToTime(reserva.getHoraFim());
-                                    hora_inicio_min = methodsInterface.addDurationToHour(res_hora_fim, tempo_limp);
-
-                                    System.out.println(hora_inicio_min);
-                                    System.out.println(hora_fim_max);
-                                    System.out.println(next_hora_inicio);
-                                    if (hora_inicio.compareTo(hora_inicio_min) < 0 || hora_fim_max.compareTo(next_hora_inicio) > 0) {
-                                        error_counter++;
+                                    if (reserva.isAtivo() || reserva.getIdReserva() != id_reserva) {
+                                        res_hora_inicio = methodsInterface.stringToTime(reserva.getHoraInicio());
+                                        res_hora_fim = methodsInterface.stringToTime(reserva.getHoraFim());
+                                        res_hora_fim_total = methodsInterface.addDurationToHour(res_hora_fim, tempo_limp);
+                                        hora_fim_total = methodsInterface.addDurationToHour(hora_fim, tempo_limp);
+                                        if (((hora_inicio.compareTo(res_hora_inicio) >= 0 && hora_inicio.compareTo(res_hora_fim_total) < 0)
+                                                || hora_fim_total.compareTo(res_hora_inicio)>=0 && hora_fim_total.compareTo(res_hora_fim_total)<0) || hora_inicio.compareTo(hora_fim) >= 0)
+                                            error_counter++;
                                     }
                                 }
                             }
                             if (error_counter == 0) {
-                                Reserva newReserva = new Reserva(
+                                Reserva newReserva = new Reserva(id_reserva,
                                         reserva.getIdSala(), userId, string_hora_inicio, string_hora_fim,
                                         methodsInterface.formatDateForAPI(string_data_reserva),
                                         num_pessoas, true);
@@ -334,10 +320,17 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
     }
 
     public void updateReserva(int id_reserva, Reserva reserva, Context mCtx, String message) {
-        Call<Reserva> updateReserva = apiInterface.updateReserva(id_reserva, reserva);
+        String AuthToken = new SharedPrefManager(mCtx).getAuthToken();
+
+        Call<Reserva> updateReserva = apiInterface.updateReserva(id_reserva, reserva, TokenType + AuthToken);
         updateReserva.enqueue(new Callback<Reserva>() {
             @Override
             public void onResponse(@NonNull Call<Reserva> call, @NonNull Response<Reserva> response) {
+                if(response.code() == 401)
+                {
+                    methodsInterface.logout(mCtx);
+                }
+
                 Reserva responseReserva = response.body();
                 if (responseReserva != null) {
                     Toast.makeText(mCtx, message,

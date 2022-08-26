@@ -10,13 +10,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.pint.roombookerapp2.Models.Sala;
+import com.pint.roombookerapp2.Models.CentroGeo;
 
-public class SpinAdapter extends ArrayAdapter<Sala> {
+public class SpinAdapterCentros extends ArrayAdapter<CentroGeo> {
     private final Context context;
-    private final Sala[] values;
+    private final CentroGeo[] values;
 
-    public SpinAdapter(Context context, int textViewResourceId, Sala[] values)
+    public SpinAdapterCentros(Context context, int textViewResourceId, CentroGeo[] values)
     {
         super(context, textViewResourceId, values);
         this.context = context;
@@ -29,7 +29,7 @@ public class SpinAdapter extends ArrayAdapter<Sala> {
     }
 
     @Override
-    public Sala getItem(int position){
+    public CentroGeo getItem(int position){
         return values[position];
     }
 
@@ -49,7 +49,7 @@ public class SpinAdapter extends ArrayAdapter<Sala> {
         label.setWidth(228);
         // Then you can get the current item using the values array (Users array) and the current position
         // You can NOW reference each method you has created in your bean object (User class)
-        label.setText(values[position].getnSala().toString());
+        label.setText(values[position].getNomeCentro().toString());
 
         // And finally return your dynamic (or custom) view for each spinner item
         return label;
@@ -61,7 +61,7 @@ public class SpinAdapter extends ArrayAdapter<Sala> {
                                 @NonNull ViewGroup parent) {
         TextView label = (TextView) super.getDropDownView(position, convertView, parent);
         label.setTextColor(Color.BLACK);
-        label.setText(values[position].getnSala().toString());
+        label.setText(values[position].getNomeCentro().toString());
 
         return label;
     }

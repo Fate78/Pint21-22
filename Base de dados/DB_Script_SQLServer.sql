@@ -181,7 +181,8 @@ create table UTILIZADOR (
    PALAVRA_PASSE        varchar(1024)        not null,
    EMAIL                varchar(1024)        UNIQUE not null,
    DATA_NASCIMENTO      date                 null,
-   VERIFICADO           bit                  not null,
+   EMAILVERIFICADO      bit                  not null default 0,
+   PASSWORDVERIFICADA   bit                  not null default 0,
    ATIVO                bit                  not null,
    constraint PK_UTILIZADOR primary key (ID_UTILIZADOR)
 )

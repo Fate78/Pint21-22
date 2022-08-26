@@ -42,6 +42,7 @@ public class HistoricoReservasFragment extends Fragment {
     Context mCtx;
     String username;
     final MethodsInterface methodsInterface = new Methods();
+    String TokenType = "Bearer ";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -57,13 +58,20 @@ public class HistoricoReservasFragment extends Fragment {
 
         username = new SharedPrefManager(getActivity()).getUsername();
 
+        String AuthToken = new SharedPrefManager(root.getContext()).getAuthToken();
+
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
-        Call<Utilizador> call = apiInterface.getUtilizadorReservas(username);
+        Call<Utilizador> call = apiInterface.getUtilizadorReservas(username, TokenType + AuthToken);
 
         call.enqueue(new Callback<Utilizador>() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(@NonNull Call<Utilizador> call, @NonNull Response<Utilizador> response) {
+                if(response.code() == 401)
+                {
+                    methodsInterface.logout(mCtx);
+                }
+
                 if (response.body() != null){
                     Log.e("Success",response.body().toString());
                     List<Reserva> reservasList = response.body().getReservas();

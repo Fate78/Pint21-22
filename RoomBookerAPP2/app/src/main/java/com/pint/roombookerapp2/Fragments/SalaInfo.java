@@ -65,7 +65,6 @@ public class SalaInfo extends Fragment {
 
         getSalaInfo(id_sala);
         ed_centro.setText(centro_name);
-        methodsInterface.generateQrCode(id_sala, img_qrCode);
         return root;
     }
 
@@ -87,7 +86,7 @@ public class SalaInfo extends Fragment {
             centro_name = new SharedPrefManager(getContext()).getCentroName();
             getSalaInfo(id_sala);
             ed_centro.setText(centro_name);
-            methodsInterface.generateQrCode(id_sala, img_qrCode);
+
         }
     }
 
@@ -110,10 +109,11 @@ public class SalaInfo extends Fragment {
                 if (response.body() != null){
                     Log.e("Success",response.body().toString());
                     Sala sala = response.body();
-
+                    int nSala = sala.getnSala();
                     txt_nsala.setText("Sala " + sala.getnSala().toString());
                     ed_lotacao.setText(sala.getLotacaoMax().toString());
                     ed_limpeza.setText(methodsInterface.formatTimeForUser(sala.getTempoMinLimp()) + " Min.");
+                    methodsInterface.generateQrCode(id_sala, nSala, img_qrCode);
                 }
             }
 

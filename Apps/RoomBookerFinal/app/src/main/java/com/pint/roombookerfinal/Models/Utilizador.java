@@ -13,10 +13,17 @@ public class Utilizador {
     private String dataNascimento;
     private boolean verificado;
     private boolean ativo;
-    private String idTipoNavigation = null;
+    private Object idTipoNavigation = null;
     private List<Reserva> reservas = null;
     private List < Object > tickets = null;
     private List < Object > utilizadorCentros = null;
+
+    public Utilizador(int idUtilizador, String nomeUtilizador, String email)
+    {
+        this.idUtilizador = idUtilizador;
+        this.nomeUtilizador = nomeUtilizador;
+        this.email = email;
+    }
 
     public Utilizador(int idUtilizador, int idTipo, String nomeUtilizador, String nomeCompleto, String palavraPasse, String email,
                       String dataNascimento, boolean verificado, boolean ativo)
@@ -69,7 +76,7 @@ public class Utilizador {
         return ativo;
     }
 
-    public String getIdTipoNavigation() {
+    public Object getIdTipoNavigation() {
         return idTipoNavigation;
     }
 
@@ -111,7 +118,7 @@ public class Utilizador {
         this.ativo = ativo;
     }
 
-    public void setIdTipoNavigation(String idTipoNavigation) {
+    public void setIdTipoNavigation(Object idTipoNavigation) {
         this.idTipoNavigation = idTipoNavigation;
     }
 

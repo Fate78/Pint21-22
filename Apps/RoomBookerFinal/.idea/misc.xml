@@ -30,22 +30,29 @@
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/App/RoomBookerFinal/app/src/main/res/menu/activity_main_drawer.xml" value="0.536" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/App/RoomBookerFinal/app/src/main/res/menu/navigation_drawer.xml" value="0.2" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/App/RoomBookerFinal/app/src/main/res/menu/reservar_button.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/drawable-v21/ic_menu_camera.xml" value="0.2595" />
+        <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/drawable-v21/ic_menu_gallery.xml" value="0.2595" />
+        <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/drawable-v21/ic_menu_slideshow.xml" value="0.2595" />
+        <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2595" />
+        <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/drawable/qrcode.xml" value="0.2585" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/drawable/side_nav_bar.xml" value="0.2595" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/layout/activity_navigation_drawer.xml" value="0.264" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/layout/activity_perfil.xml" value="0.4" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/layout/activity_reservas_sala.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/layout/activity_sala.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/layout/activity_scan.xml" value="0.13229166666666667" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/layout/app_bar_navigation_drawer.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/layout/content_navigation_drawer.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/layout/fragment_centros.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/layout/fragment_historico_reservas.xml" value="0.17447916666666666" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/layout/fragment_reservas.xml" value="0.17447916666666666" />
+        <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/layout/fragment_scanner.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/layout/item_reserva.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/layout/item_sala.xml" value="0.17447916666666666" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/layout/nav_header_navigation_drawer.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/layout/reservar_dialog.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/menu/activity_main_drawer.xml" value="0.1953125" />
+        <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/menu/activity_main_drawer.xml" value="0.4" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/menu/navigation_drawer.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Daniel/OneDrive/Documentos/GitHub/Pint21-22/Apps/RoomBookerFinal/app/src/main/res/menu/reservar_button.xml" value="0.15677083333333333" />
       </map>

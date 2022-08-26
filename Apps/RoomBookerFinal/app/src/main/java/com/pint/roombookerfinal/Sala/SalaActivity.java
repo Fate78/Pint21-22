@@ -1,7 +1,6 @@
 package com.pint.roombookerfinal.Sala;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,7 +25,6 @@ import retrofit2.Response;
 
 public class SalaActivity extends AppCompatActivity {
     private int salaId;
-    Context mCtx;
     EditText edNSala, edLocalizacao, edLotacao, edLimpeza;
     Button btn_reservas;
     private String selectedCentroName, nSala, tempo_limpeza, lotacao;

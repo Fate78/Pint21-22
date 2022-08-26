@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:allowBackup="true"
@@ -13,6 +17,9 @@
         android:theme="@style/Theme.RoomBookerFinal"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity
+            android:name=".ScannerActivity"
+            android:exported="false" />
         <activity
             android:name=".Sala.ReservasSalaActivity"
             android:exported="false"

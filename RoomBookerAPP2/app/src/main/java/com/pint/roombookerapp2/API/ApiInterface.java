@@ -1,5 +1,7 @@
 package com.pint.roombookerapp2.API;
 
+import com.pint.roombookerapp2.Models.AuthToken;
+import com.pint.roombookerapp2.Models.Authenticate;
 import com.pint.roombookerapp2.Models.CentroGeo;
 import com.pint.roombookerapp2.Models.Reserva;
 import com.pint.roombookerapp2.Models.Sala;
@@ -10,6 +12,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -43,24 +46,30 @@ public interface ApiInterface {
                                            @Path("dateBegin") String dateBegin,
                                            @Path("dateEnd") String dateEnd);
 
+    @PUT("api/salas/{id}")
+    Call<Sala> updateSala(@Path("id") int id, @Body Sala sala, @Header("Authorization") String authToken);
+
     //Utilizador
+    @POST("/api/utilizadores/authenticate")
+    Call<AuthToken> authenticate(@Body Authenticate authenticate);
+
     @GET("/api/utilizadores")
-    Call<List<Utilizador>> getUtilizadores();
+    Call<List<Utilizador>> getUtilizadores(@Header("Authorization") String authToken);
 
     @GET("api/utilizadores/{username}")
-    Call<Utilizador> getUtilizador(@Path("username") String username);
+    Call<Utilizador> getUtilizador(@Path("username") String username, @Header("Authorization") String authToken);
 
     @GET("api/utilizadores/{username}/reservas")
-    Call<Utilizador> getUtilizadorReservas(@Path("username") String username);
+    Call<Utilizador> getUtilizadorReservas(@Path("username") String username, @Header("Authorization") String authToken);
 
     //Reservas
     @GET("api/reservas/{date}")
     Call<List<Reserva>> getReservasbyDate(@Path("date") String date);
 
     @POST("api/reservas")
-    Call<Reserva> createReserva(@Body Reserva reserva);
+    Call<Reserva> createReserva(@Body Reserva reserva, @Header("Authorization") String authToken);
 
     @PUT("api/reservas/{id}")
-    Call<Reserva> updateReserva(@Path("id") int id, @Body Reserva reserva);
+    Call<Reserva> updateReserva(@Path("id") int id, @Body Reserva reserva, @Header("Authorization") String authToken);
 
 }

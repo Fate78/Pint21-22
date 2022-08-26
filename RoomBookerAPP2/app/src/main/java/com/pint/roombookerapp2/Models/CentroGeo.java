@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CentroGeo {
+    private List<CentroGeo> centroGeoList;
     private int idCentro;
     private String nomeCentro;
     private Object imagem;
