@@ -7,18 +7,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './context/AuthProvider';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Navbar from './menu/Navs/NavBar';
-import NavBarTop from './menu/Navs/NavBarTop';
-import Footer from './menu/Navs/Footer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-      <NavBarTop />
-        <Navbar />
-        <Routes>
+        <Routes>     
           <Route path="/*" element={<App />} />
         </Routes>
       </AuthProvider>

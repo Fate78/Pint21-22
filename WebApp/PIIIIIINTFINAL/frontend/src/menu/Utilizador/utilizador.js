@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from "react-router";
 import '../../CSS/stylesdashboard1.css';
 import '../../CSS/style.css'
+import axios from 'axios';
 const baseUrl = "https://roombookerapi.azurewebsites.net/api";
 
 
 
 
 export default function Pagina() {
+    
     const [state, setState] = useState({
         idTipo: "",
         nomeUtilizador: "",
@@ -20,37 +22,29 @@ export default function Pagina() {
 
 
 
-    const idUtilizador = useLocation();
+    const iDUtilizador = useLocation();
     useEffect(() => {
 
-        fetch(baseUrl + "/utilizadores/" + idUtilizador.pathname.split("/")[2], {
-            "method": "GET",
-            "headers": {
-                "Accept": "application/json",
-                "Access-Control-Allow-Origin": "true"
-            }
-        })
-            .then(response => response.json())
+        axios.get(baseUrl + "/utilizadores/" + iDUtilizador.pathname.split("/")[2])
             .then(response => {
                 console.log(response)
                 setState({
-                    idTipo: response.idTipo,
-                    nomeUtilizador: response.nomeUtilizador,
-                    nomeCompleto: response.nomeCompleto,
-                    email: response.email,
-                    dataNascimento: response.dataNascimento,
-                    verificado: response.verificado
+                    idTipo: response.data.idTipo,
+                    nomeUtilizador: response.data.nomeUtilizador,
+                    nomeCompleto: response.data.nomeCompleto,
+                    email: response.data.email,
+                    dataNascimento: response.data.dataNascimento,
+                    verificado: response.data.verificado
                 })
 
             })
             .catch(err => {
                 console.log(err);
             })
-    }, [idUtilizador])
-    console.log(idUtilizador)
+    }, [iDUtilizador])
 
-
-
+    
+    
     return (
         <div id="content-wrapper" class="d-flex flex-column">
             <div className="main">

@@ -1,75 +1,146 @@
-import React from 'react';
-import axios from 'axios';
-import { Link } from "react-router-dom"
-import '../../assets/bootstrap/bootstrap/css/bootstrap.css';
-import '../../assets/CSS/stylesdashboard1.css';
-import '../../assets/CSS/styleslogin.css';
+import React, { useEffect, useState, useRef } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import '../../CSS/stylesdashboard1.css';
+import '../../CSS/style.css'
+import axios from "axios"
+import useAuth from '../../hooks/useAuth';
+import { AuthProvider } from '../../context/AuthProvider';
 
-class Pagina extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
+const baseUrl = "https://roombookerapi.azurewebsites.net/api";
 
-  }
+export default function Pagina() {
+    const { setAuth } = useAuth();
 
-  componentDidMount() {
-    // get all entities - GET
-    fetch("https://roombookerapi.azurewebsites.net/api/utilizadores", {
-        "method": "GET",
-        "headers": {
-            "Accept": "application/json",
-            "Access-Control-Allow-Origin" : "true"
+    const [utilizador, setUtilizador] = useState();
+
+    const navigate = useNavigate();
+    let location 
+    const verify = "/verificar"
+
+    const userRef = useRef();
+    const errRef = useRef();
+
+    const [user, setUser] = useState('');
+    const [password, setPassword] = useState('');
+    const [errMsg, setErrMsg] = useState('');
+
+
+    useEffect(() => {
+        userRef.current.focus();
+    }, [])
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [user, password])
+
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post(baseUrl + "/utilizadores/authenticate",
+                { UtilizadorInput: user, PalavraPasse: password },
+                {
+                    Headers: { 'Content-Type': 'application/json' },
+                },
+            );
+            const { token } = response.data;
+            localStorage.setItem("token", token);
+            localStorage.setItem("user", user);
+            localStorage.setItem("password", password);
+            console.log(JSON.stringify(response?.data))
+            setUser(user);
+            setPassword('');
+            setAuth({ user, password });
+            
+            /*await Util()
+
+            if(utilizador.passwordVerificada) {
+                location = "/dashboard"
+            } else {
+                location = "/verificar"
+            }*/
+            const location = "/dashboard"
+            navigate(location, { replace: true });
+            
+            console.log(user, password)
+
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('No server response');
+            } else if (err.response?.status === 400) {
+                setErrMsg('Missing username or password')
+            } else if (err.response?.status === 401) {
+                setErrMsg('Sem autorização')
+            } else {
+                setErrMsg('Login failed')
+            }
+            errRef.current.focus();
         }
-    })
-    .then(response => response.json())
-    .then(response => {
-        this.setState({
-        utilizadores: response
-        })
-    })
-    .catch(err => { console.log(err); 
-    });
 
-}
+    }
 
-  render() {
+    /*async function Util() {
+        const accesstoken = localStorage.getItem("token")
+        axios.defaults.headers.common['Authorization'] = `Bearer ${accesstoken}`
+
+
+        axios.get(baseUrl + "/utilizadores/" + user)
+            .then(data => {
+                setUtilizador(
+                    data.data
+                )
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        console.log(utilizador)
+    }*/
+
+
     return (
-  
-            <div class="Section_top">
-             <div class=" center">
-                 <h1>Login</h1>
-                 <form method="post">
-                     <div class="txt_field">
-                         <input type="text" required />
-                         <label>Username</label> 
-                     </div>
-                     <div class="txt_field">
-                         <input type="password" required />
-                         <label>Password</label>
-                     </div>
-                     <div class= "pass">Esqueceu a Password? <a href="#">Recupere aqui</a></div>
-                      <a href="dashboard.html"><input type="submit" value="Login" /></a>
-                     <div class="signup_link">
-                         Faça Login ou registe-se <a href="registar.html">aqui</a>
-                     </div>
-                </form>
-             </div>
+        <div className="vh-100">
+            <div className="container-fluid h-custom">
+                <div className="row d-flex justify-content-center align-items-center h-100">
+                    <div className="col-md-9 col-lg-6 col-xl-5">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" className="img-fluid" alt="Sample image" />
+                    </div>
+                    <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                        <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"> {errMsg} </p>
+                        <h1>Entrar</h1>
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-outline mb-4">
+                                <label htmlFor='password' className="form-label"> Nome de Utilizador:</label>
+                                <input type='text'
+                                    id='username'
+                                    ref={userRef}
+                                    autoComplete='off'
+                                    onChange={(e) => setUser(e.target.value)}
+                                    value={user}
+                                    required
+                                    className="form-control form-control-lg"
+                                />
+                            </div>
+                            <div className="form-outline mb-3">
+                                <label htmlFor='password' className="form-label"> Password:</label>
+                                <input type='password'
+                                    id='password'
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    value={password}
+                                    required
+                                    className="form-control form-control-lg"
+                                />
+                            </div>
+                            <button>Entrar</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-
+        </div>
     );
-  }
+}
 
-  loadFillData() {
-    return this.state.utilizadores.map((data, index) =>{
-        return(
-            <tr key={index}>
-                
-                
-                    
-            </tr>
-        )
-    })
-}
-}
-export default Pagina;
+
+
+

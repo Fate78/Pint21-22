@@ -5,7 +5,6 @@ import NavBarTop from '../menu/Navs/NavBarTop';
 const Layout = () => {
     return (
         <div>
-            
             <Outlet />
         </div>
     )

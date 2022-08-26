@@ -14,9 +14,7 @@ export default function Pagina() {
     axios.defaults.headers.common['Authorization'] = `Bearer ${accesstoken}`
 
     useEffect(() => {
-        axios.get(baseUrl + "/salas"
-
-        )
+        axios.get(baseUrl + "/salas")
             .then(data => {
 
                 setSalas(
@@ -24,11 +22,12 @@ export default function Pagina() {
                 )
 
             })
+            
             .catch(err => {
                 console.log(err);
             });
+            
     }, [])
-
     useEffect(() => {
 
         axios.get(baseUrl + "/centros"

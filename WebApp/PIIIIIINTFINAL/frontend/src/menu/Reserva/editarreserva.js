@@ -14,20 +14,25 @@ export default function Pagina() {
     const accesstoken = localStorage.getItem("token")
     axios.defaults.headers.common['Authorization'] = `Bearer ${accesstoken}`
     const [state, setState] = useState({
-        reservas: [],
+        idReserva: "",
         idSala: "",
         idCentro: "",
-        nSala: "",
-        lotacaoMax: "",
-        tempoMinLimp: "",
-        limpo: "",
+        idUtilizador: "",
+        //nomeUtilizador: "",
+        horaInicio: "",
+        horaFim: "",
+        dataReserva: "",
+        numPessoas: "",
         ativo: "",
-
     })
 
     const [submit, setSubmit] = useState({
-        lotacaoMax: "",
-        tempoMinLimp: "",
+        idSala: "",
+        //nomeUtilizador: "",
+        horaInicio: "",
+        horaFim: "",
+        dataReserva: "",
+        numPessoas: "",
         ativo: "",
 
     })
@@ -40,19 +45,22 @@ export default function Pagina() {
         }))
     }
 
-    const idSala = useLocation();
+    const IDReserva = useLocation();
     useEffect(() => {
 
-        axios.get(baseUrl + "/salas/" + idSala.pathname.split("/")[3])
+        axios.get(baseUrl + "/reservas/" + IDReserva.pathname.split("/")[3])
             .then(data => {
                 console.log(data)
                 setState({
+                    idReserva: data.data.idReserva,
                     idSala: data.data.idSala,
                     idCentro: data.data.idCentro,
-                    nSala: data.data.nSala,
-                    lotacaoMax: data.data.lotacaoMax,
-                    tempoMinLimp: data.data.tempoMinLimp,
-                    limpo: data.data.limpo,
+                    idUtilizador: data.data.idUtilizador,
+                   // nomeUtilizador: data.data.nomeUtilizador,
+                    horaInicio: data.data.horaInicio,
+                    horaFim: data.data.horaFim,
+                    dataReserva: data.data.dataReserva,
+                    numPessoas: data.data.numPessoas,
                     ativo: data.data.ativo
                 })
 
@@ -60,21 +68,26 @@ export default function Pagina() {
             .catch(err => {
                 console.log(err);
             })
-    }, [idSala])
-    console.log(idSala)
+    }, [IDReserva])
+    console.log(IDReserva)
 
 
     function useUpdate() {
         // update entity - PUT
-        axios.put(baseUrl + "/salas/" + idSala.pathname.split("/")[3],
+        axios.put(baseUrl + "/reservas/" + IDReserva.pathname.split("/")[3],
             {
-                idSala: state.idSala,
+
+                idReserva: state.idReserva,
+                idSala: submit.idSala === "" ? state.idSala : submit.idSala,
                 idCentro: state.idCentro,
-                nSala: state.nSala,
-                lotacaoMax: submit.lotacaoMax === "" ? state.lotacaoMax : submit.lotacaoMax,
-                tempoMinLimp: submit.tempoMinLimp === "" ? state.tempoMinLimp : submit.tempoMinLimp,
-                limpo: state.limpo,
+                idUtilizador: state.idUtilizador,
+                //nomeUtilizador: submit.nomeUtilizador === "" ? state.nomeUtilizador : submit.nomeUtilizador,
+                horaInicio: submit.horaInicio === "" ? state.horaInicio : submit.horaInicio,
+                horaFim: submit.horaFim === "" ? state.horaFim : submit.horaFim,
+                dataReserva: submit.dataReserva === "" ? state.dataReserva : submit.dataReserva,
+                numPessoas: submit.numPessoas === "" ? state.numPessoas : submit.numPessoas,
                 ativo: submit.ativo === "" ? state.ativo : submit.ativo,
+
             }
         )
             .then(data => {
@@ -99,16 +112,20 @@ export default function Pagina() {
 
                     <p>Esta sala encontra-se localizada no centro {state.idCentro}</p>
                     <form>
-                        <p>Tem uma lotação máxima de <input name="lotacaoMax" onChange={handleChange} value={submit.lotacaoMax} placeholder={state.lotacaoMax} /></p>
-                        <p>O tempo mínimo de limpeza é <input name="tempoMinLimp" onChange={handleChange} value={submit.tempoMinLimp} placeholder={state.tempoMinLimp} /></p>
+                        <p>Tem uma lotação máxima de <input name="idSala" onChange={handleChange} value={submit.idSala} placeholder={state.idSala} /></p>
+                        
+                        <p>Tem uma lotação máxima de <input name="horaInicio" onChange={handleChange} value={submit.horaInicio} placeholder={state.horaInicio} /></p>
+                        <p>O tempo mínimo de limpeza é <input name="horaFim" onChange={handleChange} value={submit.horaFim} placeholder={state.horaFim} /></p>
+                        <p>Tem uma lotação máxima de <input name="dataReserva" onChange={handleChange} value={submit.dataReserva} placeholder={state.dataReserva} /></p>
+                        <p>O tempo mínimo de limpeza é <input name="numPessoas" onChange={handleChange} value={submit.numPessoas} placeholder={state.numPessoas} /></p>
                         <p>Ativo? <input name='ativo' value="true" onChange={handleChange} type="radio" /> Ativo <input name='ativo' onChange={handleChange} value="false" type="radio" /> Inativo</p>
                         <p>
-                            <Link to={`/sala/${idSala.pathname.split("/")[3]}`} className="">
+                            <Link to={`/reserva/${IDReserva.pathname.split("/")[3]}`} className="">
                                 <button className='btn btn-primary' onClick={useUpdate}>Guardar</button>
                             </Link></p>
                     </form>
                     <p>
-                        <Link to={`/sala/${idSala.pathname.split("/")[3]}`}>
+                        <Link to={`/reserva/${IDReserva.pathname.split("/")[3]}`}>
                             <button className='btn btn-primary'>Cancelar</button>
                         </Link>
                     </p>
