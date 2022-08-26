@@ -13,6 +13,18 @@ public class Sala {
     private CentroGeo idCentroNavigation;
     private List<Reserva> reservas = null;
 
+    public Sala(){
+
+    }
+
+    public Sala(Integer idCentro, Integer nSala, Integer lotacaoMax, String tempoMinLimp, Boolean ativo){
+        this.idCentro = idCentro;
+        this.nSala = nSala;
+        this.lotacaoMax = lotacaoMax;
+        this.tempoMinLimp = tempoMinLimp;
+        this.ativo = ativo;
+    }
+
     public Integer getIdSala() {
         return idSala;
     }

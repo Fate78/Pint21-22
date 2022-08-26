@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -19,7 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.pint.roombookerapp2.API.ApiClient;
 import com.pint.roombookerapp2.API.ApiInterface;
-import com.pint.roombookerapp2.Adapters.SpinAdapter;
+import com.pint.roombookerapp2.Adapters.SpinAdapterCentros;
+import com.pint.roombookerapp2.Adapters.SpinAdapterSalas;
 import com.pint.roombookerapp2.Methods;
 import com.pint.roombookerapp2.MethodsInterface;
 import com.pint.roombookerapp2.Models.CentroGeo;
@@ -40,12 +40,15 @@ public class EditarSalaActivity extends AppCompatActivity {
     private Spinner spinnerCentros, spinnerSalas;
     ArrayList<String> centroName;
     Sala[] salas_array;
+    CentroGeo[] centros_array;
     EditText ed_nSala, ed_lotacao, ed_limpeza, ed_centro;
     final MethodsInterface methodsInterface = new Methods();
     final ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
     Button btn_select, btn_update;
     Context mCtx;
-    int id_sala;
+    int id_sala, id_centro;
+    String limpeza;
+    Integer nSala, lotacao;
     String centro_name;
     String TokenType = "Bearer ";
 
@@ -74,8 +77,10 @@ public class EditarSalaActivity extends AppCompatActivity {
         spinnerCentros.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String centro = spinnerCentros.getItemAtPosition(spinnerCentros.getSelectedItemPosition()).toString();
-                loadSpinnerSala(centro);
+                CentroGeo centroGeo = (CentroGeo) spinnerCentros.getItemAtPosition(position);
+                String centro_name = spinnerCentros.getItemAtPosition(spinnerCentros.getSelectedItemPosition()).toString();
+                new SharedPrefManager(view.getContext()).saveCentro(centroGeo.getIdCentro(), centro_name);
+                loadSpinnerSala(centro_name);
             }
 
             @Override
@@ -93,12 +98,26 @@ public class EditarSalaActivity extends AppCompatActivity {
                     int selectedCentroId = spinnerCentros.getSelectedItemPosition();
                     String selectedCentro = spinnerCentros.getItemAtPosition(selectedCentroId).toString();
                     new SharedPrefManager(v.getContext()).saveSalaInfo(sala.getIdSala(), selectedCentro);
+                    getSala(sala.getIdSala());
                 });
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        btn_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                id_centro = new SharedPrefManager(v.getContext()).getCentroId();
+                id_sala = new SharedPrefManager(v.getContext()).getSalaId();
+                nSala = Integer.valueOf(ed_nSala.getText().toString());
+                lotacao = Integer.valueOf(ed_lotacao.getText().toString());
+                limpeza = ed_limpeza.getText().toString();
+                Sala newSala = new Sala(id_centro, nSala, lotacao, limpeza, true);
+                updateSala(id_sala, newSala, v.getContext());
             }
         });
     }
@@ -125,13 +144,22 @@ public class EditarSalaActivity extends AppCompatActivity {
                     if (centroGeoList.isEmpty())
                         Toast.makeText(EditarSalaActivity.this, "Não existem centros",
                                 Toast.LENGTH_LONG).show();
-                    else
-                        centroName = new ArrayList<String>();
-                        for(CentroGeo centroGeo : centroGeoList)
-                            centroName.add(centroGeo.getNomeCentro());
-                        spinnerCentros.setAdapter(new ArrayAdapter<String>(EditarSalaActivity.this, android.R.layout.simple_spinner_dropdown_item, centroName));
+                    else {
+                        /*centroName = new ArrayList<String>();
+                        for (CentroGeo centroGeo : centroGeoList)
+                            centroName.add(centroGeo.getNomeCentro());*/
+                        centros_array = new CentroGeo[centroGeoList.size()];
+                        for(int i=0; i<centroGeoList.size(); i++) {
+                            centros_array[i] = new CentroGeo();
+                            int id_centro = centroGeoList.get(i).getIdCentro();
+                            String centro_name = centroGeoList.get(i).getNomeCentro();
+                            centros_array[i].setIdCentro(id_centro);
+                            centros_array[i].setNomeCentro(centro_name);
+                        }
+                        }
+                    }
+                        spinnerCentros.setAdapter(new SpinAdapterCentros(EditarSalaActivity.this, android.R.layout.simple_spinner_dropdown_item, centros_array));
                 }
-            }
 
             @Override
             public void onFailure(@NonNull Call<List<CentroGeo>> call, @NonNull Throwable t) {
@@ -179,7 +207,7 @@ public class EditarSalaActivity extends AppCompatActivity {
                                 salas_array[i].setLotacaoMax(lotacao);
                                 salas_array[i].setTempoMinLimp(limpeza);
                             }
-                            spinnerSalas.setAdapter(new SpinAdapter(EditarSalaActivity.this, android.R.layout.simple_spinner_item, salas_array));
+                            spinnerSalas.setAdapter(new SpinAdapterSalas(EditarSalaActivity.this, android.R.layout.simple_spinner_item, salas_array));
                     }
                 }catch (Exception e) {
                     e.printStackTrace();
