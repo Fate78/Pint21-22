@@ -1,64 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from "react-router";
-import '../CSS/stylesdashboard1.css';
-import '../CSS/style.css'
+import axios from "axios";
+import { useEffect, useState } from "react";
+import BarChart from "../graphs/chart-bar";
+import NumUtilizadores from "../graphs/numutilizadores"
+import NumReservas from "../graphs/numreservas";
+import SalaCapacidade from "../graphs/salacapacidade";
+import {
+    Card,
+    Container,
+    Row,
+    Col,
+} from "react-bootstrap";
 const baseUrl = "https://roombookerapi.azurewebsites.net/api";
 
-
-
-
-export default function Pagina() {
-    const [state, setState] = useState({
-        
-    })
-
-
-
-    const idSala = useLocation();
-    useEffect(() => {
-
-        fetch(baseUrl + "/reservas/alocacaodiaria", {
-            "method": "GET",
-            "headers": {
-                "Accept": "application/json",
-                "Access-Control-Allow-Origin": "true"
-            }
-        })
-            .then(response => response.json())
-            .then(response => {
-                console.log(response)
-                setState({
-                    
-                })
-
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }, [idSala])
-    console.log(idSala)
-
-
+function App() {
+    const accesstoken = localStorage.getItem("token")
+    const user = localStorage.getItem("user")
+    const password = localStorage.getItem("password")
+    axios.defaults.headers.common['Authorization'] = `Bearer ${accesstoken}`
 
     return (
-        <div id="content-wrapper" class="d-flex flex-column">
-            <div className="main">
-                <h3 className="mb-4 text-gray-800">Informações da sala</h3>
-                <div className='budy'>
-                <div className='tituloSala'><p><h1><b>Sala {state.nSala}</b></h1></p></div>
+        <div id="content-wrapper" className="d-flex flex-column">
+            <div className="container">
+                <h3 className="mb-4 text-gray-800">Dashboard</h3>
+                <div className="row row-cols-1 row-cols-md-3 row-cols-lg-2 g-4">
+                    <BarChart />
 
-                <p>Esta sala encontra-se localizada no centro {state.idCentro}</p>
+                    <SalaCapacidade />
+
+                    <NumUtilizadores />
+
+                    <NumReservas />
                 </div>
             </div>
-
         </div>
-
-
     );
-
-
 }
 
-
-
-
+export default App;
