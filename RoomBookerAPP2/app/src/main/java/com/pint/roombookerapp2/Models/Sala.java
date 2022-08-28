@@ -9,6 +9,7 @@ public class Sala {
     private Integer nSala;
     private Integer lotacaoMax;
     private String tempoMinLimp;
+    private Boolean limpo;
     private Boolean ativo;
     private CentroGeo idCentroNavigation;
     private List<Reserva> reservas = null;
@@ -17,11 +18,13 @@ public class Sala {
 
     }
 
-    public Sala(Integer idCentro, Integer nSala, Integer lotacaoMax, String tempoMinLimp, Boolean ativo){
+    public Sala(Integer idSala, Integer idCentro, Integer nSala, Integer lotacaoMax, String tempoMinLimp, Boolean limpo, Boolean ativo){
+        this.idSala = idSala;
         this.idCentro = idCentro;
         this.nSala = nSala;
         this.lotacaoMax = lotacaoMax;
         this.tempoMinLimp = tempoMinLimp;
+        this.limpo = limpo;
         this.ativo = ativo;
     }
 

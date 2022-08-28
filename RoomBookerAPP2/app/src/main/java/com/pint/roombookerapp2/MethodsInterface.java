@@ -32,7 +32,7 @@ public interface MethodsInterface {
 
     void popDatePicker(View view, EditText editText);
 
-    void generateQrCode(int idSala, int nSala,ImageView img_qrCode);
+    void generateQrCode(ImageView img_qrCode, int idSala, int nSala, int lotacao, String limpeza, Context mCtx);
 
     void logout(Context mCtx);
 }

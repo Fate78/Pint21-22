@@ -205,11 +205,15 @@ public class Methods implements MethodsInterface{
         return "01";
     }
 
-    public void generateQrCode(int idSala, int nSala,ImageView img_qrCode)
+    public void generateQrCode(ImageView img_qrCode, int idSala, int nSala, int lotacao, String limpeza, Context mCtx)
     {
+        String centro_name = new SharedPrefManager(mCtx).getCentroName();
         JsonObject jsonData = new JsonObject();
         jsonData.addProperty("idSala", idSala);
         jsonData.addProperty("nSala", nSala);
+        jsonData.addProperty("lotacao", lotacao);
+        jsonData.addProperty("limpeza", limpeza);
+        jsonData.addProperty("nomeCentro", centro_name);
 
         MultiFormatWriter writer = new MultiFormatWriter();
         try {

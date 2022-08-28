@@ -118,21 +118,32 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
     public void handleResult(Result result) {
         final String rawresult = result.getText();
 
+        JsonObject jsonObject = (JsonObject) JsonParser.parseString(rawresult);
+        System.out.println(jsonObject);
+        JsonPrimitive jsIdSala = jsonObject.getAsJsonPrimitive("idSala");
+        JsonPrimitive jsNSala = jsonObject.getAsJsonPrimitive("nSala");
+        JsonPrimitive jsLotacao = jsonObject.getAsJsonPrimitive("lotacao");
+        JsonPrimitive jsLimpeza = jsonObject.getAsJsonPrimitive("limpeza");
+        JsonPrimitive jsNomeCentro = jsonObject.getAsJsonPrimitive("nomeCentro");
+
+        int id_sala = Integer.parseInt(String.valueOf(jsIdSala));
+        String nSala = String.valueOf(jsNSala);
+        int lotacao = Integer.parseInt(String.valueOf(jsLotacao));
+        String limpeza = String.valueOf(jsLimpeza);
+        String nomeCentro = String.valueOf(jsNomeCentro);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(rawresult);
+        builder.setTitle("Centro: " + nomeCentro);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //scannerView.resumeCameraPreview(ScanActivity.this);
-                JsonObject jsonObject = (JsonObject) JsonParser.parseString(rawresult);
-                System.out.println(jsonObject);
-                JsonPrimitive jsIdSala = jsonObject.getAsJsonPrimitive("idSala");
-                JsonPrimitive jsNSala = jsonObject.getAsJsonPrimitive("nSala");
-                int id_sala = Integer.parseInt(String.valueOf(jsIdSala));
-                String nSala = String.valueOf(jsNSala);
                 Intent intent = new Intent(ScannerActivity.this, ReservasSalaActivity.class);
                 intent.putExtra("IdSala", id_sala);
                 intent.putExtra("NSala", nSala);
+                intent.putExtra("Lotacao", lotacao);
+                intent.putExtra("Limpeza", limpeza);
+                intent.putExtra("NomeCentro", nomeCentro);
                 startActivity(intent);
             }
         });
@@ -143,7 +154,7 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
             }
         });
 
-        builder.setMessage(result.getText());
+        builder.setMessage("Prosseguir para a sala " + nSala + "?");
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }

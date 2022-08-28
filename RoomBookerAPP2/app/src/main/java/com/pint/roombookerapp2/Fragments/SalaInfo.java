@@ -1,6 +1,7 @@
 package com.pint.roombookerapp2.Fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -63,7 +64,7 @@ public class SalaInfo extends Fragment {
         id_sala = new SharedPrefManager(root.getContext()).getSalaId();
         centro_name = new SharedPrefManager(root.getContext()).getCentroName();
 
-        getSalaInfo(id_sala);
+        getSalaInfo(id_sala, root.getContext());
         ed_centro.setText(centro_name);
         return root;
     }
@@ -84,7 +85,7 @@ public class SalaInfo extends Fragment {
             // refresh fragment
             id_sala = new SharedPrefManager(getContext()).getSalaId();
             centro_name = new SharedPrefManager(getContext()).getCentroName();
-            getSalaInfo(id_sala);
+            getSalaInfo(id_sala, getContext());
             ed_centro.setText(centro_name);
 
         }
@@ -96,7 +97,7 @@ public class SalaInfo extends Fragment {
         shouldRefreshOnResume = true;
     }
 
-    public void getSalaInfo(int id_sala)
+    public void getSalaInfo(int id_sala, Context mCtx)
     {
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
         Call<Sala> call = apiInterface.getSala(id_sala);
@@ -110,10 +111,12 @@ public class SalaInfo extends Fragment {
                     Log.e("Success",response.body().toString());
                     Sala sala = response.body();
                     int nSala = sala.getnSala();
-                    txt_nsala.setText("Sala " + sala.getnSala().toString());
-                    ed_lotacao.setText(sala.getLotacaoMax().toString());
-                    ed_limpeza.setText(methodsInterface.formatTimeForUser(sala.getTempoMinLimp()) + " Min.");
-                    methodsInterface.generateQrCode(id_sala, nSala, img_qrCode);
+                    int lotacao = sala.getLotacaoMax();
+                    String limpeza = sala.getTempoMinLimp();
+                    txt_nsala.setText("Sala " + nSala);
+                    ed_lotacao.setText(lotacao);
+                    ed_limpeza.setText(methodsInterface.formatTimeForUser(limpeza) + " Min.");
+                    methodsInterface.generateQrCode(img_qrCode, id_sala, nSala, lotacao, limpeza, mCtx);
                 }
             }
 

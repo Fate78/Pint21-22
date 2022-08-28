@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         btn_logout.setOnClickListener(v -> {
             sharedPrefManager.clearLoginDetails();
+            sharedPrefManager.clearAuthToken();
             btn_login.setVisibility(View.VISIBLE);
             btn_sala.setVisibility(View.GONE);
             btn_logout.setVisibility(View.GONE);

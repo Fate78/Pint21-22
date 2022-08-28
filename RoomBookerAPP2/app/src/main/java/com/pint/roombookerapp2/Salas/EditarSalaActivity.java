@@ -65,6 +65,7 @@ public class EditarSalaActivity extends AppCompatActivity {
         ed_limpeza = findViewById(R.id.ed_edit_limpeza);
         ed_centro = findViewById(R.id.ed_edit_centro);
         btn_select = findViewById(R.id.btn_select);
+        btn_update = findViewById(R.id.btn_update);
 
         id_sala = new SharedPrefManager(this).getSalaId();
         centro_name = new SharedPrefManager(this).getCentroName();
@@ -78,7 +79,8 @@ public class EditarSalaActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 CentroGeo centroGeo = (CentroGeo) spinnerCentros.getItemAtPosition(position);
-                String centro_name = spinnerCentros.getItemAtPosition(spinnerCentros.getSelectedItemPosition()).toString();
+                //String centro_name = spinnerCentros.getItemAtPosition(spinnerCentros.getSelectedItemPosition()).toString();
+                String centro_name = centroGeo.getNomeCentro();
                 new SharedPrefManager(view.getContext()).saveCentro(centroGeo.getIdCentro(), centro_name);
                 loadSpinnerSala(centro_name);
             }
@@ -95,9 +97,7 @@ public class EditarSalaActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Sala sala = (Sala) spinnerSalas.getItemAtPosition(position);
                 btn_select.setOnClickListener(v -> {
-                    int selectedCentroId = spinnerCentros.getSelectedItemPosition();
-                    String selectedCentro = spinnerCentros.getItemAtPosition(selectedCentroId).toString();
-                    new SharedPrefManager(v.getContext()).saveSalaInfo(sala.getIdSala(), selectedCentro);
+                    new SharedPrefManager(v.getContext()).saveSalaInfo(sala.getIdSala());
                     getSala(sala.getIdSala());
                 });
             }
@@ -116,7 +116,7 @@ public class EditarSalaActivity extends AppCompatActivity {
                 nSala = Integer.valueOf(ed_nSala.getText().toString());
                 lotacao = Integer.valueOf(ed_lotacao.getText().toString());
                 limpeza = ed_limpeza.getText().toString();
-                Sala newSala = new Sala(id_centro, nSala, lotacao, limpeza, true);
+                Sala newSala = new Sala(id_sala, id_centro, nSala, lotacao, limpeza, true, true);
                 updateSala(id_sala, newSala, v.getContext());
             }
         });
@@ -239,6 +239,7 @@ public class EditarSalaActivity extends AppCompatActivity {
                     ed_nSala.setText(sala.getnSala().toString());
                     ed_lotacao.setText(sala.getLotacaoMax().toString());
                     ed_limpeza.setText(methodsInterface.formatTimeForUser(sala.getTempoMinLimp()));
+                    ed_centro.setText(new SharedPrefManager(EditarSalaActivity.this).getCentroName());
                 }
             }
 

@@ -141,7 +141,7 @@ public class SalaReservas extends Fragment {
             }
         });
 
-        getSala(id_sala);
+        getSala(id_sala, root.getContext());
 
         return root;
     }
@@ -153,7 +153,7 @@ public class SalaReservas extends Fragment {
         if(shouldRefreshOnResume){
             // refresh fragment
             id_sala = new SharedPrefManager(getContext()).getSalaId();
-            getSala(id_sala);
+            getSala(id_sala, getContext());
         }
     }
 
@@ -206,7 +206,7 @@ public class SalaReservas extends Fragment {
         });
     }
 
-    public void getSala(int id_sala)
+    public void getSala(int id_sala, Context mCtx)
     {
         ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
         Call<Sala> call = apiInterface.getSala(id_sala);
@@ -220,8 +220,10 @@ public class SalaReservas extends Fragment {
                     Log.e("Success",response.body().toString());
                     Sala sala = response.body();
                     int nSala = sala.getnSala();
+                    int lotacao = sala.getLotacaoMax();
+                    String limpeza = sala.getTempoMinLimp();
                     txt_nsala.setText("Sala " + nSala);
-                    methodsInterface.generateQrCode(id_sala, nSala, img_qrCode);
+                    methodsInterface.generateQrCode(img_qrCode, id_sala, nSala, lotacao, limpeza, mCtx);
                 }
             }
 
@@ -233,7 +235,6 @@ public class SalaReservas extends Fragment {
             }
         });
     }
-
 
     public void doAutoGetReservas() {
         handler = new Handler();
