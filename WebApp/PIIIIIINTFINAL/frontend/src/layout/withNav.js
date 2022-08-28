@@ -1,7 +1,7 @@
 
 import { Outlet } from "react-router-dom";
-import Navbar from '../menu/NavBar';
-import NavBarTop from '../menu/NavBarTop';
+import Navbar from '../menu/Navs/NavBar';
+import NavBarTop from '../menu/Navs/NavBarTop';
 
 const withNav = () => {
     return (

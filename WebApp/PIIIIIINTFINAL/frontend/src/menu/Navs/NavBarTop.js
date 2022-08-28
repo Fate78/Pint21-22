@@ -1,117 +1,95 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import '../../CSS/stylesdashboard1.css';
+import Dropdown from 'react-bootstrap/Dropdown';
+import { Link } from "react-router-dom";
+import axios from "axios";
+const baseUrl = "https://roombookerapi.azurewebsites.net/api";
 
 export default function NavBarTop() {
 
+    const accesstoken = localStorage.getItem("token")
+    const user = localStorage.getItem("user")
+    const password = localStorage.getItem("password")
+    const [isLoggedin, setIsLoggedin] = useState(false);
+    axios.defaults.headers.common['Authorization'] = `Bearer ${accesstoken}`
+    const [utilizador, setUtilizador] = useState({
+        idUtilizador: "",
+        nomeUtilizador: "",
+        email: "",
+    });
 
+    useEffect(() => {
+        axios.get(baseUrl + "/utilizadores/" + user)
+            .then(data => {
+                setUtilizador({
+                    idUtilizador: data.data.idUtilizador,
+                    nomeUtilizador: data.data.nomeUtilizador,
+                    email: data.data.email
+                })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+
+    }, [])
+
+    const logOut = () => {
+        localStorage.clear();
+        window.location.reload()
+    
+    }
+
+    
     return (
-
+        
         <div id="wrapper">
-            <div id="content-wrapper" class="d-flex flex-column">
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow fixed-top lol">
+            
+            <div id="content-wrapper" className="d-flex flex-column">
+                <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow fixed-top lol">
 
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
+                    <button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3">
+                        <i className="fa fa-bars"></i>
                     </button>
 
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Pesquise aqui..." aria-label="Search" aria-describedby="basic-addon2" />
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <span>Pesquisar</span>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <ul className="navbar-nav ml-auto">
 
-                    <ul class="navbar-nav ml-auto">
-
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                        <li className="nav-item dropdown no-arrow d-sm-none">
+                            <a className="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
+                                <i className="fas fa-search fa-fw"></i>
                             </a>
                         </li>
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
-                                <span class="badge badge-danger badge-counter">3+</span>
-                            </a>
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        <Dropdown className="container nav-item dropdown no-arrow mx-1">
+                            <Dropdown.Toggle className="nav-link"  id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i className="fas fa-bell fa-fw">bell</i>
+                                <span className="badge badge-danger badge-counter">3+</span>
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
+                                <Dropdown.Item className="dropdown-header">
                                     Notificações
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class=" bg-primary">
-                                            <i class=" text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="bg-success">
-                                            <i class=" text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class=" bg-warning">
-                                            <i class=" text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Mostrar mais</a>
-                            </div>
-                        </li>
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
 
-                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <div className="topbar-divider d-none d-sm-block"></div>
 
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Username</span>
+                        <Dropdown className="container dropdown no-arrow">
+                            <Dropdown.Toggle className="nav-link dropdown-toggle" >
+                                {user}
+                            </Dropdown.Toggle>
 
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Perfil
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Definições
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Registo de Atividade
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
-                        </li>
-
+                            <Dropdown.Menu>
+                                <Link to={`/utilizador/${utilizador.idUtilizador}`} className="dropdown-item">
+                                Perfil
+                                </Link>
+                                <Dropdown.Item href="#/action-1">Definições</Dropdown.Item>
+                                <Dropdown.Item href="#/action-1">Registo de Atividade</Dropdown.Item>
+                                <Link to={`/login`} onClick={logOut} className="dropdown-item">    
+                                Logout
+                                </Link>
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </ul>
 
                 </nav>

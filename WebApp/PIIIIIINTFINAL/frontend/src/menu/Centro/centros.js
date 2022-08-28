@@ -39,7 +39,7 @@ export default function Pagina() {
                                     <p>Centro de {data.nomeCentro}</p>
                                 </div>
                                 <hr />
-                                <p>Está {data.ativo ? "ativo" : "inativo"}</p>
+                                <p>Este centro está {data.ativo ? "ativo" : "inativo"}</p>
                             </div>
                         </div>
                     </Link>

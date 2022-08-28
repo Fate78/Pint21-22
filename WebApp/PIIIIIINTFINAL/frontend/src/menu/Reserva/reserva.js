@@ -15,31 +15,37 @@ export default function Pagina() {
     const password = localStorage.getItem("password")
     axios.defaults.headers.common['Authorization'] = `Bearer ${accesstoken}`
     const [state, setState] = useState({
-        reservas: [],
+        idReserva: "",
+        idSala: "",
         idCentro: "",
-        nSala: "",
-        lotacaoMax: "",
-        tempoMinLimp: "",
-        limpo: "",
+        idUtilizador: "",
+        nomeUtilizador: "",
+        horaInicio: "",
+        horaFim: "",
+        dataReserva: "",
+        numPessoas: "",
         ativo: "",
 
     })
 
     
 
-    const IDSala = useLocation();
+    const IDReserva = useLocation();
     useEffect(() => {
 
-        axios.get(baseUrl + "/salas/" + IDSala.pathname.split("/")[2])
+        axios.get(baseUrl + "/reservas/" + IDReserva.pathname.split("/")[2])
             .then(data => {
                 console.log(data)
                 setState({
-                    idSala:data.data.idSala,
+                    idReserva:data.data.idReserva,
+                    idSala: data.data.idSala,
                     idCentro: data.data.idCentro,
-                    nSala: data.data.nSala,
-                    lotacaoMax: data.data.lotacaoMax,
-                    tempoMinLimp: data.data.tempoMinLimp,
-                    limpo: data.data.limpo,
+                    idUtilizador: data.data.idUtilizador,
+                    nomeUtilizador: data.data.nomeUtilizador,
+                    horaInicio: data.data.horaInicio,
+                    horaFim: data.data.horaFim,
+                    dataReserva: data.data.dataReserva,
+                    numPessoas: data.data.numPessoas,
                     ativo: data.data.ativo
                 })
                 
@@ -47,8 +53,8 @@ export default function Pagina() {
             .catch(err => {
                 console.log(err);
             })
-    }, [IDSala])
-    console.log(IDSala)
+    }, [IDReserva])
+    console.log(IDReserva)
 
 
 
@@ -57,12 +63,12 @@ export default function Pagina() {
             <div className="container">
                 <h3 className="mb-4 text-gray-800">Informações da sala</h3>
                 <div className='budy'>
-                    <div className='tituloSala'><p><h1><b>Sala {state.nSala}</b></h1></p></div>
+                    <div className='tituloSala'><p><h1><b>Reserva de {state.nomeUtilizador}</b></h1></p></div>
 
-                    <p>Esta sala encontra-se localizada no centro {state.idCentro}.</p>
-                    <p>Tem uma lotação máxima de {state.lotacaoMax}.</p>
-                    <p>O tempo mínimo de limpeza é de {state.tempoMinLimp} minutos.</p>
-                    <Link to={`/sala/editar/${state.idSala}`}>
+                    <p>Reserva feita na sala {state.idSala} do centro de {state.idCentro}.</p>
+                    <p>A reserva começa às {state.horaInicio} e termina às {state.horaFim} do dia {state.dataReserva}.</p>
+                    <p>Irá ser utilizada por {state.numPessoas} pessoas.</p>
+                    <Link to={`/reserva/editar/${state.idSala}`}>
                     <button>Editar</button>
                     </Link>
                 </div>

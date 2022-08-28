@@ -2,6 +2,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {
+    Card,
+    Container,
+    Row,
+    Col,
+    Image,
+  } from "react-bootstrap";
 const baseUrl = "https://roombookerapi.azurewebsites.net/api";
 
 export default function NumReservas() {
@@ -13,13 +20,14 @@ export default function NumReservas() {
     const [myRef, setMyRef] = useState(false)
     const closeCalendar = () => {
         myRef.setOpen(false)
-      }
+    }
 
     const onChange = (dates) => {
         const [start, end] = dates;
         setStartDate(start);
         setEndDate(end);
-      };
+    };
+
 
     useEffect(() => {
         let count = 0
@@ -31,20 +39,20 @@ export default function NumReservas() {
 
                 for (let a = 0; a < numReservas; a++) {
                     const date = new Date(nRes.data[a].dataReserva);
-                    if(endDate == null) {
+                    if (endDate == null) {
                         if (startDate < date) {
                             count++;
-                            
+
                         }
                     } else {
                         if (startDate < date && date < endDate) {
                             count++;
                             console.log(date)
                         }
-                        
+
                     }
                 }
-                
+
                 setReservas(
                     count
                 )
@@ -52,18 +60,29 @@ export default function NumReservas() {
             .catch((err) => {
                 console.log(err)
             })
-            
+
     }, [startDate, endDate])
 
-    
+
 
     return (
-        <div className="App">
-            <DatePicker selected={startDate} onChange={onChange} startDate={startDate} endDate={endDate} selectsRange inline/>
-            <div>
-                Tem um total de {reservas} reservas.
-            </div>
+        <div >
+            <div className="col" style={{ textDecoration: "none", color: "black" }}>
+                <div className="card">
+                    <div className="card-body">
+                        <div className="card-title">
+                            Total de reservas num range de datas
+                        </div>
+                    
+                        
+                            <p className="card-category"><DatePicker selected={startDate} onChange={onChange} startDate={startDate} endDate={endDate} selectsRange /> </p>
 
+                            <p>Tem um total de {reservas} reservas.</p>
+                        
+                    
+                </div>
+                </div>
+            </div>
         </div>
     );
 }
