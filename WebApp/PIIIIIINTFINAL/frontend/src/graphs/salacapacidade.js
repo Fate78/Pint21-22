@@ -46,7 +46,7 @@ export default function SalaCapacidade() {
                 },
             ],
         })
-    }, [])
+    }, [state])
     return (
         
         <div style={{ width: 500 }}>

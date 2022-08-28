@@ -67,22 +67,22 @@ export default function NumReservas() {
 
     return (
         <div >
-            <Card.Body>
-                <Row>
-                    <Col xs="5">
-                        <div className="icon-big text-center icon-warning">
-                            <Image src="../img/user.png" rounded />
+            <div className="col" style={{ textDecoration: "none", color: "black" }}>
+                <div className="card">
+                    <div className="card-body">
+                        <div className="card-title">
+                            Total de reservas num range de datas
                         </div>
-                    </Col>
-                    <Col xs="7">
-                        <div className="numbers">
+                    
+                        
                             <p className="card-category"><DatePicker selected={startDate} onChange={onChange} startDate={startDate} endDate={endDate} selectsRange /> </p>
 
-                            <Card.Title as="h4">Tem um total de {reservas} reservas.</Card.Title>
-                        </div>
-                    </Col>
-                </Row>
-            </Card.Body>
+                            <p>Tem um total de {reservas} reservas.</p>
+                        
+                    
+                </div>
+                </div>
+            </div>
         </div>
     );
 }

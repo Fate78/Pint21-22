@@ -34,8 +34,8 @@ import NavBarTop from "./menu/Navs/NavBarTop";
 import Navbar from "./menu/Navs/NavBar";
 import EditarReserva from "./menu/Reserva/editarreserva"
 import Verificar from "./menu/verificar"
-import { useEffect, useState } from "react";
-import axios from "axios";
+import EmailVerficar from "./menu/emailverificar"
+import EmailConfirmar from "./menu/emailconfirmar"
 
 const baseUrl = "https://roombookerapi.azurewebsites.net/api";
 
@@ -50,10 +50,15 @@ function App() {
           {/*routes publicos*/}
           <Route path="/login" element={<Login />} />
           <Route path="/verificar" element = {<Verificar />} />
+          <Route path="/emailverificar" element = {<EmailVerficar />} />
+          <Route path="/emailconfirmar" element = {<EmailConfirmar />} />
+
 
           {/*routes protegidos*/}
 
           <Route element={<RequireAuth />}>
+
+            
 
             {/*SALAS*/}
             <Route path="/sala/*" element={<Sala />} />

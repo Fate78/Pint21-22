@@ -21,20 +21,15 @@ function App() {
     return (
         <div id="content-wrapper" className="d-flex flex-column">
             <div className="container">
+                <h3 className="mb-4 text-gray-800">Dashboard</h3>
+                <div className="row row-cols-1 row-cols-md-3 row-cols-lg-2 g-4">
+                    <BarChart />
 
-                <div className='col-lg-3-sm-6'>
-                    <h3 className="mb-4 text-gray-800">Dashboard</h3>
-                    <div className="row">
+                    <SalaCapacidade />
 
-                        <BarChart />
-                        
-                        <SalaCapacidade />
+                    <NumUtilizadores />
 
-                        <NumUtilizadores />
-
-                        <NumReservas />
-
-                    </div>
+                    <NumReservas />
                 </div>
             </div>
         </div>

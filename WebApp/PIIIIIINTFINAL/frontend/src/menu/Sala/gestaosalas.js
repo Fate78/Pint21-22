@@ -28,6 +28,7 @@ export default function Pagina() {
             });
             
     }, [])
+    
     useEffect(() => {
 
         axios.get(baseUrl + "/centros"

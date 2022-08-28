@@ -14,7 +14,7 @@ export default function Pagina() {
     const [utilizador, setUtilizador] = useState();
 
     const navigate = useNavigate();
-    let location 
+    let location
     const verify = "/verificar"
 
     const userRef = useRef();
@@ -37,35 +37,48 @@ export default function Pagina() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        let token
         try {
             const response = await axios.post(baseUrl + "/utilizadores/authenticate",
                 { UtilizadorInput: user, PalavraPasse: password },
                 {
                     Headers: { 'Content-Type': 'application/json' },
                 },
-            );
+            )
+            
             const { token } = response.data;
+            
             localStorage.setItem("token", token);
             localStorage.setItem("user", user);
             localStorage.setItem("password", password);
-            console.log(JSON.stringify(response?.data))
+            const accesstoken = localStorage.getItem("token")
+            axios.defaults.headers.common['Authorization'] = `Bearer ${accesstoken}`
+            const get = await axios.get(baseUrl + "/utilizadores/" + user)
+                    setUtilizador(
+                        get.data
+                    )
+                    
+                console.log(get)
+            console.log(user, password)
             setUser(user);
             setPassword('');
             setAuth({ user, password });
-            
-            /*await Util()
 
-            if(utilizador.passwordVerificada) {
+            //await Util()
+
+            if(get.data.password_Verificada && get.data.email_Verificado) {
                 location = "/dashboard"
-            } else {
+            } else if(!get.data.password_Verificada) {
                 location = "/verificar"
-            }*/
-            const location = "/dashboard"
+            } else if(!get.data.email_Verificado) {
+                location = "/emailverificar"
+            }
+            //const location = "/dashboard"
             navigate(location, { replace: true });
-            
-            console.log(user, password)
 
+            console.log(user, password)
+            console.log(get.data.passwordVerificada)
+            
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No server response');
@@ -96,8 +109,8 @@ export default function Pagina() {
                 console.log(err)
             })
         console.log(utilizador)
-    }*/
-
+    }
+*/
 
     return (
         <div className="vh-100">

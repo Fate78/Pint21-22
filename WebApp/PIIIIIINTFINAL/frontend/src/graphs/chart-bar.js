@@ -52,7 +52,7 @@ export default function ChartBar() {
                 },
             ],
         })
-    }, [state, startDate])
+    }, [state])
     return (
         
         <div style={{ width: 500 }}>
