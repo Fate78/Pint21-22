@@ -48,25 +48,16 @@ export default function Pagina() {
     }, []);
 
     function loadcentro() {
-        return centros.map((data) => {
-
-
+        
             return (
-                <label>
-
-
-
-                    <input onChange={change} key={data.idCentro} type="radio" value={data.idCentro} checked={selectedOption == data.idCentro} />
-                    {data.nomeCentro} &nbsp;
-
-
-
-
-
-                </label>
+                <select value={selectedOption} onChange={change} className=""  data-bs-toggle="dropdown">
+                    
+                        
+                    {centros.map(centro => <option className='dropdown-item' key={centro.idCentro}  value={centro.idCentro}>{centro.nomeCentro}</option>)}
+                    
+                </select>
             )
 
-        })
     }
 
     function loadFillData() {
@@ -79,7 +70,7 @@ export default function Pagina() {
                     <div key={index} className='col'>
                         <Link to={`/sala/${data.idSala}`} style={{ textDecoration: "none", color: "black" }}>
 
-                            <div className='card'>
+                            <div className='card h-100'>
                                 <div className='card-body'>
 
                                     <div className='card-title'>
@@ -117,13 +108,13 @@ export default function Pagina() {
                 <h1 class="h3 mb-4 text-gray-800">Gestão de Salas</h1>
                 <p>
                     <Link to={`/criarsala`}>
-                        <button className="btn btn-primary mt-3">Criar sala</button>
+                        <button className="btn btn-primary me-3 h-100">Criar sala</button>
                     </Link>
+                
+                    {loadcentro()}
                 </p>
-                {loadcentro()}
 
-
-                <div className='row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4'>
+                <div className='row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 mx-auto justify-content-center'>
 
                     {loadFillData()}
 

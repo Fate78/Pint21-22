@@ -1,7 +1,11 @@
-import axios from "axios"
-import { useState } from "react"
-import { Link } from "react-router-dom";
-
+import React, { useEffect, useState } from 'react';
+import { useLocation } from "react-router";
+import '../../CSS/stylesdashboard1.css';
+import '../../CSS/style.css'
+import '../../CSS/Main.css'
+import axios from 'axios';
+import Image from '../../img/user.png'
+import { Link, useNavigate } from 'react-router-dom';
 const baseUrl = "https://roombookerapi.azurewebsites.net/api";
 
 export default function Pagina() {
@@ -13,17 +17,17 @@ export default function Pagina() {
         palavraPasse: "",
         password_Verificada: "",
     })
-    
+
     function handleChange(event) {
         const { name, value } = event.target
         setSubmit(prevFormData => ({
             ...prevFormData,
             [name]: value
         }))
-        
+
     }
 
-    const changePassword = async(e) => {
+    const changePassword = async (e) => {
         axios.post(baseUrl + "/utilizadores/changepassword/" + accesstoken + "/" + submit.palavraPasse)
             .then(data => {
                 setSubmit({
@@ -35,23 +39,26 @@ export default function Pagina() {
                 console.log(err)
             })
     }
-    
 
     return (
         <div id="content-wrapper" class="d-flex flex-column">
-             <div className="container">
-                <div className='budy'>
-                    <form>
-                        <p>Necessita de mudar a palavra-passe para puder continuar a usar o website. </p>
-                        <p><input name="palavraPasse" onChange={handleChange} value={submit.palavraPasse} placeholder="Palavra-Passe" /></p>
-                        <p>
-                        <Link to={`/login`}>
+            <div className="container">
+                <form>
+                    <p>Necessita de mudar a palavra-passe para puder continuar a usar o website. </p>
+                    <p><input name="palavraPasse" onChange={handleChange} value={submit.palavraPasse} placeholder="Palavra-Passe" /></p>
+                    <p>
+                        <Link to={(-1)}>
                             <button className='btn btn-primary' onClick={changePassword} >Alterar</button>
                         </Link>
-                        </p>
-                    </form>
-                </div>
-             </div>
-        </div>
-    )
+                    </p>
+                </form>
+            </div>
+        </div >
+    );
+
+
 }
+
+
+
+

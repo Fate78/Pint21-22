@@ -28,7 +28,6 @@ export default function Pagina() {
     const [submit, setSubmit] = useState({
         lotacaoMax: "",
         tempoMinLimp: "",
-        limpo: "",
         ativo: "",
 
     })
@@ -74,7 +73,7 @@ export default function Pagina() {
                 nSala: state.nSala,
                 lotacaoMax: submit.lotacaoMax === "" ? state.lotacaoMax : submit.lotacaoMax,
                 tempoMinLimp: submit.tempoMinLimp === "" ? state.tempoMinLimp : submit.tempoMinLimp,
-                limpo: state.limpo === "" ? state.limpo : submit.limpo,
+                limpo: state.limpo,
                 ativo: submit.ativo === "" ? state.ativo : submit.ativo,
             }
         )
@@ -103,7 +102,6 @@ export default function Pagina() {
                         <p>Tem uma lotação máxima de <input name="lotacaoMax" onChange={handleChange} value={submit.lotacaoMax} placeholder={state.lotacaoMax} /></p>
                         <p>O tempo mínimo de limpeza é <input name="tempoMinLimp" onChange={handleChange} value={submit.tempoMinLimp} placeholder={state.tempoMinLimp} /></p>
                         <p>Ativo? <input name='ativo' value="true" onChange={handleChange} type="radio" /> Ativo <input name='ativo' onChange={handleChange} value="false" type="radio" /> Inativo</p>
-                        <p>Limpo? <input name='limpo' value="true" onChange={handleChange} type="radio" /> Limpo <input name='limpo' onChange={handleChange} value="false" type="radio" /> Por Limpar</p>
                         <p>
                             <Link to={`/sala/${idSala.pathname.split("/")[3]}`} className="">
                                 <button className='btn btn-primary' onClick={useUpdate}>Guardar</button>

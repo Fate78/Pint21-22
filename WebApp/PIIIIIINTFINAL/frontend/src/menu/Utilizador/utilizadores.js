@@ -34,7 +34,7 @@ export default function Pagina() {
 
                 <div key={index} className='col'>
                     <Link to={`/utilizador/${data.idUtilizador}`} style={{ textDecoration: "none", color: "black" }}>
-                    <div className='card'>
+                    <div className='card h-100'>
                         <div className='card-body'>
                             <div className='card-title'>
                                 <p>{data.nomeUtilizador}</p>
@@ -59,10 +59,15 @@ export default function Pagina() {
 
             <div className="container">
                 <h1 class="h3 mb-4 text-gray-800">Utilizadores</h1>
+                <p>
+                    <Link to={`/criarutilizador`}>
+                        <button className="btn btn-primary mt-3">Criar utilizador</button>
+                    </Link>
+                </p>
 
 
 
-                <div className='row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4'>
+                <div className='row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 mx-auto justify-content-center'>
 
 
                     {loadFillData()}

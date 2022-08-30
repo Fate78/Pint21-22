@@ -22,15 +22,18 @@ function App() {
         <div id="content-wrapper" className="d-flex flex-column">
             <div className="container">
                 <h3 className="mb-4 text-gray-800">Dashboard</h3>
-                <div className="row row-cols-1 row-cols-md-3 row-cols-lg-2 g-4">
+                <p><div className="row row-cols-1 row-cols-lg-2 g-5">
                     <BarChart />
 
                     <SalaCapacidade />
 
+
+                </div></p>
+                <p><div className="row row-cols-1 row-cols-lg-3 g-4">
                     <NumUtilizadores />
 
                     <NumReservas />
-                </div>
+                </div></p>
             </div>
         </div>
     );
