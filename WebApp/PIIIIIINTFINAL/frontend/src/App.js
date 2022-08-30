@@ -13,6 +13,7 @@ import Sala from './menu/Sala/sala'
 import GestaoSalas from './menu/Sala/gestaosalas'
 import EditarSala from './menu/Sala/editarsala'
 import CriarSala from "./menu/Sala/criarSala"
+import Limpeza from "./menu/Limpeza/limpeza"
 
 //Utilizador
 import Utilizadores from './menu/Utilizador/utilizadores'
@@ -80,6 +81,7 @@ function App() {
             <Route path="/criarsala" element={<CriarSala />} />
             <Route path='/gestaosalas' element={<GestaoSalas />} />
             <Route path="/sala/editar/*" element={<EditarSala />} />
+            <Route path="limpeza" element={<Limpeza />} />
 
             {/*UTILIZADORES*/}
             <Route path="/perfil/*" element={<Perfil />} />

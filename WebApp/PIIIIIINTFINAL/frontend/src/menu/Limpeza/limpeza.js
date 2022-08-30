@@ -77,6 +77,7 @@ export default function Pagina() {
     function loadFillData() {
 
         return salas.map((data, index) => {
+            console.log(data)
 
             if (data.idCentro === selectedOption && data.limpo === false) {
                 return (
@@ -111,7 +112,6 @@ export default function Pagina() {
     function change(changeEvent) {
         setSelectedOption(changeEvent.target.value)
     }
-
 
 
     return (
