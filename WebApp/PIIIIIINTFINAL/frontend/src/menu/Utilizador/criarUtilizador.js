@@ -10,64 +10,134 @@ const baseUrl = "https://roombookerapi.azurewebsites.net/api";
 
 
 export default function Pagina() {
-    const [idTipo, setIdTipo] = useState();
-    const [nomeUtilizador, setNomeUtilizador] = useState("");
-    const [nomeCompleto, setNomeCompleto] = useState("");
-    const [palavraPasse, setPalavraPasse] = useState("");
-    const [email, setEmail] = useState("");
-    const [dataNascimento, setDataNascimento] = useState("");
-    const [email_Verificado, setEmail_Verificado] = useState(false);
-    const [password_Verificada, setPassword_Verificada] = useState(false);
-    const [ativo, setAtivo] = useState("");
-    const [reservas, setReservas] = useState([]);
-    const [tickets, setTickets] = useState([]);
-    const [utilizadorCentros, setUtilizadorCentros] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [isError, setIsError] = useState(false);
-    const [data, setData] = useState(null);
+
+    const user = localStorage.getItem("user")
     const accesstoken = localStorage.getItem("token")
     axios.defaults.headers.common['Authorization'] = `Bearer ${accesstoken}`
 
-    const handleSubmit = () => {
-        setLoading(true);
-        setIsError(false);
-        const data = {
-            idTipo: idTipo,
-            nomeUtilizador: nomeUtilizador,
-            nomeCompleto: nomeCompleto,
-            palavraPasse: palavraPasse,
-            email: email,
-            dataNascimento: dataNascimento,
-            email_Verificado: email_Verificado,
-            password_Verificada: password_Verificada,
-            ativo: ativo,
-            reservas: reservas,
-            tickets: tickets,
-            utilizadorCentros: utilizadorCentros,
-        }
-        axios.post(baseUrl + "/utilizadores", data)
-            .then(res => {
-                setData(res.data);
-                setIdTipo();
-                setNomeUtilizador("");
-                setNomeCompleto("");
-                setPalavraPasse("");
-                setEmail("");
-                setDataNascimento("");
-                setEmail_Verificado(false);
-                setPassword_Verificada(false);
-                setAtivo("");
-                setReservas([]);
-                setTickets([]);
-                setUtilizadorCentros([]);
-                setLoading(false);
-            })
-            .catch(err => {
-                setLoading(false);
-                setIsError(true);
-            });
+    const [selectedOption, setSelectedOption] = useState(1);
+
+    const [submit, setSubmit] = useState({
+        idTipo: "",
+        nomeUtilizador: "",
+        nomeCompleto: "",
+        palavraPasse: "",
+        email: "",
+        dataNascimento: "",
+        ativo: "",
+
+    })
+
+    const [centro, setCentro] = useState({
+        idUtilizador: "",
+        idCentro: "",
+    })
+
+    const [state, setState] = useState({
+        idUtilizador: "",
+    });
+
+    const [utilizador, setUtilizador] = useState();
+
+    function handleChange(event) {
+        const { name, value } = event.target
+        setSubmit(prevFormData => ({
+            ...prevFormData,
+            [name]: value
+        }))
+        setCentro(prevFormData => ({
+            ...prevFormData,
+            [name]: value
+        }))
     }
 
+    function useUpdate() {
+        // update entity - PUT
+        axios.post(baseUrl + "/utilizadores",
+            {
+                idTipo: submit.idTipo,
+                nomeUtilizador: submit.nomeUtilizador,
+                nomeCompleto: submit.nomeCompleto,
+                palavraPasse: submit.palavraPasse,
+                email: submit.email,
+                dataNascimento: submit.dataNascimento,
+                ativo: submit.ativo
+            }
+        )
+            .then(data => {
+                setSubmit(anterior => ({
+                    ...anterior,
+                    ...submit
+                }))
+                setState(data.data)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    useEffect(() => {
+        axios.post(baseUrl + "/utilizadorescentros",
+        {
+            idUtilizador: state.idUtilizador,
+            idCentro: centro.idCentro
+        }
+        )
+        .then(response => {
+            console.log(response)
+            setCentro(anterior => ({
+                ...anterior,
+                ...centro
+            }))
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [state])
+
+    useEffect(() => {
+        axios.get(baseUrl + "/utilizadores/" + user)
+            .then(response => {
+                setUtilizador({
+                    idUtilizador: response.data.idUtilizador,
+                    idTipo: response.data.idTipo,
+                    nomeUtilizador: response.data.nomeUtilizador,
+                    nomeCompleto: response.data.nomeCompleto,
+                    palavraPasse: response.data.palavraPasse,
+                    email: response.data.email,
+                    dataNascimento: response.data.dataNascimento,
+                    email_Verificado: response.data.email_Verificado,
+                    password_Verificada: response.data.password_Verificada,
+                    ativo: response.data.ativo,
+                    verificado: response.data.verificado,
+                    reservas: response.data.reservas,
+                    tickets: response.data.tickets,
+                    utilizadorCentro: response.data.utilizadorCentro
+                })
+
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }, [])
+
+    function loadcentro() {
+        
+        return (
+            <select value={selectedOption} onChange={change} className="form-control" name="idCentro" required>
+                
+                    
+                {utilizador.utilizadorCentro.map(centro => <option className='dropdown-item' key={centro.idCentro}  value={centro.idCentro}>{centro.nomeCentro}</option>)}
+                
+            </select>
+        )
+
+}
+
+    function change(changeEvent) {
+        setSelectedOption(changeEvent.target.value)
+    }
 
     return (
         <div id="content-wrapper" class="d-flex flex-column">
@@ -77,73 +147,91 @@ export default function Pagina() {
                         <label htmlFor="idTipo">Que tipo de utilizador é:</label>
                         <input
                             type="text"
+                            name="idTipo"
                             className="form-control"
-                            id="idTipo"
                             placeholder="Enter name"
-                            value={idTipo}
-                            onChange={e => setIdTipo(e.target.value)} />
+                            value={submit.idTipo}
+                            onChange={handleChange}
+                            required />
                     </div>
                     <div classNames="form-group">
                         <label htmlFor="nomeUtilizador">Nome de Utilizador:</label>
                         <input
                             type="text"
                             className="form-control"
-                            id="nomeUtilizador"
+                            name="nomeUtilizador"
                             placeholder="Enter name"
-                            value={nomeUtilizador}
-                            onChange={e => setNomeUtilizador(e.target.value)} />
+                            value={submit.nomeUtilizador}
+                            onChange={handleChange}
+                            required />
                     </div>
                     <div classNames="form-group">
                         <label htmlFor="nomeCompleto">Nome Completo:</label>
                         <input
                             type="text"
                             className="form-control"
-                            id="nomeCompleto"
+                            name="nomeCompleto"
                             placeholder="Enter name"
-                            value={nomeCompleto}
-                            onChange={e => setNomeCompleto(e.target.value)} />
+                            value={submit.nomeCompleto}
+                            onChange={handleChange}
+                            required />
                     </div>
                     <div classNames="form-group">
                         <label htmlFor="palavraPasse">Palavra-Passe:</label>
                         <input
                             type="text"
                             className="form-control"
-                            id="palavraPasse"
+                            name="palavraPasse"
                             placeholder="Enter name"
-                            value={palavraPasse}
-                            onChange={e => setPalavraPasse(e.target.value)} />
+                            value={submit.palavraPasse}
+                            onChange={handleChange}
+                            required />
                     </div>
                     <div classNames="form-group">
                         <label htmlFor="email">E-mail:</label>
                         <input
                             type="text"
                             className="form-control"
-                            id="email"
+                            name="email"
                             placeholder="Enter name"
-                            value={email}
-                            onChange={e => setEmail(e.target.value)} />
+                            value={submit.email}
+                            onChange={handleChange}
+                            required />
                     </div>
                     <div classNames="form-group">
                         <label htmlFor="dataNascimento">Data de Nascimento:</label>
                         <input
                             type="text"
                             className="form-control"
-                            id="dataNascimento"
+                            name="dataNascimento"
                             placeholder="1987-05-24"
-                            value={dataNascimento}
-                            onChange={e => setDataNascimento(e.target.value)} />
+                            value={submit.dataNascimento}
+                            onChange={handleChange}
+                            required />
                     </div>
+                    <div classNames="form-group">
+                        <label htmlFor="dataNascimento">Centro:</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            name="idCentro"
+                            value={centro.idCentro}
+                            onChange={handleChange}
+                            required />
+                    </div>
+                    
                     
                     <div classNames="form-group">
                         <label htmlFor="ativo">Ativo</label>
-                        <p><input name='ativo' value="true" onChange={e => setAtivo(e.target.value)} type="radio" /> Ativo <input name='ativo' onChange={e => setAtivo(e.target.value)} value="false" type="radio" /> Inativo</p>
+                        <p><input name='ativo' value="true" onChange={handleChange} type="radio" /> Ativo <input name='ativo' onChange={handleChange} value="false" type="radio" /> Inativo</p>
                     </div>
                     <button
                         type="submit"
                         className="btn btn-primary mt-3"
-                        onClick={handleSubmit}
-                        disabled={loading}
-                    >{loading ? 'Loading...' : 'Submit'}</button>
+                        onClick={useUpdate}
+                        >
+                        Guardar
+                    </button>
                 
             </div>
 

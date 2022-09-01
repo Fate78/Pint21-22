@@ -85,7 +85,7 @@ export default function NavBarTop() {
                                 </Link>
                                 <Dropdown.Item href="#/action-1">Definições</Dropdown.Item>
                                 <Dropdown.Item href="#/action-1">Registo de Atividade</Dropdown.Item>
-                                <Link to={`/login`} onClick={logOut} className="dropdown-item">    
+                                <Link to={`/`} onClick={logOut} className="dropdown-item">    
                                 Logout
                                 </Link>
                             </Dropdown.Menu>
