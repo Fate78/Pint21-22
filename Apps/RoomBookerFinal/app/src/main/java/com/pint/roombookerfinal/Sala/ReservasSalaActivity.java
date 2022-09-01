@@ -184,7 +184,7 @@ public class ReservasSalaActivity extends AppCompatActivity {
         }));
 
         ed_lotacao.setText(getIntent().getStringExtra("Lotacao"));
-        ed_tempo_limp.setText(getIntent().getStringExtra("Limpeza"));
+        ed_tempo_limp.setText(getIntent().getStringExtra("TempoLimpeza"));
 
         dialog.show();
         Window window = dialog.getWindow();

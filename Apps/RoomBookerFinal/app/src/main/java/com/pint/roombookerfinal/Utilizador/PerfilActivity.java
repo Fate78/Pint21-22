@@ -20,6 +20,7 @@ import com.pint.roombookerfinal.API.ApiClient;
 import com.pint.roombookerfinal.API.ApiInterface;
 import com.pint.roombookerfinal.Methods;
 import com.pint.roombookerfinal.MethodsInterface;
+import com.pint.roombookerfinal.Models.IdTipoNavigation;
 import com.pint.roombookerfinal.Models.Utilizador;
 import com.pint.roombookerfinal.R;
 import com.pint.roombookerfinal.SharedPrefManager;
@@ -33,8 +34,9 @@ import retrofit2.Response;
 public class PerfilActivity extends AppCompatActivity {
 
     EditText username, nome_completo, email, data_nascimento;
+    IdTipoNavigation idTipoNavigation;
     String s_username, s_nome_completo, s_email, s_data_nascimento, api_data_nascimento, s_palavra_passe;
-    boolean verificado, ativo;
+    boolean email_verificado, password_verificada, ativo;
     int id_user, id_tipo;
     final MethodsInterface methodsInterface = new Methods();
     final ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
@@ -89,13 +91,15 @@ public class PerfilActivity extends AppCompatActivity {
 
                     Utilizador utilizador = response.body();
 
-                    id_tipo = utilizador.getIdTipo();
+                    idTipoNavigation = utilizador.getIdTipoNavigation();
+                    id_tipo = idTipoNavigation.getIdTipo();
                     s_nome_completo = utilizador.getNomeCompleto();
                     s_email = utilizador.getEmail();
                     api_data_nascimento = utilizador.getDataNascimento();
                     s_data_nascimento = methodsInterface.formatDateForUser(api_data_nascimento);
                     s_palavra_passe = utilizador.getPalavraPasse();
-                    verificado = utilizador.getVerificado();
+                    email_verificado = utilizador.getEmailVerificado();
+                    password_verificada = utilizador.isPassword_verificada();
                     ativo = utilizador.getAtivo();
 
                     nome_completo.setText(s_nome_completo);
@@ -125,7 +129,7 @@ public class PerfilActivity extends AppCompatActivity {
                             else {
                                 String new_nome_completo = nome_completo.getText().toString();
                                 if (!s_nome_completo.equals(new_nome_completo) || !s_data_nascimento.equals(input_date)) {
-                                    Utilizador utilizador = new Utilizador(id_user, id_tipo, s_username, new_nome_completo, s_palavra_passe, s_email, input_date, verificado, ativo);
+                                    Utilizador utilizador = new Utilizador(id_user, id_tipo, s_username, new_nome_completo, s_palavra_passe, s_email, input_date, email_verificado, password_verificada ,ativo);
                                     updateUtilizador(id_user, utilizador, v.getContext());
                                     Toast.makeText(v.getContext(), "Perfil Atualizado!", Toast.LENGTH_LONG).show();
                                 }

@@ -28,8 +28,6 @@ import com.pint.roombookerfinal.NavigationUI.NavigationDrawerActivity;
 import com.pint.roombookerfinal.R;
 import com.pint.roombookerfinal.SharedPrefManager;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -65,22 +63,6 @@ public class LoginActivity extends AppCompatActivity {
 
         if(!isLoggedout)
         {
-            /*String token = new SharedPrefManager(this).getAuthToken();
-            JWT jwt = new JWT(token);
-            long tokenExpiration = jwt.getClaim("exp").asLong();
-
-            LocalDateTime dateTimeNow = LocalDateTime.now();
-            ZoneId zoneId = ZoneId.of("Europe/Lisbon");
-            ZoneOffset zoneOffset = zoneId.getRules().getOffset(dateTimeNow);
-            long secEpochNow = dateTimeNow.toEpochSecond(zoneOffset);
-            //If token is not expired
-            if(tokenExpiration>secEpochNow) {
-                Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
-                startActivity(intent);
-            }
-            else{
-                methodsInterface.logout(mCtx);
-            }*/
             Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
             startActivity(intent);
 
@@ -92,23 +74,6 @@ public class LoginActivity extends AppCompatActivity {
             progressBar.setVisibility(View.VISIBLE);
             validarLogin(login_input, password);
         });
-    }
-
-    public static String getSha256(final String base) {
-        try{
-            final MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            final byte[] hash = digest.digest(base.getBytes(StandardCharsets.UTF_8));
-            final StringBuilder hexString = new StringBuilder();
-            for (byte b : hash) {
-                final String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1)
-                    hexString.append('0');
-                hexString.append(hex);
-            }
-            return hexString.toString();
-        } catch(Exception ex){
-            throw new RuntimeException(ex);
-        }
     }
 
     public void validarLogin(String login_input, String password){
@@ -127,6 +92,15 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(@NonNull Call<AuthToken> call, @NonNull Response<AuthToken> response) {
                     if (response.isSuccessful() && response.body() != null) {
+
+                        System.out.println(response.code());
+                        if(response.code()==401)
+                        {
+                            Toast.makeText(LoginActivity.this, "Falha no login!", Toast.LENGTH_SHORT).show();
+                            btn_login.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
+                        }
+
                         Log.e("Success", response.body().toString());
                         AuthToken authToken = response.body();
 

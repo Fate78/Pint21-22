@@ -11,12 +11,14 @@ public class Utilizador {
     private String palavraPasse;
     private String email;
     private String dataNascimento;
-    private boolean verificado;
+    private boolean email_verificado;
+    private boolean password_verificada;
+    private String codigo_verificacao;
     private boolean ativo;
-    private Object idTipoNavigation = null;
+    private IdTipoNavigation idTipoNavigation = null;
     private List<Reserva> reservas = null;
     private List < Object > tickets = null;
-    private List < Object > utilizadorCentros = null;
+    private List<CentroGeo> utilizadorCentro = null;
 
     public Utilizador(int idUtilizador, String nomeUtilizador, String email)
     {
@@ -26,7 +28,7 @@ public class Utilizador {
     }
 
     public Utilizador(int idUtilizador, int idTipo, String nomeUtilizador, String nomeCompleto, String palavraPasse, String email,
-                      String dataNascimento, boolean verificado, boolean ativo)
+                      String dataNascimento, boolean verificado, boolean password_verificada ,boolean ativo)
     {
         this.idUtilizador = idUtilizador;
         this.nomeUtilizador = nomeUtilizador;
@@ -34,7 +36,8 @@ public class Utilizador {
         this.palavraPasse = palavraPasse;
         this.email = email;
         this.dataNascimento = dataNascimento;
-        this.verificado = verificado;
+        this.email_verificado = email_verificado;
+        this.password_verificada = password_verificada;
         this.ativo = ativo;
         this.idTipo = idTipo;
     }
@@ -68,15 +71,15 @@ public class Utilizador {
         return dataNascimento;
     }
 
-    public boolean getVerificado() {
-        return verificado;
+    public boolean getEmailVerificado() {
+        return email_verificado;
     }
 
     public boolean getAtivo() {
         return ativo;
     }
 
-    public Object getIdTipoNavigation() {
+    public IdTipoNavigation getIdTipoNavigation() {
         return idTipoNavigation;
     }
 
@@ -110,15 +113,15 @@ public class Utilizador {
         this.dataNascimento = dataNascimento;
     }
 
-    public void setVerificado(boolean verificado) {
-        this.verificado = verificado;
+    public void setVerificado(boolean email_verificado) {
+        this.email_verificado = email_verificado;
     }
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
 
-    public void setIdTipoNavigation(Object idTipoNavigation) {
+    public void setIdTipoNavigation(IdTipoNavigation idTipoNavigation) {
         this.idTipoNavigation = idTipoNavigation;
     }
 
@@ -138,11 +141,19 @@ public class Utilizador {
         this.tickets = tickets;
     }
 
-    public List<Object> getUtilizadorCentros() {
-        return utilizadorCentros;
+    public List<CentroGeo> getUtilizadorCentro() {
+        return utilizadorCentro;
     }
 
-    public void setUtilizadorCentros(List<Object> utilizadorCentros) {
-        this.utilizadorCentros = utilizadorCentros;
+    public void setUtilizadorCentro(List<CentroGeo> utilizadorCentro) {
+        this.utilizadorCentro = utilizadorCentro;
+    }
+
+    public boolean isPassword_verificada() {
+        return password_verificada;
+    }
+
+    public void setPassword_verificada(boolean password_verificada) {
+        this.password_verificada = password_verificada;
     }
 }

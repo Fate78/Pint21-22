@@ -23,6 +23,7 @@ import com.pint.roombookerfinal.SharedPrefManager;
 import com.pint.roombookerfinal.databinding.FragmentSalasBinding;
 
 import java.util.List;
+import java.util.ListIterator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,6 +66,14 @@ public class SalasFragment extends Fragment {
                     Log.e("Success",response.body().toString());
 
                     List<Sala> salasList = response.body().getSalas();
+                    ListIterator<Sala> iterator = salasList.listIterator();
+                    while(iterator.hasNext())
+                    {
+                        Sala next_iterator = iterator.next();
+                        boolean ativo = next_iterator.getAtivo();
+                        if (!ativo)
+                            iterator.remove();
+                    }
                     String centro = response.body().getNomeCentro();
                     recyclerView.setAdapter(new SalasRecyclerViewAdapter(mCtx, salasList, centro) );
                 }

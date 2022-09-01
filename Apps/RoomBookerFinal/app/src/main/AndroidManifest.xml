@@ -18,6 +18,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".AlterarPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".VerificarEmailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ScannerActivity"
             android:exported="false" />
         <activity
