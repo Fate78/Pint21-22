@@ -45,7 +45,7 @@ export default function NavBarTop() {
         <div id="wrapper">
             
             <div id="content-wrapper" className="d-flex flex-column">
-                <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow fixed-top lol">
+                <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow fixed-top ">
 
                     <button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3">
                         <i className="fa fa-bars"></i>
@@ -80,12 +80,12 @@ export default function NavBarTop() {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
-                                <Link to={`/utilizador/${utilizador.idUtilizador}`} className="dropdown-item">
+                                <Link to={`/perfil/${utilizador.idUtilizador}`} className="dropdown-item">
                                 Perfil
                                 </Link>
                                 <Dropdown.Item href="#/action-1">Definições</Dropdown.Item>
                                 <Dropdown.Item href="#/action-1">Registo de Atividade</Dropdown.Item>
-                                <Link to={`/login`} onClick={logOut} className="dropdown-item">    
+                                <Link to={`/`} onClick={logOut} className="dropdown-item">    
                                 Logout
                                 </Link>
                             </Dropdown.Menu>

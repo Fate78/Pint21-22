@@ -1,5 +1,6 @@
 import { BrowserRouter, BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import './App.css';
+import './CSS/width.css'
 
 //Centros
 import Centros from "./menu/Centro/centros";
@@ -12,12 +13,16 @@ import Sala from './menu/Sala/sala'
 import GestaoSalas from './menu/Sala/gestaosalas'
 import EditarSala from './menu/Sala/editarsala'
 import CriarSala from "./menu/Sala/criarSala"
+import Limpeza from "./menu/Limpeza/limpeza"
 
 //Utilizador
 import Utilizadores from './menu/Utilizador/utilizadores'
-import Utilizador from './menu/Utilizador/utilizador'
+import Perfil from './menu/Utilizador/perfil'
 import Dashboard from './menu/dashboard'
 import Bulk from './menu/Utilizador/bulkinsert'
+import CriarUtilizador from './menu/Utilizador/criarUtilizador'
+import AlterarPassword from "./menu/Utilizador/changepassword"
+import Utilizador from "./menu/Utilizador/utilizador"
 
 //Reserva
 import Reservas from "./menu/Reserva/reservas"
@@ -29,26 +34,37 @@ import RequireAuth from "./menu/Login/RequireAuth";
 import PersistLogin from "./menu/Login/PersistLogin";
 
 import Layout from './layout/Layout'
-import withNav from "./layout/withNav";
+import withNav from "./layout/Width";
 import NavBarTop from "./menu/Navs/NavBarTop";
 import Navbar from "./menu/Navs/NavBar";
 import EditarReserva from "./menu/Reserva/editarreserva"
 import Verificar from "./menu/verificar"
 import EmailVerficar from "./menu/emailverificar"
 import EmailConfirmar from "./menu/emailconfirmar"
+import useWidth from "./layout/Width"
+
 
 const baseUrl = "https://roombookerapi.azurewebsites.net/api";
 
 function App() {
+  const width = useWidth()
+
+  function getClass() {
+    if(width < 768) {
+      return "pequeno"
+    } else {
+      return "grande"
+    }
+  }
 
   return (
-    <div>
+    <div className={getClass()}>
 
-      <Routes>
+      <Routes >
 
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<Layout />} >
           {/*routes publicos*/}
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/verificar" element = {<Verificar />} />
           <Route path="/emailverificar" element = {<EmailVerficar />} />
           <Route path="/emailconfirmar" element = {<EmailConfirmar />} />
@@ -58,18 +74,20 @@ function App() {
 
           <Route element={<RequireAuth />}>
 
-            
-
             {/*SALAS*/}
             <Route path="/sala/*" element={<Sala />} />
             <Route path="/criarsala" element={<CriarSala />} />
             <Route path='/gestaosalas' element={<GestaoSalas />} />
             <Route path="/sala/editar/*" element={<EditarSala />} />
+            <Route path="/limpeza" element={<Limpeza />} />
 
             {/*UTILIZADORES*/}
-            <Route path="/utilizador/*" element={<Utilizador />} />
+            <Route path="/perfil/*" element={<Perfil />} />
             <Route path='/utilizadores' element={<Utilizadores />} />
             <Route path='/bulkinsert' element={<Bulk />} />
+            <Route path="/criarutilizador" element={<CriarUtilizador />} />
+            <Route path="/utilizador/password/*" element={<AlterarPassword />} />
+            <Route path="/utilizador/*" element={<Utilizador />} />
 
             {/*RESERVAS*/}
             <Route path="/reservas" element={<Reservas />} />

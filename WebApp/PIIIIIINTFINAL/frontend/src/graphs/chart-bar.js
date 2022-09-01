@@ -10,6 +10,12 @@ export default function ChartBar() {
     
     const [startDate, setStartDate] = useState(new Date());
 
+    const onChange = (dates) => {
+        const [start] = dates;
+        setStartDate(start);
+    };
+
+
     const [graph, setGraph] = useState({
         labels: [],
         datasets: [],
@@ -19,22 +25,20 @@ export default function ChartBar() {
 
     useEffect(() => {
         
-        axios.get(baseUrl + "/reservas/alocacaodiaria/2022/8" /*+ startDate.getFullYear() + "/" + startDate.getMonth() + 1*/)
+        
+        axios.get(baseUrl + "/reservas/alocacaodiaria/" + startDate.getFullYear() + "/" + `${startDate.getMonth() + 1} `)
             .then(data => {
-                const date = new Date(data.data.dataReserva);
                 
                     setState(
                         data.data
                     )
-                
-                
-                
             })
             .catch(err => {
                 console.log(err);
             });
-            
+           
         setGraph({
+            
             labels: state?.map((data) => data.dataReserva),
             datasets: [
                 {
@@ -52,11 +56,11 @@ export default function ChartBar() {
                 },
             ],
         })
-    }, [state])
+    }, [startDate, state])
     return (
         
         <div style={{ width: 500 }}>
-            <DatePicker selected={startDate} onChange={(datee) => setStartDate={datee}} />
+            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
             <BarChart chartData={graph} />
         </div>
     )

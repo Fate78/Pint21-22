@@ -10,6 +10,8 @@ const baseUrl = "https://roombookerapi.azurewebsites.net/api";
 
 export default function Pagina() {
 
+    const navigate = useNavigate();
+
     const [state, setState] = useState({
         idUtilizador: "",
         idTipo: "",
@@ -28,6 +30,10 @@ export default function Pagina() {
     })
 
     const [submit, setSubmit] = useState({
+        nomeUtilizador: "",
+        nomeCompleto: "",
+        email: "",
+        dataNascimento: "",
         ativo: ""
     })
 
@@ -86,11 +92,11 @@ export default function Pagina() {
             {
                 idUtilizador: state.idUtilizador,
                 idTipo: state.idTipo,
-                nomeUtilizador: state.nomeUtilizador,
-                nomeCompleto: state.nomeCompleto,
+                nomeUtilizador: submit.nomeUtilizador === "" ? state.nomeUtilizador : submit.nomeUtilizador,
+                nomeCompleto: submit.nomeCompleto === "" ? state.nomeCompleto : submit.nomeCompleto,
                 palavraPasse: state.palavraPasse,
-                email: state.email,
-                dataNascimento: state.dataNascimento,
+                email: submit.email === "" ? state.email : submit.email,
+                dataNascimento: submit.dataNascimento === "" ? state.dataNascimento : submit.dataNascimento,
                 email_Verificado: state.email_Verificado,
                 password_Verificada: state.password_Verificada,
                 ativo: submit.ativo === "" ? state.ativo : submit.ativo,
@@ -110,6 +116,13 @@ export default function Pagina() {
             .catch(err => {
                 console.log(err);
             })
+
+            if(submit.nomeUtilizador == "") {
+                localStorage.setItem("user", state.nomeUtilizador)
+            } else {
+                localStorage.setItem("user", submit.nomeUtilizador)
+            }
+            
     }
 
 
@@ -135,12 +148,12 @@ export default function Pagina() {
                                 <form>
                                     <div class="mb-3">
                                         <label class="small mb-1" for="inputUsername">Nome de Utilizador</label>
-                                        <input class="form-control" name='nomeUtilizador' type="text" placeholder={state.nomeUtilizador} value={submit.nomeUtilizador} />
+                                        <input class="form-control" name='nomeUtilizador' type="text" onChange={handleChange} placeholder={state.nomeUtilizador} value={submit.nomeUtilizador} />
                                     </div>
                                     <div class="row gx-3 mb-3">
                                         <div class="col-md-12">
                                             <label class="small mb-1" for="inputFirstName">Nome Completo</label>
-                                            <input class="form-control" name='nomeCompleto' type="text" placeholder={state.nomeCompleto} value={submit.nomeCompleto} />
+                                            <input class="form-control" name='nomeCompleto' type="text" onChange={handleChange} placeholder={state.nomeCompleto} value={submit.nomeCompleto} />
                                         </div>
                                     </div>
                                     <div class="row gx-3 mb-3">
@@ -155,7 +168,7 @@ export default function Pagina() {
                                     </div>
                                     <div class="mb-3">
                                         <label class="small mb-1" for="inputEmailAddress">Email</label>
-                                        <input class="form-control" name='email' type="email" placeholder={state.email} value={submit.email} />
+                                        <input class="form-control" name='email' type="email" onChange={handleChange} placeholder={state.email} value={submit.email} />
                                     </div>
                                     <div class="row gx-3 mb-3">
                                         <div class="col-md-6">
@@ -164,13 +177,15 @@ export default function Pagina() {
                                         </div>
                                         <div class="col-md-6">
                                             <label class="small mb-1" for="inputBirthday">Data de Nascimento</label>
-                                            <input class="form-control" type="text"  name="dataNascimento" placeholder={state.dataNascimento} value={submit.dataNascimento} />
+                                            <input class="form-control" type="text" onChange={handleChange} name="dataNascimento" placeholder={state.dataNascimento} value={submit.dataNascimento} />
                                         </div>
                                     </div>
                                     <Link to={-1} className="btn btn-primary">
                                         <button type='button' className='btn btn-primary' onClick={useUpdate}>Guardar</button>
                                     </Link>
-                                    
+                                    <Link to={`/utilizador/password/${iDUtilizador.pathname.split("/")[2]}`} className="btn btn-primary">
+                                        <button type='button' className='btn btn-primary'>Alterar Password</button>
+                                    </Link>
                             </form>
                         </div>
                     </div>

@@ -62,10 +62,12 @@ export default function Navbar() {
                     </li>
                     
                     <li class="nav-item">
+                    <Link to={`/limpeza`}>
                         <a class="nav-link collapsed" href="limpeza" data-toggle="collapse" data-target="#collapseUtilities"
                             aria-expanded="true" aria-controls="collapseUtilities">
                             <span>Limpeza</span>
                         </a>
+                    </Link>
                     </li>
 
 
@@ -94,7 +96,6 @@ export default function Navbar() {
                         </Link>
                     </li>
                     
-
                     <div class="sidebar-heading">
                         Necessita de Ajuda?
                     </div>

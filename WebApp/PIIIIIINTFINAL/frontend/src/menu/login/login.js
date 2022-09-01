@@ -66,12 +66,14 @@ export default function Pagina() {
 
             //await Util()
 
-            if(get.data.password_Verificada && get.data.email_Verificado) {
+            if(get.data.password_Verificada && get.data.email_Verificado && get.data.ativo) {
                 location = "/dashboard"
             } else if(!get.data.password_Verificada) {
                 location = "/verificar"
             } else if(!get.data.email_Verificado) {
                 location = "/emailverificar"
+            } else if (!get.data.ativo) {
+                setErrMsg('Sem autorização')
             }
             //const location = "/dashboard"
             navigate(location, { replace: true });

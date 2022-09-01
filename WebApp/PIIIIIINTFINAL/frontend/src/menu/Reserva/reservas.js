@@ -57,18 +57,15 @@ export default function Pagina() {
     }, []);
 
     function loadcentro() {
-        return centros.map((data) => {
-
 
             return (
-                <label>
-                    <input onChange={change} key={data.idCentro} type="radio" value={data.idCentro} checked={selectedOption == data.idCentro} />
-                    {data.nomeCentro} &nbsp;
-
-                </label>
+                <select value={selectedOption} onChange={change} className=""  data-bs-toggle="dropdown">
+                    
+                        
+                    {centros.map(centro => <option className='dropdown-item' key={centro.idCentro}  value={centro.idCentro}>{centro.nomeCentro}</option>)}
+                    
+                </select>
             )
-
-        })
     }
 
     function loadreserva() {
@@ -88,7 +85,7 @@ export default function Pagina() {
 
                 <div key={index} className='col'>
                     <Link to={`/reserva/${data.idReserva}`} style={{ textDecoration: "none", color: "black" }}>
-                    <div className='card'>
+                    <div className='card h-100'>
                         <div className='card-body'>
                         <div className='card-title'>
                             
@@ -119,8 +116,8 @@ export default function Pagina() {
 
             <div className="container">
                 <h1 class="h3 mb-4 text-gray-800">Reservas</h1>
-                {loadcentro()}
-                <div className='row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4'>
+                <p>{loadcentro()}</p>
+                <div className='row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 mx-auto justify-content-center'>
 
 
                     {loadreserva()}

@@ -1,57 +1,44 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from 'react';
+import axios from 'axios';
+import { useState } from 'react';
 const baseUrl = "https://roombookerapi.azurewebsites.net/api";
 
-export default function Bulk() {
-    const accesstoken = localStorage.getItem("token")
-    axios.defaults.headers.common['Authorization'] = `Bearer ${accesstoken}`
-    const [selectedFile, setSelectedFile] = useState();
-	const [isFilePicked, setIsFilePicked] = useState(false);
+const Pagina = () => {
+  // a local state to store the currently selected file.
+  const [selectedFile, setSelectedFile] = useState(null);
 
-	const changeHandler = (event) => {
-		setSelectedFile(event.target.files[0]);
-		setIsFilePicked(true);
-	};
-
-	const handleSubmission = () => {
-		const formData = new FormData();
-
-		formData.append('file', selectedFile);
-
-		axios.post( baseUrl + "/utilizadores/UploadFile/",
-        {
-            Headers: { 'body': 'formData'}
-        },
-        )
-        .then((data) => {
-            console.log(data)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-	};
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+    try {
+      const response = await axios({
+        method: "post",
+        url: baseUrl + "/utilizadores/uploadfile",
+        data: formData,
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+	  console.log(response)
+    } catch(error) {
+      console.log(error)
+    }
 	
+  }
+  
 
-	return(
-   <div>
-			<input type="file" name="file" onChange={changeHandler} />
-			{isFilePicked ? (
-				<div>
-					<p>Filename: {selectedFile.name}</p>
-					<p>Filetype: {selectedFile.type}</p>
-					<p>Size in bytes: {selectedFile.size}</p>
-					<p>
-						lastModifiedDate:{' '}
-						{selectedFile.lastModifiedDate.toLocaleDateString()}
-					</p>
-				</div>
-			) : (
-				<p>Select a file to show details</p>
-			)}
-			<div>
-				<button onClick={handleSubmission}>Submit</button>
-			</div>
-		</div>
-	)
-            
-}
+  const handleFileSelect = (event) => {
+    setSelectedFile(event.target.files[0])
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      
+      <input type="file" onChange={handleFileSelect}/>
+      <input type="submit" value="Upload File" />
+    </form>
+
+    
+  )
+};
+
+export default Pagina;
