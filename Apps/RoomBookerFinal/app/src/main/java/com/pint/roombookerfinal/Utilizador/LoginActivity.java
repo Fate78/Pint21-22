@@ -91,16 +91,14 @@ public class LoginActivity extends AppCompatActivity {
             call.enqueue(new Callback<AuthToken>() {
                 @Override
                 public void onResponse(@NonNull Call<AuthToken> call, @NonNull Response<AuthToken> response) {
+                    if(response.code()==401)
+                    {
+                        Toast.makeText(LoginActivity.this, "Falha no login!", Toast.LENGTH_SHORT).show();
+                        btn_login.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                    }
+
                     if (response.isSuccessful() && response.body() != null) {
-
-                        System.out.println(response.code());
-                        if(response.code()==401)
-                        {
-                            Toast.makeText(LoginActivity.this, "Falha no login!", Toast.LENGTH_SHORT).show();
-                            btn_login.setVisibility(View.VISIBLE);
-                            progressBar.setVisibility(View.GONE);
-                        }
-
                         Log.e("Success", response.body().toString());
                         AuthToken authToken = response.body();
 
@@ -110,11 +108,26 @@ public class LoginActivity extends AppCompatActivity {
                         int idUtilizador = Integer.parseInt(Objects.requireNonNull(jwt.getClaim("ID").asString()));
                         String nomeUtilizador = jwt.getClaim("unique_name").asString();
                         String emailUtilizador = jwt.getClaim("EMAIL").asString();
-                        utilizador = new Utilizador(idUtilizador, nomeUtilizador, emailUtilizador);
+                        Boolean emailVerificado = jwt.getClaim("VERIF_EMAIL").asBoolean();
+                        Boolean passwordVerificada = jwt.getClaim("VERIF_PASS").asBoolean();
+                        utilizador = new Utilizador(idUtilizador, nomeUtilizador, emailUtilizador, emailVerificado, passwordVerificada);
 
                         saveLoginDetails(utilizador.getIdUtilizador(), utilizador.getNomeUtilizador(), utilizador.getEmail());
-                        Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
-                        startActivity(intent);
+
+                        if(!utilizador.getEmailVerificado())
+                        {
+                            Intent intent = new Intent(getApplicationContext(), VerificarEmailActivity.class);
+                            startActivity(intent);
+                        }
+                        else if(!utilizador.isPassword_verificada()){
+                            Intent intent = new Intent(getApplicationContext(), AlterarPasswordActivity.class);
+                            startActivity(intent);
+                        }
+                        else
+                        {
+                            Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
+                            startActivity(intent);
+                        }
                     }
                 }
 

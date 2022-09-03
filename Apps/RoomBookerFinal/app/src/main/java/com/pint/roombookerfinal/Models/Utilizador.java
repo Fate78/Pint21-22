@@ -27,6 +27,15 @@ public class Utilizador {
         this.email = email;
     }
 
+    public Utilizador(int idUtilizador, String nomeUtilizador, String email, Boolean email_verificado, Boolean password_verificada)
+    {
+        this.idUtilizador = idUtilizador;
+        this.nomeUtilizador = nomeUtilizador;
+        this.email = email;
+        this.email_verificado = email_verificado;
+        this.password_verificada = password_verificada;
+    }
+
     public Utilizador(int idUtilizador, int idTipo, String nomeUtilizador, String nomeCompleto, String palavraPasse, String email,
                       String dataNascimento, boolean verificado, boolean password_verificada ,boolean ativo)
     {

@@ -55,18 +55,18 @@ public interface ApiInterface {
     Call<Utilizador> updateUtilizador(@Path("id") int id, @Body Utilizador utilizador, @Header("Authorization") String authToken);
 
     //Send Email
-    @POST("api/SendEmail/{user_email}")
-    Call<Utilizador> sendEmailVerification(@Path("user_email") String user_email, @Header("Authorization") String authToken);
+    @POST("api/utilizadores/SendEmail/{user_email}")
+    Call<Void> sendEmailVerification(@Path("user_email") String user_email, @Header("Authorization") String authToken);
 
     //ChangePassword
-    @POST("api/changePassword/{token}/{newPassword}")
-    Call<Utilizador> changePassword(@Path("token") String token,
+    @POST("api/utilizadores/changePassword/{token}/{newPassword}")
+    Call<Void> changePassword(@Path("token") String token,
                                     @Path("newPassword") String newPassword,
                                     @Header("Authorization") String authToken);
 
     //VerifyEmail
-    @POST("api/VerifyEmailCode/{code}/{email}")
-    Call<Utilizador> verifyEmailCode(@Path("code") String code,
+    @POST("api/utilizadores/VerifyEmailCode/{code}/{email}")
+    Call<Void> verifyEmailCode(@Path("code") String code,
                                     @Path("email") String email,
                                     @Header("Authorization") String authToken);
 

@@ -12,6 +12,8 @@ public interface MethodsInterface {
 
     void logout(Context mCtx);
 
+    void logoutWithFlag(Context mCtx);
+
     String formatTimeForUser(String time);
 
     String formatDateForUser(String string_date);

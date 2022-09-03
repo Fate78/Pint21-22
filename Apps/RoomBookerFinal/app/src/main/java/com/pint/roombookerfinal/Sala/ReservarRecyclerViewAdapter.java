@@ -252,15 +252,9 @@ public class ReservarRecyclerViewAdapter extends
                         public void onResponse(@NonNull Call<List<Reserva>> call, @NonNull Response<List<Reserva>> response) {
                             int error_counter = 0;
                             if (response.body() != null) {
-                                int next_index = 1;
                                 Log.e("Success", response.body().toString());
                                 List<Reserva> reservaList = (List<Reserva>) response.body();
                                 for (Reserva reserva : reservaList) {
-                                    Reserva next_reserva = null;
-                                    LocalTime next_hora_inicio = null;
-                                    LocalTime next_hora_fim = null;
-                                    LocalDate next_date = null;
-                                    LocalTime hora_fim_max = null;
                                     LocalTime hora_fim_total = null;
                                     LocalTime res_hora_inicio = null;
                                     LocalTime res_hora_fim = null;
@@ -276,31 +270,6 @@ public class ReservarRecyclerViewAdapter extends
                                                 || hora_fim_total.compareTo(res_hora_inicio)>=0 && hora_fim_total.compareTo(res_hora_fim_total)<0) || hora_inicio.compareTo(hora_fim) >= 0)
                                             error_counter++;
                                     }
-                                        //If next exists and date is same day
-                                        /*if (reservaList.size() >= next_index + 1) {
-                                            next_reserva = reservaList.get(next_index);
-                                            next_index++;
-                                            next_hora_inicio = methodsInterface.stringToTime(next_reserva.getHoraInicio());
-                                            next_hora_fim = methodsInterface.stringToTime(next_reserva.getHoraFim());
-                                            next_date = methodsInterface.stringToDate(next_reserva.getDataReserva());
-                                            hora_fim_max = methodsInterface.addDurationToHour(next_hora_fim, tempo_limp);
-                                        } else {
-                                            hora_fim_max = LocalTime.parse("23:00");
-                                            next_hora_inicio = LocalTime.parse("23:00");
-                                        }
-                                        res_hora_inicio = methodsInterface.stringToTime(reserva.getHoraInicio());
-                                        res_hora_fim = methodsInterface.stringToTime(reserva.getHoraFim());
-                                        hora_inicio_min = methodsInterface.addDurationToHour(res_hora_fim, tempo_limp);
-                                        hora_fim_total = methodsInterface.addDurationToHour(hora_fim, tempo_limp);
-
-                                        System.out.println(hora_inicio_min);
-                                        System.out.println(hora_fim_max);
-                                        System.out.println(next_hora_inicio);
-                                        System.out.println(next_date);
-                                        if (hora_inicio.compareTo(hora_inicio_min) >= 0 || hora_fim_total.compareTo(next_hora_inicio) <= 0)
-                                            error_counter++;
-
-                                    }*/
                                 }
                             }
                             if (error_counter == 0) {

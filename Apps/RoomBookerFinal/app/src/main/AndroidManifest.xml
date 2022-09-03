@@ -16,12 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RoomBookerFinal"
         android:usesCleartextTraffic="true"
-        tools:targetApi="m">
+        >
         <activity
-            android:name=".AlterarPasswordActivity"
+            android:name=".Utilizador.AlterarPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".VerificarEmailActivity"
+            android:name=".Utilizador.VerificarEmailActivity"
             android:exported="false" />
         <activity
             android:name=".ScannerActivity"

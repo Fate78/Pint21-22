@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment;
 
 import com.pint.roombookerfinal.API.ApiClient;
 import com.pint.roombookerfinal.API.ApiInterface;
+import com.pint.roombookerfinal.Methods;
+import com.pint.roombookerfinal.MethodsInterface;
 import com.pint.roombookerfinal.Models.CentroGeo;
 import com.pint.roombookerfinal.Models.Utilizador;
 import com.pint.roombookerfinal.R;
@@ -35,6 +37,7 @@ public class CentrosFragment extends Fragment {
     Integer selectedCentroId;
     String selectedCentroName;
     String TokenType = "Bearer ";
+    final MethodsInterface methodsInterface = new Methods();
 
     public static CentrosFragment newInstance() {
         return new CentrosFragment();
@@ -59,6 +62,11 @@ public class CentrosFragment extends Fragment {
             public void onResponse(@NonNull Call<Utilizador> call,
                                    @NonNull Response<Utilizador> response)
             {
+                if(response.code()==401)
+                {
+                    methodsInterface.logout(root.getContext());
+                }
+
                 if (response.body() != null) {
                     Log.e("Success",response.body().toString());
                     List<CentroGeo> centroGeoList = response.body().getUtilizadorCentro();

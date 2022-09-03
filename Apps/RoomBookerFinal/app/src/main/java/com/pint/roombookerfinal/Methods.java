@@ -38,6 +38,18 @@ public class Methods implements MethodsInterface{
         mCtx.startActivity(intent);
     }
 
+    public void logoutWithFlag(Context mCtx){
+
+        Intent intent;
+        intent = new Intent(mCtx, LoginActivity.class);
+        sharedPrefManager = new SharedPrefManager(mCtx);
+        sharedPrefManager.clearLoginDetails();
+        sharedPrefManager.clearCentroDetails();
+        sharedPrefManager.clearAuthToken();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mCtx.startActivity(intent);
+    }
+
     public String formatTimeForUser(String time){
         StringBuilder sb = new StringBuilder(time);
         sb.delete(sb.length()-3, sb.length());
