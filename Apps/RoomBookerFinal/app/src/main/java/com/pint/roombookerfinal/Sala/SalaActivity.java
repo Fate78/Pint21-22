@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.pint.roombookerfinal.API.ApiClient;
 import com.pint.roombookerfinal.API.ApiInterface;
+import com.pint.roombookerfinal.Methods;
+import com.pint.roombookerfinal.MethodsInterface;
 import com.pint.roombookerfinal.Models.Sala;
 import com.pint.roombookerfinal.R;
 import com.pint.roombookerfinal.SharedPrefManager;
@@ -28,6 +30,7 @@ public class SalaActivity extends AppCompatActivity {
     EditText edNSala, edLocalizacao, edLotacao, edLimpeza;
     Button btn_reservas;
     private String selectedCentroName, nSala, tempo_limpeza, lotacao;
+    final MethodsInterface methodsInterface = new Methods();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,9 @@ public class SalaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sala);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         edNSala = findViewById(R.id.edNSala);
         edLocalizacao = findViewById(R.id.edLocalizacao);
@@ -58,7 +63,7 @@ public class SalaActivity extends AppCompatActivity {
                     setTitle(activityTitle);
 
                     nSala = sala.getnSala().toString();
-                    tempo_limpeza = formatTime(sala.getTempoMinLimp());
+                    tempo_limpeza = methodsInterface.formatTimeForUser(sala.getTempoMinLimp());
                     lotacao = sala.getLotacaoMax().toString();
                     edNSala.setText(nSala);
                     edLotacao.setText(lotacao);

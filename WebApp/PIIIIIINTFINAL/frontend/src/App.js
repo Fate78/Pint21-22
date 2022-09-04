@@ -64,7 +64,7 @@ function App() {
 
         <Route path="/" element={<Layout />} >
           {/*routes publicos*/}
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/verificar" element = {<Verificar />} />
           <Route path="/emailverificar" element = {<EmailVerficar />} />
           <Route path="/emailconfirmar" element = {<EmailConfirmar />} />
@@ -74,14 +74,12 @@ function App() {
 
           <Route element={<RequireAuth />}>
 
-            
-
             {/*SALAS*/}
             <Route path="/sala/*" element={<Sala />} />
             <Route path="/criarsala" element={<CriarSala />} />
             <Route path='/gestaosalas' element={<GestaoSalas />} />
             <Route path="/sala/editar/*" element={<EditarSala />} />
-            <Route path="limpeza" element={<Limpeza />} />
+            <Route path="/limpeza" element={<Limpeza />} />
 
             {/*UTILIZADORES*/}
             <Route path="/perfil/*" element={<Perfil />} />

@@ -17,8 +17,11 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.auth0.android.jwt.JWT;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.pint.roombookerfinal.Methods;
+import com.pint.roombookerfinal.MethodsInterface;
 import com.pint.roombookerfinal.R;
 import com.pint.roombookerfinal.ScannerActivity;
 import com.pint.roombookerfinal.SharedPrefManager;
@@ -32,6 +35,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
     TextView username, email;
     String s_username, s_email;
     ImageView img_profile, img_qr_scanner;
+    final MethodsInterface methodsInterface = new Methods();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,16 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_navigation_drawer);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        String token = new SharedPrefManager(getApplicationContext()).getAuthToken();
+        JWT jwt = new JWT(token);
+        Boolean passwordVerificada = jwt.getClaim("VERIF_PASS").asBoolean();
+        Boolean emailVerificado = jwt.getClaim("VERIF_EMAIL").asBoolean();
+
+        if(Boolean.FALSE.equals(passwordVerificada) || Boolean.FALSE.equals(emailVerificado))
+        {
+            methodsInterface.logoutWithFlag(getApplicationContext());
+        }
     }
 
     @Override
@@ -80,6 +94,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
             Intent intent = new Intent(NavigationDrawerActivity.this, ScannerActivity.class);
             startActivity(intent);
         });
+
         return true;
     }
 

@@ -61,23 +61,36 @@
         android:id="@+id/ed_edit_limpeza"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="time"
         android:minHeight="48dp"
+        android:textSize="25sp"
         app:layout_constraintStart_toEndOf="@+id/textView15"
         app:layout_constraintTop_toBottomOf="@+id/ed_edit_lotacao" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="36dp"
+        android:text="Tempo Limpeza"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <EditText
         android:id="@+id/ed_edit_nSala"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="564dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="576dp"
         android:ems="10"
         android:inputType="number"
         android:minHeight="48dp"
+        android:textSize="25sp"
         app:layout_constraintStart_toEndOf="@+id/textView12"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -89,6 +102,7 @@
         android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="number"
+        android:textSize="25sp"
         app:layout_constraintStart_toEndOf="@+id/textView14"
         app:layout_constraintTop_toBottomOf="@+id/ed_edit_nSala"
         tools:layout_height="48dp" />
@@ -126,22 +140,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="24dp"
-        android:text="Tempo Limpeza"
-        android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-    <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="564dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="576dp"
         android:text="NSala"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -151,8 +154,8 @@
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="44dp"
         android:text="Centro"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -162,11 +165,12 @@
         android:id="@+id/ed_edit_centro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="time"
         android:minHeight="48dp"
+        android:textSize="25sp"
         app:layout_constraintStart_toEndOf="@+id/textView16"
         app:layout_constraintTop_toBottomOf="@+id/ed_edit_limpeza" />
 

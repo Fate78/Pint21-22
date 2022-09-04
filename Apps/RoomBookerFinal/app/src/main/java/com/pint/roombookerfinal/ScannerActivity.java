@@ -26,7 +26,7 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
 
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView scannerView;
-    private static int cam = Camera.CameraInfo.CAMERA_FACING_BACK;
+    private static final int cam = Camera.CameraInfo.CAMERA_FACING_BACK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
         ActivityCompat.requestPermissions(ScannerActivity.this, new String[] {Manifest.permission.CAMERA}, REQUEST_CAMERA);
     }
 
-    public void onRequestPermissionResult(int requestCode, String permissions[], int[] grantResult){
+    public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResult){
         switch (requestCode){
             case REQUEST_CAMERA:
                 if (grantResult.length > 0){
@@ -67,10 +67,7 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
                                     new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                                            {
-                                                requestPermission();
-                                            }
+                                            requestPermission();
                                         }
                                     });
                             return;
@@ -118,6 +115,7 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
     public void handleResult(Result result) {
         final String rawresult = result.getText();
 
+        System.out.println(rawresult);
         JsonObject jsonObject = (JsonObject) JsonParser.parseString(rawresult);
         System.out.println(jsonObject);
         JsonPrimitive jsIdSala = jsonObject.getAsJsonPrimitive("idSala");
@@ -128,8 +126,8 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
 
         int id_sala = Integer.parseInt(String.valueOf(jsIdSala));
         String nSala = String.valueOf(jsNSala);
-        int lotacao = Integer.parseInt(String.valueOf(jsLotacao));
-        String limpeza = String.valueOf(jsLimpeza);
+        String lotacao = String.valueOf(jsLotacao);
+        String limpeza = jsLimpeza.getAsString();
         String nomeCentro = String.valueOf(jsNomeCentro);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -138,11 +136,11 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //scannerView.resumeCameraPreview(ScanActivity.this);
-                Intent intent = new Intent(ScannerActivity.this, ReservasSalaActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ReservasSalaActivity.class);
                 intent.putExtra("IdSala", id_sala);
                 intent.putExtra("NSala", nSala);
                 intent.putExtra("Lotacao", lotacao);
-                intent.putExtra("Limpeza", limpeza);
+                intent.putExtra("TempoLimpeza", limpeza);
                 intent.putExtra("NomeCentro", nomeCentro);
                 startActivity(intent);
             }

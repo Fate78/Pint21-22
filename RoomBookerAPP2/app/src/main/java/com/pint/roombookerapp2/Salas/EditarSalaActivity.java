@@ -145,9 +145,6 @@ public class EditarSalaActivity extends AppCompatActivity {
                         Toast.makeText(EditarSalaActivity.this, "Não existem centros",
                                 Toast.LENGTH_LONG).show();
                     else {
-                        /*centroName = new ArrayList<String>();
-                        for (CentroGeo centroGeo : centroGeoList)
-                            centroName.add(centroGeo.getNomeCentro());*/
                         centros_array = new CentroGeo[centroGeoList.size()];
                         for(int i=0; i<centroGeoList.size(); i++) {
                             centros_array[i] = new CentroGeo();

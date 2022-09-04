@@ -77,8 +77,7 @@ public class Methods implements MethodsInterface{
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public LocalDate stringToDate(String string_date){
-        LocalDate date = LocalDate.parse(string_date);
-        return date;
+        return LocalDate.parse(string_date);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -96,8 +95,7 @@ public class Methods implements MethodsInterface{
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public LocalTime addDurationToHour(LocalTime hora, Duration duration){
-        LocalTime nova_hora = (LocalTime) duration.addTo(hora);
-        return nova_hora;
+        return (LocalTime) duration.addTo(hora);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

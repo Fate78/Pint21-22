@@ -80,15 +80,13 @@ public class ReservasSalaActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<Sala> call, @NonNull Response<Sala> response) {
                 if (response.body() != null) {
-                    Log.e("Success",response.body().toString());
+                    Log.e("Success", response.body().toString());
 
                     List<Reserva> reservasList = response.body().getReservas();
                     ListIterator<Reserva> iterator = reservasList.listIterator();
-                    if(reservasList.isEmpty())
-                    {
+                    if (reservasList.isEmpty()) {
                         Toast.makeText(ReservasSalaActivity.this, "Não foram encontradas reservas!!", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
+                    } else {
                         while (iterator.hasNext()) {
                             Reserva next_iterator = iterator.next();
                             String string_data_reserva = next_iterator.getDataReserva();
@@ -101,7 +99,7 @@ public class ReservasSalaActivity extends AppCompatActivity {
                             }
                         }
                     }
-                    recyclerView.setAdapter(new ReservarRecyclerViewAdapter(mCtx, reservasList) );
+                    recyclerView.setAdapter(new ReservarRecyclerViewAdapter(mCtx, reservasList));
                 }
             }
 
@@ -135,7 +133,7 @@ public class ReservasSalaActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void createDialogReservar(Context mCtx){
+    public void createDialogReservar(Context mCtx) {
         int salaId = getIntent().getIntExtra("IdSala", 0);
         String nSala = getIntent().getStringExtra("NSala");
 
@@ -183,28 +181,29 @@ public class ReservasSalaActivity extends AppCompatActivity {
             }
         }));
 
-        ed_lotacao.setText(getIntent().getStringExtra("Lotacao"));
-        ed_tempo_limp.setText(getIntent().getStringExtra("Limpeza"));
+        String get_lotacao = getIntent().getStringExtra("Lotacao");
+        String get_tempo_limpeza = getIntent().getStringExtra("TempoLimpeza");
+        ed_lotacao.setText(get_lotacao);
+        ed_tempo_limp.setText(get_tempo_limpeza);
 
         dialog.show();
         Window window = dialog.getWindow();
-        window.setLayout(1000,900);
+        window.setLayout(1000, 900);
 
         btn_accept.setOnClickListener(v12 -> {
-            if(ed_hora_inicio.getText().toString().isEmpty() || ed_hora_fim.getText().toString().isEmpty()
-                    || ed_data_reserva.getText().toString().isEmpty() || ed_num_pessoas.getText().toString().isEmpty())
-            {
+            if (ed_hora_inicio.getText().toString().isEmpty() || ed_hora_fim.getText().toString().isEmpty()
+                    || ed_data_reserva.getText().toString().isEmpty() || ed_num_pessoas.getText().toString().isEmpty()) {
                 Toast.makeText(mCtx, "Preencha todos os campos!", Toast.LENGTH_LONG).show();
-            }
-            else {
+            } else {
                 String string_hora_inicio = ed_hora_inicio.getText().toString();
                 String string_hora_fim = ed_hora_fim.getText().toString();
                 String string_data_reserva = ed_data_reserva.getText().toString();
                 String string_tempo_limp = ed_tempo_limp.getText().toString();
                 String string_lotacao = ed_lotacao.getText().toString();
 
-                Integer num_pessoas = Integer.parseInt(ed_num_pessoas.getText().toString());
+                int num_pessoas = Integer.parseInt(ed_num_pessoas.getText().toString());
                 Integer userId = new SharedPrefManager(v12.getContext()).getUserId();
+                int lotacao = Integer.parseInt(string_lotacao);
 
                 String formattedDate = methodsInterface.formatDateForAPI(string_data_reserva);
                 LocalDate data_reserva = methodsInterface.stringToDate(formattedDate);
@@ -213,7 +212,16 @@ public class ReservasSalaActivity extends AppCompatActivity {
 
                 Duration tempo_limp = methodsInterface.stringToDuration(string_tempo_limp);
 
-                if (data_reserva.compareTo(methodsInterface.getDateToday()) >= 0) {
+                if ((data_reserva.compareTo(methodsInterface.getDateToday()) == 0 && hora_inicio.compareTo(methodsInterface.getTimeNow()) < 0)
+                        || data_reserva.compareTo(methodsInterface.getDateToday()) < 0 || num_pessoas > lotacao) {
+                    if (data_reserva.compareTo(methodsInterface.getDateToday()) == 0 && hora_inicio.compareTo(methodsInterface.getTimeNow()) < 0
+                            || data_reserva.compareTo(methodsInterface.getDateToday()) < 0)
+                        Toast.makeText(mCtx, "Hora inválida",
+                                Toast.LENGTH_LONG).show();
+                    if (num_pessoas > lotacao)
+                        Toast.makeText(mCtx, "Excedeu a lotação da sala",
+                                Toast.LENGTH_LONG).show();
+                } else if (data_reserva.compareTo(methodsInterface.getDateToday()) >= 0) {
                     Call<List<Reserva>> reservaCall = apiInterface.getReservasbyDate(formattedDate);
                     reservaCall.enqueue(new Callback<List<Reserva>>() {
                         @Override
@@ -245,9 +253,6 @@ public class ReservasSalaActivity extends AppCompatActivity {
                                     res_hora_fim = methodsInterface.stringToTime(reserva.getHoraFim());
                                     hora_inicio_min = methodsInterface.addDurationToHour(res_hora_fim, tempo_limp);
 
-                                    System.out.println(hora_inicio_min);
-                                    System.out.println(hora_fim_max);
-                                    System.out.println(next_hora_inicio);
                                     if (hora_inicio.compareTo(hora_inicio_min) < 0 || hora_fim_max.compareTo(next_hora_inicio) > 0) {
                                         error_counter++;
                                     }
@@ -276,8 +281,7 @@ public class ReservasSalaActivity extends AppCompatActivity {
         btn_cancel.setOnClickListener(v1 -> dialog.dismiss());
     }
 
-    public void criarReserva(Reserva reserva, Context mCtx)
-    {
+    public void criarReserva(Reserva reserva, Context mCtx) {
         String AuthToken = new SharedPrefManager(mCtx).getAuthToken();
 
         Call<Reserva> reservaPost = apiInterface.createReserva(reserva, TokenType + AuthToken);

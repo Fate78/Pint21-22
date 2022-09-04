@@ -114,7 +114,7 @@ public class SalaInfo extends Fragment {
                     int lotacao = sala.getLotacaoMax();
                     String limpeza = sala.getTempoMinLimp();
                     txt_nsala.setText("Sala " + nSala);
-                    ed_lotacao.setText(lotacao);
+                    ed_lotacao.setText(Integer.toString(lotacao));
                     ed_limpeza.setText(methodsInterface.formatTimeForUser(limpeza) + " Min.");
                     methodsInterface.generateQrCode(img_qrCode, id_sala, nSala, lotacao, limpeza, mCtx);
                 }

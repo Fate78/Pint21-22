@@ -67,7 +67,7 @@ export default function Navbar() {
                             aria-expanded="true" aria-controls="collapseUtilities">
                             <span>Limpeza</span>
                         </a>
-                        </Link>
+                    </Link>
                     </li>
 
 
@@ -96,7 +96,6 @@ export default function Navbar() {
                         </Link>
                     </li>
                     
-
                     <div class="sidebar-heading">
                         Necessita de Ajuda?
                     </div>
