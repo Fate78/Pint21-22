@@ -251,24 +251,6 @@ public class ReservasSalaActivity extends AppCompatActivity {
                                                 || hora_fim_total.compareTo(res_hora_inicio)>=0 && hora_fim_total.compareTo(res_hora_fim_total)<0) || hora_inicio.compareTo(hora_fim) >= 0)
                                             error_counter++;
                                     }
-
-                                    /*//If next exists
-                                    if (reservaList.size() >= next_index + 1) {
-                                        next_reserva = reservaList.get(next_index);
-                                        next_index++;
-                                        next_hora_inicio = methodsInterface.stringToTime(next_reserva.getHoraInicio());
-                                        hora_fim_max = methodsInterface.addDurationToHour(hora_fim, tempo_limp);
-                                    } else {
-                                        hora_fim_max = LocalTime.parse("23:00");
-                                        next_hora_inicio = LocalTime.parse("23:00");
-                                    }
-                                    res_hora_inicio = methodsInterface.stringToTime(reserva.getHoraInicio());
-                                    res_hora_fim = methodsInterface.stringToTime(reserva.getHoraFim());
-                                    hora_inicio_min = methodsInterface.addDurationToHour(res_hora_fim, tempo_limp);
-
-                                    if (hora_inicio.compareTo(hora_inicio_min) < 0 || hora_fim_max.compareTo(next_hora_inicio) > 0) {
-                                        error_counter++;
-                                    }*/
                                 }
                             }
                             if (error_counter == 0) {
