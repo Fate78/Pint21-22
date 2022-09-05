@@ -173,6 +173,8 @@ public class ReservarRecyclerViewAdapter extends
         methodsInterface.disableSoftInputFromAppearing(ed_lotacao);
         methodsInterface.disableSoftInputFromAppearing(ed_tempo_limp);
 
+        int salaId = reserva.getIdSala();
+
         ed_lotacao.setText(lotacao);
         ed_hora_inicio.setText(methodsInterface.formatTimeForUser(
                 reserva.getHoraInicio()));
@@ -261,7 +263,7 @@ public class ReservarRecyclerViewAdapter extends
                                     LocalTime hora_inicio_min = null;
                                     LocalTime res_hora_fim_total = null;
 
-                                    if (reserva.isAtivo()) {
+                                    if (reserva.isAtivo() && reserva.getIdSala() == salaId) {
                                         res_hora_inicio = methodsInterface.stringToTime(reserva.getHoraInicio());
                                         res_hora_fim = methodsInterface.stringToTime(reserva.getHoraFim());
                                         res_hora_fim_total = methodsInterface.addDurationToHour(res_hora_fim, tempo_limp);

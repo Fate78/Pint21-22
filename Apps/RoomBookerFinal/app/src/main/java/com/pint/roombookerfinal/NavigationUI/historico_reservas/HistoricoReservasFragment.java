@@ -88,8 +88,8 @@ public class HistoricoReservasFragment extends Fragment {
                         LocalTime hora_inicio = methodsInterface.stringToTime(s_hora_inicio);
                         boolean ativo = next_iterator.isAtivo();
 
-                        if ((data_reserva.compareTo(methodsInterface.getDateToday().toString())>0 &&
-                                hora_inicio.compareTo(methodsInterface.getTimeNow())>0)
+                        if ((data_reserva.compareTo(methodsInterface.getDateToday().toString())==0 &&
+                                hora_inicio.compareTo(methodsInterface.getTimeNow())>=0)
                             || !ativo || data_reserva.compareTo(methodsInterface.getDateToday().toString())>0)
                         {
                             iterator.remove();

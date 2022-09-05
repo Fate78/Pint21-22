@@ -258,7 +258,8 @@ public class EditarSalaActivity extends AppCompatActivity {
                 Sala responseSala = response.body();
                 if(response.code() == 401)
                 {
-                    methodsInterface.logout(mCtx);
+                    Toast.makeText(mCtx, "Não tem permissões para atualizar a sala!",
+                            Toast.LENGTH_LONG).show();
                 }
                 if(responseSala!=null){
                     Toast.makeText(mCtx, "Sala Atualizada",

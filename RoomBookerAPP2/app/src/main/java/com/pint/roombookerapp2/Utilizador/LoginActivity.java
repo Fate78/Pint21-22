@@ -1,6 +1,8 @@
 package com.pint.roombookerapp2.Utilizador;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -30,6 +32,7 @@ import com.pint.roombookerapp2.SharedPrefManager;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import retrofit2.Call;
@@ -38,8 +41,8 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
-    private SharedPrefManager sharedPrefManager;
     Context mCtx;
+    private SharedPrefManager sharedPrefManager;
 
     EditText ed_login_input, ed_password_input;
     Button btn_login;
@@ -120,14 +123,34 @@ public class LoginActivity extends AppCompatActivity {
                         String token = authToken.getToken();
                         new SharedPrefManager(LoginActivity.this).saveAuthToken(token);
                         JWT jwt = new JWT(token);
-                        int idUtilizador = Integer.parseInt(jwt.getClaim("ID").asString());
+                        int idUtilizador = Integer.parseInt(Objects.requireNonNull(jwt.getClaim("ID").asString()));
                         String nomeUtilizador = jwt.getClaim("unique_name").asString();
                         String emailUtilizador = jwt.getClaim("EMAIL").asString();
+                        Boolean emailVerificado = jwt.getClaim("VERIF_EMAIL").asBoolean();
+                        Boolean passwordVerificada = jwt.getClaim("VERIF_PASS").asBoolean();
+                        String role = jwt.getClaim("role").asString();
                         utilizador = new Utilizador(idUtilizador, nomeUtilizador, emailUtilizador);
 
-                        saveLoginDetails(utilizador.getIdUtilizador(), utilizador.getNomeUtilizador(), utilizador.getEmail());
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
+                        if(Boolean.FALSE.equals(emailVerificado) || Boolean.FALSE.equals(passwordVerificada))
+                        {
+                            sharedPrefManager = new SharedPrefManager(mCtx);
+                            sharedPrefManager.clearAuthToken();
+                            confirmationDialog(mCtx,
+                                    "A sua conta não se encontra totalmente verificada, por favor faça login na nossa app ou website");
+                        }
+                        else if(!Objects.equals(role, "admin") && !Objects.equals(role, "gestor") && !Objects.equals(role, "limpezas"))
+                        {
+                            sharedPrefManager = new SharedPrefManager(mCtx);
+                            sharedPrefManager.clearAuthToken();
+                            confirmationDialog(mCtx,
+                                    "A sua conta não tem permissões para aceder a esta aplicação!");
+                        }
+                        else
+                        {
+                            saveLoginDetails(utilizador.getIdUtilizador(), utilizador.getNomeUtilizador(), utilizador.getEmail());
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                        }
                     }
                 }
 
@@ -138,52 +161,6 @@ public class LoginActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                 }
             });
-
-            /*ApiInterface apiInterface = ApiClient.createService(ApiInterface.class);
-            Call<Utilizador> call = apiInterface.getUtilizador(login_input, AuthToken);
-
-            call.enqueue(new Callback<Utilizador>() {
-                @Override
-                public void onResponse(@NotNull Call<Utilizador> call, @NotNull Response<Utilizador> response) {
-
-                    if (response.isSuccessful() && response.body() != null) {
-                        Log.e("Success", response.body().toString());
-                        Utilizador utilizador = response.body();
-                        if (isEmailValid(login_input)) {
-                            if (utilizador.getEmail().equals(login_input) && utilizador.getPalavraPasse().equals(password)) {
-                                saveLoginDetails(utilizador.getIdUtilizador(), utilizador.getNomeUtilizador(), utilizador.getEmail(), utilizador.getPalavraPasse());
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(LoginActivity.this, "Email ou palavra passe errados!", Toast.LENGTH_SHORT).show();
-                                btn_login.setVisibility(View.VISIBLE);
-                                progressBar.setVisibility(View.GONE);
-                            }
-                        }  else {
-                            if (utilizador.getNomeUtilizador().equals(login_input) && utilizador.getPalavraPasse().equals(password)) {
-                                saveLoginDetails(utilizador.getIdUtilizador(), utilizador.getNomeUtilizador(), utilizador.getEmail(), utilizador.getPalavraPasse());
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(LoginActivity.this, "Utilizador ou palavra passe errados!", Toast.LENGTH_SHORT).show();
-                                btn_login.setVisibility(View.VISIBLE);
-                                progressBar.setVisibility(View.GONE);
-                            }
-                        }
-                    } else {
-                        btn_login.setVisibility(View.VISIBLE);
-                        progressBar.setVisibility(View.GONE);
-                    }
-
-                }
-
-                @Override
-                public void onFailure(@NotNull Call<Utilizador> call, @NotNull Throwable t) {
-                    Log.e("Failure", t.getLocalizedMessage());
-                    btn_login.setVisibility(View.VISIBLE);
-                    progressBar.setVisibility(View.GONE);
-                }
-            });*/
         }
     }
 
@@ -227,5 +204,23 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e("Failure", t.getLocalizedMessage());
             }
         });
+    }
+
+    public void confirmationDialog(Context mCtx, String message)
+    {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == DialogInterface.BUTTON_NEUTRAL) {
+                    dialog.dismiss();
+                    btn_login.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(mCtx);
+        builder.setMessage(message)
+                .setNeutralButton("Confirmar", dialogClickListener).show();
     }
 }

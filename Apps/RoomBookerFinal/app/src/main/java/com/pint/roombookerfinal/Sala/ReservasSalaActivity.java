@@ -222,6 +222,7 @@ public class ReservasSalaActivity extends AppCompatActivity {
                         Toast.makeText(mCtx, "Excedeu a lotação da sala",
                                 Toast.LENGTH_LONG).show();
                 } else if (data_reserva.compareTo(methodsInterface.getDateToday()) >= 0) {
+
                     Call<List<Reserva>> reservaCall = apiInterface.getReservasbyDate(formattedDate);
                     reservaCall.enqueue(new Callback<List<Reserva>>() {
                         @Override
@@ -235,11 +236,23 @@ public class ReservasSalaActivity extends AppCompatActivity {
                                     Reserva next_reserva = null;
                                     LocalTime next_hora_inicio = null;
                                     LocalTime hora_fim_max = null;
+                                    LocalTime hora_fim_total = null;
                                     LocalTime res_hora_inicio = null;
                                     LocalTime res_hora_fim = null;
                                     LocalTime hora_inicio_min = null;
+                                    LocalTime res_hora_fim_total = null;
 
-                                    //If next exists
+                                    if (reserva.isAtivo() && reserva.getIdSala() == salaId) {
+                                        res_hora_inicio = methodsInterface.stringToTime(reserva.getHoraInicio());
+                                        res_hora_fim = methodsInterface.stringToTime(reserva.getHoraFim());
+                                        res_hora_fim_total = methodsInterface.addDurationToHour(res_hora_fim, tempo_limp);
+                                        hora_fim_total = methodsInterface.addDurationToHour(hora_fim, tempo_limp);
+                                        if (((hora_inicio.compareTo(res_hora_inicio) >= 0 && hora_inicio.compareTo(res_hora_fim_total) < 0)
+                                                || hora_fim_total.compareTo(res_hora_inicio)>=0 && hora_fim_total.compareTo(res_hora_fim_total)<0) || hora_inicio.compareTo(hora_fim) >= 0)
+                                            error_counter++;
+                                    }
+
+                                    /*//If next exists
                                     if (reservaList.size() >= next_index + 1) {
                                         next_reserva = reservaList.get(next_index);
                                         next_index++;
@@ -255,7 +268,7 @@ public class ReservasSalaActivity extends AppCompatActivity {
 
                                     if (hora_inicio.compareTo(hora_inicio_min) < 0 || hora_fim_max.compareTo(next_hora_inicio) > 0) {
                                         error_counter++;
-                                    }
+                                    }*/
                                 }
                             }
                             if (error_counter == 0) {
@@ -265,8 +278,11 @@ public class ReservasSalaActivity extends AppCompatActivity {
                                         methodsInterface.formatDateForAPI(string_data_reserva),
                                         num_pessoas, true);
                                 criarReserva(newReserva, v12.getContext());
-                            } else
-                                System.out.println(error_counter);
+                            } else{
+                                Toast.makeText(mCtx, "O horário inserido é inválido!",
+                                        Toast.LENGTH_LONG).show();
+                                System.out.println("O horário inserido é inválido!");
+                            }
                         }
 
                         @Override

@@ -97,8 +97,8 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
         LocalTime hora_inicio = methodsInterface.stringToTime(reserva.getHoraInicio());
 
         if (reserva.getDataReserva().compareTo(methodsInterface.getDateToday().toString())>0
-            || (reserva.getDataReserva().compareTo(methodsInterface.getDateToday().toString())>0 &&
-                hora_inicio.compareTo(methodsInterface.getTimeNow())>0))
+            || (reserva.getDataReserva().compareTo(methodsInterface.getDateToday().toString())==0 &&
+                hora_inicio.compareTo(methodsInterface.getTimeNow())>=0))
         {
             holder.btn_delete.setVisibility(View.VISIBLE);
             holder.data_reserva.setOnClickListener(v -> {
@@ -167,7 +167,7 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void createDialogUpdateReserva(Context mCtx, Reserva reserva){
         int id_reserva = reserva.getIdReserva();
-
+        int id_sala = reserva.getIdSala();
         final Dialog dialog = new Dialog(mCtx);
         dialog.setContentView(R.layout.reservar_dialog);
 
@@ -262,15 +262,15 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
                             if (response.body() != null) {
                                 Log.e("Success", response.body().toString());
                                 List<Reserva> reservaList = (List<Reserva>) response.body();
-                                for (Reserva reserva : reservaList) {
+                                for (Reserva _reserva : reservaList) {
                                     LocalTime res_hora_inicio = null;
                                     LocalTime res_hora_fim = null;
                                     LocalTime res_hora_fim_total = null;
                                     LocalTime hora_fim_total = null;
 
-                                    if (reserva.isAtivo() || reserva.getIdReserva() != id_reserva) {
-                                        res_hora_inicio = methodsInterface.stringToTime(reserva.getHoraInicio());
-                                        res_hora_fim = methodsInterface.stringToTime(reserva.getHoraFim());
+                                    if (_reserva.isAtivo() && _reserva.getIdReserva() != id_reserva && _reserva.getIdSala() == id_sala) {
+                                        res_hora_inicio = methodsInterface.stringToTime(_reserva.getHoraInicio());
+                                        res_hora_fim = methodsInterface.stringToTime(_reserva.getHoraFim());
                                         res_hora_fim_total = methodsInterface.addDurationToHour(res_hora_fim, tempo_limp);
                                         hora_fim_total = methodsInterface.addDurationToHour(hora_fim, tempo_limp);
                                         if (((hora_inicio.compareTo(res_hora_inicio) >= 0 && hora_inicio.compareTo(res_hora_fim_total) < 0)
@@ -332,6 +332,8 @@ public class ReservasUtilizadorRecyclerViewAdapter extends
                 }
 
                 Reserva responseReserva = response.body();
+                if(response.code()==204)
+                    Toast.makeText(mCtx, "Reserva atualizada", Toast.LENGTH_LONG).show();
                 if (responseReserva != null) {
                     Toast.makeText(mCtx, message,
                             Toast.LENGTH_LONG).show();

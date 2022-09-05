@@ -85,9 +85,9 @@ public class ReservasFragment extends Fragment {
                         LocalDate today = methodsInterface.getDateToday();
                         LocalTime hora_inicio = methodsInterface.stringToTime(string_hora_inicio_reserva);
 
-                        if ((data_reserva.compareTo(today)<=0 &&
+                        if ((data_reserva.compareTo(today)==0 &&
                                 hora_inicio.compareTo(methodsInterface.getTimeNow())<0)
-                                || !ativo || data_reserva.compareTo(today)<=0)
+                                || !ativo || data_reserva.compareTo(today)<0)
                             iterator.remove();
 
                     }
