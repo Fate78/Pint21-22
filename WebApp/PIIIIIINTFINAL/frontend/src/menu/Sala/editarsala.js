@@ -103,6 +103,9 @@ export default function Pagina() {
                         <p>Tem uma lotação máxima de <input name="lotacaoMax" onChange={handleChange} value={submit.lotacaoMax} placeholder={state.lotacaoMax} /></p>
                         <p>O tempo mínimo de limpeza é <input name="tempoMinLimp" onChange={handleChange} value={submit.tempoMinLimp} placeholder={state.tempoMinLimp} /></p>
                         <p>Ativo? <input name='ativo' value="true" onChange={handleChange} type="radio" /> Ativo <input name='ativo' onChange={handleChange} value="false" type="radio" /> Inativo</p>
+                        <hr/>
+                        <hr/>
+                        <hr/>
                         <p>Limpo? <input name='limpo' value="true" onChange={handleChange} type="radio" /> Limpo <input name='limpo' onChange={handleChange} value="false" type="radio" /> Por Limpar</p>
                         <p>
                             <Link to={`/sala/${idSala.pathname.split("/")[3]}`} className="">
