@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Room Booker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  </head>
+  <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="https://room-booker2022.herokuapp.com/">Room Booker</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#Inicio">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#Website">Website</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#AppMobile">App Mobile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#AppTablet">App Tablet</a>
+              </li>
+          </ul>
+        </div>
+      </nav>
+
+          <div class="p-3 mb-2 bg-gradient-dark text-white">
+                <div class="p-3 mb-2 bg-light text-dark" id="Inicio">
+                  <h1>Inicio</h1>
+                    <p> Para uma breve compreensão da solução apresentada para o projeto "Room Booker" apresentamos as distintas funcionalidades da mesma.
+                    <br>
+                    Realizado por: André Silveira, Daniel Borges e Rafael Figueiredo</p>
+                    
+                </div>
+          
+                <div class="p-3 mb-2 bg-light text-dark" id="Website">
+                    
+                    <h1>Website</h1>
+                        <p> Para facilitar o acesso aos dados do projeto foi criada uma API,
+                        permitindo a conexão entre base de dados e aplicações de forma segura e eficiente.
+                        <br>
+                        A API utiliza endpoints, que são simplesmente URLs que especificam um determinado recurso ou serviço.
+                        <br>
+                        Utilizamos esses endpoints para estabelecer comunicação a esse serviço específico e executar a sua função.
+                        <br> Funções como, obter, criar e atualizar dados de utilizadores, salas, centros e reservas. 
+                          <br> A autenticação do utilizador é também feita através da API, 
+                         obtendo um token de sessão com a informação do utilizador e as suas permissões no que diz respeito ao acesso aos dados.
+                         <br>
+                         A aplicação web foi desenvolvida com HTML, CSS e JavaScript, utilizando as suas ferramentas e tecnologias como o Bootstrap, Node.js, React e Heroku, no ambiente de desenvolvimento Visual Studio Code. 
+                         <br>
+                          O Bootstrap ajuda a facilitar o processo de design do WebSite, tendo já classes predefinidas prontas a usar, com as suas configurações de CSS. Facilita o uso do CSS.
+                          <br> O React é uma framework que torna fácil a criação de UIs interativas. Ajuda a atualizar com facilidade e dar render aos componentes certos quando a informação muda.
+                          <br> Para postar o WebSite online e para toda a gente ver, utilizámos o Heroku que facilita esse processo e um guia com várias maneiras de o poder efetuar.
+
+                    </p>
+                    
+                </div>
+                
+                <div class="p-3 mb-2 bg-light text-dark" id="AppMobile">
+                    <h1>App Mobile</h1>
+                        <p> A aplicação principal do projeto foi feita em java no android studio e está disponível a todos os tipos de utilizador, desde o admin até ao utilizador normal.
+                            <br> O objetivo desta aplicação é permitir ao utilizador ver as salas disponíveis para cada centro ao qual está associado.
+                            <br> Permitindo então reservar essas salas consoante a sua disponibilidade. 
+                            <br>Essa disponibilidade é verificada percorrendo todas as restantes reservas e comparando se existe interposição de horários tendo em conta o tempo de limpeza.
+                            <br>
+                            O utilizador tem também acesso às suas reservas correntes onde pode alterar a mesma de acordo também com a disponibilidade da sala e eliminar a reserva.
+                            <br> Tem ainda acesso ao histórico de reservas, onde não pode efetuar alterações, mas tem acesso a essa informação.
+                            <br>
+                            Pode também alterar o seu perfil e por último tem um scanner de QRCodes, que será utilizado juntamente com a app criada para o tablet, e permite ao fazer o scan da sala ir diretamente para as reservas dessa sala.
+                    </p>
+                    
+                </div>
+                <div class="p-3 mb-2 bg-light text-dark" id="AppTablet">
+                    
+                    <h1>App Tablet</h1>
+                        <p> A segunda aplicação tem como função ser instalada nos tablets expostos à frente de cada sala.
+                            <br> O seu objetivo é mostrar as reservas da sala correspondente entre duas datas que podem ser especificadas, caso contrário irá mostrar as reservas do dia atual. 
+                            <br>Irá também mostrar os detalhes da sala e ao fazer login com uma conta de admin ou gestor é possível alterar a informação da sala.
+                            <br> Para ser selecionada a sala que será demonstrada na aplicação é necessário fazer login com uma conta de admin, gestor ou de limpezas.
+                            <br> A aplicação gera também um qr code com a informação da sala que irá levar o utilizador da aplicação móvel para as reservas da sala correspondente.
+                    </p>
+                     
+                </div>
+        </div>
+       
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  </body>
+</html>
